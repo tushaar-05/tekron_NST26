@@ -2,6 +2,33 @@ import { useState, useEffect } from 'react';
 
 function App() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [dialogueIndex, setDialogueIndex] = useState(0);
+    const [isDialogueOpen, setIsDialogueOpen] = useState(true);
+    const [isCharacterHovered, setIsCharacterHovered] = useState(false);
+    const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+    const dialogues = [
+        {
+            text: "Hey there! I'm your virtual assistant, here to guide you through this amazing journey. Welcome to our pixelated world!"
+        },
+        {
+            text: "Welcome! We're excited to have you here. Get ready to explore and discover something incredible."
+        },
+        {
+            text: "Don't forget to register to unlock all features and join our community. Click the REGISTER button above to get started!"
+        },
+        {
+            text: "See that navigation notch at the top? Hover over it to expand and click NAVIGATE. You'll enter a map where you can choose different islands and navigate to various pages. Each island is a new adventure!"
+        }
+    ];
+
+    const nextDialogue = () => {
+        setDialogueIndex((prev) => (prev + 1) % dialogues.length);
+    };
+
+    const prevDialogue = () => {
+        setDialogueIndex((prev) => (prev - 1 + dialogues.length) % dialogues.length);
+    };
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -16,15 +43,6 @@ function App() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
-    // Generate static stars (no cursor movement)
-    const stars = Array.from({ length: 200 }, (_, i) => ({
-        id: i,
-        // left: `${Math.random() * 100}%`,
-        // top: `${Math.random() * 100}%`,
-        // size: Math.random() * 3 + 1,
-        // delay: Math.random() * 3,
-    }));
-
     return (
         <div
             className="relative w-screen h-screen overflow-hidden"
@@ -36,31 +54,14 @@ function App() {
             <div
                 className="absolute inset-0 z-0 opacity-30"
                 style={{
-                    backgroundImage: 'url(/images/background.jpg)',
+                    backgroundImage: 'url(/images/bg_img.jpg)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     imageRendering: 'pixelated',
                 }}
             />
 
-            {/* Stars layer - static with twinkle only */}
-            <div className="absolute inset-0 z-0">
-                {stars.map((star) => (
-                    <div
-                        key={star.id}
-                        className="absolute rounded-full bg-white star"
-                        style={{
-                            left: star.left,
-                            top: star.top,
-                            width: `${star.size}px`,
-                            height: `${star.size}px`,
-                            animationDelay: `${star.delay}s`,
-                        }}
-                    />
-                ))}
-            </div>
-
-            {/* 5.webp - Back layer (teal/cyan) - Horizontal emphasis */}
+            {/* 5.webp - Back layer (teal/cyan) - Horizontal emphasis - Slowest */}
             <div
                 className="absolute transition-transform duration-200 ease-out"
                 style={{
@@ -68,7 +69,7 @@ function App() {
                     left: '0%',
                     zIndex: 5,
                     width: '100%',
-                    transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
+                    transform: `translate(${mousePosition.x * 5}px, ${mousePosition.y * 5}px)`,
                     willChange: 'transform',
                 }}
             >
@@ -79,13 +80,13 @@ function App() {
                 />
             </div>
 
-            {/* 4.webp - Middle of page - Diagonal movement */}
+            {/* 4.webp - Middle of page - Diagonal movement - Medium speed */}
             <div
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
                     top: '35%',
                     left: '50%',
-                    transform: `translate(-50%, -50%) translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
+                    transform: `translate(-50%, -50%) translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)`,
                     zIndex: 10,
                     width: '100%',
                     willChange: 'transform',
@@ -98,13 +99,13 @@ function App() {
                 />
             </div>
 
-            {/* 3.webp - 100px down from 4 - Opposite diagonal */}
+            {/* 3.webp - 100px down from 4 - Opposite diagonal - Medium-fast speed */}
             <div
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
                     top: 'calc(50% + 100px)',
                     left: '50%',
-                    transform: `translate(-50%, -50%) translate(${mousePosition.x * -10}px, ${mousePosition.y * 10}px)`,
+                    transform: `translate(-50%, -50%) translate(${mousePosition.x * -12}px, ${mousePosition.y * 12}px)`,
                     zIndex: 12,
                     width: '100%',
                     willChange: 'transform',
@@ -117,7 +118,7 @@ function App() {
                 />
             </div>
 
-            {/* 2.webp - Bottom most - Vertical emphasis */}
+            {/* 2.webp - Bottom most - Vertical emphasis - Fast speed */}
             <div
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
@@ -125,7 +126,7 @@ function App() {
                     left: '0%',
                     zIndex: 15,
                     width: '100%',
-                    transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
+                    transform: `translate(${mousePosition.x * 15}px, ${mousePosition.y * 15}px)`,
                     willChange: 'transform',
                 }}
             >
@@ -136,7 +137,7 @@ function App() {
                 />
             </div>
 
-            {/* 1.webp - Above 2 at bottom - Slow and subtle */}
+            {/* 1.webp - Above 2 at bottom - Fastest speed */}
             <div
                 className="absolute transition-transform duration-500 ease-out"
                 style={{
@@ -144,7 +145,7 @@ function App() {
                     left: '-2.5%',
                     zIndex: 18,
                     width: '105%',
-                    transform: `translate(${mousePosition.x * 10}px, ${mousePosition.y * 10}px)`,
+                    transform: `translate(${mousePosition.x * 18}px, ${mousePosition.y * 18}px)`,
                     willChange: 'transform',
                 }}
             >
@@ -155,12 +156,13 @@ function App() {
                 />
             </div>
 
-            {/* Navigation pill at top */}
-            <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-40">
-                <div className="nav-pill px-8 py-3 rounded-full">
-                    <span className="pixel-font text-purple-200 text-xs tracking-wider">NAVIGATE</span>
+            {/* Notch navigation button */}
+            <button className="notch-nav-button absolute top-0 left-1/2 transform -translate-x-1/2 z-40 pixel-art">
+                <div className="notch-nav-content">
+                    <span className="notch-text-default pixel-font text-white text-xs">MAP</span>
+                    <span className="notch-text-expanded pixel-font text-white text-xs">NAVIGATE</span>
                 </div>
-            </div>
+            </button>
 
             {/* Main content container */}
             <div className="relative z-20 h-full flex flex-col items-center justify-center px-8">
@@ -202,7 +204,7 @@ function App() {
                 </div>
 
                 {/* Register button */}
-                <button className="pixel-button pixel-font px-16 py-5 rounded-xl text-white mb-16 transform hover:scale-105 transition-transform"
+                <button className="pixel-button pixel-font px-16 py-5 text-white mb-16"
                     style={{
                         fontSize: 'clamp(14px, 1.4vw, 22px)',
                         letterSpacing: '0.15em',
@@ -211,55 +213,102 @@ function App() {
                     REGISTER
                 </button>
 
-                {/* Character and dialogue bubble container */}
-                <div className="absolute bottom-16 right-16 flex items-end gap-8 z-30">
-                    {/* Dialogue bubble */}
-                    <div className="dialogue-bubble px-10 py-7 rounded-3xl relative">
-                        <p className="pixel-font text-cyan-100 mb-5" style={{ fontSize: '11px', lineHeight: '1.8', textShadow: '0 0 10px rgba(34, 211, 238, 0.3)' }}>
-                            Hey, my name is __,<br />
-                            your assistant
-                        </p>
+                {/* Dialogue bubble */}
+                {isDialogueOpen && (
+                    <div className="absolute bottom-[500px] right-[10px] z-50">
+                        <div className="dialogue-bubble px-8 py-6 relative">
+                            {/* Close button */}
+                            <button
+                                onClick={() => setIsDialogueOpen(false)}
+                                className="absolute top-2 right-2 pixel-font text-cyan-400 hover:text-cyan-200"
+                                style={{ fontSize: '12px', cursor: 'pointer', lineHeight: '1' }}
+                            >
+                                ×
+                            </button>
 
-                        {/* Arrow buttons */}
-                        <div className="flex justify-center gap-6">
-                            <button
-                                className="text-cyan-400 hover:text-cyan-200 transition-all hover:scale-125 transform"
-                                style={{ fontSize: '18px', textShadow: '0 0 10px rgba(34, 211, 238, 0.5)' }}
-                            >
-                                &lt;
-                            </button>
-                            <button
-                                className="text-cyan-400 hover:text-cyan-200 transition-all hover:scale-125 transform"
-                                style={{ fontSize: '18px', textShadow: '0 0 10px rgba(34, 211, 238, 0.5)' }}
-                            >
-                                &gt;
-                            </button>
+                            <p className="pixel-font text-cyan-100 mb-4" style={{ fontSize: '10px', lineHeight: '1.8', textShadow: '0 0 10px rgba(34, 211, 238, 0.3)' }}>
+                                {dialogues[dialogueIndex].text}
+                            </p>
+
+                            {/* Progress dots */}
+                            <div className="flex justify-center gap-2 mb-4">
+                                {dialogues.map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className="dialogue-dot"
+                                        style={{
+                                            width: dialogueIndex === index ? '8px' : '6px',
+                                            height: '6px',
+                                            background: dialogueIndex === index ? '#22d3ee' : 'rgba(34, 211, 238, 0.4)',
+                                            borderRadius: '0',
+                                            imageRendering: 'pixelated',
+                                        }}
+                                    />
+                                ))}
+                            </div>
+
+                            {/* Arrow buttons */}
+                            <div className="flex justify-center gap-6">
+                                <button
+                                    onClick={prevDialogue}
+                                    className="dialogue-arrow pixel-font text-cyan-400 hover:text-cyan-200"
+                                    style={{ fontSize: '16px', textShadow: '0 0 10px rgba(34, 211, 238, 0.5)', cursor: 'pointer' }}
+                                >
+                                    &lt;
+                                </button>
+                                <button
+                                    onClick={nextDialogue}
+                                    className="dialogue-arrow pixel-font text-cyan-400 hover:text-cyan-200"
+                                    style={{ fontSize: '16px', textShadow: '0 0 10px rgba(34, 211, 238, 0.5)', cursor: 'pointer' }}
+                                >
+                                    &gt;
+                                </button>
+                            </div>
+
+                            {/* Bubble pointer (triangle pointing down) */}
+                            <div
+                                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full"
+                                style={{
+                                    width: 0,
+                                    height: 0,
+                                    borderLeft: '16px solid transparent',
+                                    borderRight: '16px solid transparent',
+                                    borderTop: '16px solid #22d3ee',
+                                    filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.4))',
+                                    imageRendering: 'pixelated',
+                                }}
+                            />
                         </div>
-
-                        {/* Bubble pointer (triangle pointing right) */}
-                        <div
-                            className="absolute right-0 top-1/2 transform translate-x-full -translate-y-1/2"
-                            style={{
-                                width: 0,
-                                height: 0,
-                                borderTop: '18px solid transparent',
-                                borderBottom: '18px solid transparent',
-                                borderLeft: '18px solid #22d3ee',
-                                filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.4))',
-                            }}
-                        />
                     </div>
+                )}
 
-                    {/* Character */}
+                {/* Character */}
+                <div 
+                    className="absolute bottom-0 right-[-80px] z-30"
+                    onClick={() => setIsDialogueOpen(!isDialogueOpen)}
+                    onMouseMove={(e) => {
+                        const rect = e.currentTarget.getBoundingClientRect();
+                        const mouseX = e.clientX - rect.left;
+                        // Shift center point to the left (about 20% from left edge)
+                        const centerX = rect.width * 0.2;
+                        
+                        // Only show cursor if mouse is on the right side (from adjusted center)
+                        if (mouseX > centerX) {
+                            setIsCharacterHovered(true);
+                            setCursorPosition({ x: e.clientX, y: e.clientY });
+                        } else {
+                            setIsCharacterHovered(false);
+                        }
+                    }}
+                    onMouseLeave={() => setIsCharacterHovered(false)}
+                    style={{ cursor: isCharacterHovered ? 'none' : 'default' }}
+                >
                     <div className="floating">
                         <div
                             className="pixel-art"
                             style={{
                                 width: 'clamp(400px, 33vw, 800px)',
-                                position: 'absolute',
-                                bottom: -380,
-                                right: -440,
-                                transform: 'translate(-50%, -50%)',
+                                position: 'relative',
                             }}
                         >
                             <img
@@ -270,6 +319,22 @@ function App() {
                         </div>
                     </div>
                 </div>
+
+                {/* Custom cursor */}
+                {isCharacterHovered && (
+                    <div
+                        className="custom-cursor pixel-font fixed pointer-events-none z-50"
+                        style={{
+                            left: `${cursorPosition.x + 15}px`,
+                            top: `${cursorPosition.y + 15}px`,
+                            transform: 'translate(0, 0)',
+                        }}
+                    >
+                        <div className="cursor-text">
+                            CLICK ME
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
