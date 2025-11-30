@@ -149,6 +149,7 @@ function App() {
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
                     bottom: '-2%',
+                    opacity: 0.7,
                     left: '0%',
                     zIndex: 15,
                     width: '100%',
@@ -201,9 +202,13 @@ function App() {
                         letterSpacing: '0.15em',
                         textShadow: '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 40px rgba(216, 198, 242, 0.3)',
                         lineHeight: '1.1',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                     }}
                 >
-                    HEADING
+                    <span>TEKRON</span>
+                    <span className="text-purple-500 text-[60px]">2026</span>
                 </h1>
 
                 {/* Countdown Timer */}
@@ -236,21 +241,13 @@ function App() {
                     <p
                         className="pixel-font text-center leading-relaxed"
                         style={{
-                            fontSize: 'clamp(7px, 0.75vw, 12px)',
+                            fontSize: 'clamp(7px, 0.75vw, 16px)',
                             color: '#c8b6e2',
                             lineHeight: '2',
                             textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
                         }}
                     >
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua. Ut enim ad minim veniam, quis nostrud
-                        exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in reprehenderit
-                        in voluptate velit esse cillum dolore eu fugiat nulla
-                        pariatur. Excepteur sint occaecat cupidatat non proident,
-                        sunt in culpa qui officia deserunt mollit anim id est
-                        laborum.
+                        Come to TEKRON, the wild tech fest! Hack the end of the world with AI bosses sipping bad coffee, qubits that hate rules, and hackers who plug cables into your dreams. We're all glitches anyway—join the fun, blow up old ideas with fireworks from junk computers, and turn bugs into wins. Plug in or just scroll forever? Your call.
                     </p>
                 </div>
 
