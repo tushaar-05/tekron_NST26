@@ -220,13 +220,15 @@ function App() {
                             {/* Close button */}
                             <button
                                 onClick={() => setIsDialogueOpen(false)}
-                                className="absolute top-2 right-2 pixel-font text-cyan-400 hover:text-cyan-200"
-                                style={{ fontSize: '12px', cursor: 'pointer', lineHeight: '1' }}
+                                className="absolute top-2 right-2 pixel-font"
+                                style={{ fontSize: '12px', cursor: 'pointer', lineHeight: '1', color: '#c084fc' }}
+                                onMouseEnter={(e) => e.target.style.color = '#d8c6f2'}
+                                onMouseLeave={(e) => e.target.style.color = '#c084fc'}
                             >
                                 ×
                             </button>
 
-                            <p className="pixel-font text-cyan-100 mb-4" style={{ fontSize: '10px', lineHeight: '1.8', textShadow: '0 0 10px rgba(34, 211, 238, 0.3)' }}>
+                            <p className="pixel-font mb-4" style={{ fontSize: '10px', lineHeight: '1.8', color: '#d8c6f2', textShadow: '1px 1px 0px #000000, 0 0 10px rgba(168, 85, 247, 0.3)', imageRendering: 'pixelated' }}>
                                 {dialogues[dialogueIndex].text}
                             </p>
 
@@ -239,7 +241,7 @@ function App() {
                                         style={{
                                             width: dialogueIndex === index ? '8px' : '6px',
                                             height: '6px',
-                                            background: dialogueIndex === index ? '#22d3ee' : 'rgba(34, 211, 238, 0.4)',
+                                            background: dialogueIndex === index ? '#c084fc' : 'rgba(168, 85, 247, 0.4)',
                                             borderRadius: '0',
                                             imageRendering: 'pixelated',
                                         }}
@@ -251,15 +253,19 @@ function App() {
                             <div className="flex justify-center gap-6">
                                 <button
                                     onClick={prevDialogue}
-                                    className="dialogue-arrow pixel-font text-cyan-400 hover:text-cyan-200"
-                                    style={{ fontSize: '16px', textShadow: '0 0 10px rgba(34, 211, 238, 0.5)', cursor: 'pointer' }}
+                                    className="dialogue-arrow pixel-font"
+                                    style={{ fontSize: '16px', color: '#c084fc', textShadow: '0 0 10px rgba(168, 85, 247, 0.5)', cursor: 'pointer' }}
+                                    onMouseEnter={(e) => e.target.style.color = '#d8c6f2'}
+                                    onMouseLeave={(e) => e.target.style.color = '#c084fc'}
                                 >
                                     &lt;
                                 </button>
                                 <button
                                     onClick={nextDialogue}
-                                    className="dialogue-arrow pixel-font text-cyan-400 hover:text-cyan-200"
-                                    style={{ fontSize: '16px', textShadow: '0 0 10px rgba(34, 211, 238, 0.5)', cursor: 'pointer' }}
+                                    className="dialogue-arrow pixel-font"
+                                    style={{ fontSize: '16px', color: '#c084fc', textShadow: '0 0 10px rgba(168, 85, 247, 0.5)', cursor: 'pointer' }}
+                                    onMouseEnter={(e) => e.target.style.color = '#d8c6f2'}
+                                    onMouseLeave={(e) => e.target.style.color = '#c084fc'}
                                 >
                                     &gt;
                                 </button>
@@ -273,8 +279,8 @@ function App() {
                                     height: 0,
                                     borderLeft: '16px solid transparent',
                                     borderRight: '16px solid transparent',
-                                    borderTop: '16px solid #22d3ee',
-                                    filter: 'drop-shadow(0 0 8px rgba(34, 211, 238, 0.4))',
+                                    borderTop: '16px solid #a855f7',
+                                    filter: 'drop-shadow(0 0 8px rgba(168, 85, 247, 0.4))',
                                     imageRendering: 'pixelated',
                                 }}
                             />

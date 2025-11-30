@@ -130,16 +130,23 @@ body {
   border: none;
   border-radius: 0;
   box-shadow: 
-    0 0 0 2px #000000,
-    0 0 0 4px #22d3ee,
+    0 0 0 1px #000000,
+    0 0 0 2px #0a0a0a,
+    0 0 0 3px #a855f7,
+    0 0 0 4px #1a1a1a,
+    0 0 0 5px #c084fc,
     0 0 0 6px #000000,
-    0 0 20px rgba(34, 211, 238, 0.5),
+    0 0 0 7px #a855f7,
+    0 0 20px rgba(168, 85, 247, 0.5),
     inset 0 0 30px rgba(0, 0, 0, 0.5);
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   min-width: 300px;
   max-width: 400px;
+  transform: scale(1);
+  transform-origin: top left;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .dialogue-arrow {
@@ -147,9 +154,11 @@ body {
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
   border: none;
   background: none;
   padding: 4px 8px;
+  text-shadow: 1px 1px 0px #000000;
 }
 
 .dialogue-arrow:hover {
@@ -183,17 +192,27 @@ body {
   border: none;
   border-radius: 0;
   box-shadow: 
-    0 0 0 2px #000000,
-    0 0 0 4px #22d3ee,
-    0 0 20px rgba(34, 211, 238, 0.5);
+    0 0 0 1px #000000,
+    0 0 0 2px #0a0a0a,
+    0 0 0 3px #a855f7,
+    0 0 0 4px #1a1a1a,
+    0 0 0 5px #c084fc,
+    0 0 0 6px #000000,
+    0 0 20px rgba(168, 85, 247, 0.5);
   padding: 6px 10px;
-  color: #22d3ee;
+  color: #c084fc;
   font-size: 8px;
   white-space: nowrap;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-  text-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
+  image-rendering: -webkit-optimize-contrast;
+  text-shadow: 
+    1px 1px 0px #000000,
+    0 0 10px rgba(168, 85, 247, 0.5);
+  letter-spacing: 0.05em;
+  transform: scale(1);
+  transform-origin: top left;
 }
 
 /* Notch navigation button */
