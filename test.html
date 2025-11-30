@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEKRON 2026 - Loading</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            overflow: hidden;
+            background: #0a0015;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .loading-screen {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(180deg, #0a0015 0%, #1a0a2e 50%, #2d1b4e 100%);
+        }
+
+        /* Scanlines */
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.15) 0px,
+                rgba(0, 0, 0, 0.15) 2px,
+                transparent 2px,
+                transparent 4px
+            );
+            pointer-events: none;
+            z-index: 100;
+            animation: scanlineMove 8s linear infinite;
+        }
+
+        @keyframes scanlineMove {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
+        }
+
+        /* Stars */
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+            animation: twinkle 3s ease-in-out infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Nebula clouds */
+        .nebula {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.3;
+        }
+
+        .nebula-cloud {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: nebulaDrift 20s ease-in-out infinite;
+        }
+
+        @keyframes nebulaDrift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(30px) translateY(-20px); }
+        }
+
+        /* Grid horizon */
+        .grid-horizon {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: 
+                linear-gradient(90deg, transparent 0%, rgba(166, 107, 255, 0.1) 50%, transparent 100%),
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(166, 107, 255, 0.2) 40px,
+                    rgba(166, 107, 255, 0.2) 42px
+                ),
+                repeating-linear-gradient(
+                    90deg,
+                    transparent,
+                    transparent 40px,
+                    rgba(166, 107, 255, 0.2) 40px,
+                    rgba(166, 107, 255, 0.2) 42px
+                );
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: bottom;
+            opacity: 0.4;
+        }
+
+        /* Pixel clouds */
+        .clouds {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            overflow: hidden;
+        }
+
+        .cloud {
+            position: absolute;
+            bottom: 0;
+            width: 200px;
+            height: 80px;
+            background: linear-gradient(180deg, rgba(166, 107, 255, 0.3) 0%, rgba(100, 200, 255, 0.2) 100%);
+            clip-path: polygon(
+                0% 40%, 10% 30%, 20% 35%, 30% 25%, 40% 30%, 
+                50% 20%, 60% 25%, 70% 30%, 80% 25%, 90% 35%, 
+                100% 40%, 100% 100%, 0% 100%
+            );
+            animation: cloudFloat 15s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(166, 107, 255, 0.3));
+        }
+
+        @keyframes cloudFloat {
+            0% { transform: translateX(-200px); }
+            100% { transform: translateX(calc(100vw + 200px)); }
+        }
+
+        /* Main container */
+        .main-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        /* Title */
+        .title {
+            font-size: clamp(16px, 4vw, 32px);
+            color: #A66BFF;
+            text-shadow: 
+                0 0 10px rgba(166, 107, 255, 0.8),
+                0 0 20px rgba(166, 107, 255, 0.6),
+                0 0 30px rgba(166, 107, 255, 0.4),
+                2px 2px 0 rgba(255, 0, 255, 0.3),
+                -2px -2px 0 rgba(0, 255, 255, 0.3);
+            margin-bottom: 60px;
+            animation: glitchTitle 3s ease-in-out infinite;
+            letter-spacing: 4px;
+        }
+
+        @keyframes glitchTitle {
+            0%, 90%, 100% { 
+                transform: translateX(0);
+                text-shadow: 
+                    0 0 10px rgba(166, 107, 255, 0.8),
+                    0 0 20px rgba(166, 107, 255, 0.6),
+                    0 0 30px rgba(166, 107, 255, 0.4),
+                    2px 2px 0 rgba(255, 0, 255, 0.3),
+                    -2px -2px 0 rgba(0, 255, 255, 0.3);
+            }
+            92%, 94%, 96% {
+                transform: translateX(-4px);
+                text-shadow: 
+                    0 0 10px rgba(166, 107, 255, 0.8),
+                    0 0 20px rgba(166, 107, 255, 0.6),
+                    0 0 30px rgba(166, 107, 255, 0.4),
+                    4px 0 0 rgba(255, 0, 255, 0.8),
+                    -4px 0 0 rgba(0, 255, 255, 0.8);
+            }
+            93%, 95% {
+                transform: translateX(4px);
+            }
+        }
+
+        /* Loading bar container */
+        .loading-bar-container {
+            position: relative;
+            width: 100%;
+            height: 60px;
+            margin: 40px 0;
+        }
+
+        .loading-bar-frame {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 0, 21, 0.8);
+            border: 4px solid #A66BFF;
+            box-shadow: 
+                0 0 20px rgba(166, 107, 255, 0.6),
+                inset 0 0 20px rgba(166, 107, 255, 0.2),
+                0 0 40px rgba(166, 107, 255, 0.4);
+            animation: frameFlicker 2s ease-in-out infinite;
+        }
+
+        @keyframes frameFlicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.95; }
+            51% { opacity: 1; }
+        }
+
+        .loading-bar-fill {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            height: calc(100% - 16px);
+            width: 0%;
+            background: linear-gradient(
+                90deg,
+                rgba(166, 107, 255, 0.8) 0%,
+                rgba(200, 150, 255, 1) 50%,
+                rgba(166, 107, 255, 0.8) 100%
+            );
+            box-shadow: 
+                0 0 20px rgba(166, 107, 255, 0.8),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: fillBar 4s ease-in-out forwards;
+        }
+
+        @keyframes fillBar {
+            0% { width: 0%; }
+            100% { width: calc(100% - 16px); }
+        }
+
+        /* Spark particles */
+        .spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+            top: 50%;
+            transform: translateY(-50%);
+            animation: sparkMove 1s linear infinite;
+        }
+
+        @keyframes sparkMove {
+            0% { left: 0%; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* System messages */
+        .system-message {
+            font-size: clamp(10px, 2vw, 14px);
+            color: #64C8FF;
+            text-shadow: 0 0 10px rgba(100, 200, 255, 0.8);
+            min-height: 40px;
+            margin-top: 20px;
+            letter-spacing: 2px;
+        }
+
+        .typing-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: #64C8FF;
+            margin-left: 4px;
+            animation: blink 0.7s step-end infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* Light rays */
+        .light-rays {
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 80px,
+                    rgba(166, 107, 255, 0.03) 80px,
+                    rgba(166, 107, 255, 0.03) 100px
+                );
+            animation: raysMove 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes raysMove {
+            0% { transform: translateX(-50%) translateY(0); }
+            100% { transform: translateX(-50%) translateY(100px); }
+        }
+
+        /* Glitch lines */
+        .glitch-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(166, 107, 255, 0.5);
+            animation: glitchSlide 2s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes glitchSlide {
+            0% { left: -100%; opacity: 0; }
+            5% { opacity: 1; }
+            50% { left: 100%; opacity: 1; }
+            51% { opacity: 0; }
+            100% { left: 100%; opacity: 0; }
+        }
+
+        /* Mascot */
+        .mascot {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 80px;
+            height: 80px;
+            z-index: 50;
+            animation: mascotBob 2s ease-in-out infinite;
+        }
+
+        @keyframes mascotBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .mascot-body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .mascot-pixel {
+            position: absolute;
+            background: #A66BFF;
+            box-shadow: 0 0 10px rgba(166, 107, 255, 0.8);
+        }
+
+        .orb {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: #64C8FF;
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(100, 200, 255, 1);
+            animation: orbPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes orbPulse {
+            0%, 100% { 
+                transform: translateX(-50%) scale(1);
+                box-shadow: 0 0 20px rgba(100, 200, 255, 1);
+            }
+            50% { 
+                transform: translateX(-50%) scale(1.3);
+                box-shadow: 0 0 30px rgba(100, 200, 255, 1);
+            }
+        }
+
+        /* Percentage */
+        .percentage {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            font-size: 20px;
+            color: #A66BFF;
+            text-shadow: 0 0 10px rgba(166, 107, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-screen">
+        <!-- Scanlines -->
+        <div class="scanlines"></div>
+
+        <!-- Light rays -->
+        <div class="light-rays"></div>
+
+        <!-- Stars -->
+        <div class="stars" id="stars"></div>
+
+        <!-- Nebula -->
+        <div class="nebula" id="nebula"></div>
+
+        <!-- Grid horizon -->
+        <div class="grid-horizon"></div>
+
+        <!-- Pixel clouds -->
+        <div class="clouds" id="clouds"></div>
+
+        <!-- Glitch lines -->
+        <div class="glitch-line" style="top: 20%; animation-delay: 0s;"></div>
+        <div class="glitch-line" style="top: 45%; animation-delay: 0.7s;"></div>
+        <div class="glitch-line" style="top: 70%; animation-delay: 1.4s;"></div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <h1 class="title">LOADING TEKRON 2026...</h1>
+            
+            <div class="loading-bar-container">
+                <div class="percentage" id="percentage">0%</div>
+                <div class="loading-bar-frame">
+                    <div class="loading-bar-fill" id="loadingBarFill"></div>
+                    <div class="spark" style="animation-delay: 0s;"></div>
+                    <div class="spark" style="animation-delay: 0.3s;"></div>
+                    <div class="spark" style="animation-delay: 0.6s;"></div>
+                </div>
+            </div>
+
+            <div class="system-message" id="systemMessage"></div>
+        </div>
+
+        <!-- Mascot -->
+        <div class="mascot">
+            <div class="mascot-body" id="mascotBody"></div>
+            <div class="orb"></div>
+        </div>
+    </div>
+
+    <script>
+        // Generate stars
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 70 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 3) + 's';
+            starsContainer.appendChild(star);
+        }
+
+        // Generate nebula clouds
+        const nebulaContainer = document.getElementById('nebula');
+        const nebulaColors = [
+            'rgba(166, 107, 255, 0.3)',
+            'rgba(100, 200, 255, 0.2)',
+            'rgba(200, 150, 255, 0.25)'
+        ];
+        for (let i = 0; i < 5; i++) {
+            const cloud = document.createElement('div');
+            cloud.className = 'nebula-cloud';
+            cloud.style.left = Math.random() * 100 + '%';
+            cloud.style.top = Math.random() * 60 + '%';
+            cloud.style.width = (200 + Math.random() * 300) + 'px';
+            cloud.style.height = (200 + Math.random() * 300) + 'px';
+            cloud.style.background = nebulaColors[Math.floor(Math.random() * nebulaColors.length)];
+            cloud.style.animationDelay = Math.random() * 5 + 's';
+            cloud.style.animationDuration = (15 + Math.random() * 10) + 's';
+            nebulaContainer.appendChild(cloud);
+        }
+
+        // Generate pixel clouds
+        const cloudsContainer = document.getElementById('clouds');
+        for (let i = 0; i < 8; i++) {
+            const cloud = document.createElement('div');
+            cloud.className = 'cloud';
+            cloud.style.left = (i * 15 - 10) + '%';
+            cloud.style.bottom = Math.random() * 20 + '%';
+            cloud.style.animationDelay = (i * 2) + 's';
+            cloud.style.animationDuration = (12 + Math.random() * 6) + 's';
+            cloud.style.opacity = 0.3 + Math.random() * 0.4;
+            cloudsContainer.appendChild(cloud);
+        }
+
+        // System messages
+        const messages = [
+            'Initializing Quantum Systems...',
+            'Booting AI Modules...',
+            'Establishing Cybersecurity Protocols...',
+            'Loading Neural Networks...',
+            'Synchronizing Blockchain...',
+            'Activating Holographic Interface...'
+        ];
+
+        let currentMessageIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        const systemMessage = document.getElementById('systemMessage');
+
+        function typeWriter() {
+            const currentMessage = messages[currentMessageIndex];
+            
+            if (!isDeleting && currentCharIndex < currentMessage.length) {
+                systemMessage.innerHTML = currentMessage.substring(0, currentCharIndex + 1) + '<span class="typing-cursor"></span>';
+                currentCharIndex++;
+                setTimeout(typeWriter, 50);
+            } else if (!isDeleting && currentCharIndex === currentMessage.length) {
+                setTimeout(() => {
+                    isDeleting = true;
+                    typeWriter();
+                }, 2000);
+            } else if (isDeleting && currentCharIndex > 0) {
+                systemMessage.innerHTML = currentMessage.substring(0, currentCharIndex - 1) + '<span class="typing-cursor"></span>';
+                currentCharIndex--;
+                setTimeout(typeWriter, 30);
+            } else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false;
+                currentMessageIndex = (currentMessageIndex + 1) % messages.length;
+                setTimeout(typeWriter, 500);
+            }
+        }
+
+        // Start typewriter effect
+        setTimeout(typeWriter, 500);
+
+        // Update percentage
+        const percentageElement = document.getElementById('percentage');
+        let currentPercentage = 0;
+        const percentageInterval = setInterval(() => {
+            if (currentPercentage < 100) {
+                currentPercentage += 1;
+                percentageElement.textContent = currentPercentage + '%';
+            } else {
+                clearInterval(percentageInterval);
+            }
+        }, 40);
+
+        // Create pixel art mascot (simple robot/AI character)
+        const mascotBody = document.getElementById('mascotBody');
+        const mascotPixels = [
+            // Head
+            {x: 20, y: 10, w: 40, h: 8, color: '#A66BFF'},
+            {x: 16, y: 18, w: 48, h: 24, color: '#A66BFF'},
+            // Eyes
+            {x: 24, y: 26, w: 8, h: 8, color: '#64C8FF'},
+            {x: 48, y: 26, w: 8, h: 8, color: '#64C8FF'},
+            // Antenna
+            {x: 36, y: 0, w: 8, h: 10, color: '#FF6BFF'},
+            {x: 32, y: 0, w: 16, h: 4, color: '#FF6BFF'},
+            // Body
+            {x: 24, y: 42, w: 32, h: 20, color: '#8B5FBF'},
+            // Arms
+            {x: 8, y: 46, w: 16, h: 8, color: '#8B5FBF'},
+            {x: 56, y: 46, w: 16, h: 8, color: '#8B5FBF'},
+            // Legs
+            {x: 28, y: 62, w: 8, h: 12, color: '#8B5FBF'},
+            {x: 44, y: 62, w: 8, h: 12, color: '#8B5FBF'}
+        ];
+
+        mascotPixels.forEach(pixel => {
+            const div = document.createElement('div');
+            div.className = 'mascot-pixel';
+            div.style.left = pixel.x + 'px';
+            div.style.top = pixel.y + 'px';
+            div.style.width = pixel.w + 'px';
+            div.style.height = pixel.h + 'px';
+            div.style.background = pixel.color;
+            div.style.boxShadow = `0 0 8px ${pixel.color}`;
+            mascotBody.appendChild(div);
+        });
+
+        // Sync orb pulse with loading bar
+        const orb = document.querySelector('.orb');
+        const loadingBarFill = document.getElementById('loadingBarFill');
+        
+        // Optional: Add completion event
+        setTimeout(() => {
+            console.log('Loading complete!');
+            // You can add transition to main content here
+        }, 4000);
+    </script>
+</body>
+</html>

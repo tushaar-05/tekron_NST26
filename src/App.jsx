@@ -190,7 +190,7 @@ function App() {
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
                     bottom: '-2%',
-                    opacity: 0.7,
+                    opacity: 0.95,
                     left: '0%',
                     zIndex: 15,
                     width: '100%',
@@ -460,7 +460,7 @@ function App() {
                             }}
                         >
                             <img
-                                src="/images/CH02.jpg"
+                                src="/images/Adobe Express - file (2).png"
                                 alt="Assistant character"
                                 className="w-full h-auto block pixel-art"
                             />
@@ -479,7 +479,7 @@ function App() {
                         }}
                     >
                     <div className="cursor-text">
-                        CLICK ME
+                        NEED HELP?
                     </div>
                     </div>
                 )}
