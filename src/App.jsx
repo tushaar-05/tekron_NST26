@@ -6,6 +6,7 @@ function App() {
     const [isDialogueOpen, setIsDialogueOpen] = useState(true);
     const [isCharacterHovered, setIsCharacterHovered] = useState(false);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+    const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
     const dialogues = [
         {
@@ -41,6 +42,31 @@ function App() {
 
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    useEffect(() => {
+        const targetDate = new Date('2026-01-30T00:00:00').getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                setTimeLeft({ days, hours, minutes, seconds });
+            } else {
+                setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            }
+        };
+
+        updateCountdown();
+        const interval = setInterval(updateCountdown, 1000);
+
+        return () => clearInterval(interval);
     }, []);
 
     return (
@@ -179,6 +205,31 @@ function App() {
                 >
                     HEADING
                 </h1>
+
+                {/* Countdown Timer */}
+                <div className="countdown-timer mb-8">
+                    <div className="countdown-container">
+                        <div className="countdown-item">
+                            <div className="countdown-value pixel-font">{String(timeLeft.days).padStart(2, '0')}</div>
+                            <div className="countdown-label pixel-font">DAYS</div>
+                        </div>
+                        <div className="countdown-separator pixel-font">:</div>
+                        <div className="countdown-item">
+                            <div className="countdown-value pixel-font">{String(timeLeft.hours).padStart(2, '0')}</div>
+                            <div className="countdown-label pixel-font">HRS</div>
+                        </div>
+                        <div className="countdown-separator pixel-font">:</div>
+                        <div className="countdown-item">
+                            <div className="countdown-value pixel-font">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                            <div className="countdown-label pixel-font">MIN</div>
+                        </div>
+                        <div className="countdown-separator pixel-font">:</div>
+                        <div className="countdown-item">
+                            <div className="countdown-value pixel-font">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                            <div className="countdown-label pixel-font">SEC</div>
+                        </div>
+                    </div>
+                </div>
 
                 {/* Lorem ipsum paragraph */}
                 <div className="max-w-4xl mx-auto mb-10">
