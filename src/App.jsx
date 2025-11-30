@@ -7,19 +7,20 @@ function App() {
     const [isCharacterHovered, setIsCharacterHovered] = useState(false);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+    const [glitchActive, setGlitchActive] = useState(false);
 
     const dialogues = [
         {
-            text: "Hey there! I'm your virtual assistant, here to guide you through this amazing journey. Welcome to our pixelated world!"
+            text: "Welcome to TEKRON 2026! Join us for cutting-edge tech talks, AI innovations, and quantum computing breakthroughs."
         },
         {
-            text: "Welcome! We're excited to have you here. Get ready to explore and discover something incredible."
+            text: "Network with industry leaders, attend hands-on workshops, and explore the future of technology. Register now to secure your spot!"
         },
         {
-            text: "Don't forget to register to unlock all features and join our community. Click the REGISTER button above to get started!"
+            text: "Featuring talks on AI, Machine Learning, Quantum Computing, Cybersecurity, and more. Don't miss out on this tech extravaganza!"
         },
         {
-            text: "See that navigation notch at the top? Hover over it to expand and click NAVIGATE. You'll enter a map where you can choose different islands and navigate to various pages. Each island is a new adventure!"
+            text: "Use the navigation menu above to explore speakers, schedule, workshops, and more. Each section is packed with tech insights!"
         }
     ];
 
@@ -42,6 +43,14 @@ function App() {
 
         window.addEventListener('mousemove', handleMouseMove);
         return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    useEffect(() => {
+        const glitchInterval = setInterval(() => {
+            setGlitchActive(true);
+            setTimeout(() => setGlitchActive(false), 200);
+        }, 5000);
+        return () => clearInterval(glitchInterval);
     }, []);
 
     useEffect(() => {
@@ -71,11 +80,20 @@ function App() {
 
     return (
         <div
-            className="relative w-screen h-screen overflow-hidden"
+            className="relative w-screen h-screen overflow-hidden tech-event-bg"
             style={{
                 background: 'linear-gradient(180deg, #1a0b2e 0%, #2d1b4e 30%, #1e1438 70%, #0f0a1e 100%)',
             }}
         >
+            {/* Subtle tech grid overlay - pixelated */}
+            <div className="tech-grid-pixel absolute inset-0 z-0 opacity-15" />
+            
+            {/* Subtle scanning line effect - pixelated */}
+            <div className="scan-line-pixel absolute inset-0 z-2 pointer-events-none" />
+            
+            {/* Subtle glitch overlay - pixelated */}
+            {glitchActive && <div className="glitch-overlay-pixel absolute inset-0 z-3 pointer-events-none" />}
+            
             {/* Background image layer */}
             <div
                 className="absolute inset-0 z-0 opacity-30"
@@ -195,21 +213,36 @@ function App() {
             <div className="relative z-20 h-full flex flex-col items-center justify-center px-8">
                 {/* Heading */}
                 <h1
-                    className="pixel-font text-center mb-6"
+                    className={`pixel-font text-center mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}
                     style={{
                         fontSize: 'clamp(60px, 10vw, 140px)',
                         color: '#d8c6f2',
                         letterSpacing: '0.15em',
-                        textShadow: '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 40px rgba(216, 198, 242, 0.3)',
+                        textShadow: 
+                            '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 40px rgba(216, 198, 242, 0.3), 0 0 60px rgba(124, 58, 237, 0.2)',
                         lineHeight: '1.1',
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
                 >
-                    <span>TEKRON</span>
-                    <span className="text-purple-500 text-[60px]">2026</span>
+                    <span className="pixel-tech-glow">TEKRON</span>
+                    <span className="text-purple-500 text-[60px]" style={{ 
+                        textShadow: '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.4)',
+                    }}>2026</span>
                 </h1>
+                
+                {/* Tech event tagline - pixel style */}
+                <div className="tech-tagline mb-4">
+                    <p className="pixel-font text-center" style={{
+                        fontSize: 'clamp(10px, 1vw, 16px)',
+                        color: '#c084fc',
+                        letterSpacing: '0.1em',
+                        textShadow: '2px 2px 0px rgba(0, 0, 0, 0.5), 0 0 20px rgba(192, 132, 252, 0.4)',
+                    }}>
+                        &gt; NEWTON SCHOOL OF TECHNOLOGY &lt;
+                    </p>
+                </div>
 
                 {/* Countdown Timer */}
                 <div className="countdown-timer mb-8">
@@ -236,7 +269,7 @@ function App() {
                     </div>
                 </div>
 
-                {/* Lorem ipsum paragraph */}
+                {/* Tech event description */}
                 <div className="max-w-4xl mx-auto mb-10">
                     <p
                         className="pixel-font text-center leading-relaxed"
@@ -244,15 +277,43 @@ function App() {
                             fontSize: 'clamp(7px, 0.75vw, 16px)',
                             color: '#c8b6e2',
                             lineHeight: '2',
-                            textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+                            textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 182, 226, 0.3)',
                         }}
                     >
-                        Come to TEKRON, the wild tech fest! Hack the end of the world with AI bosses sipping bad coffee, qubits that hate rules, and hackers who plug cables into your dreams. We're all glitches anyway—join the fun, blow up old ideas with fireworks from junk computers, and turn bugs into wins. Plug in or just scroll forever? Your call.
+                        Join TEKRON 2026 for an immersive tech experience featuring cutting-edge AI, quantum computing, 
+                        cybersecurity, and emerging technologies. Network with industry leaders, attend hands-on workshops, 
+                        and explore the innovations shaping tomorrow. Register now to be part of the future.
                     </p>
                 </div>
+                
+                {/* Tech highlights - pixel style */}
+                {/* <div className="tech-highlights mb-8 max-w-5xl mx-auto">
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <div className="tech-badge-pixel">
+                            <div className="pixel-icon pixel-icon-ai"></div>
+                            <span className="pixel-font">AI & ML</span>
+                        </div>
+                        <div className="tech-badge-pixel">
+                            <div className="pixel-icon pixel-icon-quantum"></div>
+                            <span className="pixel-font">QUANTUM</span>
+                        </div>
+                        <div className="tech-badge-pixel">
+                            <div className="pixel-icon pixel-icon-security"></div>
+                            <span className="pixel-font">SECURITY</span>
+                        </div>
+                        <div className="tech-badge-pixel">
+                            <div className="pixel-icon pixel-icon-web3"></div>
+                            <span className="pixel-font">WEB3</span>
+                        </div>
+                        <div className="tech-badge-pixel">
+                            <div className="pixel-icon pixel-icon-cloud"></div>
+                            <span className="pixel-font">CLOUD</span>
+                        </div>
+                    </div>
+                </div> */}
 
                 {/* Register button */}
-                <button className="pixel-button pixel-font px-16 py-5 text-white mb-16"
+                <button className="pixel-button pixel-font px-16 py-5 text-white mb-16 pixel-tech-button"
                     style={{
                         fontSize: 'clamp(14px, 1.4vw, 22px)',
                         letterSpacing: '0.15em',
@@ -276,7 +337,13 @@ function App() {
                                 ×
                             </button>
 
-                            <p className="pixel-font mb-4" style={{ fontSize: '10px', lineHeight: '1.8', color: '#d8c6f2', textShadow: '1px 1px 0px #000000, 0 0 10px rgba(168, 85, 247, 0.3)', imageRendering: 'pixelated' }}>
+                            <p className="pixel-font mb-4" style={{ 
+                                fontSize: '10px', 
+                                lineHeight: '1.8', 
+                                color: '#d8c6f2', 
+                                textShadow: '1px 1px 0px #000000, 0 0 10px rgba(168, 85, 247, 0.3)',
+                                imageRendering: 'pixelated',
+                            }}>
                                 {dialogues[dialogueIndex].text}
                             </p>
 
@@ -292,6 +359,7 @@ function App() {
                                             background: dialogueIndex === index ? '#c084fc' : 'rgba(168, 85, 247, 0.4)',
                                             borderRadius: '0',
                                             imageRendering: 'pixelated',
+                                            boxShadow: dialogueIndex === index ? '0 0 8px rgba(192, 132, 252, 0.6)' : 'none',
                                         }}
                                     />
                                 ))}
@@ -384,9 +452,9 @@ function App() {
                             transform: 'translate(0, 0)',
                         }}
                     >
-                        <div className="cursor-text">
-                            CLICK ME
-                        </div>
+                    <div className="cursor-text">
+                        CLICK ME
+                    </div>
                     </div>
                 )}
             </div>

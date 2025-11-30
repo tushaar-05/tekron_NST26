@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -312,8 +313,8 @@ body {
 
 /* Notch navigation button */
 .notch-nav-button {
-  background: rgba(97, 19, 231, 0.5);
-  border: none;
+  background: #c084fc8b;
+  border: 2px solid #a552f7;
   width: 120px;
   height: 50px;
   padding: 0;
@@ -323,7 +324,7 @@ body {
   image-rendering: crisp-edges;
   position: relative;
   overflow: visible;
-  transition: width 0.15s steps(4, end);
+  transition: all 0.3s ease;
   /* Pixel art notch shape - rounded top, jagged bottom */
   clip-path: polygon(
     0% 0%,
@@ -349,9 +350,9 @@ body {
     0% calc(100% - 18px)
   );
   box-shadow: 
-    0 0 0 2px #0f0a1e,
-    0 0 0 4px #7c3aed,
-    0 0 20px rgba(124, 58, 237, 0.4);
+    0 0 0 1px rgba(0, 240, 255, 0.2),
+    0 0 20px rgba(0, 240, 255, 0.3),
+    inset 0 0 10px rgba(0, 240, 255, 0.05);
 }
 
 .notch-nav-button::before {
@@ -367,11 +368,13 @@ body {
 
 .notch-nav-button:hover {
   width: 280px;
-  background: #1d1e45;
+  background: rgba(0, 240, 255, 0.25);
+  border-color: rgba(0, 240, 255, 0.7);
   box-shadow: 
-    0 0 0 2px #0f0a1e,
-    0 0 0 4px #a855f7,
-    0 0 30px rgba(168, 85, 247, 0.6);
+    0 0 0 1px rgba(0, 240, 255, 0.3),
+    0 0 30px rgba(0, 240, 255, 0.5),
+    0 0 50px rgba(124, 58, 237, 0.3),
+    inset 0 0 20px rgba(0, 240, 255, 0.1);
 }
 
 .notch-nav-content {
@@ -405,4 +408,439 @@ body {
 .notch-nav-button:hover .notch-text-expanded {
   opacity: 1;
   transition: opacity 0.1s steps(2, end) 0.05s;
+}
+
+/* Tech Event Background Effects - Pixel Art Style */
+.tech-event-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Pixelated Tech Grid Pattern */
+.tech-grid-pixel {
+  background-image: 
+    linear-gradient(rgba(192, 132, 252, 0.08) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(192, 132, 252, 0.08) 2px, transparent 2px);
+  background-size: 40px 40px;
+  animation: gridMovePixel 25s linear infinite;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+@keyframes gridMovePixel {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
+/* Pixelated Scanning Line Effect */
+.scan-line-pixel {
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(192, 132, 252, 0.15) 2px,
+    rgba(192, 132, 252, 0.15) 4px,
+    transparent 6px
+  );
+  background-size: 100% 20px;
+  animation: scanPixel 4s linear infinite;
+  pointer-events: none;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+@keyframes scanPixel {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+/* Pixelated Glitch Overlay */
+.glitch-overlay-pixel {
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255, 0, 0, 0.15) 2px, transparent 4px),
+    linear-gradient(0deg, transparent 0%, rgba(0, 255, 255, 0.15) 2px, transparent 4px);
+  background-size: 8px 8px;
+  animation: glitchPixel 0.2s steps(4, end);
+  pointer-events: none;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+@keyframes glitchPixel {
+  0% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(-2px, 2px);
+  }
+  50% {
+    transform: translate(2px, -2px);
+  }
+  75% {
+    transform: translate(-2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Pixel Tech Title Glow */
+.pixel-tech-glow {
+  animation: pixelTechPulse 3s ease-in-out infinite;
+}
+
+@keyframes pixelTechPulse {
+  0%, 100% {
+    text-shadow: 
+      6px 6px 0px rgba(0, 0, 0, 0.6), 
+      0 0 40px rgba(216, 198, 242, 0.3), 
+      0 0 60px rgba(124, 58, 237, 0.2);
+  }
+  50% {
+    text-shadow: 
+      6px 6px 0px rgba(0, 0, 0, 0.6), 
+      0 0 50px rgba(216, 198, 242, 0.5), 
+      0 0 80px rgba(124, 58, 237, 0.4),
+      0 0 100px rgba(168, 85, 247, 0.2);
+  }
+}
+
+/* Pixel Glitch Text Effect */
+.glitch-text-pixel {
+  animation: textGlitchPixel 0.3s steps(4, end);
+}
+
+@keyframes textGlitchPixel {
+  0%, 100% {
+    transform: translate(0);
+  }
+  25% {
+    transform: translate(-2px, 2px);
+  }
+  50% {
+    transform: translate(2px, -2px);
+  }
+  75% {
+    transform: translate(-2px, -2px);
+  }
+}
+
+/* Pixel Button with Tech Glow */
+.pixel-tech-button {
+  box-shadow: 
+    /* Pixelated multi-layer border for blocky effect */
+    0 0 0 2px #000000,
+    0 0 0 4px #c084fc,
+    0 0 0 6px #000000,
+    0 0 0 8px #a855f7,
+    /* 3D shadow effect */
+    4px 4px 0px #4c1d95,
+    /* Tech glow effect */
+    0 0 20px rgba(192, 132, 252, 0.4),
+    0 0 40px rgba(168, 85, 247, 0.2);
+}
+
+.pixel-tech-button:hover {
+  box-shadow: 
+    /* Pixelated multi-layer border for blocky effect */
+    0 0 0 2px #000000,
+    0 0 0 4px #c084fc,
+    0 0 0 6px #000000,
+    0 0 0 8px #a855f7,
+    /* 3D shadow effect */
+    6px 6px 0px #4c1d95,
+    /* Enhanced tech glow effect */
+    0 0 30px rgba(192, 132, 252, 0.6),
+    0 0 60px rgba(168, 85, 247, 0.4),
+    0 0 80px rgba(124, 58, 237, 0.2);
+}
+
+/* Pixel Tech Badges */
+.tech-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.tech-badge-pixel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: rgba(30, 30, 40, 0.9);
+  border: none;
+  border-radius: 0;
+  box-shadow: 
+    0 0 0 2px #000000,
+    0 0 0 4px #1e1438,
+    0 0 0 6px #a855f7,
+    0 0 0 8px #000000,
+    0 0 0 10px #c084fc,
+    0 0 20px rgba(168, 85, 247, 0.4),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  color: #c084fc;
+  font-size: clamp(8px, 0.8vw, 12px);
+  text-shadow: 
+    1px 1px 0px #000000,
+    0 0 10px rgba(192, 132, 252, 0.5);
+  transition: none;
+  cursor: default;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+.tech-badge-pixel:hover {
+  background: rgba(40, 40, 50, 0.9);
+  box-shadow: 
+    0 0 0 2px #000000,
+    0 0 0 4px #1e1438,
+    0 0 0 6px #a855f7,
+    0 0 0 8px #000000,
+    0 0 0 10px #c084fc,
+    0 0 30px rgba(168, 85, 247, 0.6),
+    0 0 50px rgba(192, 132, 252, 0.3),
+    inset 0 0 15px rgba(0, 0, 0, 0.5);
+  transform: translate(-1px, -1px);
+}
+
+/* Pixel Art Icons */
+.pixel-icon {
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  flex-shrink: 0;
+  position: relative;
+  display: inline-block;
+}
+
+/* AI & ML Icon - Neural Network (Pixel Grid) */
+.pixel-icon-ai {
+  background: 
+    /* Grid pattern for neural network */
+    linear-gradient(#c084fc 1px, transparent 1px),
+    linear-gradient(90deg, #c084fc 1px, transparent 1px),
+    /* Nodes */
+    radial-gradient(circle at 25% 25%, #a855f7 2px, transparent 2px),
+    radial-gradient(circle at 75% 25%, #a855f7 2px, transparent 2px),
+    radial-gradient(circle at 25% 75%, #a855f7 2px, transparent 2px),
+    radial-gradient(circle at 75% 75%, #a855f7 2px, transparent 2px),
+    radial-gradient(circle at 50% 50%, #c084fc 3px, transparent 3px);
+  background-size: 7px 7px, 7px 7px, 28px 28px, 28px 28px, 28px 28px, 28px 28px, 28px 28px;
+  filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.9));
+}
+
+/* Quantum Icon - Atom (Pixel Style) */
+.pixel-icon-quantum {
+  background: 
+    /* Pixelated orbital rings */
+    conic-gradient(from 0deg at 50% 50%, transparent 0deg, #00d9ff 90deg, transparent 180deg, #00d9ff 270deg, transparent 360deg),
+    /* Nucleus */
+    radial-gradient(circle at 50% 50%, #00f0ff 3px, transparent 3px);
+  background-size: 28px 28px, 28px 28px;
+  border-radius: 0;
+  filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.9));
+  clip-path: polygon(
+    50% 0%, 100% 25%, 100% 50%, 75% 50%, 50% 100%, 25% 50%, 0% 50%, 0% 25%
+  );
+}
+
+.pixel-icon-quantum::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  width: 4px;
+  height: 4px;
+  background: #00f0ff;
+  box-shadow: 
+    14px 0 0 #00f0ff,
+    0 14px 0 #00f0ff,
+    14px 14px 0 #00f0ff;
+  filter: drop-shadow(0 0 3px rgba(0, 240, 255, 1));
+  animation: quantumPulse 2s ease-in-out infinite;
+}
+
+@keyframes quantumPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}
+
+/* Security Icon - Shield (Pixel Style) */
+.pixel-icon-security {
+  background: 
+    /* Shield base */
+    linear-gradient(to bottom, #a855f7 0%, #a855f7 40%, #c084fc 40%, #c084fc 60%, #a855f7 60%, #a855f7 100%);
+  clip-path: polygon(
+    50% 0%, 90% 20%, 90% 60%, 50% 100%, 10% 60%, 10% 20%
+  );
+  filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.9));
+  position: relative;
+}
+
+.pixel-icon-security::before {
+  content: '';
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 6px solid #00f0ff;
+  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 1));
+}
+
+.pixel-icon-security::after {
+  content: '';
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 4px;
+  background: #00f0ff;
+  box-shadow: 0 0 4px rgba(0, 240, 255, 1);
+}
+
+/* Web3 Icon - Blockchain (Pixel Blocks) */
+.pixel-icon-web3 {
+  background: 
+    /* Chain blocks */
+    linear-gradient(90deg, #c084fc 0%, #c084fc 35%, transparent 35%, transparent 65%, #c084fc 65%, #c084fc 100%),
+    linear-gradient(0deg, #a855f7 0%, #a855f7 35%, transparent 35%, transparent 65%, #a855f7 65%, #a855f7 100%);
+  background-size: 9px 9px;
+  filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.9));
+  position: relative;
+}
+
+.pixel-icon-web3::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #00f0ff;
+  box-shadow: 
+    11px 0 0 #00f0ff,
+    0 11px 0 #00f0ff,
+    11px 11px 0 #00f0ff;
+  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 1));
+}
+
+/* Cloud Icon - Server/Cloud (Pixel Style) */
+.pixel-icon-cloud {
+  background: 
+    /* Cloud shape - pixelated */
+    radial-gradient(circle at 30% 45%, #c084fc 5px, transparent 5px),
+    radial-gradient(circle at 50% 45%, #a855f7 6px, transparent 6px),
+    radial-gradient(circle at 70% 45%, #c084fc 5px, transparent 5px),
+    linear-gradient(to bottom, transparent 45%, #c084fc 45%, #c084fc 55%, transparent 55%);
+  background-size: 28px 28px;
+  filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.9));
+  position: relative;
+}
+
+.pixel-icon-cloud::before {
+  content: '';
+  position: absolute;
+  bottom: 15%;
+  left: 25%;
+  width: 50%;
+  height: 3px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      #00f0ff 0px,
+      #00f0ff 3px,
+      transparent 3px,
+      transparent 6px
+    );
+  filter: drop-shadow(0 0 4px rgba(0, 240, 255, 1));
+}
+
+/* Enhanced Countdown Timer - Pixel Art with Tech Glow */
+.countdown-timer {
+  filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.3));
+}
+
+.countdown-container {
+  background: rgba(30, 30, 40, 0.9);
+  border: none;
+  border-radius: 0;
+  box-shadow: 
+    0 0 0 2px #000000,
+    0 0 0 4px #1e1438,
+    0 0 0 6px #a855f7,
+    0 0 0 8px #000000,
+    0 0 0 10px #c084fc,
+    0 0 30px rgba(168, 85, 247, 0.6),
+    inset 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.countdown-value {
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+  border-radius: 0;
+  box-shadow: 
+    0 0 0 2px #000000,
+    0 0 0 4px #a855f7,
+    inset 0 0 10px rgba(0, 0, 0, 0.8);
+  color: #c084fc;
+  text-shadow: 
+    2px 2px 0px #000000,
+    0 0 15px rgba(168, 85, 247, 0.8),
+    0 0 30px rgba(192, 132, 252, 0.4);
+}
+
+.countdown-separator {
+  color: #a855f7;
+  text-shadow: 
+    2px 2px 0px #000000,
+    0 0 20px rgba(168, 85, 247, 0.8);
+  animation: blink 1s infinite;
+}
+
+/* Enhanced Dialogue Bubble - Pixel Art with Tech Glow */
+.dialogue-bubble {
+  background: rgba(30, 30, 40, 0.95);
+  border: none;
+  border-radius: 0;
+  box-shadow: 
+    0 0 0 1px #000000,
+    0 0 0 2px #0a0a0a,
+    0 0 0 3px #a855f7,
+    0 0 0 4px #1a1a1a,
+    0 0 0 5px #c084fc,
+    0 0 0 6px #000000,
+    0 0 0 7px #a855f7,
+    0 0 20px rgba(168, 85, 247, 0.5),
+    0 0 40px rgba(192, 132, 252, 0.2),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Z-index utilities */
+.z-1 {
+  z-index: 1;
+}
+
+.z-2 {
+  z-index: 2;
+}
+
+.z-3 {
+  z-index: 3;
 }
