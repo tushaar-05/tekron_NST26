@@ -8,6 +8,8 @@ function App() {
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
     const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     const [glitchActive, setGlitchActive] = useState(false);
+    const [displayedText, setDisplayedText] = useState('');
+    const [dialogueGlitch, setDialogueGlitch] = useState(false);
 
     const dialogues = [
         {
@@ -15,9 +17,6 @@ function App() {
         },
         {
             text: "Network with industry leaders, attend hands-on workshops, and explore the future of technology. Register now to secure your spot!"
-        },
-        {
-            text: "Featuring talks on AI, Machine Learning, Quantum Computing, Cybersecurity, and more. Don't miss out on this tech extravaganza!"
         },
         {
             text: "Use the navigation menu above to explore speakers, schedule, workshops, and more. Each section is packed with tech insights!"
@@ -52,6 +51,30 @@ function App() {
         }, 5000);
         return () => clearInterval(glitchInterval);
     }, []);
+
+    // Typewriter effect for dialogue
+    useEffect(() => {
+        const currentDialogue = dialogues[dialogueIndex].text;
+        setDisplayedText('');
+        
+        let currentIndex = 0;
+        const typeInterval = setInterval(() => {
+            if (currentIndex < currentDialogue.length) {
+                setDisplayedText(currentDialogue.slice(0, currentIndex + 1));
+                currentIndex++;
+                
+                // Random glitch effect during typing
+                if (Math.random() < 0.1) {
+                    setDialogueGlitch(true);
+                    setTimeout(() => setDialogueGlitch(false), 100);
+                }
+            } else {
+                clearInterval(typeInterval);
+            }
+        }, 30); // Typing speed: 30ms per character
+
+        return () => clearInterval(typeInterval);
+    }, [dialogueIndex]);
 
     useEffect(() => {
         const targetDate = new Date('2026-01-30T00:00:00').getTime();
@@ -337,14 +360,17 @@ function App() {
                                 ×
                             </button>
 
-                            <p className="pixel-font mb-4" style={{ 
+                            <p className={`pixel-font mb-4 dialogue-text ${dialogueGlitch ? 'dialogue-glitch' : ''}`} style={{ 
                                 fontSize: '10px', 
                                 lineHeight: '1.8', 
                                 color: '#d8c6f2', 
                                 textShadow: '1px 1px 0px #000000, 0 0 10px rgba(168, 85, 247, 0.3)',
                                 imageRendering: 'pixelated',
                             }}>
-                                {dialogues[dialogueIndex].text}
+                                {displayedText}
+                                {displayedText.length < dialogues[dialogueIndex].text.length && (
+                                    <span className="typewriter-cursor">|</span>
+                                )}
                             </p>
 
                             {/* Progress dots */}
