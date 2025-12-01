@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 function WorldMap({ onNavigateHome }) {
     const [hoveredIsland, setHoveredIsland] = useState(null);
@@ -24,15 +25,20 @@ function WorldMap({ onNavigateHome }) {
 
     return (
         <div className="world-map-container">
-            
-            <div className="world-map-wrapper">
+
+            <motion.div
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                className="world-map-wrapper"
+            >
                 <img
                     src="/images/world-map.jpg"
                     alt="TEKRON World Map"
                     className="world-map-image pixel-art"
                 />
 
-                
+
                 {islands.map((island) => (
                     <div
                         key={island.id}
@@ -49,7 +55,7 @@ function WorldMap({ onNavigateHome }) {
                         onMouseLeave={() => setHoveredIsland(null)}
                         onClick={() => handleIslandClick(island)}
                     >
-                        
+
                         {hoveredIsland === island.id && (
                             <div className="island-tooltip pixel-font">
                                 {island.name}
@@ -57,7 +63,7 @@ function WorldMap({ onNavigateHome }) {
                         )}
                     </div>
                 ))}
-            </div>
+            </motion.div>
 
             <style jsx>{`
                 .world-map-container {
@@ -173,7 +179,7 @@ function WorldMap({ onNavigateHome }) {
                     }
                 }
             `}</style>
-        </div>
+        </div >
     );
 }
 
