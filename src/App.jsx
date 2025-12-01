@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
+import WorldMap from './WorldMap';
+import Loading from './Loading';
 
 function App() {
+    const [showMap, setShowMap] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     const [dialogueIndex, setDialogueIndex] = useState(0);
     const [isDialogueOpen, setIsDialogueOpen] = useState(true);
@@ -10,6 +14,19 @@ function App() {
     const [glitchActive, setGlitchActive] = useState(false);
     const [displayedText, setDisplayedText] = useState('');
     const [dialogueGlitch, setDialogueGlitch] = useState(false);
+
+    const handleNavigateToMap = () => {
+        setIsTransitioning(true);
+    };
+
+    const handleNavigateToHome = () => {
+        setIsTransitioning(true);
+    };
+
+    const handleLoadingComplete = () => {
+        setIsTransitioning(false);
+        setShowMap(!showMap);
+    };
 
     const dialogues = [
         {
@@ -52,18 +69,16 @@ function App() {
         return () => clearInterval(glitchInterval);
     }, []);
 
-    // Typewriter effect for dialogue
     useEffect(() => {
         const currentDialogue = dialogues[dialogueIndex].text;
         setDisplayedText('');
-        
+
         let currentIndex = 0;
         const typeInterval = setInterval(() => {
             if (currentIndex < currentDialogue.length) {
                 setDisplayedText(currentDialogue.slice(0, currentIndex + 1));
                 currentIndex++;
-                
-                // Random glitch effect during typing
+
                 if (Math.random() < 0.1) {
                     setDialogueGlitch(true);
                     setTimeout(() => setDialogueGlitch(false), 100);
@@ -101,6 +116,28 @@ function App() {
         return () => clearInterval(interval);
     }, []);
 
+    if (isTransitioning) {
+        return <Loading onLoadingComplete={handleLoadingComplete} />;
+    }
+
+    if (showMap) {
+        return (
+            <div className="relative">
+                <WorldMap onNavigateHome={handleNavigateToHome} />
+                <button
+                    onClick={handleNavigateToHome}
+                    className="pixel-button pixel-font absolute top-8 right-8 px-8 py-4 text-white z-50"
+                    style={{
+                        fontSize: '12px',
+                        letterSpacing: '0.1em',
+                    }}
+                >
+                    BACK TO HOME
+                </button>
+            </div>
+        );
+    }
+
     return (
         <div
             className="relative w-screen h-screen overflow-hidden tech-event-bg"
@@ -108,16 +145,16 @@ function App() {
                 background: 'linear-gradient(180deg, #1a0b2e 0%, #2d1b4e 30%, #1e1438 70%, #0f0a1e 100%)',
             }}
         >
-            {/* Subtle tech grid overlay - pixelated */}
+            
             <div className="tech-grid-pixel absolute inset-0 z-0 opacity-15" />
+
             
-            {/* Subtle scanning line effect - pixelated */}
             <div className="scan-line-pixel absolute inset-0 z-2 pointer-events-none" />
+
             
-            {/* Subtle glitch overlay - pixelated */}
             {glitchActive && <div className="glitch-overlay-pixel absolute inset-0 z-3 pointer-events-none" />}
+
             
-            {/* Background image layer */}
             <div
                 className="absolute inset-0 z-0 opacity-30"
                 style={{
@@ -128,7 +165,7 @@ function App() {
                 }}
             />
 
-            {/* 5.webp - Back layer (teal/cyan) - Horizontal emphasis - Slowest */}
+            
             <div
                 className="absolute transition-transform duration-200 ease-out"
                 style={{
@@ -147,7 +184,7 @@ function App() {
                 />
             </div>
 
-            {/* 4.webp - Middle of page - Diagonal movement - Medium speed */}
+            
             <div
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
@@ -166,7 +203,7 @@ function App() {
                 />
             </div>
 
-            {/* 3.webp - 100px down from 4 - Opposite diagonal - Medium-fast speed */}
+            
             <div
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
@@ -185,7 +222,7 @@ function App() {
                 />
             </div>
 
-            {/* 2.webp - Bottom most - Vertical emphasis - Fast speed */}
+            
             <div
                 className="absolute transition-transform duration-300 ease-out"
                 style={{
@@ -205,7 +242,7 @@ function App() {
                 />
             </div>
 
-            {/* 1.webp - Above 2 at bottom - Fastest speed */}
+            
             <div
                 className="absolute transition-transform duration-500 ease-out"
                 style={{
@@ -224,24 +261,27 @@ function App() {
                 />
             </div>
 
-            {/* Notch navigation button */}
-            <button className="notch-nav-button absolute top-0 left-1/2 transform -translate-x-1/2 z-40 pixel-art">
+            
+            <button
+                className="notch-nav-button absolute top-0 left-1/2 transform -translate-x-1/2 z-40 pixel-art"
+                onClick={handleNavigateToMap}
+            >
                 <div className="notch-nav-content">
                     <span className="notch-text-default pixel-font text-white text-xs">MAP</span>
                     <span className="notch-text-expanded pixel-font text-white text-xs">NAVIGATE</span>
                 </div>
             </button>
 
-            {/* Main content container */}
+            
             <div className="relative z-20 h-full flex flex-col items-center justify-center px-8">
-                {/* Heading */}
+                
                 <h1
                     className={`pixel-font text-center mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}
                     style={{
                         fontSize: 'clamp(60px, 10vw, 140px)',
                         color: '#d8c6f2',
                         letterSpacing: '0.15em',
-                        textShadow: 
+                        textShadow:
                             '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 40px rgba(216, 198, 242, 0.3), 0 0 60px rgba(124, 58, 237, 0.2)',
                         lineHeight: '1.1',
                         display: 'flex',
@@ -250,12 +290,12 @@ function App() {
                     }}
                 >
                     <span className="pixel-tech-glow">TEKRON</span>
-                    <span className="text-purple-500 text-[60px]" style={{ 
+                    <span className="text-purple-500 text-[60px]" style={{
                         textShadow: '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.4)',
                     }}>2026</span>
                 </h1>
+
                 
-                {/* Tech event tagline - pixel style */}
                 <div className="tech-tagline mb-4">
                     <p className="pixel-font text-center" style={{
                         fontSize: 'clamp(10px, 1vw, 16px)',
@@ -267,7 +307,7 @@ function App() {
                     </p>
                 </div>
 
-                {/* Countdown Timer */}
+                
                 <div className="countdown-timer mb-8">
                     <div className="countdown-container">
                         <div className="countdown-item">
@@ -292,7 +332,7 @@ function App() {
                     </div>
                 </div>
 
-                {/* Tech event description */}
+                
                 <div className="max-w-4xl mx-auto mb-10">
                     <p
                         className="pixel-font text-center leading-relaxed"
@@ -303,13 +343,13 @@ function App() {
                             textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 182, 226, 0.3)',
                         }}
                     >
-                        Join TEKRON 2026 for an immersive tech experience featuring cutting-edge AI, quantum computing, 
-                        cybersecurity, and emerging technologies. Network with industry leaders, attend hands-on workshops, 
+                        Join TEKRON 2026 for an immersive tech experience featuring cutting-edge AI, quantum computing,
+                        cybersecurity, and emerging technologies. Network with industry leaders, attend hands-on workshops,
                         and explore the innovations shaping tomorrow. Register now to be part of the future.
                     </p>
                 </div>
+
                 
-                {/* Tech highlights - pixel style */}
                 {/* <div className="tech-highlights mb-8 max-w-5xl mx-auto">
                     <div className="flex flex-wrap justify-center gap-4">
                         <div className="tech-badge-pixel">
@@ -335,7 +375,7 @@ function App() {
                     </div>
                 </div> */}
 
-                {/* Register button */}
+                
                 <button className="pixel-button pixel-font px-16 py-5 text-white mb-16 pixel-tech-button"
                     style={{
                         fontSize: 'clamp(14px, 1.4vw, 22px)',
@@ -345,11 +385,11 @@ function App() {
                     REGISTER
                 </button>
 
-                {/* Dialogue bubble */}
+                
                 {isDialogueOpen && (
                     <div className="absolute bottom-[500px] right-[10px] z-50">
                         <div className="dialogue-bubble px-8 py-6 relative">
-                            {/* Close button */}
+                            
                             <button
                                 onClick={() => setIsDialogueOpen(false)}
                                 className="absolute top-2 right-2 pixel-font"
@@ -360,10 +400,10 @@ function App() {
                                 ×
                             </button>
 
-                            <p className={`pixel-font mb-4 dialogue-text ${dialogueGlitch ? 'dialogue-glitch' : ''}`} style={{ 
-                                fontSize: '10px', 
-                                lineHeight: '1.8', 
-                                color: '#d8c6f2', 
+                            <p className={`pixel-font mb-4 dialogue-text ${dialogueGlitch ? 'dialogue-glitch' : ''}`} style={{
+                                fontSize: '10px',
+                                lineHeight: '1.8',
+                                color: '#d8c6f2',
                                 textShadow: '1px 1px 0px #000000, 0 0 10px rgba(168, 85, 247, 0.3)',
                                 imageRendering: 'pixelated',
                             }}>
@@ -373,7 +413,7 @@ function App() {
                                 )}
                             </p>
 
-                            {/* Progress dots */}
+                            
                             <div className="flex justify-center gap-2 mb-4">
                                 {dialogues.map((_, index) => (
                                     <div
@@ -391,7 +431,7 @@ function App() {
                                 ))}
                             </div>
 
-                            {/* Arrow buttons */}
+                            
                             <div className="flex justify-center gap-6">
                                 <button
                                     onClick={prevDialogue}
@@ -413,7 +453,7 @@ function App() {
                                 </button>
                             </div>
 
-                            {/* Bubble pointer (triangle pointing down) */}
+                            
                             <div
                                 className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full"
                                 style={{
@@ -430,17 +470,15 @@ function App() {
                     </div>
                 )}
 
-                {/* Character */}
-                <div 
+                
+                <div
                     className="absolute bottom-0 right-[-80px] z-30"
                     onClick={() => setIsDialogueOpen(!isDialogueOpen)}
                     onMouseMove={(e) => {
                         const rect = e.currentTarget.getBoundingClientRect();
                         const mouseX = e.clientX - rect.left;
-                        // Shift center point to the left (about 20% from left edge)
                         const centerX = rect.width * 0.2;
-                        
-                        // Only show cursor if mouse is on the right side (from adjusted center)
+
                         if (mouseX > centerX) {
                             setIsCharacterHovered(true);
                             setCursorPosition({ x: e.clientX, y: e.clientY });
@@ -468,7 +506,7 @@ function App() {
                     </div>
                 </div>
 
-                {/* Custom cursor */}
+                
                 {isCharacterHovered && (
                     <div
                         className="custom-cursor pixel-font fixed pointer-events-none z-50"
@@ -478,9 +516,9 @@ function App() {
                             transform: 'translate(0, 0)',
                         }}
                     >
-                    <div className="cursor-text">
-                        NEED HELP?
-                    </div>
+                        <div className="cursor-text">
+                            NEED HELP?
+                        </div>
                     </div>
                 )}
             </div>
