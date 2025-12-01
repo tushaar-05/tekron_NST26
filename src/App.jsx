@@ -130,8 +130,12 @@ function App() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.5 }}
                     className="relative"
+                    style={{
+                        background: '#1a0b2e',
+                        imageRendering: 'pixelated',
+                    }}
                 >
                     <WorldMap onNavigateHome={handleNavigateToHome} />
                     <button
@@ -152,6 +156,10 @@ function App() {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.3 }}
+                    style={{
+                        background: '#1a0b2e',
+                        imageRendering: 'pixelated',
+                    }}
                 >
                     <div
                         className="relative w-screen h-screen overflow-hidden tech-event-bg"

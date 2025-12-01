@@ -11,11 +11,27 @@
   box-sizing: border-box;
 }
 
+html {
+  background-color: #1a0b2e;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 body {
   margin: 0;
   padding: 0;
   overflow: hidden;
   font-family: 'Press Start 2P', cursive;
+  background-color: #1a0b2e;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+#root {
+  background-color: #1a0b2e;
+  min-height: 100vh;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;

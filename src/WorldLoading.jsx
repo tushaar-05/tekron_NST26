@@ -22,7 +22,7 @@ function WorldLoading({ onLoadingComplete }) {
 
             // Update progress based on video time
             const handleTimeUpdate = () => {
-                const currentProgress = (video.currentTime / video.duration) * 100;
+                const currentProgress = (video.currentTime / video.duration) * 50;
                 setProgress(currentProgress);
             };
 
@@ -30,7 +30,7 @@ function WorldLoading({ onLoadingComplete }) {
             const handleVideoEnd = () => {
                 setProgress(100);
                 if (onLoadingComplete) {
-                    setTimeout(() => onLoadingComplete(), 500);
+                    setTimeout(() => onLoadingComplete(), 200);
                 }
             };
 
