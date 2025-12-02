@@ -27,18 +27,21 @@ function WorldMap() {
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-            {/* Main Background */}
+            {/* Main Background with subtle parallax */}
             <div
                 style={{
                     position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
+                    top: '50%',
+                    left: '50%',
+                    width: '105%',
+                    height: '105%',
                     backgroundImage: 'url(/images/map/main.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
+                    backgroundRepeat: 'no-repeat',
+                    transform: `translate(calc(-50% + ${mousePosition.x * 5}px), calc(-50% + ${mousePosition.y * 5}px))`,
+                    transition: 'transform 0.1s ease-out',
+                    willChange: 'transform'
                 }}
             />
             
