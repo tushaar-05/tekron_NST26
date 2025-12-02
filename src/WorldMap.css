@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.island {
+    transition: all 0.3s ease;
+    border-radius: 50%;
+}
+
+.island:hover {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.7));
+    transform: scale(1.05) !important;
+}
+
+.island-label {
+    font-family: 'Press Start 2P', cursive;
+    position: absolute;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    transform: translateY(-40px);
+}
+
+/* Add a subtle pulse animation for the home island */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+    100% { transform: scale(1); }
+}
+
+#home {
+    animation: pulse 4s infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .island-label {
+        font-size: 8px !important;
+        padding: 2px 5px !important;
+    }
+    
+    .island {
+        transform: scale(0.8);
+    }
+    
+    .island:hover {
+        transform: scale(0.85) !important;
+    }
+}
