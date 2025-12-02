@@ -138,16 +138,6 @@ function App() {
                     }}
                 >
                     <WorldMap onNavigateHome={handleNavigateToHome} />
-                    <button
-                        onClick={handleNavigateToHome}
-                        className="pixel-button pixel-font absolute top-8 right-8 px-8 py-4 text-white z-50"
-                        style={{
-                            fontSize: '12px',
-                            letterSpacing: '0.1em',
-                        }}
-                    >
-                        BACK TO HOME
-                    </button>
                 </motion.div>
             ) : (
                 <motion.div
