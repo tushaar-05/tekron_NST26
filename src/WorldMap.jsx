@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 function WorldMap() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -16,29 +16,32 @@ function WorldMap() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
-    const cloudStyle = {
+    const getParallaxStyle = (xFactor, yFactor) => ({
         position: 'absolute',
         width: '500px',
         height: 'auto',
         zIndex: 1,
-        transition: 'transform 0.3s ease-out',
-        willChange: 'transform'
-    };
+        transform: `translate(${mousePosition.x * xFactor}px, ${mousePosition.y * yFactor}px)`,
+        transition: 'transform 0.1s ease-out'
+    });
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
-            {/* Main Background */}
+            {/* Main Background with subtle parallax */}
             <div
                 style={{
                     position: 'fixed',
-                    top: 0,
-                    left: 0,
-                    width: '100vw',
-                    height: '100vh',
+                    top: '50%',
+                    left: '50%',
+                    width: '105%',
+                    height: '105%',
                     backgroundImage: 'url(/images/map/main.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
+                    backgroundRepeat: 'no-repeat',
+                    transform: `translate(calc(-50% + ${mousePosition.x * 5}px), calc(-50% + ${mousePosition.y * 5}px))`,
+                    transition: 'transform 0.1s ease-out',
+                    willChange: 'transform'
                 }}
             />
 
@@ -47,10 +50,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png"
                 alt="Cloud 1"
                 style={{
-                    ...cloudStyle,
+                    ...getParallaxStyle(-15, -15),
                     top: '-20px',
                     left: '-20px',
-                    transform: `translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)`
+                    transform: getParallaxStyle(-15, -15).transform + ' scale(1)'
                 }}
             />
 
@@ -59,10 +62,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png"
                 alt="Cloud 2"
                 style={{
-                    ...cloudStyle,
+                    ...getParallaxStyle(15, -15),
                     top: '-20px',
                     right: '-20px',
-                    transform: `scaleX(-1) translate(${mousePosition.x * -10}px, ${mousePosition.y * 10}px)`
+                    transform: getParallaxStyle(15, -15).transform + ' scaleX(-1)'
                 }}
             />
 
@@ -71,10 +74,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png"
                 alt="Cloud 3"
                 style={{
-                    ...cloudStyle,
+                    ...getParallaxStyle(-15, 15),
                     bottom: '-20px',
                     left: '-20px',
-                    transform: `scaleY(-1) translate(${mousePosition.x * 12}px, ${mousePosition.y * -12}px)`
+                    transform: getParallaxStyle(-15, 15).transform + ' scaleY(-1)'
                 }}
             />
 
@@ -83,10 +86,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png"
                 alt="Cloud 4"
                 style={{
-                    ...cloudStyle,
-                    bottom: '20px',
-                    right: '20px',
-                    transform: `scale(-1) translate(${mousePosition.x * -15}px, ${mousePosition.y * -15}px)`
+                    ...getParallaxStyle(15, 15),
+                    bottom: '-20px',
+                    right: '-20px',
+                    transform: getParallaxStyle(15, 15).transform + ' scale(-1)'
                 }}
             />
         </div>
