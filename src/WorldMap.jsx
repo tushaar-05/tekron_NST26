@@ -27,14 +27,14 @@ function WorldMap() {
     });
 
     const hotspots = [
-        { id: 'home', name: 'Events', route: '/events', position: { top: '15%', left: '28%' }, size: { width: '180px', height: '180px' }, color: '#ff6b9d'},
-        { id: 'events', name: 'Home', route: '/', position: { top: '40%', left: '43%' }, size: { width: '200px', height: '200px' }, color: '#ffa500' },
-        { id: 'competitions', name: 'Competitions', route: '/competitions', position: { top: '15%', right: '35%' }, size: { width: '180px', height: '180px' }, color: '#00d4ff' },
-        { id: 'about', name: 'About Us', route: '/about', position: { top: '41%', left: '7%' }, size: { width: '180px', height: '180px' }, color: '#a855f7' },
-        { id: 'speakers', name: 'Speakers', route: '/speakers', position: { top: '41%', right: '16%' }, size: { width: '180px', height: '180px' }, color: '#4ade80' },
-        { id: 'schedule', name: 'Schedule', route: '/schedule', position: { bottom: '20%', left: '23%' }, size: { width: '180px', height: '180px' }, color: '#f59e0b' },
-        { id: 'workshops', name: 'Workshops', route: '/workshops', position: { bottom: '5%', left: '42%' }, size: { width: '180px', height: '180px' }, color: '#ec4899', rotation: 0, transform: 'skewX(5deg)' },
-        { id: 'sponsors', name: 'Sponsors', route: '/sponsors', position: { bottom: '18%', right: '29%' }, size: { width: '180px', height: '180px' }, color: '#06b6d4', rotation: 2 }
+        { id: 'home', name: 'Events', route: '/events', position: { top: '15%', left: '31%' }, size: { width: '180px', height: '180px' }, color: '#ff6b9d', rotation: 30, labelOffset: { x: 0, y: 10 } },
+        { id: 'events', name: 'Home', route: '/', position: { top: '43%', left: '48%' }, size: { width: '200px', height: '250px' }, color: '#ffa500', rotation: 30, labelOffset: { x: 0, y: 10 } },
+        { id: 'competitions', name: 'Competitions', route: '/competitions', position: { top: '16%', right: '26%' }, size: { width: '180px', height: '180px' }, color: '#00d4ff', rotation: 30, labelOffset: { x: 0, y: 10 } },
+        { id: 'about', name: 'About Us', route: '/about', position: { top: '45%', left: '12%' }, size: { width: '180px', height: '180px' }, color: '#a855f7', rotation: 30, labelOffset: { x: 0, y: 10 } },
+        { id: 'speakers', name: 'Speakers', route: '/speakers', position: { top: '45%', right: '7%' }, size: { width: '180px', height: '180px' }, color: '#4ade80', rotation: 30, labelOffset: { x: 0, y: 10 } },
+        { id: 'schedule', name: 'Schedule', route: '/schedule', position: { bottom: '16%', left: '28%' }, size: { width: '180px', height: '180px' }, color: '#f59e0b', rotation: 30, labelOffset: { x: 0, y: 10 } },
+        { id: 'workshops', name: 'Workshops', route: '/workshops', position: { bottom: '5%', left: '50%' }, size: { width: '180px', height: '180px' }, color: '#ec4899', rotation: 30, labelOffset: { x: 0, y: 10 } },
+        { id: 'sponsors', name: 'Sponsors', route: '/sponsors', position: { bottom: '18%', right: '20%' }, size: { width: '180px', height: '180px' }, color: '#06b6d4', rotation: 30, labelOffset: { x: 0, y: 10 } }
     ];
 
     const handleHotspotClick = (route) => {
@@ -73,7 +73,7 @@ function WorldMap() {
                     style={{
                         position: 'absolute',
                         ...hotspot.position,
-                        transform: 'translate(-50%, -50%)',
+                        transform: `translate(-50%, -50%) rotate(${hotspot.rotation || 0}deg)`,
                         zIndex: 20,
                         cursor: 'pointer',
                         transition: 'all 0.3s ease'
@@ -96,7 +96,7 @@ function WorldMap() {
                             <div
                                 style={{
                                     position: 'absolute',
-                                    top: '44%',
+                                    top: '50%',
                                     left: '50%',
                                     transform: 'translate(-50%, -50%)',
                                     width: '100%',
@@ -120,10 +120,9 @@ function WorldMap() {
                     <div
                         style={{
                             position: 'absolute',
-                            top: '100%',
-                            left: '50%',
-                            transform: `rotate(30deg)`,
-                            marginTop: '10px',
+                            top: `calc(100% + ${hotspot.labelOffset?.y || 10}px)`,
+                            left: `calc(50% + ${hotspot.labelOffset?.x || 0}px)`,
+                            transform: 'translateX(-50%)',
                             background: hoveredHotspot === hotspot.id
                                 ? `rgba(26, 11, 46, 0.95)`
                                 : 'rgba(26, 11, 46, 0.85)',
