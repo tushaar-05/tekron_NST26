@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BrowserRouter as Router, Routes, Route, useNavigate, Navigate, Link } from 'react-router-dom';
 import WorldMap from './WorldMap';
 import WorldLoading from './WorldLoading';
 
@@ -122,44 +121,36 @@ function App() {
     }, []);
 
     return (
-        <Router>
-            <AnimatePresence mode="wait">
-                <Routes>
-                    <Route path="/" element={
-                        <Navigate to="/home" replace />
-                    } />
-                    
-                    <Route path="/home" element={
-                        <motion.div
-                            key="home"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className="relative"
-                            style={{
-                                background: '#1a0b2e',
-                                imageRendering: 'pixelated',
-                                height: '100vh',
-                                overflow: 'hidden'
-                            }}
-                        >
-                            {isTransitioning ? (
-                                <WorldLoading key={loadingKey} onLoadingComplete={handleLoadingComplete} />
-                            ) : showMap ? (
-                                <WorldMap />
-                            ) : (
-                                <motion.div
-                                    key="home-content"
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    exit={{ opacity: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    style={{
-                                        background: '#1a0b2e',
-                                        imageRendering: 'pixelated',
-                                    }}
-                                >
+        <AnimatePresence mode="wait">
+            {isTransitioning ? (
+                <WorldLoading key={loadingKey} onLoadingComplete={handleLoadingComplete} />
+            ) : showMap ? (
+                <motion.div
+                    key="map"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="relative"
+                    style={{
+                        background: '#1a0b2e',
+                        imageRendering: 'pixelated',
+                    }}
+                >
+                    <WorldMap onNavigateHome={handleNavigateToHome} />
+                </motion.div>
+            ) : (
+                <motion.div
+                    key="home"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                        background: '#1a0b2e',
+                        imageRendering: 'pixelated',
+                    }}
+                >
                     <div
                         className="relative w-screen h-screen overflow-hidden tech-event-bg"
                         style={{
@@ -283,16 +274,15 @@ function App() {
                         </div>
 
 
-                        <Link
-                            to="/map"
+                        <button
                             className="notch-nav-button absolute top-0 left-1/2 transform -translate-x-1/2 z-40 pixel-art"
-                            style={{ textDecoration: 'none' }}
+                            onClick={handleNavigateToMap}
                         >
                             <div className="notch-nav-content">
                                 <span className="notch-text-default pixel-font text-white text-xs">MAP</span>
                                 <span className="notch-text-expanded pixel-font text-white text-xs">NAVIGATE</span>
                             </div>
-                        </Link>
+                        </button>
 
 
                         <div className="relative z-20 h-full flex flex-col items-center justify-center px-8">
@@ -518,76 +508,9 @@ function App() {
                             )}
                         </div>
                     </div>
-                                </motion.div>
-                            )}
-                        </motion.div>
-                    } />
-                    
-                    {/* Map Route */}
-                    <Route path="/map" element={
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            style={{
-                                position: 'fixed',
-                                top: 0,
-                                left: 0,
-                                width: '100%',
-                                height: '100%',
-                                zIndex: 1000
-                            }}
-                        >
-                            <WorldMap />
-                        </motion.div>
-                    } />
-                    
-                    {/* Other page routes */}
-                    <Route path="/about" element={
-                        <div className="page-container">
-                            <h1>About Tekron</h1>
-                            <p>Information about Tekron will go here.</p>
-                        </div>
-                    } />
-                    <Route path="/events" element={
-                        <div className="page-container">
-                            <h1>Events</h1>
-                            <p>Events information will go here.</p>
-                        </div>
-                    } />
-                    <Route path="/competition" element={
-                        <div className="page-container">
-                            <h1>Competition</h1>
-                            <p>Competition details will go here.</p>
-                        </div>
-                    } />
-                    <Route path="/store" element={
-                        <div className="page-container">
-                            <h1>Store</h1>
-                            <p>Store items will be listed here.</p>
-                        </div>
-                    } />
-                    <Route path="/contact" element={
-                        <div className="page-container">
-                            <h1>Contact Us</h1>
-                            <p>Contact information will go here.</p>
-                        </div>
-                    } />
-                    <Route path="/sponsors" element={
-                        <div className="page-container">
-                            <h1>Sponsors</h1>
-                            <p>Our sponsors will be listed here.</p>
-                        </div>
-                    } />
-                    <Route path="/gallery" element={
-                        <div className="page-container">
-                            <h1>Gallery</h1>
-                            <p>Gallery images will be displayed here.</p>
-                        </div>
-                    } />
-                </Routes>
-            </AnimatePresence>
-        </Router>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 }
 
