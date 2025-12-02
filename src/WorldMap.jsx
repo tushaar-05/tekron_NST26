@@ -1,10 +1,29 @@
+import { useState, useEffect } from 'react';
+
 function WorldMap() {
-    const cloudStyle = {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const offsetX = (e.clientX - centerX) / centerX;
+            const offsetY = (e.clientY - centerY) / centerY;
+            setMousePosition({ x: offsetX, y: offsetY });
+        };
+
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
+
+    const getParallaxStyle = (xFactor, yFactor) => ({
         position: 'absolute',
         width: '500px',
         height: 'auto',
-        zIndex: 1
-    };
+        zIndex: 1,
+        transform: `translate(${mousePosition.x * xFactor}px, ${mousePosition.y * yFactor}px)`,
+        transition: 'transform 0.1s ease-out'
+    });
 
     return (
         <div style={{ position: 'relative', width: '100vw', height: '100vh' }}>
@@ -28,9 +47,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png" 
                 alt="Cloud 1" 
                 style={{
-                    ...cloudStyle,
+                    ...getParallaxStyle(-15, -15),
                     top: '-20px',
-                    left: '-20px'
+                    left: '-20px',
+                    transform: getParallaxStyle(-15, -15).transform + ' scale(1)'
                 }}
             />
             
@@ -39,10 +59,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png" 
                 alt="Cloud 2" 
                 style={{
-                    ...cloudStyle,
+                    ...getParallaxStyle(15, -15),
                     top: '-20px',
                     right: '-20px',
-                    transform: 'scaleX(-1)'
+                    transform: getParallaxStyle(15, -15).transform + ' scaleX(-1)'
                 }}
             />
             
@@ -51,10 +71,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png" 
                 alt="Cloud 3" 
                 style={{
-                    ...cloudStyle,
+                    ...getParallaxStyle(-15, 15),
                     bottom: '-20px',
                     left: '-20px',
-                    transform: 'scaleY(-1)'
+                    transform: getParallaxStyle(-15, 15).transform + ' scaleY(-1)'
                 }}
             />
             
@@ -63,10 +83,10 @@ function WorldMap() {
                 src="/images/map/cloud-1.png" 
                 alt="Cloud 4" 
                 style={{
-                    ...cloudStyle,
-                    bottom: '20px',
-                    right: '20px',
-                    transform: 'scale(-1)'
+                    ...getParallaxStyle(15, 15),
+                    bottom: '-20px',
+                    right: '-20px',
+                    transform: getParallaxStyle(15, 15).transform + ' scale(-1)'
                 }}
             />
         </div>
