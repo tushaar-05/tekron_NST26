@@ -4,13 +4,12 @@ import { useNavigate } from 'react-router-dom';
 function WorldMap() {
     const navigate = useNavigate();
     
-    // Island data with positions, routes, and individual skew values
     const islands = [
         { 
             id: 1, 
             name: 'Home', 
             top: '400px', 
-            left: '730px', 
+            left: '750px', 
             width: '17%', 
             height: '20%', 
             route: '/Home',
@@ -20,15 +19,57 @@ function WorldMap() {
         { 
             id: 2, 
             name: 'Store', 
-            top: '160px', 
-            left: '470px', 
+            top: '190px', 
+            left: '490px', 
             width: '14%', 
-            height: '17%', 
+            height: '16%', 
             route: '/store',
             skewX: '50deg',
             skewY: '-32deg'
         },
-        // Add more islands with their positions, routes, and individual skews as needed
+        { 
+            id: 3, 
+            name: 'Gallery', 
+            top: '390px', 
+            left: '250px', 
+            width: '14%', 
+            height: '17%', 
+            route: '/allery',
+            skewX: '50deg',
+            skewY: '-32deg'
+        },{ 
+            id: 4, 
+            name: 'About', 
+            top: '700px', 
+            left: '220px', 
+            width: '12%', 
+            height: '17%', 
+            route: '/about',
+            skewX: '50deg',
+            skewY: '-32deg'
+        },
+        {
+            id: 5, 
+            name: 'About', 
+            top: '700px', 
+            left: '220px', 
+            width: '12%', 
+            height: '17%', 
+            route: '/about',
+            skewX: '50deg',
+            skewY: '-32deg'
+        },
+        {
+            id: 6, 
+            name: 'About', 
+            top: '700px', 
+            left: '220px', 
+            width: '12%', 
+            height: '17%', 
+            route: '/about',
+            skewX: '50deg',
+            skewY: '-32deg'
+        }
     ];
     
     const handleIslandClick = (route) => {
@@ -68,7 +109,7 @@ function WorldMap() {
                     left: '50%',
                     width: '105%',
                     height: '105%',
-                    backgroundImage: 'url(/src/assets/images/map/finalMap.png)',
+                    backgroundImage: 'url(/src/assets/images/map/FinalMapNolabel.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -167,7 +208,7 @@ function WorldMap() {
                         left: island.left,
                         width: island.width,
                         height: island.height,
-                        opacity: 0,
+                        opacity: 0.5,
                         backgroundColor: `hsl(${island.id * 90}, 70%, 60%)`,
                         cursor: 'pointer',
                         border: '2px solid transparent',
