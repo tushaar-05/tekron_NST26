@@ -1,6 +1,50 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function WorldMap() {
+    const navigate = useNavigate();
+    
+    // Island data with positions, routes, and individual skew values
+    const islands = [
+        // { 
+        //     id: 1, 
+        //     name: 'island1', 
+        //     top: '45%', 
+        //     left: '30%', 
+        //     width: '15%', 
+        //     height: '20%', 
+        //     route: '/island1',
+        //     skewX: '15deg',
+        //     skewY: '-25deg'
+        // },
+        { 
+            id: 2, 
+            name: 'Home', 
+            top: '400px', 
+            left: '730px', 
+            width: '17%', 
+            height: '20%', 
+            route: '/Home',
+            skewX: '54deg',
+            skewY: '-35deg'
+        },
+        // { 
+        //     id: 3, 
+        //     name: 'island3', 
+        //     top: '55%', 
+        //     left: '65%', 
+        //     width: '14%', 
+        //     height: '22%', 
+        //     route: '/island3',
+        //     skewX: '20deg',
+        //     skewY: '-30deg'
+        // },
+        // Add more islands with their positions, routes, and individual skews as needed
+    ];
+    
+    const handleIslandClick = (route) => {
+        navigate(route);
+    };
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
@@ -35,7 +79,7 @@ function WorldMap() {
                     left: '50%',
                     width: '105%',
                     height: '105%',
-                    backgroundImage: 'url(/src/assets/images/map/test_2.png)',
+                    backgroundImage: 'url(/src/assets/images/map/finalMap.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -61,39 +105,39 @@ function WorldMap() {
 
             {/* Cloud 2 - Top Right */}
             <img
-                src="/src/assets/images/map/cloud-1.png"
+                src="/src/assets/images/map/clouds-2.png"
                 alt="Cloud 2"
                 style={{
                     ...getParallaxStyle(15, -15),
                     top: '-20px',
                     right: '-20px',
-                    transform: getParallaxStyle(15, -15).transform + ' scaleX(-1)',
+                    // transform: getParallaxStyle(15, -15).transform + ' scaleX(-1)',
                     pointerEvents: 'none'
                 }}
             />
 
             {/* Cloud 3 - Bottom Left */}
             <img
-                src="/src/assets/images/map/cloud-1.png"
+                src="/src/assets/images/map/clouds-3.png"
                 alt="Cloud 3"
                 style={{
                     ...getParallaxStyle(-15, 15),
                     bottom: '-20px',
-                    left: '-20px',
-                    transform: getParallaxStyle(-15, 15).transform + ' scaleY(-1)',
+                    left: '-5px',
+                    // transform: getParallaxStyle(-15, 15).transform + ' scaleY(-1)',
                     pointerEvents: 'none'
                 }}
             />
 
             {/* Cloud 4 - Bottom Right */}
             <img
-                src="/src/assets/images/map/cloud-1.png"
+                src="/src/assets/images/map/clouds-4.png"
                 alt="Cloud 4"
                 style={{
                     ...getParallaxStyle(15, 15),
                     bottom: '-20px',
                     right: '-20px',
-                    transform: getParallaxStyle(15, 15).transform + ' scale(-1)',
+                    // transform: getParallaxStyle(15, 15).transform + ' scale(-1)',
                     pointerEvents: 'none'
                 }}
             />
@@ -122,6 +166,31 @@ function WorldMap() {
                     }
                 }
             `}</style>
+            
+            {/* Invisible Island Buttons */}
+            {islands.map((island) => (
+                <button
+                    key={island.id}
+                    onClick={() => handleIslandClick(island.route)}
+                    style={{
+                        position: 'absolute',
+                        top: island.top,
+                        left: island.left,
+                        width: island.width,
+                        height: island.height,
+                        opacity: 0,
+                        backgroundColor: `hsl(${island.id * 90}, 70%, 60%)`,
+                        cursor: 'pointer',
+                        border: 'none',
+                        background: 'transparent',
+                        padding: 0,
+                        zIndex: 10,
+                        transform: `translate(${mousePosition.x * 2}px, ${mousePosition.y * 2}px) skew(${island.skewX}, ${island.skewY})`,
+                        transition: 'transform 0.1s ease-out'
+                    }}
+                    aria-label={`Go to ${island.name}`}
+                />
+            ))}
         </div>
     );
 }
