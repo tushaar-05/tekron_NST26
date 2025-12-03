@@ -8,7 +8,7 @@ function WorldMap() {
         { 
             id: 1, 
             name: 'Home', 
-            top: '400px', 
+            top: '370px', 
             left: '750px', 
             width: '17%', 
             height: '20%', 
@@ -19,7 +19,7 @@ function WorldMap() {
         { 
             id: 2, 
             name: 'Store', 
-            top: '190px', 
+            top: '160px', 
             left: '490px', 
             width: '14%', 
             height: '16%', 
@@ -30,46 +30,24 @@ function WorldMap() {
         { 
             id: 3, 
             name: 'Gallery', 
-            top: '390px', 
-            left: '250px', 
+            top: '330px', 
+            left: '290px', 
             width: '14%', 
-            height: '17%', 
+            height: '19%', 
             route: '/allery',
             skewX: '50deg',
             skewY: '-32deg'
         },{ 
             id: 4, 
             name: 'About', 
-            top: '700px', 
-            left: '220px', 
+            top: '640px', 
+            left: '250px', 
             width: '12%', 
             height: '17%', 
             route: '/about',
             skewX: '50deg',
             skewY: '-32deg'
         },
-        {
-            id: 5, 
-            name: 'About', 
-            top: '700px', 
-            left: '220px', 
-            width: '12%', 
-            height: '17%', 
-            route: '/about',
-            skewX: '50deg',
-            skewY: '-32deg'
-        },
-        {
-            id: 6, 
-            name: 'About', 
-            top: '700px', 
-            left: '220px', 
-            width: '12%', 
-            height: '17%', 
-            route: '/about',
-            skewX: '50deg',
-            skewY: '-32deg'
-        }
     ];
     
     const handleIslandClick = (route) => {
@@ -212,6 +190,7 @@ function WorldMap() {
                         backgroundColor: `hsl(${island.id * 90}, 70%, 60%)`,
                         cursor: 'pointer',
                         border: '2px solid transparent',
+                        borderRadius: '40px',
                         padding: 0,
                         zIndex: 10,
                         transform: `translate(${mousePosition.x * 2}px, ${mousePosition.y * 2}px) skew(${island.skewX}, ${island.skewY})`,
