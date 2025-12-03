@@ -284,8 +284,8 @@ function App() {
                             onClick={handleNavigateToMap}
                         >
                             <div className="notch-nav-content">
-                                <span className="notch-text-default pixel-font text-white text-xs">MAP</span>
-                                <span className="notch-text-expanded pixel-font text-white text-xs">NAVIGATE</span>
+                                <span className="notch-text-default pixel-font text-white text-[17px]">MAP</span>
+                                <span className="notch-text-expanded pixel-font text-white text-[17px]">NAVIGATE</span>
                             </div>
                         </button>
 

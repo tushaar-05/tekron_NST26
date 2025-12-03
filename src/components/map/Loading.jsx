@@ -91,7 +91,7 @@ function Loading({ onLoadingComplete }) {
                 <h1
                     className={`pixel-font text-center mb-8 ${glitchActive ? 'glitch-text-pixel' : ''}`}
                     style={{
-                        fontSize: 'clamp(40px, 8vw, 100px)',
+                        fontSize: 'clamp(40px, 50vw, 100px)',
                         color: '#d8c6f2',
                         letterSpacing: '0.15em',
                         textShadow:

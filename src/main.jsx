@@ -5,11 +5,13 @@ import './styles/index.css';
 import App from './pages/App.jsx';
 import WorldMap from './components/map/WorldMap.jsx';
 import Loading from './components/map/Loading.jsx';
+import WorldLoading from './components/map/WorldLoading.jsx';
 
 // A wrapper component to handle loading state and route changes
 function AppWrapper() {
     const [isLoading, setIsLoading] = useState(true);
     const location = useLocation();
+    const isMapRoute = location.pathname === '/map';
 
     // Reset loading state when location changes
     useEffect(() => {
@@ -19,7 +21,11 @@ function AppWrapper() {
     }, [location]);
 
     if (isLoading) {
-        return <Loading onLoadingComplete={() => setIsLoading(false)} />;
+        return isMapRoute ? (
+            <WorldLoading onLoadingComplete={() => setIsLoading(false)} />
+        ) : (
+            <Loading onLoadingComplete={() => setIsLoading(false)} />
+        );
     }
 
     return (
