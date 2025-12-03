@@ -6,19 +6,8 @@ function WorldMap() {
     
     // Island data with positions, routes, and individual skew values
     const islands = [
-        // { 
-        //     id: 1, 
-        //     name: 'island1', 
-        //     top: '45%', 
-        //     left: '30%', 
-        //     width: '15%', 
-        //     height: '20%', 
-        //     route: '/island1',
-        //     skewX: '15deg',
-        //     skewY: '-25deg'
-        // },
         { 
-            id: 2, 
+            id: 1, 
             name: 'Home', 
             top: '400px', 
             left: '730px', 
@@ -28,17 +17,17 @@ function WorldMap() {
             skewX: '54deg',
             skewY: '-35deg'
         },
-        // { 
-        //     id: 3, 
-        //     name: 'island3', 
-        //     top: '55%', 
-        //     left: '65%', 
-        //     width: '14%', 
-        //     height: '22%', 
-        //     route: '/island3',
-        //     skewX: '20deg',
-        //     skewY: '-30deg'
-        // },
+        { 
+            id: 2, 
+            name: 'Store', 
+            top: '160px', 
+            left: '470px', 
+            width: '14%', 
+            height: '17%', 
+            route: '/store',
+            skewX: '50deg',
+            skewY: '-32deg'
+        },
         // Add more islands with their positions, routes, and individual skews as needed
     ];
     
@@ -181,12 +170,16 @@ function WorldMap() {
                         opacity: 0,
                         backgroundColor: `hsl(${island.id * 90}, 70%, 60%)`,
                         cursor: 'pointer',
-                        border: 'none',
-                        background: 'transparent',
+                        border: '2px solid transparent',
                         padding: 0,
                         zIndex: 10,
                         transform: `translate(${mousePosition.x * 2}px, ${mousePosition.y * 2}px) skew(${island.skewX}, ${island.skewY})`,
-                        transition: 'transform 0.1s ease-out'
+                        transition: 'all 0.2s ease-out',
+                        boxSizing: 'border-box',
+                        ':hover': {
+                            borderColor: 'rgba(255, 255, 255, 0.7)',
+                            boxShadow: '0 0 10px rgba(255, 255, 255, 0.3)'
+                        }
                     }}
                     aria-label={`Go to ${island.name}`}
                 />
