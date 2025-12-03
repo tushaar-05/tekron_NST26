@@ -20,7 +20,7 @@ function WorldMap() {
             id: 2, 
             name: 'Store', 
             top: '160px', 
-            left: '490px', 
+            left: '500px', 
             width: '14%', 
             height: '16%', 
             route: '/store',
@@ -48,6 +48,28 @@ function WorldMap() {
             skewX: '50deg',
             skewY: '-32deg'
         },
+        { 
+            id: 5, 
+            name: 'Competition', 
+            top: '580px', 
+            left: '600px', 
+            width: '13%', 
+            height: '19%', 
+            route: '/competition',
+            skewX: '56deg',
+            skewY: '-28deg'
+        },
+        { 
+            id: 6, 
+            name: 'Events', 
+            top: '370px', 
+            left: '1280px', 
+            width: '15%', 
+            height: '16%', 
+            route: '/events',
+            skewX: '60deg',
+            skewY: '-32deg'
+        }
     ];
     
     const handleIslandClick = (route) => {
