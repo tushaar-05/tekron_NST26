@@ -5,6 +5,7 @@ function WorldMap() {
     const navigate = useNavigate();
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     
     const islands = [
         { 
@@ -116,17 +117,30 @@ function WorldMap() {
             setMousePosition({ x: offsetX, y: offsetY });
         };
 
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
         window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        window.addEventListener('resize', handleResize);
+        
+        // Initial check
+        handleResize();
+        
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
-    const getParallaxStyle = (xFactor, yFactor) => ({
+    const getParallaxStyle = (xFactor, yFactor, size = '500px') => ({
         position: 'absolute',
-        width: '500px',
+        width: isMobile ? `${parseInt(size) * 0.6}px` : size,
         height: 'auto',
         zIndex: 1,
         transform: `translate(${mousePosition.x * xFactor}px, ${mousePosition.y * yFactor}px)`,
-        transition: 'transform 0.1s ease-out'
+        transition: 'transform 0.1s ease-out',
+        pointerEvents: 'none'
     });
 
     return (
@@ -137,9 +151,9 @@ function WorldMap() {
                     position: 'fixed',
                     top: '50%',
                     left: '50%',
-                    width: '105%',
-                    height: '105%',
-                    backgroundImage: 'url(/src/assets/images/map/FinalMapNolabel.png)',
+                    width: '100%',
+                    height: '100%',
+                    backgroundImage: `url(${isMobile ? '/src/assets/images/map/Mobile.png' : '/src/assets/images/map/FinalMapNolabel.png'})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -155,11 +169,10 @@ function WorldMap() {
                 src="/src/assets/images/map/cloud-1.png"
                 alt="Cloud 1"
                 style={{
-                    ...getParallaxStyle(-15, -15),
-                    top: '-20px',
-                    left: '-20px',
-                    transform: getParallaxStyle(-15, -15).transform + ' scale(1)',
-                    pointerEvents: 'none'
+                    ...getParallaxStyle(-15, -15, '300px'),
+                    top: isMobile ? '-30px' : '-20px',
+                    left: isMobile ? '-30px' : '-20px',
+                    transform: getParallaxStyle(-15, -15, '300px').transform + ' scale(1)'
                 }}
             />
 
@@ -168,11 +181,9 @@ function WorldMap() {
                 src="/src/assets/images/map/clouds-2.png"
                 alt="Cloud 2"
                 style={{
-                    ...getParallaxStyle(15, -15),
-                    top: '-20px',
-                    right: '-20px',
-                    // transform: getParallaxStyle(15, -15).transform + ' scaleX(-1)',
-                    pointerEvents: 'none'
+                    ...getParallaxStyle(15, -15, '350px'),
+                    top: isMobile ? '-30px' : '-20px',
+                    right: isMobile ? '-30px' : '-20px'
                 }}
             />
 
@@ -181,11 +192,9 @@ function WorldMap() {
                 src="/src/assets/images/map/clouds-3.png"
                 alt="Cloud 3"
                 style={{
-                    ...getParallaxStyle(-15, 15),
-                    bottom: '-20px',
-                    left: '-5px',
-                    // transform: getParallaxStyle(-15, 15).transform + ' scaleY(-1)',
-                    pointerEvents: 'none'
+                    ...getParallaxStyle(-15, 15, '320px'),
+                    bottom: isMobile ? '-30px' : '-20px',
+                    left: isMobile ? '-15px' : '-5px'
                 }}
             />
 
@@ -194,11 +203,9 @@ function WorldMap() {
                 src="/src/assets/images/map/clouds-4.png"
                 alt="Cloud 4"
                 style={{
-                    ...getParallaxStyle(15, 15),
-                    bottom: '-20px',
-                    right: '-20px',
-                    // transform: getParallaxStyle(15, 15).transform + ' scale(-1)',
-                    pointerEvents: 'none'
+                    ...getParallaxStyle(15, 15, '400px'),
+                    bottom: isMobile ? '-30px' : '-20px',
+                    right: isMobile ? '-30px' : '-20px'
                 }}
             />
 
