@@ -69,6 +69,28 @@ function WorldMap() {
             route: '/events',
             skewX: '60deg',
             skewY: '-32deg'
+        },
+        { 
+            id: 7, 
+            name: 'Contact', 
+            top: '630px', 
+            left: '1070px', 
+            width: '13%', 
+            height: '13%', 
+            route: '/contact',
+            skewX: '60deg',
+            skewY: '-32deg'
+        },
+        { 
+            id: 8, 
+            name: 'Sponsors', 
+            top: '170px', 
+            left: '1050px', 
+            width: '13%', 
+            height: '13%', 
+            route: '/sponsors',
+            skewX: '60deg',
+            skewY: '-32deg'
         }
     ];
     
@@ -208,7 +230,7 @@ function WorldMap() {
                         left: island.left,
                         width: island.width,
                         height: island.height,
-                        opacity: 0.5,
+                        opacity: 0,
                         backgroundColor: `hsl(${island.id * 90}, 70%, 60%)`,
                         cursor: 'pointer',
                         border: '2px solid transparent',
