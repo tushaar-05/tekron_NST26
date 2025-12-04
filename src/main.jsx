@@ -2,10 +2,19 @@ import { StrictMode, useState, useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import './styles/index.css';
-import App from './pages/App.jsx';
-import WorldMap from './components/map/WorldMap.jsx';
-import Loading from './components/map/Loading.jsx';
-import WorldLoading from './components/map/WorldLoading.jsx';
+
+// Page Components
+import App from './pages/App';
+import WorldMap from './components/map/WorldMap';
+import Loading from './components/map/Loading';
+import WorldLoading from './components/map/WorldLoading';
+import About from './pages/About/About';
+import Store from './pages/Store/Store';
+import Gallery from './pages/Gallery/Gallery';
+import Competition from './pages/Competition/Competition';
+import Events from './pages/Events/Events';
+import Contact from './pages/Contact/Contact';
+import Sponsors from './pages/Sponsors/Sponsors';
 
 // A wrapper component to handle loading state and route changes
 function AppWrapper() {
@@ -33,6 +42,17 @@ function AppWrapper() {
             <Routes>
                 <Route path="/" element={<App />} />
                 <Route path="/map" element={<WorldMap />} />
+                
+                {/* Main Routes */}
+                <Route path="/about" element={<About />} />
+                <Route path="/store" element={<Store />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/competition" element={<Competition />} />
+                <Route path="/events" element={<Events />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/sponsors" element={<Sponsors />} />
+                
+                {/* Redirects */}
                 <Route path="/home" element={<Navigate to="/" replace />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

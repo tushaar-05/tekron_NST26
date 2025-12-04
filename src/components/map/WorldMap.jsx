@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 function WorldMap() {
     const navigate = useNavigate();
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
     
     const islands = [
         { 
@@ -12,7 +14,7 @@ function WorldMap() {
             left: '750px', 
             width: '17%', 
             height: '20%', 
-            route: '/Home',
+            route: '/',
             skewX: '54deg',
             skewY: '-35deg'
         },
@@ -34,10 +36,11 @@ function WorldMap() {
             left: '290px', 
             width: '14%', 
             height: '19%', 
-            route: '/allery',
+            route: '/gallery',
             skewX: '50deg',
             skewY: '-32deg'
-        },{ 
+        },
+        { 
             id: 4, 
             name: 'About', 
             top: '640px', 
@@ -95,10 +98,15 @@ function WorldMap() {
     ];
     
     const handleIslandClick = (route) => {
-        navigate(route);
+        // Add transition effect before navigation
+        setIsTransitioning(true);
+        // Delay navigation to allow for transition
+        setTimeout(() => {
+            navigate(route, { replace: true });
+            // Reset transition after navigation
+            setTimeout(() => setIsTransitioning(false), 500);
+        }, 500);
     };
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
     useEffect(() => {
         const handleMouseMove = (e) => {
             const centerX = window.innerWidth / 2;
@@ -231,21 +239,26 @@ function WorldMap() {
                         width: island.width,
                         height: island.height,
                         opacity: 0,
-                        backgroundColor: `hsl(${island.id * 90}, 70%, 60%)`,
+                        backgroundColor: `hsl(${island.id * 45}, 70%, 60%)`,
                         cursor: 'pointer',
                         border: '2px solid transparent',
                         borderRadius: '40px',
                         padding: 0,
                         zIndex: 10,
                         transform: `translate(${mousePosition.x * 2}px, ${mousePosition.y * 2}px) skew(${island.skewX}, ${island.skewY})`,
-                        transition: 'all 0.2s ease-out',
-                        boxSizing: 'border-box',
-                        ':hover': {
-                            borderColor: 'rgba(255, 255, 255, 0.7)',
-                            boxShadow: '0 0 10px rgba(255, 255, 255, 0.3)'
-                        }
+                        transition: 'transform 0.1s ease-out, background-color 0.2s ease, border-color 0.2s ease',
                     }}
-                    aria-label={`Go to ${island.name}`}
+                    onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = `hsl(${island.id * 45}, 80%, 70%)`;
+                        e.target.style.borderColor = 'white';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = `hsl(${island.id * 45}, 70%, 60%)`;
+                        e.target.style.borderColor = 'transparent';
+                        e.target.style.opacity = '0';
+                    }}
+                    aria-label={`Navigate to ${island.name}`}
+                    title={`Go to ${island.name}`}
                 />
             ))}
         </div>
