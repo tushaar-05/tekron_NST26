@@ -1,273 +1,296 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+
+// Import all island images
+import homeIsland from '../../assets/images/map/islands/home.png';
+import aboutIsland from '../../assets/images/map/islands/about.png';
+import compIsland from '../../assets/images/map/islands/comp.png';
+import contactIsland from '../../assets/images/map/islands/contact.png';
+import eventsIsland from '../../assets/images/map/islands/events.png';
+import galleryIsland from '../../assets/images/map/islands/gallery.png';
+import sponsorsIsland from '../../assets/images/map/islands/sponsors.png';
+import storeIsland from '../../assets/images/map/islands/store.png';
 
 function WorldMap() {
-    const navigate = useNavigate();
-    const [isTransitioning, setIsTransitioning] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+    const [dimensions, setDimensions] = useState({
+        baseSize: window.innerWidth < 768 ? 200 : 300,
+        homeSize: window.innerWidth < 768 ? 300 : 400,
+        distance: window.innerWidth < 768 ? 250 : 400
+    });
     
+    // Island data with positions in a circular layout
     const islands = [
         { 
-            id: 1, 
-            name: 'Home', 
-            top: '370px', 
-            left: '750px', 
-            width: '17%', 
-            height: '20%', 
-            route: '/',
-            skewX: '54deg',
-            skewY: '-35deg'
+            id: 'home', 
+            image: homeIsland, 
+            size: dimensions.homeSize, 
+            x: '50%', 
+            y: '50%', 
+            zIndex: 10 
         },
-        { 
-            id: 2, 
-            name: 'Store', 
-            top: '160px', 
-            left: '500px', 
-            width: '14%', 
-            height: '16%', 
-            route: '/store',
-            skewX: '50deg',
-            skewY: '-32deg'
-        },
-        { 
-            id: 3, 
-            name: 'Gallery', 
-            top: '330px', 
-            left: '290px', 
-            width: '14%', 
-            height: '19%', 
-            route: '/gallery',
-            skewX: '50deg',
-            skewY: '-32deg'
-        },
-        { 
-            id: 4, 
-            name: 'About', 
-            top: '640px', 
-            left: '250px', 
-            width: '12%', 
-            height: '17%', 
-            route: '/about',
-            skewX: '50deg',
-            skewY: '-32deg'
-        },
-        { 
-            id: 5, 
-            name: 'Competition', 
-            top: '580px', 
-            left: '600px', 
-            width: '13%', 
-            height: '19%', 
-            route: '/competition',
-            skewX: '56deg',
-            skewY: '-28deg'
-        },
-        { 
-            id: 6, 
-            name: 'Events', 
-            top: '370px', 
-            left: '1280px', 
-            width: '15%', 
-            height: '16%', 
-            route: '/events',
-            skewX: '60deg',
-            skewY: '-32deg'
-        },
-        { 
-            id: 7, 
-            name: 'Contact', 
-            top: '630px', 
-            left: '1070px', 
-            width: '13%', 
-            height: '13%', 
-            route: '/contact',
-            skewX: '60deg',
-            skewY: '-32deg'
-        },
-        { 
-            id: 8, 
-            name: 'Sponsors', 
-            top: '170px', 
-            left: '1050px', 
-            width: '13%', 
-            height: '13%', 
-            route: '/sponsors',
-            skewX: '60deg',
-            skewY: '-32deg'
-        }
+        { id: 'about', image: aboutIsland, size: dimensions.baseSize, angle: 0, distance: dimensions.distance },
+        { id: 'comp', image: compIsland, size: dimensions.baseSize, angle: 45, distance: dimensions.distance },
+        { id: 'events', image: eventsIsland, size: dimensions.baseSize, angle: 90, distance: dimensions.distance },
+        { id: 'gallery', image: galleryIsland, size: dimensions.baseSize, angle: 135, distance: dimensions.distance },
+        { id: 'contact', image: contactIsland, size: dimensions.baseSize, angle: 180, distance: dimensions.distance },
+        { id: 'store', image: storeIsland, size: dimensions.baseSize, angle: 225, distance: dimensions.distance },
+        { id: 'sponsors', image: sponsorsIsland, size: dimensions.baseSize, angle: 315, distance: dimensions.distance }
     ];
     
-    const handleIslandClick = (route) => {
-        // Add transition effect before navigation
-        setIsTransitioning(true);
-        // Delay navigation to allow for transition
-        setTimeout(() => {
-            navigate(route, { replace: true });
-            // Reset transition after navigation
-            setTimeout(() => setIsTransitioning(false), 500);
-        }, 500);
-    };
+    // Handle window resize for responsive design
     useEffect(() => {
-        const handleMouseMove = (e) => {
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const offsetX = (e.clientX - centerX) / centerX;
-            const offsetY = (e.clientY - centerY) / centerY;
-            setMousePosition({ x: offsetX, y: offsetY });
+        const handleResize = () => {
+            const isMobile = window.innerWidth < 768;
+            const isTablet = window.innerWidth < 1024;
+            
+            if (isMobile) {
+                // Compact layout for mobile
+                setDimensions({
+                    baseSize: 120,    // Smaller islands
+                    homeSize: 160,    // Slightly larger home island
+                    distance: 180     // Closer to center
+                });
+            } else if (isTablet) {
+                // Medium size for tablets
+                setDimensions({
+                    baseSize: 200,
+                    homeSize: 300,
+                    distance: 300
+                });
+            } else {
+                // Full size for desktops
+                setDimensions({
+                    baseSize: 300,
+                    homeSize: 400,
+                    distance: 400
+                });
+            }
         };
 
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
+        // Set initial sizes and handle resize immediately
+        handleResize();
+        window.dispatchEvent(new Event('resize'));
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    // Update mouse position
+    useEffect(() => {
+        const handleMouseMove = (e) => {
+            const x = (e.clientX / window.innerWidth) * 30; // 30px max movement
+            const y = (e.clientY / window.innerHeight) * 30;
+            setMousePosition({ x, y });
         };
 
         window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('resize', handleResize);
-        
-        // Initial check
-        handleResize();
-        
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('resize', handleResize);
-        };
+        return () => window.removeEventListener('mousemove', handleMouseMove);
     }, []);
 
-    const getParallaxStyle = (xFactor, yFactor, size = '500px') => ({
+    // Single parallax transformation for all elements
+    const parallaxTransform = `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)`;
+
+    const isMobile = window.innerWidth < 768;
+    const cloudBaseStyle = {
         position: 'absolute',
-        width: isMobile ? `${parseInt(size) * 0.6}px` : size,
-        height: 'auto',
+        width: isMobile ? '120px' : '300px',
+        height: isMobile ? '120px' : '300px',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        opacity: isMobile ? 0.6 : 0.8,  // Slightly more transparent on mobile
         zIndex: 1,
-        transform: `translate(${mousePosition.x * xFactor}px, ${mousePosition.y * yFactor}px)`,
-        transition: 'transform 0.1s ease-out',
-        pointerEvents: 'none'
-    });
+        willChange: 'transform',
+        transition: 'all 0.3s ease',
+        pointerEvents: 'none'  // Prevent clouds from blocking clicks
+    };
+
+    // Calculate position for circular layout
+    const getIslandPosition = (island) => {
+        if (island.x && island.y) {
+            return {
+                position: 'absolute',
+                top: `calc(${island.y} - ${island.size / 2}px - ${isMobile ? '30px' : '50px'})`,
+                left: `calc(${island.x} - ${island.size / 2}px)`,
+                zIndex: island.zIndex || 5
+            };
+        }
+        
+        const centerX = window.innerWidth / 2;
+        const centerY = (window.innerHeight / 2) - (isMobile ? 30 : 50);
+        const radian = (island.angle * Math.PI) / 180;
+        const distance = isMobile ? (island.distance * 0.7) : island.distance; // Reduce distance on mobile
+        const x = centerX + Math.cos(radian) * distance;
+        const y = centerY + Math.sin(radian) * distance;
+        
+        return {
+            position: 'absolute',
+            top: `${y - island.size / 2}px`,
+            left: `${x - island.size / 2}px`,
+            zIndex: 5
+        };
+    };
 
     return (
-        <div style={{ position: 'relative', width: '100vw', height: '100vh', overflow: 'hidden' }}>
-            {/* Main Background with subtle parallax */}
+        <div style={{
+            position: 'relative',
+            width: '100vw',
+            height: isMobile ? 'calc(100vh - 60px)' : '100vh', // Account for mobile browser UI
+            overflow: 'hidden',
+            backgroundColor: '#1a365d', // Fallback background color
+            touchAction: 'none' // Better touch handling
+        }}>
+            {/* Water Background */}
             <div
                 style={{
                     position: 'fixed',
-                    top: '50%',
-                    left: '50%',
-                    width: '100%',
-                    height: '100%',
-                    backgroundImage: `url(${isMobile ? '/src/assets/images/map/Mobile.png' : '/src/assets/images/map/FinalMapNolabel.png'})`,
+                    top: "-10px",
+                    left: "-10px",
+                    width: '110%',
+                    height: '110%',
+                    backgroundImage: 'url(/src/assets/images/map/waterFinal.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
-                    transform: `translate(calc(-50% + ${mousePosition.x * 5}px), calc(-50% + ${mousePosition.y * 5}px))`,
-                    transition: 'transform 0.1s ease-out',
-                    willChange: 'transform'
+                    transform: parallaxTransform,
+                    willChange: 'transform',
+                    transition: 'transform 0.1s linear'
                 }}
             />
 
+            {/* Cloud in top-left corner */}
+            <div style={{
+                ...cloudBaseStyle,
+                backgroundImage: 'url(/src/assets/images/map/cloud-1.png)',
+                top: '-20px',
+                left: '-20px',
+                transform: parallaxTransform
+            }} />
 
-            {/* Cloud 1 - Top Left */}
-            <img
-                src="/src/assets/images/map/cloud-1.png"
-                alt="Cloud 1"
-                style={{
-                    ...getParallaxStyle(-15, -15, '300px'),
-                    top: isMobile ? '-30px' : '-20px',
-                    left: isMobile ? '-30px' : '-20px',
-                    transform: getParallaxStyle(-15, -15, '300px').transform + ' scale(1)'
-                }}
-            />
+            {/* Cloud in top-right corner */}
+            <div style={{
+                ...cloudBaseStyle,
+                backgroundImage: 'url(/src/assets/images/map/clouds-2.png)',
+                top: '-20px',
+                right: '-20px',
+                transform: parallaxTransform
+            }} />
 
-            {/* Cloud 2 - Top Right */}
-            <img
-                src="/src/assets/images/map/clouds-2.png"
-                alt="Cloud 2"
-                style={{
-                    ...getParallaxStyle(15, -15, '350px'),
-                    top: isMobile ? '-30px' : '-20px',
-                    right: isMobile ? '-30px' : '-20px'
-                }}
-            />
+            {/* Cloud in bottom-left corner */}
+            <div style={{
+                ...cloudBaseStyle,
+                backgroundImage: 'url(/src/assets/images/map/clouds-3.png)',
+                bottom: '-20px',
+                left: '-20px',
+                transform: parallaxTransform
+            }} />
 
-            {/* Cloud 3 - Bottom Left */}
-            <img
-                src="/src/assets/images/map/clouds-3.png"
-                alt="Cloud 3"
-                style={{
-                    ...getParallaxStyle(-15, 15, '320px'),
-                    bottom: isMobile ? '-30px' : '-20px',
-                    left: isMobile ? '-15px' : '-5px'
-                }}
-            />
+            {/* Cloud in bottom-right corner */}
+            <div style={{
+                ...cloudBaseStyle,
+                backgroundImage: 'url(/src/assets/images/map/clouds-4.png)',
+                bottom: '-20px',
+                right: '-20px',
+                transform: parallaxTransform
+            }} />
 
-            {/* Cloud 4 - Bottom Right */}
-            <img
-                src="/src/assets/images/map/clouds-4.png"
-                alt="Cloud 4"
-                style={{
-                    ...getParallaxStyle(15, 15, '400px'),
-                    bottom: isMobile ? '-30px' : '-20px',
-                    right: isMobile ? '-30px' : '-20px'
-                }}
-            />
-
-            {/* CSS Animations */}
-            <style>{`
-                @keyframes glowPulse {
-                    0%, 100% {
-                        opacity: 0.9;
-                        transform: translate(-50%, -50%) scale(1);
-                    }
-                    50% {
-                        opacity: 0.6;
-                        transform: translate(-50%, -50%) scale(1.04);
-                    }
-                }
-
-                @keyframes fadeIn {
-                    from {
-                        opacity: 0;
-                        transform: translateX(-50%) translateY(-10px);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateX(-50%) translateY(0);
-                    }
-                }
-            `}</style>
-            
-            {/* Invisible Island Buttons */}
-            {islands.map((island) => (
-                <button
-                    key={island.id}
-                    onClick={() => handleIslandClick(island.route)}
-                    style={{
-                        position: 'absolute',
-                        top: island.top,
-                        left: island.left,
-                        width: island.width,
-                        height: island.height,
-                        opacity: 0,
-                        backgroundColor: `hsl(${island.id * 45}, 70%, 60%)`,
-                        cursor: 'pointer',
-                        border: '2px solid transparent',
-                        borderRadius: '40px',
-                        padding: 0,
-                        zIndex: 10,
-                        transform: `translate(${mousePosition.x * 2}px, ${mousePosition.y * 2}px) skew(${island.skewX}, ${island.skewY})`,
-                        transition: 'transform 0.1s ease-out, background-color 0.2s ease, border-color 0.2s ease',
-                    }}
-                    onMouseEnter={(e) => {
-                        e.target.style.backgroundColor = `hsl(${island.id * 45}, 80%, 70%)`;
-                        e.target.style.borderColor = 'white';
-                    }}
-                    onMouseLeave={(e) => {
-                        e.target.style.backgroundColor = `hsl(${island.id * 45}, 70%, 60%)`;
-                        e.target.style.borderColor = 'transparent';
-                        e.target.style.opacity = '0';
-                    }}
-                    aria-label={`Navigate to ${island.name}`}
-                    title={`Go to ${island.name}`}
-                />
-            ))}
+            {/* Islands */}
+            {islands.map((island) => {
+                const position = getIslandPosition(island);
+                const islandName = island.id.charAt(0).toUpperCase() + island.id.slice(1);
+                
+                return (
+                    <div 
+                        key={island.id}
+                        style={{
+                            position: 'absolute',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            ...position,
+                            zIndex: position.zIndex,
+                            width: 'auto',
+                            height: 'auto',
+                            
+                            cursor: 'pointer',
+                            transition: 'font-size 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+                            willChange: 'transform, z-index'
+                        }}
+                        onMouseEnter={(e) => {
+                            if (!isMobile) {
+                                e.currentTarget.querySelector('h3').style.fontSize = '1.5rem';
+                                e.currentTarget.style.zIndex = 20;
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            if (!isMobile) {
+                                e.currentTarget.querySelector('h3').style.fontSize = '1.2rem';
+                                e.currentTarget.style.zIndex = position.zIndex;
+                            }
+                        }}
+                        onTouchStart={(e) => {
+                            if (isMobile) {
+                                e.currentTarget.querySelector('h3').style.fontSize = '1.2rem';
+                                e.currentTarget.style.zIndex = 20;
+                            }
+                        }}
+                        onTouchEnd={(e) => {
+                            if (isMobile) {
+                                e.currentTarget.querySelector('h3').style.fontSize = '1rem';
+                                e.currentTarget.style.zIndex = position.zIndex;
+                            }
+                        }}
+                        onClick={() => {
+                            // Handle click event for the island
+                            console.log(`Navigating to ${island.id}`);
+                            // You can add navigation logic here
+                        }}
+                    >
+                        <div style={{
+                            height: '30px',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '100%',
+                            marginBottom: '10px',
+                            transform: parallaxTransform,
+                            willChange: 'transform',
+                            transition: 'transform 0.1s linear',
+                            pointerEvents: 'none'
+                        }}>
+                            <h3 style={{
+                                color: 'white',
+                                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
+                                fontSize: window.innerWidth < 768 ? '1rem' : '1.2rem',
+                                fontWeight: 'bold',
+                                textTransform: 'capitalize',
+                                textAlign: 'center',
+                                pointerEvents: 'none',
+                                userSelect: 'none',
+                                transition: 'all 0.3s ease-in-out',
+                                margin: 0,
+                                padding: '0 10px'
+                            }}>
+                                {islandName}
+                            </h3>
+                        </div>
+                        <div
+                            style={{
+                                width: `${island.size}px`,
+                                height: `${island.size}px`,
+                                backgroundImage: `url(${island.image})`,
+                                backgroundSize: 'contain',
+                                backgroundRepeat: 'no-repeat',
+                                backgroundPosition: 'center',
+                                pointerEvents: 'none',
+                                transition: 'transform 0.1s linear',
+                                willChange: 'transform',
+                                transform: `scale(1) ${parallaxTransform}`.trim()
+                            }}
+                        />
+                    </div>
+                );
+            })}
         </div>
     );
 }
