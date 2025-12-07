@@ -237,6 +237,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 10px;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -244,20 +248,24 @@ body {
 
 .countdown-container {
   display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 4px;
   background: rgba(30, 30, 40, 0.9);
   border: none;
   border-radius: 0;
   box-shadow: 
-    0 0 0 2px #000000,
-    0 0 0 4px #1e1438,
-    0 0 0 6px #a855f7,
-    0 0 0 8px #000000,
-    0 0 0 10px #c084fc,
-    0 0 30px rgba(168, 85, 247, 0.6),
-    inset 0 0 20px rgba(0, 0, 0, 0.5);
-  padding: 20px 30px;
+    0 0 0 1px #000000,
+    0 0 0 2px #1e1438,
+    0 0 0 3px #a855f7,
+    0 0 0 4px #000000,
+    0 0 0 5px #c084fc,
+    0 0 15px rgba(168, 85, 247, 0.6),
+    inset 0 0 10px rgba(0, 0, 0, 0.5);
+  padding: 4px 8px;
+  width: 100%;
+  max-width: 100%;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -267,27 +275,30 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  min-width: 40px;
+  gap: 2px;
 }
 
 .countdown-value {
   background: rgba(0, 0, 0, 0.8);
   border: none;
-  border-radius: 0;
+  border-radius: 2px;
   box-shadow: 
-    0 0 0 2px #000000,
-    0 0 0 4px #a855f7,
-    inset 0 0 10px rgba(0, 0, 0, 0.8);
-  padding: 12px 16px;
+    0 0 0 1px #000000,
+    0 0 0 2px #a855f7,
+    inset 0 0 5px rgba(0, 0, 0, 0.8);
+  padding: 4px 6px;
   color: #c084fc;
-  font-size: clamp(20px, 2.5vw, 32px);
-  min-width: 60px;
+  font-size: 1.2rem;
+  min-width: 40px;
   text-align: center;
   text-shadow: 
-    2px 2px 0px #000000,
-    0 0 15px rgba(168, 85, 247, 0.8),
-    0 0 30px rgba(192, 132, 252, 0.4);
-  letter-spacing: 0.1em;
+    1px 1px 0px #000000,
+    0 0 8px rgba(168, 85, 247, 0.8),
+    0 0 15px rgba(192, 132, 252, 0.4);
+  letter-spacing: 0.05em;
+  line-height: 1;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -296,11 +307,14 @@ body {
 
 .countdown-label {
   color: #d8c6f2;
-  font-size: clamp(8px, 0.8vw, 12px);
+  font-size: 0.5rem;
   text-shadow: 
     1px 1px 0px #000000,
-    0 0 10px rgba(168, 85, 247, 0.5);
-  letter-spacing: 0.15em;
+    0 0 5px rgba(168, 85, 247, 0.5);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  text-align: center;
+  text-transform: uppercase;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
@@ -308,14 +322,81 @@ body {
 
 .countdown-separator {
   color: #a855f7;
-  font-size: clamp(24px, 3vw, 40px);
+  font-size: 1.5rem;
+  line-height: 1;
+  margin: 0 2px;
   text-shadow: 
-    2px 2px 0px #000000,
-    0 0 20px rgba(168, 85, 247, 0.8);
+    1px 1px 0px #000000,
+    0 0 10px rgba(168, 85, 247, 0.8);
   animation: blink 1s infinite;
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+}
+
+/* Responsive adjustments */
+@media (min-width: 400px) {
+  .countdown-item {
+    min-width: 50px;
+  }
+  .countdown-value {
+    font-size: 1.5rem;
+    min-width: 50px;
+    padding: 6px 8px;
+  }
+  .countdown-label {
+    font-size: 0.6rem;
+  }
+  .countdown-separator {
+    font-size: 1.8rem;
+    margin: 0 4px;
+  }
+}
+
+@media (min-width: 640px) {
+  .countdown-container {
+    gap: 8px;
+    padding: 8px 16px;
+  }
+  .countdown-item {
+    min-width: 60px;
+    gap: 4px;
+  }
+  .countdown-value {
+    font-size: 2rem;
+    min-width: 60px;
+    padding: 8px 10px;
+  }
+  .countdown-label {
+    font-size: 0.7rem;
+  }
+  .countdown-separator {
+    font-size: 2.2rem;
+    margin: 0 6px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .countdown-container {
+    gap: 12px;
+    padding: 12px 24px;
+  }
+  .countdown-item {
+    min-width: 80px;
+    gap: 6px;
+  }
+  .countdown-value {
+    font-size: 2.5rem;
+    min-width: 80px;
+    padding: 10px 12px;
+  }
+  .countdown-label {
+    font-size: 0.8rem;
+  }
+  .countdown-separator {
+    font-size: 3rem;
+    margin: 0 8px;
+  }
 }
 
 @keyframes blink {

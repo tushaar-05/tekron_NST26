@@ -290,16 +290,16 @@ function App() {
                         </button>
 
 
-                        <div className="relative z-20 h-full flex flex-col items-center justify-center px-8">
+                        <div className="relative z-20 h-full flex flex-col items-center justify-center px-8 -mt-10">
 
                             <h1
-                                className={`pixel-font text-center mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}
+                                className={`pixel-font text-center mb-4 sm:mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}
                                 style={{
-                                    fontSize: 'clamp(60px, 10vw, 140px)',
+                                    fontSize: 'clamp(36px, 8vw, 100px)',
                                     color: '#d8c6f2',
                                     letterSpacing: '0.15em',
                                     textShadow:
-                                        '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 40px rgba(216, 198, 242, 0.3), 0 0 60px rgba(124, 58, 237, 0.2)',
+                                        '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(216, 198, 242, 0.3), 0 0 40px rgba(124, 58, 237, 0.2)',
                                     lineHeight: '1.1',
                                     display: 'flex',
                                     flexDirection: 'column',
@@ -307,44 +307,45 @@ function App() {
                                 }}
                             >
                                 <span className="pixel-tech-glow">TEKRON</span>
-                                <span className="text-purple-500 text-[60px]" style={{
-                                    textShadow: '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(168, 85, 247, 0.4)',
+                                <span className="text-purple-500 text-[40px] sm:text-[60px]" style={{
+                                    textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.4)',
                                 }}>2026</span>
                             </h1>
 
 
                             <div className="tech-tagline mb-4">
-                                <p className="pixel-font text-center" style={{
-                                    fontSize: 'clamp(10px, 1vw, 16px)',
+                                <p className="pixel-font text-center px-4" style={{
+                                    fontSize: 'clamp(8px, 0.8vw, 14px)',
                                     color: '#c084fc',
                                     letterSpacing: '0.1em',
                                     textShadow: '2px 2px 0px rgba(0, 0, 0, 0.5), 0 0 20px rgba(192, 132, 252, 0.4)',
+                                    lineHeight: '1.4'
                                 }}>
                                     &gt; NEWTON SCHOOL OF TECHNOLOGY &lt;
                                 </p>
                             </div>
 
 
-                            <div className="countdown-timer mb-8">
-                                <div className="countdown-container">
-                                    <div className="countdown-item">
-                                        <div className="countdown-value pixel-font">{String(timeLeft.days).padStart(2, '0')}</div>
-                                        <div className="countdown-label pixel-font">DAYS</div>
+                            <div className="countdown-timer mb-4 sm:mb-8 w-full px-4">
+                                <div className="countdown-container flex flex-wrap justify-center gap-1 sm:gap-2 px-2 py-3 sm:px-4 sm:py-4">
+                                    <div className="countdown-item flex flex-col items-center">
+                                        <div className="countdown-value pixel-font text-xl sm:text-2xl md:text-3xl lg:text-4xl">{String(timeLeft.days).padStart(2, '0')}</div>
+                                        <div className="countdown-label pixel-font text-xs sm:text-sm">DAYS</div>
                                     </div>
-                                    <div className="countdown-separator pixel-font">:</div>
-                                    <div className="countdown-item">
-                                        <div className="countdown-value pixel-font">{String(timeLeft.hours).padStart(2, '0')}</div>
-                                        <div className="countdown-label pixel-font">HRS</div>
+                                    <div className="countdown-separator pixel-font text-xl sm:text-2xl md:text-3xl lg:text-4xl flex items-center">:</div>
+                                    <div className="countdown-item flex flex-col items-center">
+                                        <div className="countdown-value pixel-font text-xl sm:text-2xl md:text-3xl lg:text-4xl">{String(timeLeft.hours).padStart(2, '0')}</div>
+                                        <div className="countdown-label pixel-font text-xs sm:text-sm">HRS</div>
                                     </div>
-                                    <div className="countdown-separator pixel-font">:</div>
-                                    <div className="countdown-item">
-                                        <div className="countdown-value pixel-font">{String(timeLeft.minutes).padStart(2, '0')}</div>
-                                        <div className="countdown-label pixel-font">MIN</div>
+                                    <div className="countdown-separator pixel-font text-xl sm:text-2xl md:text-3xl lg:text-4xl flex items-center">:</div>
+                                    <div className="countdown-item flex flex-col items-center">
+                                        <div className="countdown-value pixel-font text-xl sm:text-2xl md:text-3xl lg:text-4xl">{String(timeLeft.minutes).padStart(2, '0')}</div>
+                                        <div className="countdown-label pixel-font text-xs sm:text-sm">MIN</div>
                                     </div>
-                                    <div className="countdown-separator pixel-font">:</div>
-                                    <div className="countdown-item">
-                                        <div className="countdown-value pixel-font">{String(timeLeft.seconds).padStart(2, '0')}</div>
-                                        <div className="countdown-label pixel-font">SEC</div>
+                                    <div className="countdown-separator pixel-font text-xl sm:text-2xl md:text-3xl lg:text-4xl flex items-center">:</div>
+                                    <div className="countdown-item flex flex-col items-center">
+                                        <div className="countdown-value pixel-font text-xl sm:text-2xl md:text-3xl lg:text-4xl">{String(timeLeft.seconds).padStart(2, '0')}</div>
+                                        <div className="countdown-label pixel-font text-xs sm:text-sm">SEC</div>
                                     </div>
                                 </div>
                             </div>
@@ -352,11 +353,11 @@ function App() {
 
                             <div className="max-w-4xl mx-auto mb-10">
                                 <p
-                                    className="pixel-font text-center leading-relaxed"
+                                    className="pixel-font text-center leading-relaxed px-4 sm:px-0"
                                     style={{
-                                        fontSize: 'clamp(7px, 0.75vw, 16px)',
+                                        fontSize: 'clamp(8px, 0.9vw, 14px)',
                                         color: '#c8b6e2',
-                                        lineHeight: '2',
+                                        lineHeight: '1.8',
                                         textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 182, 226, 0.3)',
                                     }}
                                 >
@@ -366,10 +367,12 @@ function App() {
                                 </p>
                             </div>
 
-                            <button className="pixel-button pixel-font px-16 py-5 text-white mb-16 pixel-tech-button"
+                            <button className="pixel-button pixel-font px-12 sm:px-16 py-3 sm:py-5 text-white mb-8 sm:mb-16 pixel-tech-button"
                                 style={{
-                                    fontSize: 'clamp(14px, 1.4vw, 22px)',
+                                    fontSize: 'clamp(10px, 1.1vw, 18px)',
                                     letterSpacing: '0.15em',
+                                    transform: 'scale(0.9) sm:scale-100',
+                                    transformOrigin: 'center'
                                 }}
                             >
                                 REGISTER
@@ -377,7 +380,7 @@ function App() {
 
 
                             {isDialogueOpen && (
-                                <div className="absolute bottom-[500px] right-[10px] z-50">
+                                <div className="hidden sm:block absolute bottom-[500px] right-[10px] z-50">
                                     <div className="dialogue-bubble px-8 py-6 relative">
 
                                         <button
@@ -462,7 +465,7 @@ function App() {
 
 
                             <div
-                                className="absolute bottom-0 right-[-80px] z-30"
+                                className="hidden sm:block absolute bottom-0 right-[-80px] z-30"
                                 onClick={() => setIsDialogueOpen(!isDialogueOpen)}
                                 onMouseMove={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();
