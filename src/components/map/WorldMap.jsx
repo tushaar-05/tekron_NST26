@@ -266,9 +266,20 @@ function WorldMap() {
                             }
                         }}
                         onClick={() => {
-                            // Handle click event for the island
-                            console.log(`Navigating to ${island.id}`);
-                            // You can add navigation logic here
+                            // Navigate to the respective route based on island id
+                            const routes = {
+                                home: '/',
+                                about: '/about',
+                                events: '/events',
+                                comp: '/competition',
+                                gallery: '/gallery',
+                                contact: '/contact',
+                                sponsors: '/sponsors',
+                                store: '/store'
+                            };
+                            
+                            const route = routes[island.id] || '/';
+                            window.location.href = route;
                         }}
                     >
                         <div style={{
