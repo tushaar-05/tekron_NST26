@@ -46,7 +46,7 @@ function WorldMap() {
             if (isMobile) {
                 // Compact layout for mobile
                 setDimensions({
-                    baseSize: 120,    // Smaller islands
+                    baseSize: 130,    // Smaller islands
                     homeSize: 160,    // Slightly larger home island
                     distance: 180     // Closer to center
                 });
@@ -79,7 +79,7 @@ function WorldMap() {
     // Update mouse position
     useEffect(() => {
         const handleMouseMove = (e) => {
-            const x = (e.clientX / window.innerWidth) * 30; // 30px max movement
+            const x = (e.clientX / window.innerWidth) * 30;
             const y = (e.clientY / window.innerHeight) * 30;
             setMousePosition({ x, y });
         };
@@ -94,8 +94,8 @@ function WorldMap() {
     const isMobile = window.innerWidth < 768;
     const cloudBaseStyle = {
         position: 'absolute',
-        width: isMobile ? '120px' : '300px',
-        height: isMobile ? '120px' : '300px',
+        width: isMobile ? '190px' : '300px',
+        height: isMobile ? '150px' : '300px',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         opacity: isMobile ? 0.6 : 0.8,  // Slightly more transparent on mobile
@@ -107,21 +107,42 @@ function WorldMap() {
 
     // Calculate position for circular layout
     const getIslandPosition = (island) => {
+        if (isMobile) {
+            // Custom positions for mobile layout
+            const positions = {
+                store: { x: '50%', y: '13%' },
+                home: { x: '50%', y: '40%' },
+                events: { x: '28%', y: '68%' },
+                comp: { x: '65%', y: '70%' },
+                gallery: { x: '15%', y: '25%' },
+                contact: { x: '15%', y: '48%' },
+                sponsors: { x: '80%', y: '30%' },
+                about: { x: '85%', y: '55%' }
+            };
+
+            const pos = positions[island.id] || { x: '50%', y: '50%' };
+            return {
+                position: 'absolute',
+                top: `calc(${pos.y} - ${island.size / 2}px)`,
+                left: `calc(${pos.x} - ${island.size / 2}px)`,
+                zIndex: island.id === 'home' ? 10 : 5
+            };
+        }
+
         if (island.x && island.y) {
             return {
                 position: 'absolute',
-                top: `calc(${island.y} - ${island.size / 2}px - ${isMobile ? '30px' : '50px'})`,
+                top: `calc(${island.y} - ${island.size / 2}px - 50px)`,
                 left: `calc(${island.x} - ${island.size / 2}px)`,
                 zIndex: island.zIndex || 5
             };
         }
         
         const centerX = window.innerWidth / 2;
-        const centerY = (window.innerHeight / 2) - (isMobile ? 30 : 50);
+        const centerY = (window.innerHeight / 2) - 50;
         const radian = (island.angle * Math.PI) / 180;
-        const distance = isMobile ? (island.distance * 0.7) : island.distance; // Reduce distance on mobile
-        const x = centerX + Math.cos(radian) * distance;
-        const y = centerY + Math.sin(radian) * distance;
+        const x = centerX + Math.cos(radian) * island.distance;
+        const y = centerY + Math.sin(radian) * island.distance;
         
         return {
             position: 'absolute',
@@ -135,7 +156,7 @@ function WorldMap() {
         <div style={{
             position: 'relative',
             width: '100vw',
-            height: isMobile ? 'calc(100vh - 60px)' : '100vh', // Account for mobile browser UI
+            height: isMobile ? '100vh' : '100vh', // Full height for better mobile layout
             overflow: 'hidden',
             backgroundColor: '#1a365d', // Fallback background color
             touchAction: 'none' // Better touch handling
@@ -180,8 +201,10 @@ function WorldMap() {
             <div style={{
                 ...cloudBaseStyle,
                 backgroundImage: 'url(/src/assets/images/map/clouds-3.png)',
-                bottom: '-20px',
-                left: '-20px',
+                bottom: isMobile ? '0' : '-20px',
+                left: isMobile ? '0' : '-20px',
+                width: isMobile ? '150px' : cloudBaseStyle.width,
+                height: isMobile ? '150px' : cloudBaseStyle.height,
                 transform: parallaxTransform
             }} />
 
@@ -189,8 +212,10 @@ function WorldMap() {
             <div style={{
                 ...cloudBaseStyle,
                 backgroundImage: 'url(/src/assets/images/map/clouds-4.png)',
-                bottom: '-20px',
-                right: '-20px',
+                bottom: isMobile ? '0' : '-20px',
+                right: isMobile ? '0' : '-20px',
+                width: isMobile ? '150px' : cloudBaseStyle.width,
+                height: isMobile ? '150px' : cloudBaseStyle.height,
                 transform: parallaxTransform
             }} />
 
@@ -201,7 +226,7 @@ function WorldMap() {
                 
                 return (
                     <div 
-                        key={island.id}
+                        key={`${island.id}-${isMobile ? 'mobile' : 'desktop'}`}
                         style={{
                             position: 'absolute',
                             display: 'flex',
@@ -224,19 +249,19 @@ function WorldMap() {
                         }}
                         onMouseLeave={(e) => {
                             if (!isMobile) {
-                                e.currentTarget.querySelector('h3').style.fontSize = '1.2rem';
+                                e.currentTarget.querySelector('h3').style.fontSize = '0.95rem';
                                 e.currentTarget.style.zIndex = position.zIndex;
                             }
                         }}
                         onTouchStart={(e) => {
                             if (isMobile) {
-                                e.currentTarget.querySelector('h3').style.fontSize = '1.2rem';
+                                e.currentTarget.querySelector('h3').style.fontSize = '0.95rem';
                                 e.currentTarget.style.zIndex = 20;
                             }
                         }}
                         onTouchEnd={(e) => {
                             if (isMobile) {
-                                e.currentTarget.querySelector('h3').style.fontSize = '1rem';
+                                e.currentTarget.querySelector('h3').style.fontSize = '0.85rem';
                                 e.currentTarget.style.zIndex = position.zIndex;
                             }
                         }}
@@ -252,16 +277,16 @@ function WorldMap() {
                             alignItems: 'center',
                             justifyContent: 'center',
                             width: '100%',
-                            marginBottom: '10px',
+                            marginBottom: '4px', // Reduced from 10px to 4px
                             transform: parallaxTransform,
                             willChange: 'transform',
                             transition: 'transform 0.1s linear',
                             pointerEvents: 'none'
                         }}>
                             <h3 style={{
-                                color: 'white',
+                                color: '#d8c6f2',
                                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
-                                fontSize: window.innerWidth < 768 ? '1rem' : '1.2rem',
+                                fontSize: window.innerWidth < 768 ? '0.85rem' : '1.2rem',
                                 fontWeight: 'bold',
                                 textTransform: 'capitalize',
                                 textAlign: 'center',
