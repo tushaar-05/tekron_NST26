@@ -1,97 +1,186 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import VendingMachine from '../../components/ui/VendingMachine/VendingMachine';
+import styled from 'styled-components';
+
+// Sample competition data
+const competitions = [
+  {
+    id: 1,
+    title: 'CODE WARS',
+    description: 'A 24-hour hackathon to build innovative solutions for real-world problems using cutting-edge technologies.',
+    prize: '₹50,000',
+    image: 'https://images.unsplash.com/photo-1544984243-ec57ea16fe25?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    deadline: '15th March 2025'
+  },
+  {
+    id: 2,
+    title: 'ROBO SOCCER',
+    description: 'Design and program autonomous robots to compete in an exciting game of robot soccer.',
+    prize: '₹75,000',
+    image: 'https://images.unsplash.com/photo-1544984243-ec57ea16fe25?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    deadline: '18th March 2025'
+  },
+  {
+    id: 3,
+    title: 'TECH QUIZ',
+    description: 'Test your technical knowledge in this fast-paced quiz competition with exciting prizes.',
+    prize: '₹30,000',
+    image: 'https://images.unsplash.com/photo-1544984243-ec57ea16fe25?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    deadline: '12th March 2025'
+  }
+];
+
+const PageContainer = styled.div`
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0a0418 0%, #1a0b2e 50%, #2d1b69 100%);
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(138, 79, 255, 0.1) 0%, transparent 20%),
+      radial-gradient(circle at 80% 70%, rgba(138, 79, 255, 0.1) 0%, transparent 20%);
+    pointer-events: none;
+  }
+`;
+
+const Stars = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #8a4fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 40px 70px, #d8c6f2, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 60px 20px, #8a4fff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 80px 50px, #d8c6f2, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 100px 80px, #8a4fff, rgba(0,0,0,0));
+  background-size: 100px 100px;
+  animation: twinkle 5s infinite;
+  opacity: 0.5;
+  
+  @keyframes twinkle {
+    0% { opacity: 0.3; }
+    50% { opacity: 0.7; }
+    100% { opacity: 0.3; }
+  }
+`;
+
+const CompetitionCard = styled.div`
+  background: rgba(26, 11, 46, 0.8);
+  border: 2px solid #8a4fff;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 10px 0;
+  color: #fff;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(138, 79, 255, 0.4);
+  }
+  
+  h3 {
+    color: #d8c6f2;
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+    text-shadow: 0 0 5px rgba(138, 79, 255, 0.7);
+  }
+  
+  p {
+    margin: 5px 0;
+    font-size: 0.9em;
+    color: #c0a9ff;
+  }
+  
+  .prize {
+    color: #ffd700;
+    font-weight: bold;
+  }
+  
+  .deadline {
+    font-size: 0.8em;
+    color: #ff7eb9;
+  }
+  
+  img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    border: 1px solid #4a2a8a;
+  }
+`;
+
+const CompetitionsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  
+  /* Custom scrollbar */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(45, 27, 105, 0.3);
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #8a4fff;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a87bff;
+  }
+`;
 
 function Competition() {
-    const navigate = useNavigate();
-
+    const [selectedCompetition, setSelectedCompetition] = useState(null);
+    
     useEffect(() => {
         document.title = 'Competitions | TEKRON 2026';
     }, []);
 
-    const competitions = [
-        {
-            id: 1,
-            title: 'Code Wars',
-            type: 'Coding',
-            teamSize: '1-2 members',
-            prize: '₹50,000',
-            deadline: 'March 10, 2026',
-            description: 'A competitive programming challenge to test your algorithmic skills and problem-solving abilities.'
-        },
-        {
-            id: 2,
-            title: 'Hack the Future',
-            type: 'Hackathon',
-            teamSize: '2-4 members',
-            prize: '₹1,00,000',
-            deadline: 'March 12, 2026',
-            description: 'Build innovative solutions to real-world problems in this 24-hour hackathon.'
-        },
-        {
-            id: 3,
-            title: 'Robo Rumble',
-            type: 'Robotics',
-            teamSize: '2-3 members',
-            prize: '₹75,000',
-            deadline: 'March 8, 2026',
-            description: 'Design and program robots to complete challenging tasks in this exciting robotics competition.'
-        }
-    ];
-
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#1a0b2e] to-[#2d1b69] text-white p-8">
-            <div className="max-w-4xl mx-auto">
-                <h1 className="text-4xl md:text-6xl font-bold mb-4 text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-                    Competitions
-                </h1>
-                <p className="text-center text-xl text-purple-200 mb-12">Test your skills and win exciting prizes!</p>
-                
-                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {competitions.map((comp) => (
-                        <div key={comp.id} className="bg-black/30 backdrop-blur-sm border border-purple-500/30 rounded-lg p-6 hover:border-purple-400/50 transition-all">
-                            <div className="flex justify-between items-start mb-4">
-                                <div>
-                                    <h2 className="text-2xl font-bold text-purple-300">{comp.title}</h2>
-                                    <span className="text-sm bg-purple-900/50 text-purple-300 px-2 py-1 rounded">
-                                        {comp.type}
-                                    </span>
-                                </div>
-                                <div className="text-right">
-                                    <p className="text-2xl font-bold text-yellow-400">{comp.prize}</p>
-                                    <p className="text-xs text-purple-200">Prize Money</p>
-                                </div>
-                            </div>
-                            
-                            <p className="text-gray-200 mb-4">{comp.description}</p>
-                            
-                            <div className="flex justify-between text-sm text-purple-200 mb-4">
-                                <div>
-                                    <p className="font-semibold">Team Size</p>
-                                    <p>{comp.teamSize}</p>
-                                </div>
-                                <div className="text-right">
-                                    <p className="font-semibold">Deadline</p>
-                                    <p>{comp.deadline}</p>
-                                </div>
-                            </div>
-                            
-                            <button className="w-full py-2 bg-purple-600 hover:bg-purple-700 rounded-lg transition-colors">
-                                Register Now
-                            </button>
-                        </div>
+        <PageContainer>
+            <Stars />
+            <VendingMachine>
+                <CompetitionsContainer>
+                    {competitions.map(comp => (
+                        <CompetitionCard 
+                            key={comp.id}
+                            onClick={() => setSelectedCompetition(comp)}
+                        >
+                            <img src={comp.image} alt={comp.title} />
+                            <h3>{comp.title}</h3>
+                            <p>{comp.description}</p>
+                            <p className="prize">Prize: {comp.prize}</p>
+                            <p className="deadline">Deadline: {comp.deadline}</p>
+                        </CompetitionCard>
                     ))}
-                </div>
-
-                <div className="flex justify-center mt-12">
-                    <button 
-                        onClick={() => navigate(-1)}
-                        className="px-8 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105"
-                    >
-                        Back to Map
-                    </button>
-                </div>
-            </div>
-        </div>
+                </CompetitionsContainer>
+            </VendingMachine>
+        </PageContainer>
     );
 }
 
