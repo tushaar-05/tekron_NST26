@@ -6,6 +6,7 @@ import './styles/index.css';
 // Page Components
 import App from './pages/App';
 import WorldMap from './components/map/WorldMap';
+import Loading from './components/map/Loading';
 import WorldLoading from './components/map/WorldLoading';
 import About from './pages/About/About';
 import Store from './pages/Store/Store';
@@ -30,7 +31,11 @@ function AppWrapper() {
     }, [location]);
 
     if (isLoading) {
-        return <WorldLoading onLoadingComplete={() => setIsLoading(false)} />;
+        return isMapRoute ? (
+            <WorldLoading onLoadingComplete={() => setIsLoading(false)} />
+        ) : (
+            <Loading onLoadingComplete={() => setIsLoading(false)} />
+        );
     }
 
     return (
