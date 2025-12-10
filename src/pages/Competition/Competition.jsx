@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { competitions } from '../../data/eventsData';
 import EventCard from '../../components/ui/EventCard/EventCard';
 import { motion } from 'framer-motion';
@@ -90,9 +91,52 @@ const Grid = styled.div`
   padding: 20px 0;
 `;
 
+const BackButton = styled(motion.button)`
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 100;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(124, 58, 237, 0.3));
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(168, 85, 247, 0.4);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  &:hover {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(124, 58, 237, 0.5));
+    border-color: rgba(168, 85, 247, 0.8);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+    transform: translateX(-5px);
+  }
+
+  &::before {
+    content: '←';
+    font-size: 1.2rem;
+  }
+`;
+
 const Competition = () => {
+  const navigate = useNavigate();
+
   return (
     <PageContainer>
+      <BackButton
+        onClick={() => navigate('/map')}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+      >
+        Back to Map
+      </BackButton>
       <ContentWrapper>
         <Header>
           <Title
