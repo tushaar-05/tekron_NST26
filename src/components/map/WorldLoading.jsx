@@ -91,7 +91,7 @@ function WorldLoading({ onLoadingComplete }) {
                     imageRendering: 'pixelated',
                 }}
             >
-                <source src="/images/Pixel_Art_Game_Loading_Screen_Animation.mp4" type="video/mp4" />
+                <source src="../public/images/map/Pixel_Art_Game_Loading_Screen_Animation.mp4" />
                 Your browser does not support the video tag.
             </video>
 
