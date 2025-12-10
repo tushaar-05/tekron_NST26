@@ -175,7 +175,7 @@ function App() {
                         <div
                             className="absolute inset-0 z-0 opacity-30"
                             style={{
-                                backgroundImage: 'url(/src/assets/images/backgrounds/bg_img.jpg)',
+                                backgroundImage: 'url(/images/backgrounds/bg_img.jpg)',
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 imageRendering: 'pixelated',
@@ -195,9 +195,10 @@ function App() {
                             }}
                         >
                             <img
-                                src="/src/assets/images/backgrounds/5.webp"
+                                src="/images/backgrounds/5.webp"
                                 alt="Back teal cloud"
                                 className="w-full h-auto pixel-art"
+                                loading="lazy"
                             />
                         </div>
 
@@ -214,9 +215,10 @@ function App() {
                             }}
                         >
                             <img
-                                src="/src/assets/images/backgrounds/4.webp"
+                                src="/images/backgrounds/4.webp"
                                 alt="Middle cloud"
                                 className="w-full h-auto pixel-art"
+                                loading="lazy"
                             />
                         </div>
 
@@ -233,9 +235,10 @@ function App() {
                             }}
                         >
                             <img
-                                src="/src/assets/images/backgrounds/3.webp"
+                                src="/images/backgrounds/3.webp"
                                 alt="Cloud below middle"
                                 className="w-full h-auto pixel-art"
+                                loading="lazy"
                             />
                         </div>
 
@@ -253,9 +256,10 @@ function App() {
                             }}
                         >
                             <img
-                                src="/src/assets/images/backgrounds/2.webp"
+                                src="/images/backgrounds/2.webp"
                                 alt="Bottom cloud"
                                 className="w-full h-auto pixel-art"
+                                loading="lazy"
                             />
                         </div>
 
@@ -272,9 +276,10 @@ function App() {
                             }}
                         >
                             <img
-                                src="/src/assets/images/backgrounds/1.webp"
+                                src="/images/backgrounds/1.webp"
                                 alt="Cloud above bottom"
                                 className="w-full h-auto pixel-art"
+                                loading="lazy"
                             />
                         </div>
 
@@ -498,9 +503,10 @@ function App() {
                                         }}
                                     >
                                         <img
-                                            src="/src/assets/images/characters/main_Chr.png"
+                                            src="/images/characters/main_Chr.png"
                                             alt="Assistant character"
                                             className="w-full h-auto block pixel-art"
+                                            loading="lazy"
                                         />
                                     </div>
                                 </div>

@@ -63,6 +63,7 @@ function Sponsors() {
                                 src={sponsor.logo} 
                                 alt={sponsor.name}
                                 className="max-w-full max-h-full object-contain p-2"
+                                loading="lazy"
                             />
                         </div>
                         <span className="text-center text-sm md:text-base">{sponsor.name}</span>

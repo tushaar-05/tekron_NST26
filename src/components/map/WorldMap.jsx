@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 // Import all island images
-import homeIsland from '../../assets/images/map/islands/home.png';
-import aboutIsland from '../../assets/images/map/islands/about.png';
-import compIsland from '../../assets/images/map/islands/comp.png';
-import contactIsland from '../../assets/images/map/islands/contact.png';
-import eventsIsland from '../../assets/images/map/islands/events.png';
-import galleryIsland from '../../assets/images/map/islands/gallery.png';
-import sponsorsIsland from '../../assets/images/map/islands/sponsors.png';
-import storeIsland from '../../assets/images/map/islands/store.png';
+// Images are now in the public directory
+const homeIsland = '/images/map/islands/home.png';
+const aboutIsland = '/images/map/islands/about.png';
+const compIsland = '/images/map/islands/comp.png';
+const contactIsland = '/images/map/islands/contact.png';
+const eventsIsland = '/images/map/islands/events.png';
+const galleryIsland = '/images/map/islands/gallery.png';
+const sponsorsIsland = '/images/map/islands/sponsors.png';
+const storeIsland = '/images/map/islands/store.png';
 
 function WorldMap() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -60,9 +61,9 @@ function WorldMap() {
             } else {
                 // Full size for desktops
                 setDimensions({
-                    baseSize: 250,
-                    homeSize: 400,
-                    distance: 400
+                    baseSize: 200,
+                    homeSize: 300,
+                    distance: 350
                 });
             }
         };
@@ -169,7 +170,7 @@ function WorldMap() {
                     left: "-10px",
                     width: '110%',
                     height: '110%',
-                    backgroundImage: 'url(/src/assets/images/map/waterFinal.png)',
+                    backgroundImage: 'url(/images/map/waterFinal.png)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
@@ -182,7 +183,7 @@ function WorldMap() {
             {/* Cloud in top-left corner */}
             <div style={{
                 ...cloudBaseStyle,
-                backgroundImage: 'url(/src/assets/images/map/cloud-1.png)',
+                backgroundImage: 'url(/images/map/cloud-1.png)',
                 top: '-20px',
                 left: '-20px',
                 transform: parallaxTransform
@@ -191,7 +192,7 @@ function WorldMap() {
             {/* Cloud in top-right corner */}
             <div style={{
                 ...cloudBaseStyle,
-                backgroundImage: 'url(/src/assets/images/map/clouds-2.png)',
+                backgroundImage: 'url(/images/map/clouds-2.png)',
                 top: '-20px',
                 right: '-20px',
                 transform: parallaxTransform
@@ -200,7 +201,7 @@ function WorldMap() {
             {/* Cloud in bottom-left corner */}
             <div style={{
                 ...cloudBaseStyle,
-                backgroundImage: 'url(/src/assets/images/map/clouds-3.png)',
+                backgroundImage: 'url(/images/map/clouds-3.png)',
                 bottom: isMobile ? '0' : '-20px',
                 left: isMobile ? '0' : '-20px',
                 width: isMobile ? '150px' : cloudBaseStyle.width,
@@ -211,7 +212,7 @@ function WorldMap() {
             {/* Cloud in bottom-right corner */}
             <div style={{
                 ...cloudBaseStyle,
-                backgroundImage: 'url(/src/assets/images/map/clouds-4.png)',
+                backgroundImage: 'url(/images/map/clouds-4.png)',
                 bottom: isMobile ? '0' : '-20px',
                 right: isMobile ? '0' : '-20px',
                 width: isMobile ? '150px' : cloudBaseStyle.width,
@@ -222,7 +223,12 @@ function WorldMap() {
             {/* Islands */}
             {islands.map((island) => {
                 const position = getIslandPosition(island);
-                const islandName = island.id.charAt(0).toUpperCase() + island.id.slice(1);
+                // Custom display names for islands
+                const displayNames = {
+                    comp: 'Competition',
+                    // Add other custom display names here if needed
+                };
+                const islandName = displayNames[island.id] || (island.id.charAt(0).toUpperCase() + island.id.slice(1));
                 
                 return (
                     <div 
@@ -287,8 +293,9 @@ function WorldMap() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            width: '100%',
-                            marginBottom: '4px', // Reduced from 10px to 4px
+                            width: '120px', // Fixed width to prevent movement
+                            minWidth: '120px', // Ensure minimum width
+                            marginBottom: '4px',
                             transform: parallaxTransform,
                             willChange: 'transform',
                             transition: 'transform 0.1s linear',
@@ -297,7 +304,8 @@ function WorldMap() {
                             <h3 style={{
                                 color: '#d8c6f2',
                                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
-                                fontSize: window.innerWidth < 768 ? '0.85rem' : '1.2rem',
+                                fontSize: window.innerWidth < 768 ? '0.85rem' : '1.1rem',
+                                whiteSpace: 'nowrap', // Prevent text wrapping
                                 fontWeight: 'bold',
                                 textTransform: 'capitalize',
                                 textAlign: 'center',
