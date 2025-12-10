@@ -282,15 +282,22 @@ function App() {
                         <button
                             className="notch-nav-button absolute top-0 left-1/2 transform -translate-x-1/2 z-40 pixel-art"
                             onClick={handleNavigateToMap}
+                            style={{
+                                transform: 'translateX(-50%) scale(1.3)',
+                                transformOrigin: 'top center',
+                                minWidth: '270px',
+                                width: 'auto',
+                                padding: '0 30px',
+                            }}
                         >
-                            <div className="notch-nav-content">
-                                <span className="notch-text-default pixel-font text-white text-[17px]">MAP</span>
-                                <span className="notch-text-expanded pixel-font text-white text-[17px]">NAVIGATE</span>
+                            <div className="notch-nav-content w-full">
+                                <span className="notch-text-default pixel-font text-white text-[22px] md:text-[24px] whitespace-nowrap">EXPLORE</span>
+                                <span className="notch-text-expanded pixel-font text-white text-[22px] md:text-[24px] whitespace-nowrap">NAVIGATE</span>
                             </div>
                         </button>
 
 
-                        <div className="relative z-20 h-full flex flex-col items-center justify-center px-8 -mt-10">
+                        <div className="relative z-20 h-full flex flex-col items-center justify-center px-8 pt-20">
 
                             <h1
                                 className={`pixel-font text-center mb-4 sm:mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}

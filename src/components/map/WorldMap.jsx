@@ -32,9 +32,9 @@ function WorldMap() {
         { id: 'comp', image: compIsland, size: dimensions.baseSize, angle: 45, distance: dimensions.distance },
         { id: 'events', image: eventsIsland, size: dimensions.baseSize, angle: 90, distance: dimensions.distance },
         { id: 'gallery', image: galleryIsland, size: dimensions.baseSize, angle: 135, distance: dimensions.distance },
-        { id: 'contact', image: contactIsland, size: dimensions.baseSize, angle: 180, distance: dimensions.distance },
-        { id: 'store', image: storeIsland, size: dimensions.baseSize, angle: 225, distance: dimensions.distance },
-        { id: 'sponsors', image: sponsorsIsland, size: dimensions.baseSize, angle: 315, distance: dimensions.distance }
+        { id: 'contact', image: contactIsland, size: dimensions.baseSize, angle: 175, distance: dimensions.distance },
+        { id: 'store', image: storeIsland, size: dimensions.baseSize, angle: 220, distance: dimensions.distance },
+        { id: 'sponsors', image: sponsorsIsland, size: dimensions.baseSize, angle: 320, distance: dimensions.distance }
     ];
     
     // Handle window resize for responsive design
@@ -60,7 +60,7 @@ function WorldMap() {
             } else {
                 // Full size for desktops
                 setDimensions({
-                    baseSize: 300,
+                    baseSize: 250,
                     homeSize: 400,
                     distance: 400
                 });

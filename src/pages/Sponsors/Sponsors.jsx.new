@@ -2,7 +2,7 @@ import React from 'react';
 import ComingSoon from '../../components/ui/ComingSoon/ComingSoon';
 
 const Sponsors = () => {
-    return <ComingSoon title="Sponsors Coming Soon" />;
+  return <ComingSoon title="Sponsors Coming Soon" />;
 };
 
 export default Sponsors;
