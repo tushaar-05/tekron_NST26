@@ -8,7 +8,7 @@ const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01' }) => {
   const [glitchEffect, setGlitchEffect] = useState(false);
 
   const handleExploreClick = () => {
-    navigate('/');
+    navigate('/map');
   };
 
   const handleMouseMove = (e) => {
