@@ -284,6 +284,7 @@ function App() {
                         </div>
 
 
+                        {/* Commented out EXPLORE/NAVIGATE button as per request
                         <button
                             className="notch-nav-button absolute top-0 left-1/2 transform -translate-x-1/2 z-40 pixel-art"
                             onClick={handleNavigateToMap}
@@ -300,6 +301,7 @@ function App() {
                                 <span className="notch-text-expanded pixel-font text-white text-[22px] md:text-[24px] whitespace-nowrap">NAVIGATE</span>
                             </div>
                         </button>
+                        */}
 
 
                         <div className="relative z-20 h-full flex flex-col items-center justify-center px-8 pt-20">
@@ -379,15 +381,17 @@ function App() {
                                 </p>
                             </div>
 
-                            <button className="pixel-button pixel-font px-12 sm:px-16 py-3 sm:py-5 text-white mb-8 sm:mb-16 pixel-tech-button"
+                            <button 
+                                className="pixel-button pixel-font px-12 sm:px-16 py-3 sm:py-5 text-white mb-8 sm:mb-16 pixel-tech-button"
                                 style={{
                                     fontSize: 'clamp(10px, 1.1vw, 18px)',
                                     letterSpacing: '0.15em',
                                     transform: 'scale(0.9) sm:scale-100',
                                     transformOrigin: 'center'
                                 }}
+                                onClick={handleNavigateToMap}
                             >
-                                REGISTER
+                                EXPLORE
                             </button>
 
 
