@@ -3,125 +3,68 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { competitions } from '../../data/eventsData';
 import EventCard from '../../components/ui/EventCard/EventCard';
-import { motion } from 'framer-motion';
 
-const PageContainer = styled.div`
+const Page = styled.div`
   min-height: 100vh;
-  padding: 120px 20px 60px;
-  background: linear-gradient(180deg, #1a0b2e 0%, #2d1b4e 30%, #1e1438 70%, #0f0a1e 100%);
-  color: #fff;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      repeating-linear-gradient(
-        0deg,
-        rgba(168, 85, 247, 0.03) 0px,
-        transparent 1px,
-        transparent 2px,
-        rgba(168, 85, 247, 0.03) 3px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        rgba(168, 85, 247, 0.03) 0px,
-        transparent 1px,
-        transparent 2px,
-        rgba(168, 85, 247, 0.03) 3px
-      );
-    opacity: 0.3;
-    pointer-events: none;
-  }
+  padding: 100px 20px 40px;
+  background: #0f0a1e;
+  color: white;
 `;
 
-const ContentWrapper = styled.div`
-  max-width: 1400px;
+const Container = styled.div`
+  max-width: 1200px;
   margin: 0 auto;
-  position: relative;
-  z-index: 1;
 `;
 
-const Header = styled.div`
+const Header = styled.header`
   text-align: center;
   margin-bottom: 60px;
 `;
 
-const Title = styled(motion.h1)`
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
-  font-weight: 900;
+const Title = styled.h1`
+  font-size: 3.5rem;
+  font-weight: 800;
   margin-bottom: 20px;
-  background: linear-gradient(135deg, #ffffff, #d8c6f2, #a855f7);
+  background: linear-gradient(90deg, #a855f7, #6366f1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  text-shadow: 0 0 40px rgba(168, 85, 247, 0.3);
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #a855f7, transparent);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-  }
 `;
 
-const Subtitle = styled(motion.p)`
-  font-size: clamp(1rem, 2vw, 1.25rem);
+const Subtitle = styled.p`
+  font-size: 1.25rem;
   color: #c8b6e2;
   max-width: 700px;
-  margin: 30px auto 0;
-  line-height: 1.8;
-  opacity: 0.9;
+  margin: 0 auto;
+  line-height: 1.6;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 35px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
   padding: 20px 0;
 `;
 
-const BackButton = styled(motion.button)`
+const BackButton = styled.button`
   position: fixed;
   top: 30px;
   left: 30px;
-  z-index: 100;
   padding: 12px 24px;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(124, 58, 237, 0.3));
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(168, 85, 247, 0.4);
-  border-radius: 12px;
-  color: #fff;
-  font-size: 0.95rem;
+  background: rgba(168, 85, 247, 0.1);
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  backdrop-filter: blur(10px);
+  z-index: 100;
 
   &:hover {
-    background: linear-gradient(135deg, rgba(168, 85, 247, 0.4), rgba(124, 58, 237, 0.5));
-    border-color: rgba(168, 85, 247, 0.8);
-    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
-    transform: translateX(-5px);
-  }
-
-  &::before {
-    content: '←';
-    font-size: 1.2rem;
+    background: rgba(168, 85, 247, 0.2);
+    transform: translateY(-2px);
   }
 `;
 
@@ -129,47 +72,31 @@ const Competition = () => {
   const navigate = useNavigate();
 
   return (
-    <PageContainer>
-      <BackButton
-        onClick={() => navigate('/map')}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        Back to Map
+    <Page>
+      <BackButton onClick={() => navigate('/map')}>
+        ← Back to Map
       </BackButton>
-      <ContentWrapper>
+      
+      <Container>
         <Header>
-          <Title
-            initial={{ opacity: 0, y: -30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            Competitions
-          </Title>
-          <Subtitle
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          >
-            Challenge yourself and compete with the brightest minds. Showcase your skills,
-            push your limits, and claim victory in our exciting competitions.
+          <Title>Competitions</Title>
+          <Subtitle>
+            Test your skills and compete with the best in our exciting range of competitions.
+            From coding challenges to robotics, there's something for everyone.
           </Subtitle>
         </Header>
 
         <Grid>
-          {competitions.map((comp, index) => (
-            <motion.div
-              key={comp.id}
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <EventCard title={comp.title} category={comp.category} />
-            </motion.div>
+          {competitions.map((comp) => (
+            <EventCard 
+              key={comp.id} 
+              title={comp.title} 
+              category={comp.category} 
+            />
           ))}
         </Grid>
-      </ContentWrapper>
-    </PageContainer>
+      </Container>
+    </Page>
   );
 };
 

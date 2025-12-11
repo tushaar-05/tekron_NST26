@@ -1,8 +1,0 @@
-import React from 'react';
-import ComingSoon from '../../components/ui/ComingSoon/ComingSoon';
-
-const Events = () => {
-  return <ComingSoon title="Events Coming Soon" />;
-};
-
-export default Events;
