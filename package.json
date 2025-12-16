@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.20.7",
     "@react-three/drei": "^9.56.16",
     "@react-three/fiber": "^8.15.12",
     "@types/styled-components": "^5.1.36",

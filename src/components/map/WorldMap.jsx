@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 
 // Import all island images
 // Images are now in the public directory
-const homeIsland = '/images/map/islands/home.webp';
-const aboutIsland = '/images/map/islands/about.webp';
-const compIsland = '/images/map/islands/comp.webp';
-const contactIsland = '/images/map/islands/contact.webp';
-const eventsIsland = '/images/map/islands/events.webp';
-const galleryIsland = '/images/map/islands/gallery.webp';
-const sponsorsIsland = '/images/map/islands/sponsors.webp';
-const storeIsland = '/images/map/islands/store.webp';
+const homeIsland = '/images/map/islands/Untitled.png';
+const aboutIsland = '/images/map/islands/Untitled-1.webp';
+const compIsland = '/images/map/islands/Untitled-4.png';
+const contactIsland = '/images/map/islands/Untitled-3.png';
+const eventsIsland = '/images/map/islands/Untitled-2.png';
+const galleryIsland = '/images/map/islands/Untitled-5.png';
+const sponsorsIsland = '/images/map/islands/Untitled-7.png';
+const storeIsland = '/images/map/islands/Untitled-6.png';
 
 function WorldMap() {
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -61,8 +61,8 @@ function WorldMap() {
             } else {
                 // Full size for desktops
                 setDimensions({
-                    baseSize: 200,
-                    homeSize: 300,
+                    baseSize: 220,
+                    homeSize: 400,
                     distance: 350
                 });
             }
