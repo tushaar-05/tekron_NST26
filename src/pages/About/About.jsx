@@ -2,85 +2,74 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-// Starfield Component - 50 twinkling stars
-const Starfield = () => {
-    const stars = Array.from({ length: 50 }, (_, i) => ({
-        id: i,
-        top: `${Math.random() * 100}%`,
-        left: `${Math.random() * 100}%`,
-        delay: `${Math.random() * 3}s`,
-        duration: `${2 + Math.random() * 2}s`
-    }));
 
-    return (
-        <div className="fixed inset-0 pointer-events-none z-0">
-            {stars.map((star) => (
-                <div
-                    key={star.id}
-                    className="absolute bg-white rounded-full w-[2px] h-[2px]"
-                    style={{
-                        top: star.top,
-                        left: star.left,
-                        animation: `twinkle ${star.duration} ease-in-out infinite`,
-                        animationDelay: star.delay
-                    }}
-                />
-            ))}
-        </div>
-    );
+
+// Animated Counter Component
+const AnimatedCounter = ({ target }) => {
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+        let startTime;
+        const duration = 2000; // 2 seconds animation
+
+        const animate = (currentTime) => {
+            if (!startTime) startTime = currentTime;
+            const progress = Math.min((currentTime - startTime) / duration, 1);
+
+            setCount(Math.floor(progress * target));
+
+            if (progress < 1) {
+                requestAnimationFrame(animate);
+            }
+        };
+
+        requestAnimationFrame(animate);
+    }, [target]);
+
+    return <span>{count.toLocaleString()}</span>;
 };
 
 function About() {
     const navigate = useNavigate();
-    const [displayedText, setDisplayedText] = useState('');
-    const [currentLineIndex, setCurrentLineIndex] = useState(0);
-    const [showCursor, setShowCursor] = useState(true);
 
-    const terminalLines = [
-        'SYSTEM_STATUS: ONLINE',
-        '> LOADING ARCHIVES...',
-        'Welcome, Traveler. You have breached the firewall of TEKRON 2026.',
-        'We are the convergence point where logic meets magic.',
-        'The server is open. The quest begins now.'
-    ];
+    const [showCursor, setShowCursor] = useState(true);
+    const [glitchActive, setGlitchActive] = useState(false);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+
 
     useEffect(() => {
         document.title = 'About TEKRON | TEKRON 2026';
-
-        // Enable scrolling on About page (override global overflow:hidden from body)
         document.body.style.overflow = 'auto';
-
-        // Cleanup: restore original overflow when leaving the page
         return () => {
             document.body.style.overflow = 'hidden';
         };
     }, []);
 
-    // Typewriter effect
+    // Mouse tracking for parallax effect
     useEffect(() => {
-        if (currentLineIndex >= terminalLines.length) return;
+        const handleMouseMove = (e) => {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const offsetX = (e.clientX - centerX) / centerX;
+            const offsetY = (e.clientY - centerY) / centerY;
+            setMousePosition({ x: offsetX, y: offsetY });
+        };
 
-        const currentLine = terminalLines[currentLineIndex];
-        const totalText = terminalLines.slice(0, currentLineIndex).join('\n') +
-            (currentLineIndex > 0 ? '\n' : '') +
-            displayedText.split('\n')[currentLineIndex] || '';
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+    }, []);
 
-        if (!displayedText.split('\n')[currentLineIndex] ||
-            displayedText.split('\n')[currentLineIndex].length < currentLine.length) {
-            const timer = setTimeout(() => {
-                const currentLineText = displayedText.split('\n')[currentLineIndex] || '';
-                const newLines = [...displayedText.split('\n')];
-                newLines[currentLineIndex] = currentLine.slice(0, currentLineText.length + 1);
-                setDisplayedText(newLines.join('\n'));
-            }, 50);
-            return () => clearTimeout(timer);
-        } else if (currentLineIndex < terminalLines.length - 1) {
-            const timer = setTimeout(() => {
-                setCurrentLineIndex(prev => prev + 1);
-            }, 500);
-            return () => clearTimeout(timer);
-        }
-    }, [displayedText, currentLineIndex]);
+    // Glitch effect
+    useEffect(() => {
+        const glitchInterval = setInterval(() => {
+            setGlitchActive(true);
+            setTimeout(() => setGlitchActive(false), 200);
+        }, 5000);
+        return () => clearInterval(glitchInterval);
+    }, []);
+
+
 
     // Blinking cursor
     useEffect(() => {
@@ -93,430 +82,466 @@ function About() {
     const artifactsData = [
         {
             title: 'INNOVATION',
-            subtitle: 'ELIXIR OF INNOVATION',
-            description: 'Volatile ideas. Where raw creativity is brewed into reality.',
+            subtitle: 'ELIXIR OF IDEAS',
+            description: 'Brew volatile ideas into reality. Craft the future.',
             glowColor: 'cyan',
-            bgGradient: 'from-cyan-500/10 to-cyan-900/10',
-            borderColor: 'border-cyan-500/30',
-            hoverGlow: 'hover:shadow-[0_0_30px_rgba(6,182,212,0.6)]'
+            icon: '⚗️',
+            rarity: 'LEGENDARY'
         },
         {
             title: 'COMPETITION',
-            subtitle: 'BLADE OF THE CODER',
-            description: 'Forged for battle. 24-hour Hackathons and coding arenas.',
+            subtitle: 'BLADE OF CODE',
+            description: 'Forged in 24hr battles. Sharpen your skills.',
             glowColor: 'red',
-            bgGradient: 'from-red-500/10 to-red-900/10',
-            borderColor: 'border-red-500/30',
-            hoverGlow: 'hover:shadow-[0_0_30px_rgba(239,68,68,0.6)]'
+            icon: '⚔️',
+            rarity: 'EPIC'
         },
         {
             title: 'EVENTS',
             subtitle: 'RETRO CONSOLE',
-            description: 'Esports tournaments and gaming lounges. High scores recorded.',
+            description: 'Esports arena. High scores recorded forever.',
             glowColor: 'purple',
-            bgGradient: 'from-purple-500/10 to-purple-900/10',
-            borderColor: 'border-purple-500/30',
-            hoverGlow: 'hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]'
+            icon: '🎮',
+            rarity: 'RARE'
         },
         {
             title: 'WORKSHOPS',
-            subtitle: 'LEGACY DATA',
-            description: 'Knowledge transfer from industry veterans.',
+            subtitle: 'LEGACY SCROLL',
+            description: 'Ancient knowledge from industry veterans.',
             glowColor: 'green',
-            bgGradient: 'from-green-500/10 to-green-900/10',
-            borderColor: 'border-green-500/30',
-            hoverGlow: 'hover:shadow-[0_0_30px_rgba(16,185,129,0.6)]'
+            icon: '📜',
+            rarity: 'UNCOMMON'
         }
     ];
 
-    const guildMembers = [
-        {
-            initials: 'GM',
-            name: 'Alex Rivera',
-            role: 'Guild Master',
-            color: 'bg-purple-600'
-        },
-        {
-            initials: 'TL',
-            name: 'Jordan Chen',
-            role: 'Tech Lead',
-            color: 'bg-cyan-600'
-        },
-        {
-            initials: 'DL',
-            name: 'Sam Taylor',
-            role: 'Design Lead',
-            color: 'bg-pink-600'
-        },
-        {
-            initials: 'EH',
-            name: 'Morgan Blake',
-            role: 'Event Head',
-            color: 'bg-violet-600'
-        },
-        {
-            initials: 'LO',
-            name: 'Casey Park',
-            role: 'Logistics',
-            color: 'bg-indigo-600'
-        },
-        {
-            initials: 'FN',
-            name: 'Riley Wong',
-            role: 'Finance',
-            color: 'bg-purple-500'
-        },
-        {
-            initials: 'PR',
-            name: 'Avery Singh',
-            role: 'Public Relations',
-            color: 'bg-pink-500'
-        },
-        {
-            initials: 'MK',
-            name: 'Quinn Davis',
-            role: 'Marketing',
-            color: 'bg-cyan-500'
-        },
-        {
-            initials: 'SP',
-            name: 'Drew Martinez',
-            role: 'Sponsorships',
-            color: 'bg-violet-500'
-        },
-        {
-            initials: 'CM',
-            name: 'Rowan Lee',
-            role: 'Community',
-            color: 'bg-indigo-500'
-        }
-    ];
-
-    const sponsorSlots = Array.from({ length: 10 }, (_, i) => ({
+    const coreCommittee = Array.from({ length: 13 }, (_, i) => ({
         id: i + 1,
-        label: `LOGO_SLOT_${String(i + 1).padStart(2, '0')}`
+        name: `Member Name ${i + 1}`,
+        role: 'Core Member',
+        image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i}`, // Placeholder
+        color: 'bg-purple-600'
     }));
 
-    return (
-        <div className="min-h-screen bg-gradient-to-b from-[#1a0b2e] via-[#2e1065] to-[#1a0b2e] text-white overflow-x-hidden relative">
-            {/* Digital Starfield Background */}
-            <Starfield />
+    const organizingCommittee = Array.from({ length: 30 }, (_, i) => ({
+        id: i + 1,
+        name: `Volunteer ${i + 1}`,
+        role: 'Organizer',
+        image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Org${i}`, // Placeholder
+    }));
 
-            {/* Back to Map Button */}
+    const stats = {
+        events: 50,
+        participants: 500,
+        projects: 100,
+        hours: 10000
+    };
+
+    return (
+        <div className="min-h-screen bg-gradient-to-b from-[#1a0b2e] via-[#2e1065] to-[#1a0b2e] text-white overflow-x-hidden relative"
+            style={{ imageRendering: 'pixelated' }}>
+
+
+
+            {/* Pixel Grid Overlay */}
+            <div className="tech-grid-pixel fixed inset-0 z-0 opacity-10 pointer-events-none" />
+
+            {/* Scan Line Effect */}
+            <div className="scan-line-pixel fixed inset-0 z-1 pointer-events-none" />
+
+            {/* Glitch Overlay */}
+            {glitchActive && <div className="glitch-overlay-pixel fixed inset-0 z-2 pointer-events-none" />}
+
+            {/* Floating Pixel Clouds - Parallax Layers */}
+            {/* Back Cloud Layer */}
+            <div
+                className="fixed transition-transform duration-200 ease-out pointer-events-none"
+                style={{
+                    bottom: '-3%',
+                    left: '0%',
+                    zIndex: 3,
+                    width: '100%',
+                    transform: `translate(${mousePosition.x * 5}px, ${mousePosition.y * 5}px)`,
+                    willChange: 'transform',
+                    opacity: 0.3
+                }}
+            >
+                <img
+                    src="/images/backgrounds/5.webp"
+                    alt="Pixel cloud layer"
+                    className="w-full h-auto pixel-art"
+                    loading="lazy"
+                />
+            </div>
+
+            {/* Middle Cloud Layer */}
+            <div
+                className="fixed transition-transform duration-300 ease-out pointer-events-none"
+                style={{
+                    top: '20%',
+                    left: '50%',
+                    transform: `translate(-50%, -50%) translate(${mousePosition.x * 8}px, ${mousePosition.y * 8}px)`,
+                    zIndex: 4,
+                    width: '100%',
+                    willChange: 'transform',
+                    opacity: 0.25
+                }}
+            >
+                <img
+                    src="/images/backgrounds/4.webp"
+                    alt="Pixel cloud layer"
+                    className="w-full h-auto pixel-art"
+                    loading="lazy"
+                />
+            </div>
+
+            {/* Front Cloud Layer */}
+            <div
+                className="fixed transition-transform duration-300 ease-out pointer-events-none"
+                style={{
+                    bottom: '10%',
+                    left: '0%',
+                    zIndex: 5,
+                    width: '100%',
+                    transform: `translate(${mousePosition.x * 12}px, ${mousePosition.y * 12}px)`,
+                    willChange: 'transform',
+                    opacity: 0.2
+                }}
+            >
+                <img
+                    src="/images/backgrounds/3.webp"
+                    alt="Pixel cloud layer"
+                    className="w-full h-auto pixel-art"
+                    loading="lazy"
+                />
+            </div>
+
+            {/* Back to Map Button - Pixel Style */}
             <motion.button
                 onClick={() => navigate('/map')}
-                className="fixed top-6 left-6 z-50 px-6 py-3 bg-gradient-to-r from-purple-600/20 to-purple-800/30 backdrop-blur-md border-2 border-purple-500/40 text-white font-bold uppercase tracking-wider pixel-font text-xs hover:border-purple-400/80 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-300"
+                className="fixed top-6 left-6 z-50 px-6 py-3 pixel-font text-xs pixel-button"
+                style={{
+                    background: '#7c3aed',
+                    fontSize: '10px',
+                    imageRendering: 'pixelated'
+                }}
                 whileHover={{ scale: 1.05, x: -5 }}
                 whileTap={{ scale: 0.95 }}
             >
-                ← Back to Map
+                ← BACK
             </motion.button>
 
-            {/* HERO SECTION - Title + Terminal */}
-            <section className="min-h-[90vh] flex flex-col items-center justify-center px-4 mt-16 gap-16 relative">
-                {/* MAIN PAGE HEADER - Maximized Size */}
-                <motion.h1
-                    initial={{ opacity: 0, y: -30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="text-6xl md:text-8xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-purple-400 pixel-font z-10"
-                    style={{
-                        textShadow: '0 0 40px rgba(168, 85, 247, 0.5), 6px 6px 0px rgba(0, 0, 0, 0.6)'
-                    }}
-                >
-                    ABOUT TEKRON
-                </motion.h1>
+            {/* HERO SECTION - Title + Terminal + Stats */}
+            <section className="min-h-screen flex flex-col items-center justify-center px-4 relative z-10 pt-20">
 
-                {/* TERMINAL BOX with Pulsing Glow - Fixed Height */}
-                <div className="relative w-full max-w-3xl">
-                    {/* Pulsing Core Glow */}
-                    <div className="absolute -inset-4 bg-purple-600 opacity-20 blur-3xl rounded-full animate-pulse -z-10"></div>
+
+                {/* MAIN PAGE HEADER */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative text-center mb-12"
+                >
+                    <h1
+                        className={`text-6xl md:text-9xl font-bold text-center pixel-font ${glitchActive ? 'glitch-text-pixel' : ''}`}
+                        style={{
+                            color: '#d8c6f2',
+                            letterSpacing: '0.1em',
+                            textShadow: '6px 6px 0px rgba(0, 0, 0, 0.6), 0 0 40px rgba(216, 198, 242, 0.4), 0 0 60px rgba(124, 58, 237, 0.3)',
+                            imageRendering: 'pixelated',
+                            lineHeight: '1.1'
+                        }}
+                    >
+                        ABOUT<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-b from-purple-400 to-purple-800" style={{ textShadow: 'none', filter: 'drop-shadow(0 0 20px rgba(168,85,247,0.5))' }}>
+                            TEKRON
+                        </span>
+                    </h1>
 
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="w-full min-h-[350px] bg-black/40 backdrop-blur-lg border border-purple-400/30 p-8 md:p-12 shadow-[0_0_50px_rgba(168,85,247,0.3)] relative z-10"
-                    >
-                        <div className="mb-6 flex items-center justify-between border-b border-purple-500/20 pb-4">
-                            <div className="flex gap-2">
-                                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                            </div>
-                            <span className="text-purple-300 text-xs font-mono">TEKRON_TERMINAL_v2026</span>
-                        </div>
+                        initial={{ width: 0 }}
+                        animate={{ width: "100%" }}
+                        transition={{ delay: 1, duration: 1 }}
+                        className="h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent mt-4 mx-auto"
+                    />
+                </motion.div>
 
-                        <div className="font-mono text-sm md:text-base text-green-400 whitespace-pre-wrap">
-                            {displayedText.split('\n').map((line, index) => (
-                                <div key={index} className="mb-2">
-                                    {line}
-                                    {index === currentLineIndex && showCursor && (
-                                        <span className="inline-block w-2 h-4 bg-green-400 ml-1 animate-pulse"></span>
-                                    )}
-                                </div>
-                            ))}
-                        </div>
-                    </motion.div>
-                </div>
-            </section>
-
-            {/* SECTION 2: VISION & MISSION */}
-            <section className="px-4 py-16 max-w-6xl mx-auto relative z-10">
+                {/* HUD STATS BAR - Unified High Fidelity Display */}
                 <motion.div
                     initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-8"
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.5 }}
+                    className="w-full max-w-5xl"
                 >
-                    {/* Vision Card */}
-                    <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        className="bg-[#1e1432]/80 backdrop-blur-md border border-purple-500/30 p-8 shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
-                    >
-                        <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 pixel-font text-sm md:text-lg glitch-title">
-                            THE VISION
-                        </h2>
-                        <p className="text-gray-300 leading-relaxed text-sm md:text-base font-mono">
-                            To render a future where technology isn't just a tool, but a playground.
-                            We envision a sandbox where students compile, debug, and deploy ideas to change the world.
-                        </p>
-                    </motion.div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 p-4 bg-black/40 backdrop-blur-md border-y-2 border-purple-500/30">
+                        {/* Stat 1: Participants */}
+                        <div className="text-center group cursor-default">
+                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-cyan-400 transition-colors">PLAYERS</div>
+                            <div className="text-2xl md:text-4xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                                <AnimatedCounter target={stats.participants} />
+                                <span className="text-purple-500">+</span>
+                            </div>
+                        </div>
 
-                    {/* Mission Card */}
-                    <motion.div
-                        whileHover={{ scale: 1.02 }}
-                        className="bg-[#1e1432]/80 backdrop-blur-md border border-purple-500/30 p-8 shadow-lg hover:shadow-purple-500/50 transition-all duration-300"
-                    >
-                        <h2 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 pixel-font text-sm md:text-lg glitch-title">
-                            THE MISSION
-                        </h2>
-                        <p className="text-gray-300 leading-relaxed text-sm md:text-base font-mono">
-                            To equip the next generation with the ultimate inventory: Skills, Network, and Opportunity.
-                            Fostering a guild of collaborators ready to patch the bugs of tomorrow.
-                        </p>
-                    </motion.div>
+                        {/* Stat 2: Events */}
+                        <div className="text-center group cursor-default">
+                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-pink-400 transition-colors">QUESTS</div>
+                            <div className="text-2xl md:text-4xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                                <AnimatedCounter target={stats.events} />
+                                <span className="text-purple-500">+</span>
+                            </div>
+                        </div>
+
+                        {/* Stat 3: Projects */}
+                        <div className="text-center group cursor-default">
+                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-green-400 transition-colors">LOOT</div>
+                            <div className="text-2xl md:text-4xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                                <AnimatedCounter target={stats.projects} />
+                                <span className="text-purple-500">+</span>
+                            </div>
+                        </div>
+
+                        {/* Stat 4: Prize Pool */}
+                        <div className="text-center group cursor-default">
+                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-yellow-400 transition-colors">BOUNTY</div>
+                            <div className="text-2xl md:text-4xl font-bold text-yellow-400 pixel-font" style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.5)' }}>
+                                ₹10L
+                                <span className="text-purple-500">+</span>
+                            </div>
+                        </div>
+                    </div>
                 </motion.div>
-            </section>
 
-            {/* SECTION 3: SYSTEM FEATURES */}
-            <section className="px-4 py-16 max-w-7xl mx-auto relative z-10">
-                <motion.h2
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-4xl md:text-5xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 pixel-font text-lg md:text-2xl glitch-title"
-                >
-                    SYSTEM FEATURES
-                </motion.h2>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {artifactsData.map((artifact, index) => (
-                        <motion.div
-                            key={artifact.title}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.4, delay: index * 0.1 }}
-                            whileHover={{ scale: 1.1 }}
-                            className={`bg-gradient-to-br ${artifact.bgGradient} backdrop-blur-sm border-2 ${artifact.borderColor} p-6 ${artifact.hoverGlow} transition-all duration-200 cursor-pointer`}
-                        >
-                            <h3 className={`pixel-font text-xs mb-2 ${artifact.glowColor === 'cyan' ? 'text-cyan-400' :
-                                artifact.glowColor === 'red' ? 'text-red-400' :
-                                    artifact.glowColor === 'purple' ? 'text-purple-400' :
-                                        'text-green-400'
-                                }`}>
-                                {artifact.title}
-                            </h3>
-                            <h4 className="font-bold text-sm mb-3 text-white font-mono">
-                                {artifact.subtitle}
-                            </h4>
-                            <p className="text-gray-400 text-xs font-mono leading-relaxed">
-                                {artifact.description}
-                            </p>
-                        </motion.div>
-                    ))}
+                <div className="absolute bottom-10 animate-bounce text-purple-500">
+                    Scroll to Start
                 </div>
             </section>
 
-            {/* SECTION 4: THE GUILD */}
-            <section className="px-4 py-16 max-w-7xl mx-auto relative z-10">
-                <motion.h2
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-4xl md:text-5xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-violet-400 pixel-font text-lg md:text-2xl glitch-title"
-                >
-                    THE GUILD
-                </motion.h2>
+            {/* SECTION 2: VISION & MISSION - Holographic Data Terminals */}
+            <section className="px-4 py-20 max-w-7xl mx-auto relative z-10 w-full">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                    {guildMembers.map((member, index) => (
-                        <motion.div
-                            key={member.name}
-                            initial={{ opacity: 0, scale: 0.8 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5, delay: index * 0.08 }}
-                            whileHover={{ scale: 1.05, y: -5 }}
-                            className="bg-[#1e1432]/70 backdrop-blur-md border-2 border-purple-600/40 overflow-hidden shadow-lg hover:shadow-purple-500/40 transition-all duration-300"
-                            style={{ imageRendering: 'pixelated' }}
-                        >
-                            {/* Trading Card Image Area - Currently placeholder with initials */}
-                            <div className={`w-full aspect-[4/5] ${member.color} flex items-center justify-center border-b-2 border-purple-600/40 bg-gradient-to-br from-purple-900/50 to-black/80`}>
-                                <span className="text-white font-bold text-4xl md:text-5xl pixel-font opacity-50">
-                                    {member.initials}
-                                </span>
+                    {/* Vision Terminal */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8 }}
+                        className="relative group"
+                    >
+                        {/* Connecting Lines */}
+                        <div className="absolute -left-4 top-1/2 w-4 h-[2px] bg-cyan-500/50 hidden md:block"></div>
+
+                        <div className="bg-black/80 border border-cyan-500/30 p-1 relative overflow-hidden"
+                            style={{
+                                boxShadow: '0 0 20px rgba(6, 182, 212, 0.15)',
+                                clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)'
+                            }}>
+
+                            {/* Terminal Header */}
+                            <div className="bg-cyan-900/20 px-4 py-2 flex justify-between items-center border-b border-cyan-500/20">
+                                <span className="text-cyan-400 text-[10px] pixel-font">TERMINAL_01 // VISION.LOG</span>
+                                <div className="flex gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-cyan-500/50 animate-pulse"></div>
+                                    <div className="w-2 h-2 rounded-full bg-cyan-500/20"></div>
+                                </div>
                             </div>
 
-                            {/* Card Info */}
-                            <div className="p-4 text-center">
-                                <h3 className="text-white font-bold mb-1 text-sm font-mono">
-                                    {member.name}
-                                </h3>
-                                <p className="text-purple-300 text-xs pixel-font">
-                                    {member.role}
-                                </p>
+                            {/* Terminal Content */}
+                            <div className="p-8 relative">
+                                {/* Scanline background */}
+                                <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(6,182,212,0.05)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
+
+                                <div className="flex items-start gap-6 mb-6">
+                                    <div className="text-5xl border border-cyan-500/30 p-4 bg-cyan-900/10">🎯</div>
+                                    <div>
+                                        <h2 className="text-2xl md:text-3xl font-bold text-white pixel-font mb-2">
+                                            THE VISION
+                                        </h2>
+                                        <div className="h-0.5 w-24 bg-cyan-500/50 mb-4"></div>
+                                    </div>
+                                </div>
+
+                                <div className="font-mono text-cyan-100/80 leading-relaxed text-sm md:text-base space-y-4">
+                                    <p>&gt; RENDERING_FUTURE_STATE...</p>
+                                    <p>
+                                        To render a future where technology isn't just a tool, but a playground.
+                                        We envision a sandbox where students <span className="text-cyan-400 font-bold">compile, debug, and deploy</span> ideas to change the world.
+                                    </p>
+                                    <p className="text-cyan-500/50 text-xs mt-4">_END_OF_FILE</p>
+                                </div>
                             </div>
-                        </motion.div>
-                    ))}
+
+                            {/* Interactive Hover Glow */}
+                            <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                        </div>
+                    </motion.div>
+
+                    {/* Mission Terminal */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="relative group"
+                    >
+                        {/* Connecting Lines */}
+                        <div className="absolute -right-4 top-1/2 w-4 h-[2px] bg-pink-500/50 hidden md:block"></div>
+
+                        <div className="bg-black/80 border border-pink-500/30 p-1 relative overflow-hidden"
+                            style={{
+                                boxShadow: '0 0 20px rgba(236, 72, 153, 0.15)',
+                                clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))'
+                            }}>
+
+                            {/* Terminal Header */}
+                            <div className="bg-pink-900/20 px-4 py-2 flex justify-between items-center border-b border-pink-500/20">
+                                <span className="text-pink-400 text-[10px] pixel-font">TERMINAL_02 // MISSION.EXE</span>
+                                <div className="flex gap-2">
+                                    <div className="w-2 h-2 rounded-full bg-pink-500/50 animate-pulse"></div>
+                                    <div className="w-2 h-2 rounded-full bg-pink-500/20"></div>
+                                </div>
+                            </div>
+
+                            {/* Terminal Content */}
+                            <div className="p-8 relative">
+                                {/* Scanline background */}
+                                <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(236,72,153,0.05)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
+
+                                <div className="flex items-start gap-6 mb-6">
+                                    <div className="text-5xl border border-pink-500/30 p-4 bg-pink-900/10">🚀</div>
+                                    <div>
+                                        <h2 className="text-2xl md:text-3xl font-bold text-white pixel-font mb-2">
+                                            THE MISSION
+                                        </h2>
+                                        <div className="h-0.5 w-24 bg-pink-500/50 mb-4"></div>
+                                    </div>
+                                </div>
+
+                                <div className="font-mono text-pink-100/80 leading-relaxed text-sm md:text-base space-y-4">
+                                    <p>&gt; EXECUTING_PROTOCOL...</p>
+                                    <p>
+                                        To equip the next generation with the ultimate inventory: <span className="text-pink-400 font-bold">Skills, Network, and Opportunity.</span>
+                                        Fostering a guild of collaborators ready to patch the bugs of tomorrow.
+                                    </p>
+                                    <p className="text-pink-500/50 text-xs mt-4">_TASK_COMPLETE</p>
+                                </div>
+                            </div>
+
+                            {/* Interactive Hover Glow */}
+                            <div className="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                        </div>
+                    </motion.div>
+
                 </div>
             </section>
 
-            {/* SECTION 5: OUR ALLIES */}
+
+
+            {/* SECTION 4: CORE COMMITTEE - 13 Members */}
             <section className="px-4 py-16 max-w-7xl mx-auto relative z-10">
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-5xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-400 pixel-font text-lg md:text-2xl glitch-title"
+                    className="text-4xl md:text-5xl font-bold text-center mb-4 pixel-font text-base md:text-xl"
+                    style={{
+                        color: '#d8c6f2',
+                        textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(216, 198, 242, 0.4)',
+                        imageRendering: 'pixelated'
+                    }}
                 >
-                    OUR ALLIES
+                    [ CORE COMMITTEE ]
                 </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="text-center text-purple-300 pixel-font text-xs mb-12 max-w-2xl mx-auto"
+                >
+                    &gt; THE_ARCHITECTS_OF_TEKRON.
+                </motion.p>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                    {sponsorSlots.map((slot, index) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 justify-center">
+                    {coreCommittee.map((member, index) => (
                         <motion.div
-                            key={slot.id}
+                            key={member.id}
                             initial={{ opacity: 0, scale: 0.9 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.05 }}
-                            whileHover={{ scale: 1.05, borderColor: 'rgba(168, 85, 247, 0.8)' }}
-                            className="aspect-square bg-black/30 backdrop-blur-sm border-2 border-dashed border-purple-500/30 flex items-center justify-center hover:shadow-[0_0_20px_rgba(168,85,247,0.4)] transition-all duration-300"
+                            whileHover={{ scale: 1.05, y: -5 }}
+                            className="bg-black/40 backdrop-blur-sm border border-purple-500/30 p-4 flex flex-col items-center text-center group"
+                            style={{
+                                boxShadow: '0 0 15px rgba(168, 85, 247, 0.1)',
+                                imageRendering: 'pixelated'
+                            }}
                         >
-                            <span className="text-purple-500/50 text-xs pixel-font text-center px-2">
-                                {slot.label}
-                            </span>
+                            <div className="w-24 h-24 mb-4 rounded-full overflow-hidden border-2 border-purple-500/50 group-hover:border-purple-400 transition-colors">
+                                <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                            </div>
+                            <h3 className="text-white font-bold pixel-font text-sm mb-1">{member.name}</h3>
+                            <p className="text-purple-400 text-xs font-mono">{member.role}</p>
                         </motion.div>
                     ))}
                 </div>
             </section>
 
-            {/* SECTION 6: FOOTER CTA */}
-            <section className="px-4 py-20 max-w-4xl mx-auto text-center relative z-10">
-                <motion.div
+
+            {/* SECTION 5: ORGANIZING COMMITTEE - 30 Members */}
+            <section className="px-4 py-16 max-w-7xl mx-auto relative z-10">
+                <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    className="text-4xl md:text-5xl font-bold text-center mb-4 pixel-font text-base md:text-xl"
+                    style={{
+                        color: '#d8c6f2',
+                        textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(216, 198, 242, 0.4)',
+                        imageRendering: 'pixelated'
+                    }}
                 >
-                    <motion.button
-                        whileHover={{
-                            scale: 1.05,
-                            boxShadow: '0 0 40px rgba(236, 72, 153, 0.6), 0 0 60px rgba(6, 182, 212, 0.4)'
-                        }}
-                        whileTap={{ scale: 0.95 }}
-                        className="px-12 py-6 bg-transparent border-4 border-purple-500 text-purple-300 font-bold text-lg md:text-xl pixel-font hover:bg-purple-500/10 hover:border-pink-500 hover:text-pink-300 transition-all duration-300 shadow-[0_0_30px_rgba(168,85,247,0.5)] hover:shadow-[0_0_50px_rgba(236,72,153,0.7)]"
-                        style={{
-                            imageRendering: 'pixelated',
-                            animation: 'glitch 3s infinite'
-                        }}
-                    >
-                        [ PRESS START TO REGISTER ]
-                    </motion.button>
+                    [ ORGANIZING COMMITTEE ]
+                </motion.h2>
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="text-center text-purple-300 pixel-font text-xs mb-12 max-w-2xl mx-auto"
+                >
+                    &gt; THE_FORCE_BEHIND_THE_REALM.
+                </motion.p>
 
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 }}
-                        className="mt-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400 font-mono text-sm md:text-base"
-                    >
-                        The lobby is filling up. Secure your spawn point.
-                    </motion.p>
-                </motion.div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                    {organizingCommittee.map((member, index) => (
+                        <motion.div
+                            key={member.id}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.02 }}
+                            whileHover={{ scale: 1.05 }}
+                            className="bg-black/30 backdrop-blur-sm border border-purple-500/20 p-3 flex flex-col items-center text-center hover:bg-purple-900/10 transition-colors"
+                        >
+                            <div className="w-16 h-16 mb-2 rounded-full overflow-hidden border border-purple-500/30">
+                                <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" />
+                            </div>
+                            <h3 className="text-white font-bold text-xs mb-0.5">{member.name}</h3>
+                            <p className="text-purple-400 text-[10px] font-mono">{member.role}</p>
+                        </motion.div>
+                    ))}
+                </div>
             </section>
+
+
 
             {/* Spacer */}
             <div className="h-20"></div>
 
             <style>{`
-                /* Twinkle Animation for Stars */
+                /* Twinkle Animation for Pixel Stars */
                 @keyframes twinkle {
-                    0%, 100% { opacity: 0.2; }
+                    0%, 100% { opacity: 0.3; }
                     50% { opacity: 1; }
-                }
-
-                /* Glitch Title Effect - CRT Flicker */
-                .glitch-title {
-                    position: relative;
-                    animation: crt-flicker 3s infinite;
-                }
-
-                @keyframes crt-flicker {
-                    0%, 94%, 100% {
-                        text-shadow: 
-                            0 0 10px rgba(168, 85, 247, 0.8),
-                            0 0 20px rgba(168, 85, 247, 0.5),
-                            2px 2px 0px rgba(236, 72, 153, 0.3);
-                    }
-                    95% {
-                        text-shadow: 
-                            2px 0 10px rgba(168, 85, 247, 1),
-                            -2px 0 20px rgba(236, 72, 153, 1),
-                            0 0 30px rgba(6, 182, 212, 0.5);
-                        transform: translate(2px, 0);
-                    }
-                    96% {
-                        text-shadow: 
-                            -2px 0 10px rgba(236, 72, 153, 1),
-                            2px 0 20px rgba(168, 85, 247, 1),
-                            0 0 30px rgba(6, 182, 212, 0.5);
-                        transform: translate(-2px, 0);
-                    }
-                    97% {
-                        text-shadow: 
-                            0 0 10px rgba(168, 85, 247, 0.8),
-                            0 0 20px rgba(168, 85, 247, 0.5),
-                            2px 2px 0px rgba(236, 72, 153, 0.3);
-                        transform: translate(0, 0);
-                    }
-                }
-
-                /* Button Glitch Animation */
-                @keyframes glitch {
-                    0%, 90%, 100% {
-                        transform: translate(0, 0);
-                        filter: hue-rotate(0deg);
-                    }
-                    92% {
-                        transform: translate(-2px, 2px);
-                        filter: hue-rotate(90deg);
-                    }
-                    94% {
-                        transform: translate(2px, -2px);
-                        filter: hue-rotate(180deg);
-                    }
-                    96% {
-                        transform: translate(-2px, -2px);
-                        filter: hue-rotate(270deg);
-                    }
-                    98% {
-                        transform: translate(2px, 2px);
-                        filter: hue-rotate(360deg);
-                    }
                 }
             `}</style>
         </div>
