@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import { competitions } from '../../data/eventsData';
 import EventCard from '../../components/ui/EventCard/EventCard';
 
 const Page = styled.div`
   min-height: 100vh;
   padding: 100px 20px 40px;
-  background: #0f0a1e;
   color: white;
 `;
 
@@ -72,31 +72,33 @@ const Competition = () => {
   const navigate = useNavigate();
 
   return (
-    <Page>
-      <BackButton onClick={() => navigate('/map')}>
-        ← Back to Map
-      </BackButton>
-      
-      <Container>
-        <Header>
-          <Title>Competitions</Title>
-          <Subtitle>
-            Test your skills and compete with the best in our exciting range of competitions.
-            From coding challenges to robotics, there's something for everyone.
-          </Subtitle>
-        </Header>
+    <UnifiedBackground>
+      <Page>
+        <BackButton onClick={() => navigate('/map')}>
+          ← Back to Map
+        </BackButton>
 
-        <Grid>
-          {competitions.map((comp) => (
-            <EventCard 
-              key={comp.id} 
-              title={comp.title} 
-              category={comp.category} 
-            />
-          ))}
-        </Grid>
-      </Container>
-    </Page>
+        <Container>
+          <Header>
+            <Title>Competitions</Title>
+            <Subtitle>
+              Test your skills and compete with the best in our exciting range of competitions.
+              From coding challenges to robotics, there's something for everyone.
+            </Subtitle>
+          </Header>
+
+          <Grid>
+            {competitions.map((comp) => (
+              <EventCard
+                key={comp.id}
+                title={comp.title}
+                category={comp.category}
+              />
+            ))}
+          </Grid>
+        </Container>
+      </Page>
+    </UnifiedBackground>
   );
 };
 

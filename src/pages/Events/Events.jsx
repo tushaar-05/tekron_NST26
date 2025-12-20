@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import UnifiedBackground from '../../components/layout/UnifiedBackground';
 
 // EventCard Component
 const EventCard = ({ title, category }) => {
@@ -181,87 +182,89 @@ export default function Events() {
     : events.filter(event => event.category === activeTab);
 
   return (
-    <div className="w-full overflow-x-hidden relative" style={{ background: '#0f0a1e', color: 'white', padding: '80px 20px 60px', minHeight: '100vh' }}>
-      {/* Back Button */}
-      <button
-        onClick={() => navigate('/map')}
-        className="fixed top-8 left-8 px-6 py-3 rounded-lg font-semibold text-base cursor-pointer transition-all duration-300 z-50"
-        style={{
-          background: 'rgba(168, 85, 247, 0.1)',
-          border: '2px solid rgba(168, 85, 247, 0.3)',
-          backdropFilter: 'blur(10px)',
-          color: 'white'
-        }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = 'rgba(168, 85, 247, 0.2)';
-          e.currentTarget.style.transform = 'translateY(-2px)';
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = 'rgba(168, 85, 247, 0.1)';
-          e.currentTarget.style.transform = 'translateY(0)';
-        }}
-      >
-        ← Back to Map
-      </button>
+    <UnifiedBackground>
+      <div className="w-full overflow-x-hidden relative" style={{ color: 'white', padding: '80px 20px 60px', minHeight: '100vh' }}>
+        {/* Back Button */}
+        <button
+          onClick={() => navigate('/map')}
+          className="fixed top-8 left-8 px-6 py-3 rounded-lg font-semibold text-base cursor-pointer transition-all duration-300 z-50"
+          style={{
+            background: 'rgba(168, 85, 247, 0.1)',
+            border: '2px solid rgba(168, 85, 247, 0.3)',
+            backdropFilter: 'blur(10px)',
+            color: 'white'
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = 'rgba(168, 85, 247, 0.2)';
+            e.currentTarget.style.transform = 'translateY(-2px)';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = 'rgba(168, 85, 247, 0.1)';
+            e.currentTarget.style.transform = 'translateY(0)';
+          }}
+        >
+          ← Back to Map
+        </button>
 
-      {/* Content Wrapper */}
-      <div className="max-w-7xl mx-auto px-5">
-        {/* Header */}
-        <header className="text-center mb-16">
-          <h1
-            className="text-6xl font-extrabold mb-5 leading-tight"
-            style={{
-              background: 'linear-gradient(90deg, #a855f7, #6366f1)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text'
-            }}
-          >
-            Events & Workshops
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#c8b6e2' }}>
-            Immerse yourself in cutting-edge technology experiences and hands-on learning.
-            From inspiring talks to interactive workshops, discover the future of innovation.
-          </p>
-        </header>
-
-        {/* Category Tabs */}
-        <div className="flex justify-center gap-4 mb-10 flex-wrap">
-          {categories.map(category => (
-            <button
-              key={category}
-              className="px-5 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300"
+        {/* Content Wrapper */}
+        <div className="max-w-7xl mx-auto px-5">
+          {/* Header */}
+          <header className="text-center mb-16">
+            <h1
+              className="text-6xl font-extrabold mb-5 leading-tight"
               style={{
-                border: '2px solid rgba(168, 85, 247, 0.3)',
-                background: activeTab === category ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
-                color: 'white'
-              }}
-              onClick={() => setActiveTab(category)}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(168, 85, 247, 0.2)';
-                e.currentTarget.style.transform = 'translateY(-2px)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = activeTab === category ? 'rgba(168, 85, 247, 0.2)' : 'transparent';
-                e.currentTarget.style.transform = 'translateY(0)';
+                background: 'linear-gradient(90deg, #a855f7, #6366f1)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text'
               }}
             >
-              {category}
-            </button>
-          ))}
-        </div>
+              Events & Workshops
+            </h1>
+            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#c8b6e2' }}>
+              Immerse yourself in cutting-edge technology experiences and hands-on learning.
+              From inspiring talks to interactive workshops, discover the future of innovation.
+            </p>
+          </header>
 
-        {/* Events Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {filteredEvents.map((event) => (
-            <EventCard
-              key={event.id}
-              title={event.title}
-              category={event.category}
-            />
-          ))}
+          {/* Category Tabs */}
+          <div className="flex justify-center gap-4 mb-10 flex-wrap">
+            {categories.map(category => (
+              <button
+                key={category}
+                className="px-5 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300"
+                style={{
+                  border: '2px solid rgba(168, 85, 247, 0.3)',
+                  background: activeTab === category ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
+                  color: 'white'
+                }}
+                onClick={() => setActiveTab(category)}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.background = 'rgba(168, 85, 247, 0.2)';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.background = activeTab === category ? 'rgba(168, 85, 247, 0.2)' : 'transparent';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* Events Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            {filteredEvents.map((event) => (
+              <EventCard
+                key={event.id}
+                title={event.title}
+                category={event.category}
+              />
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+    </UnifiedBackground>
   );
 }

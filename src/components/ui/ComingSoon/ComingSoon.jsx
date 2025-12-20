@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01' }) => {
+const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01', transparent = false }) => {
   const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState({});
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -51,19 +51,20 @@ const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01' }) => {
   ));
 
   return (
-    <div 
+    <div
       className="pixel-font"
       style={{
         ...styles.container,
+        background: transparent ? 'transparent' : styles.container.background,
         ...(glitchEffect && styles.glitchEffect)
       }}
       onMouseMove={handleMouseMove}
     >
       {/* Animated Background Grid */}
       <div style={styles.gridBackground}></div>
-      
+
       {/* Cursor Trail Effect */}
-      <div 
+      <div
         style={{
           ...styles.cursorTrail,
           left: cursorPosition.x - 25,
@@ -78,7 +79,7 @@ const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01' }) => {
           <span style={styles.titleText}>{title}</span>
           <span style={styles.titlePixel}></span>
         </h1>
-        
+
         {/* Subtitle */}
         <p style={styles.subtitle}>
           PREPARING AN EPIC ADVENTURE
@@ -88,8 +89,8 @@ const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01' }) => {
         <div style={styles.descriptionBox}>
           <div style={styles.descriptionBorder}>
             <p style={styles.description}>
-              We're crafting something extraordinary! 
-              Our team of pixel wizards is hard at work creating 
+              We're crafting something extraordinary!
+              Our team of pixel wizards is hard at work creating
               an experience you won't forget.
             </p>
             <div style={styles.loadingBar}>
@@ -100,7 +101,7 @@ const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01' }) => {
         </div>
 
         {/* Interactive Button */}
-        <button 
+        <button
           onClick={handleExploreClick}
           style={styles.button}
           onMouseEnter={(e) => {

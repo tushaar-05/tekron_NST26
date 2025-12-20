@@ -46,12 +46,12 @@ function AppWrapper() {
 
                 {/* Main Routes */}
                 <Route path="/about" element={<About />} />
-                <Route path="/store" element={<ComingSoon title="Store" launchDate="2024-02-01" />} />
+                <Route path="/store" element={<Store />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/competition" element={<Competition />} />
                 <Route path="/events" element={<Events />} />
                 <Route path="/contact" element={<Contact />} />
-                <Route path="/sponsors" element={<ComingSoon title="Sponsors" launchDate="2024-02-01" />} />
+                <Route path="/sponsors" element={<Sponsors />} />
 
                 {/* Redirects */}
                 <Route path="/home" element={<Navigate to="/" replace />} />
