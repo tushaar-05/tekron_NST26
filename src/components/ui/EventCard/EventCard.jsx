@@ -58,7 +58,7 @@ const CardContainer = styled(motion.div)`
 const ImageContainer = styled.div`
   width: 100%;
   height: 220px;
-  background: linear-gradient(135deg, #1e1438 0%, #2d1b4e 50%, #1a0b2e 100%);
+  background: ${props => props.image ? `url(${props.image}) center/cover no-repeat` : 'linear-gradient(135deg, #1e1438 0%, #2d1b4e 50%, #1a0b2e 100%)'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -137,10 +137,10 @@ const CategoryBadge = styled.span`
   display: inline-block;
   padding: 0.4rem 1rem;
   background: ${props => {
-        if (props.category === 'Competition') return 'linear-gradient(135deg, #a855f7, #7c3aed)';
-        if (props.category === 'Workshop') return 'linear-gradient(135deg, #6366f1, #4f46e5)';
-        return 'linear-gradient(135deg, #8b5cf6, #6d28d9)';
-    }};
+    if (props.category === 'Competition') return 'linear-gradient(135deg, #a855f7, #7c3aed)';
+    if (props.category === 'Workshop') return 'linear-gradient(135deg, #6366f1, #4f46e5)';
+    return 'linear-gradient(135deg, #8b5cf6, #6d28d9)';
+  }};
   color: #fff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -195,60 +195,84 @@ const Particle = styled(motion.div)`
   box-shadow: 0 0 10px ${props => props.color || '#a855f7'};
 `;
 
-const EventCard = ({ title, category }) => {
-    const particles = Array.from({ length: 8 }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        color: ['#a855f7', '#7c3aed', '#6366f1', '#8b5cf6'][Math.floor(Math.random() * 4)]
-    }));
+const MetaInfo = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(168, 85, 247, 0.2);
+`;
 
-    return (
-        <CardContainer
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-            <ImageContainer>
-                <IconCircle
-                    whileHover={{ scale: 1.1, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                >
-                    {title.charAt(0)}
-                </IconCircle>
-            </ImageContainer>
+const MetaItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: #c8b6e2;
+  background: rgba(168, 85, 247, 0.1);
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(168, 85, 247, 0.2);
 
-            <Content>
-                <CategoryBadge category={category}>{category}</CategoryBadge>
-                <Title>{title}</Title>
-                <Description>
-                    {category === 'Competition' && 'Compete with the best and showcase your skills'}
-                    {category === 'Workshop' && 'Learn from experts and gain hands-on experience'}
-                    {category === 'Event' && 'Experience innovation and technology firsthand'}
-                </Description>
-            </Content>
+  span {
+    color: #fff;
+    font-weight: 600;
+  }
+`;
 
-            <Particles>
-                {particles.map(particle => (
-                    <Particle
-                        key={particle.id}
-                        color={particle.color}
-                        style={{ left: `${particle.x}%`, top: `${particle.y}%` }}
-                        animate={{
-                            y: [0, -20, 0],
-                            opacity: [0, 1, 0],
-                        }}
-                        transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: particle.id * 0.2,
-                        }}
-                    />
-                ))}
-            </Particles>
-        </CardContainer>
-    );
+const EventCard = ({ title, category, image, onClick }) => {
+  const particles = Array.from({ length: 8 }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 100,
+    color: ['#a855f7', '#7c3aed', '#6366f1', '#8b5cf6'][Math.floor(Math.random() * 4)]
+  }));
+
+  return (
+    <CardContainer
+      onClick={onClick}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      <ImageContainer image={image}>
+        {!image && (
+          <IconCircle
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            {title.charAt(0)}
+          </IconCircle>
+        )}
+      </ImageContainer>
+
+      <Content>
+        <CategoryBadge category={category}>{category}</CategoryBadge>
+        <Title>{title}</Title>
+      </Content>
+
+      <Particles>
+        {particles.map(particle => (
+          <Particle
+            key={particle.id}
+            color={particle.color}
+            style={{ left: `${particle.x}%`, top: `${particle.y}%` }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0, 1, 0],
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              delay: particle.id * 0.2,
+            }}
+          />
+        ))}
+      </Particles>
+    </CardContainer>
+  );
 };
 
 export default EventCard;

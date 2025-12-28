@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import { competitions } from '../../data/eventsData';
 import EventCard from '../../components/ui/EventCard/EventCard';
+import CompetitionModal from '../../components/ui/CompetitionModal/CompetitionModal';
 
 const Page = styled.div`
   min-height: 100vh;
@@ -70,6 +71,7 @@ const BackButton = styled.button`
 
 const Competition = () => {
   const navigate = useNavigate();
+  const [selectedCompetition, setSelectedCompetition] = React.useState(null);
 
   return (
     <UnifiedBackground>
@@ -91,12 +93,18 @@ const Competition = () => {
             {competitions.map((comp) => (
               <EventCard
                 key={comp.id}
-                title={comp.title}
-                category={comp.category}
+                {...comp}
+                onClick={() => setSelectedCompetition(comp)}
               />
             ))}
           </Grid>
         </Container>
+
+        <CompetitionModal
+          isOpen={!!selectedCompetition}
+          onClose={() => setSelectedCompetition(null)}
+          data={selectedCompetition}
+        />
       </Page>
     </UnifiedBackground>
   );
