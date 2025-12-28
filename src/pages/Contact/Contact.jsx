@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 
@@ -125,15 +125,9 @@ function Contact() {
                             </h3>
                             <div className="space-y-6">
                                 <div className="group">
-                                    <p className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-1">General Inquiries</p>
-                                    <a href="mailto:techfest@college.edu" className="text-white text-xl font-medium group-hover:text-indigo-400 transition-colors flex items-center gap-2">
-                                        techfest@college.edu <span className="opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
-                                    </a>
-                                </div>
-                                <div className="group">
-                                    <p className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-1">Support</p>
-                                    <a href="mailto:support@techfest.com" className="text-white text-xl font-medium group-hover:text-indigo-400 transition-colors flex items-center gap-2">
-                                        support@techfest.com <span className="opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                                    <p className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-1">Official Email</p>
+                                    <a href="mailto:tekronfest@newtonschool.co" className="text-white text-xl font-medium group-hover:text-indigo-400 transition-colors flex items-center gap-2 pb-6">
+                                        tekronfest@newtonschool.co <span className="opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
                                     </a>
                                 </div>
                             </div>
@@ -149,15 +143,16 @@ function Contact() {
                             <div className="space-y-6">
                                 <div>
                                     <p className="text-purple-300 text-xs font-bold uppercase tracking-wider mb-1">General Inquiry</p>
-                                    <p className="text-white text-xl font-medium">+91 12345 67890</p>
+                                    <p className="text-white text-xl font-medium">Nihal - +91 62825 00918</p>
                                 </div>
-                                <div>
-                                    <p className="text-purple-300 text-xs font-bold uppercase tracking-wider mb-1">Event Coordinator</p>
-                                    <p className="text-white text-xl font-medium">+91 98765 43210</p>
-                                </div>
-                                <div className="pt-4 border-t border-purple-500/20 mt-2 flex items-center gap-3">
-                                    <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                    <p className="text-white/80 text-sm">Mon–Sat | 10:00 AM – 6:00 PM</p>
+                                <div className="pt-4 border-t border-purple-500/20 mt-2">
+                                    <div className="flex items-center gap-3 mb-3">
+                                        <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                                        <p className="text-white/80 text-sm">Mon–Sat | 10:00 AM – 6:00 PM</p>
+                                    </div>
+                                    <p className="text-sm text-gray-400">
+                                        For event specific details, please visit the <Link to="/competition" className="text-purple-400 hover:text-pink-400 underline transition-colors">Competition</Link> or <Link to="/events" className="text-purple-400 hover:text-pink-400 underline transition-colors">Events</Link> page.
+                                    </p>
                                 </div>
                             </div>
                         </motion.div>
