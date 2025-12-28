@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 
 // EventCard Component
-const EventCard = ({ title, category }) => {
+const EventCard = ({ title, category, image }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const particles = Array.from({ length: 8 }, (_, i) => ({
@@ -61,7 +61,9 @@ const EventCard = ({ title, category }) => {
 
       <div className="relative w-full h-56 flex items-center justify-center overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, #1e1438 0%, #2d1b4e 50%, #1a0b2e 100%)'
+          background: image
+            ? `url(${image}) center/cover no-repeat`
+            : 'linear-gradient(135deg, #1e1438 0%, #2d1b4e 50%, #1a0b2e 100%)'
         }}>
         <div className="absolute inset-0 opacity-30"
           style={{
@@ -73,26 +75,28 @@ const EventCard = ({ title, category }) => {
         />
 
         <div className="relative z-10">
-          <div
-            className="w-24 h-24 rounded-full flex items-center justify-center text-5xl font-extrabold relative transition-transform duration-300"
-            style={{
-              background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(124, 58, 237, 0.3))',
-              border: '3px solid rgba(168, 85, 247, 0.4)',
-              color: '#d8c6f2',
-              textShadow: '0 0 20px rgba(168, 85, 247, 0.6)',
-              transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)'
-            }}
-          >
+          {!image && (
             <div
-              className="absolute rounded-full animate-pulse"
+              className="w-24 h-24 rounded-full flex items-center justify-center text-5xl font-extrabold relative transition-transform duration-300"
               style={{
-                inset: '-10px',
-                background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%)',
-                animation: 'pulse 2s ease-in-out infinite'
+                background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(124, 58, 237, 0.3))',
+                border: '3px solid rgba(168, 85, 247, 0.4)',
+                color: '#d8c6f2',
+                textShadow: '0 0 20px rgba(168, 85, 247, 0.6)',
+                transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)'
               }}
-            />
-            <span className="relative z-10">{title.charAt(0)}</span>
-          </div>
+            >
+              <div
+                className="absolute rounded-full animate-pulse"
+                style={{
+                  inset: '-10px',
+                  background: 'radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%)',
+                  animation: 'pulse 2s ease-in-out infinite'
+                }}
+              />
+              <span className="relative z-10">{title.charAt(0)}</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -116,10 +120,6 @@ const EventCard = ({ title, category }) => {
         >
           {title}
         </h3>
-
-        <p className="text-sm leading-relaxed m-0 opacity-90" style={{ color: '#c8b6e2' }}>
-          {getDescription(category)}
-        </p>
       </div>
 
       {isHovered && (
@@ -160,26 +160,17 @@ const EventCard = ({ title, category }) => {
 // Events Page Component
 export default function Events() {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('All');
 
-  // Sample events data
+  // Events data
   const events = [
-    { id: 1, title: 'AI Hackathon 2024', category: 'Competition' },
-    { id: 2, title: 'Web3 Workshop', category: 'Workshop' },
-    { id: 3, title: 'Tech Keynote', category: 'Event' },
-    { id: 4, title: 'Code Sprint', category: 'Competition' },
-    { id: 5, title: 'React Masterclass', category: 'Workshop' },
-    { id: 6, title: 'Innovation Summit', category: 'Event' },
-    { id: 7, title: 'Data Science Challenge', category: 'Competition' },
-    { id: 8, title: 'Cloud Computing 101', category: 'Workshop' },
-    { id: 9, title: 'Startup Showcase', category: 'Event' },
+    { id: 1, title: 'Robotics Workshop', category: 'Workshop', image: '/images/events/robotics.png' },
+    { id: 2, title: 'Cyber Security Workshop', category: 'Workshop', image: '/images/events/cybersecurity.png' },
+    { id: 3, title: 'Among Us - Real Life', category: 'Event', image: '/images/events/amongus.png' },
+    { id: 4, title: 'Speed Dating', category: 'Event', image: '/images/events/speeddating.png' },
+    { id: 5, title: 'Live Concert DJ Night', category: 'Event', image: '/images/events/djnight.png' },
   ];
 
-  const categories = ['All', ...new Set(events.map(event => event.category))];
 
-  const filteredEvents = activeTab === 'All'
-    ? events
-    : events.filter(event => event.category === activeTab);
 
   return (
     <UnifiedBackground>
@@ -227,39 +218,16 @@ export default function Events() {
             </p>
           </header>
 
-          {/* Category Tabs */}
-          <div className="flex justify-center gap-4 mb-10 flex-wrap">
-            {categories.map(category => (
-              <button
-                key={category}
-                className="px-5 py-2 rounded-full font-semibold cursor-pointer transition-all duration-300"
-                style={{
-                  border: '2px solid rgba(168, 85, 247, 0.3)',
-                  background: activeTab === category ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
-                  color: 'white'
-                }}
-                onClick={() => setActiveTab(category)}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'rgba(168, 85, 247, 0.2)';
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = activeTab === category ? 'rgba(168, 85, 247, 0.2)' : 'transparent';
-                  e.currentTarget.style.transform = 'translateY(0)';
-                }}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
+
 
           {/* Events Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-            {filteredEvents.map((event) => (
+            {events.map((event) => (
               <EventCard
                 key={event.id}
                 title={event.title}
                 category={event.category}
+                image={event.image}
               />
             ))}
           </div>
