@@ -23,21 +23,23 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-  font-size: 3.5rem;
+  font-size: 4rem;
   font-weight: 800;
   margin-bottom: 20px;
   background: linear-gradient(90deg, #a855f7, #6366f1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-family: 'VT323', monospace;
 `;
 
 const Subtitle = styled.p`
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   color: #c8b6e2;
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.6;
+  line-height: 1.4;
+  font-family: 'VT323', monospace;
 `;
 
 const Grid = styled.div`
@@ -56,12 +58,13 @@ const BackButton = styled.button`
   border: 2px solid rgba(168, 85, 247, 0.3);
   border-radius: 8px;
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
   backdrop-filter: blur(10px);
   z-index: 100;
+  font-family: 'VT323', monospace;
 
   &:hover {
     background: rgba(168, 85, 247, 0.2);

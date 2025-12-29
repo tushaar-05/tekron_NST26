@@ -109,7 +109,7 @@ const EventCard = ({ title, category, image }) => {
         </span>
 
         <h3
-          className="text-2xl font-extrabold m-0 leading-tight tracking-wide"
+          className="text-3xl font-extrabold m-0 leading-tight tracking-wide minecraft-font"
           style={{
             background: 'linear-gradient(135deg, #ffffff, #d8c6f2)',
             WebkitBackgroundClip: 'text',
@@ -178,7 +178,7 @@ export default function Events() {
         {/* Back Button */}
         <button
           onClick={() => navigate('/map')}
-          className="fixed top-8 left-8 px-6 py-3 rounded-lg font-semibold text-base cursor-pointer transition-all duration-300 z-50"
+          className="fixed top-8 left-8 px-6 py-3 rounded-lg font-semibold text-base cursor-pointer transition-all duration-300 z-50 minecraft-font"
           style={{
             background: 'rgba(168, 85, 247, 0.1)',
             border: '2px solid rgba(168, 85, 247, 0.3)',
@@ -212,7 +212,7 @@ export default function Events() {
             >
               Events & Workshops
             </h1>
-            <p className="text-xl max-w-3xl mx-auto leading-relaxed" style={{ color: '#c8b6e2' }}>
+            <p className="text-2xl max-w-3xl mx-auto leading-relaxed minecraft-font" style={{ color: '#c8b6e2' }}>
               Immerse yourself in cutting-edge technology experiences and hands-on learning.
               From inspiring talks to interactive workshops, discover the future of innovation.
             </p>

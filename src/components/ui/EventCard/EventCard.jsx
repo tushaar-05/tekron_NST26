@@ -142,7 +142,7 @@ const CategoryBadge = styled.span`
     return 'linear-gradient(135deg, #8b5cf6, #6d28d9)';
   }};
   color: #fff;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -150,11 +150,12 @@ const CategoryBadge = styled.span`
   width: fit-content;
   box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: 'VT323', monospace;
 `;
 
 const Title = styled.h3`
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 800;
   margin: 0;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
@@ -164,14 +165,16 @@ const Title = styled.h3`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  font-family: 'VT323', monospace;
 `;
 
 const Description = styled.p`
   color: #c8b6e2;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.4;
   margin: 0;
   opacity: 0.9;
+  font-family: 'VT323', monospace;
 `;
 
 const Particles = styled.div`

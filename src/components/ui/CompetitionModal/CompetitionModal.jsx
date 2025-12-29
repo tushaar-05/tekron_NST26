@@ -91,22 +91,24 @@ const CategoryBadge = styled.span`
   color: white;
   padding: 6px 16px;
   border-radius: 20px;
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   font-weight: 600;
   letter-spacing: 1px;
   text-transform: uppercase;
   margin-bottom: 16px;
   display: inline-block;
   box-shadow: 0 4px 12px rgba(168, 85, 247, 0.4);
+  font-family: 'VT323', monospace;
 `;
 
 const Title = styled.h2`
-  font-size: 3rem;
+  font-size: 4rem;
   font-weight: 800;
   margin: 0 0 24px;
   background: linear-gradient(135deg, #ffffff, #d8c6f2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  font-family: 'VT323', monospace;
 `;
 
 const Grid = styled.div`
@@ -124,11 +126,12 @@ const InfoBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
+  font-family: 'VT323', monospace;
 
   h4 {
     color: #a855f7;
     margin: 0;
-    font-size: 0.9rem;
+    font-size: 1.1rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
@@ -137,15 +140,16 @@ const InfoBox = styled.div`
     color: white;
     margin: 0;
     font-weight: 600;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
   }
 `;
 
 const Description = styled.div`
   color: #c8b6e2;
-  line-height: 1.8;
-  font-size: 1.1rem;
+  line-height: 1.4;
+  font-size: 1.5rem;
   margin-bottom: 40px;
+  font-family: 'VT323', monospace;
   
   p {
     margin-bottom: 16px;
@@ -162,12 +166,13 @@ const RegisterButton = styled.a`
   color: white;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.75rem;
   border-radius: 12px;
   transition: all 0.3s;
   box-shadow: 0 8px 24px rgba(168, 85, 247, 0.4);
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-family: 'VT323', monospace;
 
   &:hover {
     transform: translateY(-2px);
@@ -182,10 +187,11 @@ const Section = styled.div`
   border-radius: 16px;
   padding: 24px;
   border: 1px solid rgba(168, 85, 247, 0.1);
+  font-family: 'VT323', monospace;
   
   h3 {
     color: #a855f7;
-    font-size: 1.25rem;
+    font-size: 1.75rem;
     font-weight: 700;
     margin: 0 0 20px;
     display: flex;
@@ -217,7 +223,7 @@ const Section = styled.div`
       padding: 12px 16px;
       border-radius: 8px;
       color: #e2e8f0;
-      font-size: 0.95rem;
+      font-size: 1.25rem;
       border: 1px solid rgba(168, 85, 247, 0.1);
       transition: all 0.2s;
       
@@ -230,8 +236,8 @@ const Section = styled.div`
 
   p {
     color: #cbd5e1;
-    line-height: 1.8;
-    font-size: 1rem;
+    line-height: 1.4;
+    font-size: 1.4rem;
     margin: 0;
     white-space: pre-line;
   }

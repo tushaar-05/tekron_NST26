@@ -109,7 +109,7 @@ function Contact() {
                         <h1 className="text-6xl md:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-purple-300 drop-shadow-[0_0_15px_rgba(168,85,247,0.5)]">
                             CONTACT US
                         </h1>
-                        <p className="text-xl md:text-2xl text-purple-200/80 max-w-2xl mx-auto font-light">
+                        <p className="text-xl md:text-2xl text-purple-200/80 max-w-2xl mx-auto minecraft-font">
                             We're here to help!
                         </p>
                     </motion.div>
@@ -120,14 +120,14 @@ function Contact() {
                             whileHover={{ scale: 1.02 }}
                             className="bg-gradient-to-br from-indigo-900/40 to-blue-900/20 border border-indigo-500/30 p-10 rounded-3xl backdrop-blur-xl"
                         >
-                            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-4">
+                            <h3 className="text-3xl font-bold text-white mb-8 flex items-center gap-4 minecraft-font">
                                 <span className="p-3 bg-indigo-500/20 rounded-xl">📧</span> Official Emails
                             </h3>
-                            <div className="space-y-6">
-                                <div className="group">
-                                    <p className="text-indigo-300 text-xs font-bold uppercase tracking-wider mb-1">Official Email</p>
-                                    <a href="mailto:tekronfest@newtonschool.co" className="text-white text-xl font-medium group-hover:text-indigo-400 transition-colors flex items-center gap-2 pb-6">
-                                        tekronfest@newtonschool.co <span className="opacity-0 group-hover:opacity-100 transition-opacity">↗</span>
+                            <div className="space-y-6 minecraft-font">
+                                <div className="group px-4">
+                                    <p className="text-indigo-300 text-sm font-bold uppercase tracking-wider mb-1">Official Email</p>
+                                    <a href="mailto:tekronfest@newtonschool.co" className="text-white text-2xl group-hover:text-indigo-400 transition-colors block">
+                                        tekronfest@newtonschool.co
                                     </a>
                                 </div>
                             </div>
@@ -137,20 +137,20 @@ function Contact() {
                             whileHover={{ scale: 1.02 }}
                             className="bg-gradient-to-br from-purple-900/40 to-pink-900/20 border border-purple-500/30 p-10 rounded-3xl backdrop-blur-xl"
                         >
-                            <h3 className="text-2xl font-bold text-white mb-8 flex items-center gap-4">
+                            <h3 className="text-3xl font-bold text-white mb-8 flex items-center gap-4 minecraft-font">
                                 <span className="p-3 bg-purple-500/20 rounded-xl">📞</span> Helplines
                             </h3>
-                            <div className="space-y-6">
+                            <div className="space-y-6 minecraft-font">
                                 <div>
-                                    <p className="text-purple-300 text-xs font-bold uppercase tracking-wider mb-1">General Inquiry</p>
-                                    <p className="text-white text-xl font-medium">Nihal - +91 62825 00918</p>
+                                    <p className="text-purple-300 text-sm font-bold uppercase tracking-wider mb-1">General Inquiry</p>
+                                    <p className="text-white text-2xl">Nihal - +91 62825 00918</p>
                                 </div>
                                 <div className="pt-4 border-t border-purple-500/20 mt-2">
                                     <div className="flex items-center gap-3 mb-3">
                                         <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                                        <p className="text-white/80 text-sm">Mon–Sat | 10:00 AM – 6:00 PM</p>
+                                        <p className="text-white/80 text-lg">Mon–Sat | 10:00 AM – 6:00 PM</p>
                                     </div>
-                                    <p className="text-sm text-gray-400">
+                                    <p className="text-lg text-gray-400">
                                         For event specific details, please visit the <Link to="/competition" className="text-purple-400 hover:text-pink-400 underline transition-colors">Competition</Link> or <Link to="/events" className="text-purple-400 hover:text-pink-400 underline transition-colors">Events</Link> page.
                                     </p>
                                 </div>
@@ -162,11 +162,11 @@ function Contact() {
                     <motion.div variants={itemVariants} className="space-y-10">
                         <div className="flex items-center justify-center gap-4">
                             <div className="h-[1px] w-20 bg-gradient-to-r from-transparent to-purple-500"></div>
-                            <h2 className="text-3xl font-bold text-white uppercase tracking-widest">Core Team</h2>
+                            <h2 className="text-4xl font-bold text-white uppercase tracking-widest minecraft-font">Core Team</h2>
                             <div className="h-[1px] w-20 bg-gradient-to-l from-transparent to-purple-500"></div>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 minecraft-font">
                             {coordinators.map((member, index) => (
                                 <motion.div
                                     key={index}
@@ -176,9 +176,9 @@ function Contact() {
                                     <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform">
                                         👤
                                     </div>
-                                    <p className="text-purple-400 font-bold text-xs mb-3 uppercase tracking-widest border-b border-purple-500/30 pb-2 inline-block">{member.role}</p>
-                                    <h3 className="text-2xl font-bold text-white mb-4 leading-tight">{member.name}</h3>
-                                    <div className="space-y-3 text-gray-300 text-sm">
+                                    <p className="text-purple-400 font-bold text-sm mb-3 uppercase tracking-widest border-b border-purple-500/30 pb-2 inline-block">{member.role}</p>
+                                    <h3 className="text-3xl font-bold text-white mb-4 leading-tight">{member.name}</h3>
+                                    <div className="space-y-3 text-gray-300 text-lg">
                                         <a href={`tel:${member.phone}`} className="flex items-center gap-3 hover:text-purple-300 transition-colors">
                                             <span className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center">📞</span> {member.phone}
                                         </a>
@@ -196,14 +196,14 @@ function Contact() {
                         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
                         <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-10 relative z-10">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-10 relative z-10 minecraft-font">
                             <div className="text-center md:text-left space-y-4 md:w-1/2">
                                 <div>
-                                    <h2 className="text-sm font-bold text-pink-400 tracking-[0.2em] uppercase mb-2">Event Venue</h2>
-                                    <h3 className="text-3xl md:text-4xl font-bold text-white leading-tight">Ajeenkya DY Patil University</h3>
+                                    <h2 className="text-lg font-bold text-pink-400 tracking-[0.2em] uppercase mb-2">Event Venue</h2>
+                                    <h3 className="text-4xl md:text-5xl font-bold text-white leading-tight">Ajeenkya DY Patil University</h3>
                                 </div>
                                 <div className="h-1 w-20 bg-gradient-to-r from-purple-500 to-transparent mx-auto md:mx-0 rounded-full"></div>
-                                <p className="text-gray-300 text-lg leading-relaxed max-w-md">
+                                <p className="text-gray-300 text-2xl leading-relaxed max-w-md">
                                     Join us at our state-of-the-art campus for an unforgettable experience of technology and innovation.
                                 </p>
                             </div>
@@ -216,8 +216,8 @@ function Contact() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Building</p>
-                                        <p className="text-white font-medium text-lg">School of MCA Building, NST 4th Floor</p>
+                                        <p className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">Building</p>
+                                        <p className="text-white font-medium text-2xl">School of MCA Building, NST 4th Floor</p>
                                     </div>
                                 </div>
 
@@ -229,9 +229,9 @@ function Contact() {
                                         </svg>
                                     </div>
                                     <div>
-                                        <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Address</p>
-                                        <p className="text-gray-200">Charholi Budruk, via Lohegaon, Pune - 412105</p>
-                                        <p className="text-sm text-gray-400 mt-1">Landmark: DY Patil Knowledge City</p>
+                                        <p className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">Address</p>
+                                        <p className="text-gray-200 text-2xl">Charholi Budruk, via Lohegaon, Pune - 412105</p>
+                                        <p className="text-xl text-gray-400 mt-1">Landmark: DY Patil Knowledge City</p>
                                     </div>
                                 </div>
                             </div>
@@ -258,61 +258,61 @@ function Contact() {
                         </div>
 
                         {/* Right: Contact Form */}
-                        <div className="bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative overflow-hidden group hover:border-white/20 transition-all duration-500 flex flex-col justify-center">
+                        <div className="bg-gradient-to-br from-white/5 to-white/0 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative overflow-hidden group hover:border-white/20 transition-all duration-500 flex flex-col justify-center minecraft-font">
                             <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
-                            <h2 className="text-3xl font-bold text-center text-white mb-8 flex items-center justify-center gap-3">
+                            <h2 className="text-4xl font-bold text-center text-white mb-8 flex items-center justify-center gap-3">
                                 <span className="text-4xl">✉️</span> Send Message
                             </h2>
                             <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
                                 <div className="space-y-2">
-                                    <label htmlFor="name" className="text-xs font-bold text-purple-300 uppercase ml-1 tracking-wider">Your Name</label>
+                                    <label htmlFor="name" className="text-sm font-bold text-purple-300 uppercase ml-1 tracking-wider">Your Name</label>
                                     <input
                                         type="text"
                                         id="name"
                                         name="name"
                                         value={formData.name}
                                         onChange={handleChange}
-                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white placeholder-gray-500/50 backdrop-blur-sm"
+                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white text-xl placeholder-gray-500/50 backdrop-blur-sm"
                                         placeholder="John Doe"
                                         required
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label htmlFor="email" className="text-xs font-bold text-purple-300 uppercase ml-1 tracking-wider">Email Address</label>
+                                    <label htmlFor="email" className="text-sm font-bold text-purple-300 uppercase ml-1 tracking-wider">Email Address</label>
                                     <input
                                         type="email"
                                         id="email"
                                         name="email"
                                         value={formData.email}
                                         onChange={handleChange}
-                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white placeholder-gray-500/50 backdrop-blur-sm"
+                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white text-xl placeholder-gray-500/50 backdrop-blur-sm"
                                         placeholder="john@example.com"
                                         required
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label htmlFor="subject" className="text-xs font-bold text-purple-300 uppercase ml-1 tracking-wider">Subject</label>
+                                    <label htmlFor="subject" className="text-sm font-bold text-purple-300 uppercase ml-1 tracking-wider">Subject</label>
                                     <input
                                         type="text"
                                         id="subject"
                                         name="subject"
                                         value={formData.subject}
                                         onChange={handleChange}
-                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white placeholder-gray-500/50 backdrop-blur-sm"
+                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white text-xl placeholder-gray-500/50 backdrop-blur-sm"
                                         placeholder="Query about events..."
                                         required
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <label htmlFor="message" className="text-xs font-bold text-purple-300 uppercase ml-1 tracking-wider">Message</label>
+                                    <label htmlFor="message" className="text-sm font-bold text-purple-300 uppercase ml-1 tracking-wider">Message</label>
                                     <textarea
                                         id="message"
                                         name="message"
                                         rows="4"
                                         value={formData.message}
                                         onChange={handleChange}
-                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white placeholder-gray-500/50 backdrop-blur-sm resize-none"
+                                        className="w-full px-5 py-3 bg-black/40 border border-purple-500/20 rounded-xl focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-500/20 transition-all text-white text-xl placeholder-gray-500/50 backdrop-blur-sm resize-none"
                                         placeholder="Type your message here..."
                                         required
                                     ></textarea>
@@ -322,7 +322,7 @@ function Contact() {
                                     whileTap={{ scale: 0.98 }}
                                     type="submit"
                                     disabled={status === 'sending'}
-                                    className={`w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-lg rounded-xl shadow-lg transition-all duration-300 ${status === 'sending' ? 'opacity-80 cursor-wait' : ''}`}
+                                    className={`w-full py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-2xl rounded-xl shadow-lg transition-all duration-300 ${status === 'sending' ? 'opacity-80 cursor-wait' : ''}`}
                                 >
                                     {status === 'sending' ? (
                                         <span className="flex items-center justify-center gap-2">
@@ -335,10 +335,10 @@ function Contact() {
                     </motion.div>
 
                     {/* 5. Social Media Links */}
-                    <motion.div variants={itemVariants} className="pt-16 pb-8 text-center space-y-10 relative">
+                    <motion.div variants={itemVariants} className="pt-16 pb-8 text-center space-y-10 relative minecraft-font">
                         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
 
-                        <h2 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-white">Connect With Us</h2>
+                        <h2 className="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-white">Connect With Us</h2>
                         <div className="flex justify-center gap-6 flex-wrap">
                             <SocialLink href="#" label="Instagram" icon={
                                 <svg className="w-7 h-7" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
