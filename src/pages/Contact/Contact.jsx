@@ -53,11 +53,10 @@ function Contact() {
     };
 
     const coordinators = [
-        { role: 'Fest Coordinator', name: 'Arjun Mehta', phone: '+91 98765 43210', email: 'arjun@tekron.com' },
-        { role: 'Technical Events Head', name: 'Sneha Reddy', phone: '+91 98765 43211', email: 'sneha@tekron.com' },
-        { role: 'Cultural Head', name: 'Rohan Gupta', phone: '+91 98765 43212', email: 'rohan@tekron.com' },
-        { role: 'Sponsorship Head', name: 'Priya Sharma', phone: '+91 98765 43213', email: 'priya@tekron.com' },
-        { role: 'Hospitality Head', name: 'Vikram Singh', phone: '+91 98765 43214', email: 'vikram@tekron.com' },
+        { role: 'Tech. Head', name: 'Ved Bhadani', phone: '+91 95467 85861', email: 'ved.bhadani@adypu.edu.in' },
+        { role: 'Marketing Head', name: 'Vamshi Krishna Pendyala', phone: '+91 91215 07280', email: 'vamshikrishna.pendyala@adypu.edu.in' },
+        { role: 'Sponsorship Head', name: 'Harshit Jain', phone: '+91 74278 87050', email: 'harshit.jain@adypu.edu.in' },
+        { role: 'Hospitality Head', name: 'Ayush Shukla', phone: '+91 78753 93239', email: 'ayush.shukla@adypu.edu.in' },
     ];
 
     const containerVariants = {
