@@ -57,6 +57,16 @@ function WorldMap() {
     // The Genesis Sequence Controller Combined with Physics
     useEffect(() => {
         const sequence = async () => {
+            // Check if animation has already played this session
+            const hasPlayedAnimation = sessionStorage.getItem('tekron_genesis_played');
+
+            if (hasPlayedAnimation) {
+                // Skip animation, go directly to connected state
+                setPhase('connected');
+                setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
+                return;
+            }
+
             // Phase 1: Void
             setNarrative("SCANNING SECTOR...");
             await new Promise(r => setTimeout(r, 1000));
@@ -84,6 +94,9 @@ function WorldMap() {
             // Phase 5: Connected
             setPhase('connected');
             setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
+
+            // Mark animation as played for this session
+            sessionStorage.setItem('tekron_genesis_played', 'true');
         };
 
         sequence();
