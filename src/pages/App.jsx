@@ -162,24 +162,7 @@ function App() {
 
     return (
         <AnimatePresence mode="wait">
-            {!assetsLoaded ? (
-                <motion.div
-                    key="loading"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="fixed inset-0 bg-gradient-to-br from-purple-900 via-black to-blue-900 flex items-center justify-center z-50"
-                >
-                    <div className="text-center">
-                        <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                            className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full mx-auto mb-4"
-                        />
-                        <p className="text-white text-xl font-mono tracking-wider">LOADING TEKRON...</p>
-                    </div>
-                </motion.div>
-            ) : isTransitioning ? (
+            {isTransitioning ? (
                 <WorldLoading key={loadingKey} onLoadingComplete={handleLoadingComplete} />
             ) : showMap ? (
                 <motion.div
