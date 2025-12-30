@@ -381,7 +381,7 @@ function App() {
                                 </p>
                             </div>
 
-                            <button 
+                            <button
                                 className="pixel-button pixel-font px-12 sm:px-16 py-3 sm:py-5 text-white mb-8 sm:mb-16 pixel-tech-button"
                                 style={{
                                     fontSize: 'clamp(10px, 1.1vw, 18px)',
@@ -481,7 +481,7 @@ function App() {
 
 
                             <div
-                                className="hidden sm:block absolute bottom-0 right-[-80px] z-30"
+                                className="hidden sm:block absolute bottom-[-50px] right-[-80px] z-30"
                                 onClick={() => setIsDialogueOpen(!isDialogueOpen)}
                                 onMouseMove={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();

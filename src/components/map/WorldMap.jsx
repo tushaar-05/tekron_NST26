@@ -18,32 +18,32 @@ function WorldMap() {
         homeSize: window.innerWidth < 768 ? 300 : 400,
         distance: window.innerWidth < 768 ? 250 : 400
     });
-    
+
     // Island data with positions in a circular layout
     const islands = [
-        { 
-            id: 'home', 
-            image: homeIsland, 
-            size: dimensions.homeSize, 
-            x: '50%', 
-            y: '50%', 
-            zIndex: 10 
+        {
+            id: 'home',
+            image: homeIsland,
+            size: dimensions.homeSize,
+            x: '50%',
+            y: '50%',
+            zIndex: 10
         },
         { id: 'about', image: aboutIsland, size: dimensions.baseSize, angle: 0, distance: dimensions.distance },
-        { id: 'comp', image: compIsland, size: dimensions.baseSize, angle: 45, distance: dimensions.distance },
-        { id: 'events', image: eventsIsland, size: dimensions.baseSize, angle: 90, distance: dimensions.distance },
+        { id: 'comp', image: compIsland, size: dimensions.baseSize, angle: 220, distance: dimensions.distance },
+        { id: 'events', image: eventsIsland, size: dimensions.baseSize, angle: 320, distance: dimensions.distance },
         { id: 'gallery', image: galleryIsland, size: dimensions.baseSize, angle: 135, distance: dimensions.distance },
-        { id: 'contact', image: contactIsland, size: dimensions.baseSize, angle: 175, distance: dimensions.distance },
-        { id: 'store', image: storeIsland, size: dimensions.baseSize, angle: 220, distance: dimensions.distance },
-        { id: 'sponsors', image: sponsorsIsland, size: dimensions.baseSize, angle: 320, distance: dimensions.distance }
+        { id: 'contact', image: contactIsland, size: dimensions.baseSize, angle: 90, distance: dimensions.distance },
+        { id: 'store', image: storeIsland, size: dimensions.baseSize, angle: 45, distance: dimensions.distance },
+        { id: 'sponsors', image: sponsorsIsland, size: dimensions.baseSize, angle: 175, distance: dimensions.distance }
     ];
-    
+
     // Handle window resize for responsive design
     useEffect(() => {
         const handleResize = () => {
             const isMobile = window.innerWidth < 768;
             const isTablet = window.innerWidth < 1024;
-            
+
             if (isMobile) {
                 // Compact layout for mobile
                 setDimensions({
@@ -111,13 +111,13 @@ function WorldMap() {
         if (isMobile) {
             // Custom positions for mobile layout
             const positions = {
-                store: { x: '50%', y: '13%' },
+                store: { x: '65%', y: '70%' },
                 home: { x: '50%', y: '40%' },
-                events: { x: '28%', y: '68%' },
-                comp: { x: '65%', y: '70%' },
+                events: { x: '80%', y: '30%' },
+                comp: { x: '50%', y: '13%' },
                 gallery: { x: '15%', y: '25%' },
-                contact: { x: '15%', y: '48%' },
-                sponsors: { x: '80%', y: '30%' },
+                contact: { x: '28%', y: '68%' },
+                sponsors: { x: '15%', y: '48%' },
                 about: { x: '85%', y: '55%' }
             };
 
@@ -138,13 +138,13 @@ function WorldMap() {
                 zIndex: island.zIndex || 5
             };
         }
-        
+
         const centerX = window.innerWidth / 2;
         const centerY = (window.innerHeight / 2) - 50;
         const radian = (island.angle * Math.PI) / 180;
         const x = centerX + Math.cos(radian) * island.distance;
         const y = centerY + Math.sin(radian) * island.distance;
-        
+
         return {
             position: 'absolute',
             top: `${y - island.size / 2}px`,
@@ -229,9 +229,9 @@ function WorldMap() {
                     // Add other custom display names here if needed
                 };
                 const islandName = displayNames[island.id] || (island.id.charAt(0).toUpperCase() + island.id.slice(1));
-                
+
                 return (
-                    <div 
+                    <div
                         key={`${island.id}-${isMobile ? 'mobile' : 'desktop'}`}
                         style={{
                             position: 'absolute',
@@ -242,7 +242,7 @@ function WorldMap() {
                             zIndex: position.zIndex,
                             width: 'auto',
                             height: 'auto',
-                            
+
                             cursor: 'pointer',
                             transition: 'font-size 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
                             willChange: 'transform, z-index'
@@ -283,7 +283,7 @@ function WorldMap() {
                                 sponsors: '/sponsors',
                                 store: '/store'
                             };
-                            
+
                             const route = routes[island.id] || '/';
                             window.location.href = route;
                         }}

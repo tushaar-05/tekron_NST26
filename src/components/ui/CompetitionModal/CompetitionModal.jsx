@@ -180,6 +180,41 @@ const RegisterButton = styled.a`
   }
 `;
 
+const RulebookButton = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 18px;
+  background: rgba(168, 85, 247, 0.1);
+  border: 2px solid #a855f7;
+  color: #a855f7;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.75rem;
+  border-radius: 12px;
+  transition: all 0.3s;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'VT323', monospace;
+
+  &:hover {
+    background: rgba(168, 85, 247, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.2);
+  }
+`;
+
+const ButtonGroup = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+`;
+
 
 const Section = styled.div`
   margin-top: 40px;
@@ -307,13 +342,25 @@ const CompetitionModal = ({ isOpen, onClose, data }) => {
               </Section>
             ))}
 
-            <RegisterButton
-              href={data.unstopLink || '#'}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {data.unstopLink ? 'Register' : 'Allocating Slots Soon'}
-            </RegisterButton>
+            <ButtonGroup>
+              <RegisterButton
+                href={data.unstopLink || '#'}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {data.unstopLink ? 'Register' : 'Allocating Slots Soon'}
+              </RegisterButton>
+
+              {data.rulebookLink && (
+                <RulebookButton
+                  href={data.rulebookLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Rulebook
+                </RulebookButton>
+              )}
+            </ButtonGroup>
           </Content>
         </ModalContainer>
       </Overlay>
