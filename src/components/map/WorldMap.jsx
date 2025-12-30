@@ -117,11 +117,13 @@ function WorldMap() {
     }, []);
 
     return (
-        <div className="relative w-screen h-screen overflow-hidden bg-black font-sans selection:bg-purple-500 selection:text-white perspective-[2000px]">
+        <div className="relative w-screen h-screen overflow-hidden bg-black font-['VT323',_monospace] selection:bg-purple-500 selection:text-white perspective-[2000px]">
 
             {/* 1. Deep Space Background (Fixed) */}
-            <div
+            <motion.div
                 className="absolute inset-[-10%]"
+                animate={phase === 'seed' ? { x: [-2, 2, -2, 2, 0], y: [-1, 1, -1, 1, 0] } : {}}
+                transition={{ duration: 0.1, repeat: phase === 'seed' ? Infinity : 0 }}
                 style={{
                     backgroundImage: 'url(/images/map/waterFinal.webp)',
                     backgroundSize: 'cover',
@@ -140,7 +142,7 @@ function WorldMap() {
                         mixBlendMode: 'overlay'
                     }}
                 />
-            </div>
+            </motion.div>
 
             {/* 2. Independent Floating Debris */}
             <div className="absolute inset-0 pointer-events-none z-0">
@@ -218,7 +220,7 @@ function WorldMap() {
 
             {/* 3D Islands Field */}
             <motion.div
-                className="relative w-full h-full z-10 p-20 transform-3d"
+                className="relative w-full h-full z-10 transform-3d"
             >
                 {islands.map((island) => {
                     const isHome = island.id === 'home';
@@ -228,32 +230,94 @@ function WorldMap() {
                         <motion.div
                             key={island.id}
                             className="absolute cursor-pointer perspective-[500px]"
-                            initial={{ left: '50%', top: '50%', x: '-50%', y: '-50%', scale: 0, opacity: 0 }}
+                            initial={{ left: '50%', top: '50%', x: '-50%', y: '-50%', scale: 0, opacity: 0, filter: 'blur(20px)' }}
                             animate={{
                                 left: isExpanded ? `${island.x}%` : '50%',
                                 top: isExpanded ? `${island.y}%` : '50%',
                                 scale: phase === 'void' ? 0 : isExpanded ? 1 : (isHome ? 1 : 0),
-                                opacity: phase === 'void' ? 0 : 1
+                                opacity: phase === 'void' ? 0 : 1,
+                                filter: (isHome && phase === 'seed') ? 'blur(0px)' : (phase === 'void' ? 'blur(20px)' : 'blur(0px)')
                             }}
                             transition={{
                                 type: "spring", stiffness: 40, damping: 15,
                                 delay: isHome ? 0 : (isExpanded ? Math.random() * 0.2 : 0)
                             }}
+                            style={{ zIndex: isHome ? 20 : 10 }}
                             onClick={() => phase === 'connected' && navigate(island.route)}
                         >
+                            {/* Green Nebula Vortex (Home Emergence only) */}
+                            {isHome && (phase === 'seed' || phase === 'genesis' || phase === 'stabilized' || phase === 'connected') && (
+                                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[-1]">
+                                    {/* Primary Pulsing Vortex */}
+                                    <motion.div
+                                        initial={{ scale: 0, opacity: 0, rotate: 0 }}
+                                        animate={{
+                                            scale: phase === 'seed' ? [0.5, 1.5, 1.2] : [1, 1.1, 1],
+                                            opacity: phase === 'seed' ? [0, 1, 0.8] : [0.4, 0.6, 0.4],
+                                            rotate: 360
+                                        }}
+                                        transition={{
+                                            duration: phase === 'seed' ? 2 : 10,
+                                            repeat: phase === 'seed' ? 0 : Infinity,
+                                            ease: phase === 'seed' ? "easeOut" : "linear"
+                                        }}
+                                        style={{
+                                            width: isHome ? island.size * 1.5 : 0,
+                                            height: isHome ? island.size * 1.5 : 0,
+                                            background: 'radial-gradient(circle, rgba(0, 255, 170, 0.5) 0%, rgba(0, 150, 255, 0.2) 40%, transparent 70%)',
+                                            filter: 'blur(35px) brightness(1.2)',
+                                            borderRadius: '50%',
+                                        }}
+                                    />
+                                    {/* Secondary Glow Ring */}
+                                    <motion.div
+                                        animate={{
+                                            scale: [1, 1.3, 1],
+                                            opacity: [0.2, 0.4, 0.2],
+                                        }}
+                                        transition={{
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: "easeInOut"
+                                        }}
+                                        style={{
+                                            position: 'absolute',
+                                            top: '50%',
+                                            left: '50%',
+                                            transform: 'translate(-50%, -50%)',
+                                            width: isHome ? island.size * 2 : 0,
+                                            height: isHome ? island.size * 2 : 0,
+                                            background: 'radial-gradient(circle, rgba(0, 255, 200, 0.2) 0%, transparent 60%)',
+                                            filter: 'blur(50px)',
+                                            borderRadius: '50%',
+                                        }}
+                                    />
+                                </div>
+                            )}
+
                             {/* Inner 3D Container for Image and Glare */}
                             <motion.div
                                 className="relative preserve-3d"
-                                animate={phase === 'connected' ? {
-                                    y: [0, -15, 0],
-                                    rotateZ: [0, 2, 0, -2, 0] // Subtle floating
-                                } : {}}
-                                transition={phase === 'connected' ? {
-                                    duration: 5,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    delay: isHome ? 0 : Math.random() * 2
-                                } : {}}
+                                animate={
+                                    phase === 'seed' && isHome ? {
+                                        x: [-3, 3, -3, 3, 0],
+                                        y: [-3, 3, -3, 3, 0],
+                                        scale: [0.8, 1.05, 1], // Scaling up emergence
+                                        filter: ['blur(10px)', 'blur(0px)']
+                                    } : phase === 'connected' ? {
+                                        y: [0, -15, 0],
+                                        rotateZ: [0, 2, 0, -2, 0] // Subtle floating
+                                    } : {}
+                                }
+                                transition={
+                                    phase === 'seed' && isHome ? { duration: 1.5, times: [0, 1] }
+                                        : phase === 'connected' ? {
+                                            duration: 5,
+                                            repeat: Infinity,
+                                            ease: "easeInOut",
+                                            delay: isHome ? 0 : Math.random() * 2
+                                        } : {}
+                                }
                             >
                                 <img
                                     src={island.image}
@@ -284,7 +348,7 @@ function WorldMap() {
                                     >
                                         <div className="flex flex-col items-center gap-1">
                                             <div className="w-1 h-8 bg-gradient-to-b from-white/50 to-transparent" />
-                                            <span className="text-xs font-bold text-white tracking-[0.2em] bg-black/40 px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg">
+                                            <span className="text-lg font-bold text-white tracking-[0.2em] bg-black/40 px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg" style={{ fontFamily: "'VT323', monospace" }}>
                                                 {island.label}
                                             </span>
                                         </div>
@@ -305,13 +369,13 @@ function WorldMap() {
                     exit={{ opacity: 0 }}
                     className="inline-block bg-black/80 px-6 py-2 rounded-full border border-white/20 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]"
                 >
-                    <span className="text-cyan-400 font-mono text-sm tracking-widest typewriter drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
+                    <span className="text-cyan-400 text-xl tracking-widest typewriter drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" style={{ fontFamily: "'VT323', monospace" }}>
                         {`> ${narrative}`}
                     </span>
                 </motion.div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 .typewriter {
                     overflow: hidden;
                     white-space: nowrap;
@@ -330,7 +394,7 @@ function WorldMap() {
                 }
             `}</style>
 
-        </div>
+        </div >
     );
 }
 

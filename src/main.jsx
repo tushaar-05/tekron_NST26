@@ -17,47 +17,26 @@ import Contact from './pages/Contact/Contact';
 import Sponsors from './pages/Sponsors/Sponsors';
 import ComingSoon from './components/ui/ComingSoon/ComingSoon';
 
-// A wrapper component to handle loading state and route changes
+// A wrapper component to handle route changes
 function AppWrapper() {
-    const [isLoading, setIsLoading] = useState(true);
-    const location = useLocation();
-    const isMapRoute = location.pathname === '/map';
-
-    // Reset loading state when location changes
-    useEffect(() => {
-        setIsLoading(true);
-        const timer = setTimeout(() => setIsLoading(false), 1000); // Simulate loading
-        return () => clearTimeout(timer);
-    }, [location]);
-
-    if (isLoading) {
-        return isMapRoute ? (
-            <WorldLoading onLoadingComplete={() => setIsLoading(false)} />
-        ) : (
-            <Loading onLoadingComplete={() => setIsLoading(false)} />
-        );
-    }
-
     return (
-        <>
-            <Routes>
-                <Route path="/" element={<App />} />
-                <Route path="/map" element={<WorldMap />} />
+        <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/map" element={<WorldMap />} />
 
-                {/* Main Routes */}
-                <Route path="/about" element={<About />} />
-                <Route path="/store" element={<Store />} />
-                <Route path="/gallery" element={<Gallery />} />
-                <Route path="/competition" element={<Competition />} />
-                <Route path="/events" element={<Events />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/sponsors" element={<Sponsors />} />
+            {/* Main Routes */}
+            <Route path="/about" element={<About />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/competition" element={<Competition />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/sponsors" element={<Sponsors />} />
 
-                {/* Redirects */}
-                <Route path="/home" element={<Navigate to="/" replace />} />
-                <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-        </>
+            {/* Redirects */}
+            <Route path="/home" element={<Navigate to="/" replace />} />
+            <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
     );
 }
 

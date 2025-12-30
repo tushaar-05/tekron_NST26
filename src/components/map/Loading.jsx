@@ -60,10 +60,10 @@ function Loading({ onLoadingComplete }) {
                 background: 'linear-gradient(180deg, #1a0b2e 0%, #2d1b4e 30%, #1e1438 70%, #0f0a1e 100%)',
             }}
         >
-            
+
             <div className="tech-grid-pixel absolute inset-0 z-0 opacity-15" />
 
-            
+
             <div
                 className="absolute inset-0 z-2 pointer-events-none"
                 style={{
@@ -71,10 +71,10 @@ function Loading({ onLoadingComplete }) {
                 }}
             />
 
-            
+
             {glitchActive && <div className="glitch-overlay-pixel absolute inset-0 z-3 pointer-events-none" />}
 
-            
+
             <div
                 className="absolute inset-0 opacity-20"
                 style={{
@@ -85,9 +85,9 @@ function Loading({ onLoadingComplete }) {
                 }}
             />
 
-            
+
             <div className="relative z-10 flex flex-col items-center justify-center px-8">
-                
+
                 <h1
                     className={`pixel-font text-center mb-8 ${glitchActive ? 'glitch-text-pixel' : ''}`}
                     style={{
@@ -102,7 +102,7 @@ function Loading({ onLoadingComplete }) {
                     TEKRON
                 </h1>
 
-                
+
                 <div
                     className="pixel-font mb-12"
                     style={{
@@ -115,7 +115,7 @@ function Loading({ onLoadingComplete }) {
                     2026
                 </div>
 
-                
+
                 <div className="mb-6" style={{ width: 'clamp(300px, 60vw, 600px)' }}>
                     <div
                         className="relative"
@@ -135,7 +135,7 @@ function Loading({ onLoadingComplete }) {
                             imageRendering: 'pixelated',
                         }}
                     >
-                        
+
                         <div
                             className="absolute top-0 left-0 h-full transition-all duration-100"
                             style={{
@@ -149,7 +149,7 @@ function Loading({ onLoadingComplete }) {
                                 imageRendering: 'pixelated',
                             }}
                         >
-                            
+
                             <div
                                 className="absolute inset-0"
                                 style={{
@@ -159,7 +159,7 @@ function Loading({ onLoadingComplete }) {
                             />
                         </div>
 
-                        
+
                         <div
                             className="absolute inset-0 flex items-center justify-center pixel-font"
                             style={{
@@ -174,7 +174,7 @@ function Loading({ onLoadingComplete }) {
                     </div>
                 </div>
 
-                
+
                 <div
                     className="pixel-font text-center"
                     style={{
@@ -187,7 +187,7 @@ function Loading({ onLoadingComplete }) {
                     {loadingText}
                 </div>
 
-                
+
                 <div
                     className="pixel-font mt-8 text-center"
                     style={{
@@ -204,7 +204,7 @@ function Loading({ onLoadingComplete }) {
                 </div>
             </div>
 
-            
+
             <div
                 className="absolute bottom-4 left-4 pixel-font"
                 style={{
@@ -229,7 +229,7 @@ function Loading({ onLoadingComplete }) {
                 SYS_OK
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes progressScan {
                     0% {
                         transform: translateX(-100%);

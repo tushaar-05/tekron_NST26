@@ -15,10 +15,15 @@ function WorldLoading({ onLoadingComplete }) {
             // Set playback speed to 7x
             video.playbackRate = 7;
 
-            // Play the video
-            video.play().catch(err => {
-                console.error('Error playing video:', err);
-            });
+            // Play the video with a check
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(err => {
+                    if (err.name !== 'AbortError') {
+                        console.error('Error playing video:', err);
+                    }
+                });
+            }
 
             // Update progress based on video time
             const handleTimeUpdate = () => {
@@ -41,6 +46,9 @@ function WorldLoading({ onLoadingComplete }) {
             return () => {
                 video.removeEventListener('timeupdate', handleTimeUpdate);
                 video.removeEventListener('ended', handleVideoEnd);
+                video.pause();
+                video.src = "";
+                video.load();
             };
         }
     }, [onLoadingComplete]);
@@ -91,7 +99,7 @@ function WorldLoading({ onLoadingComplete }) {
                     imageRendering: 'pixelated',
                 }}
             >
-                <source src="../public/images/map/Pixel_Art_Game_Loading_Screen_Animation.mp4" />
+                <source src="/images/map/Pixel_Art_Game_Loading_Screen_Animation.mp4" />
                 Your browser does not support the video tag.
             </video>
 
@@ -225,7 +233,7 @@ function WorldLoading({ onLoadingComplete }) {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes progressScan {
                     0% {
                         transform: translateX(-100%);

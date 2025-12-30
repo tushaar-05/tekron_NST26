@@ -18,16 +18,20 @@ function App() {
     const [displayedText, setDisplayedText] = useState('');
     const [dialogueGlitch, setDialogueGlitch] = useState(false);
     const [assetsLoaded, setAssetsLoaded] = useState(false);
+    const [loadedAssets, setLoadedAssets] = useState({}); // Track individual asset loading
 
     const navigate = useNavigate();
 
-    // Preload critical images
+    // Preload critical home page images
     useEffect(() => {
         const imagesToPreload = [
             '/images/characters/main_Chr.png',
-            '/images/map/clouds-1.png',
-            '/images/map/clouds-2.png',
-            '/images/map/waterFinal.webp'
+            '/images/backgrounds/bg_img.jpg',
+            '/images/backgrounds/1.webp',
+            '/images/backgrounds/2.webp',
+            '/images/backgrounds/3.webp',
+            '/images/backgrounds/4.webp',
+            '/images/backgrounds/5.webp'
         ];
 
         let loadedCount = 0;
@@ -37,12 +41,14 @@ function App() {
             const img = new Image();
             img.onload = () => {
                 loadedCount++;
+                setLoadedAssets(prev => ({ ...prev, [src]: true }));
                 if (loadedCount === totalImages) {
                     setAssetsLoaded(true);
                 }
             };
             img.onerror = () => {
                 loadedCount++;
+                setLoadedAssets(prev => ({ ...prev, [src]: true })); // Mark as "loaded" even on error to not block
                 if (loadedCount === totalImages) {
                     setAssetsLoaded(true);
                 }
@@ -208,18 +214,19 @@ function App() {
 
 
                         <div
-                            className="absolute inset-0 z-0 opacity-30"
+                            className="absolute inset-0 z-0 transition-opacity duration-1000"
                             style={{
                                 backgroundImage: 'url(/images/backgrounds/bg_img.jpg)',
                                 backgroundSize: 'cover',
                                 backgroundPosition: 'center',
                                 imageRendering: 'pixelated',
+                                opacity: loadedAssets['/images/backgrounds/bg_img.jpg'] ? 0.3 : 0,
                             }}
                         />
 
 
                         <div
-                            className="absolute transition-transform duration-200 ease-out"
+                            className="absolute transition-all duration-700 ease-out"
                             style={{
                                 bottom: '-3%',
                                 left: '0%',
@@ -227,19 +234,20 @@ function App() {
                                 width: '100%',
                                 transform: `translate(${mousePosition.x * 5}px, ${mousePosition.y * 5}px)`,
                                 willChange: 'transform',
+                                opacity: loadedAssets['/images/backgrounds/5.webp'] ? 1 : 0,
                             }}
                         >
                             <img
                                 src="/images/backgrounds/5.webp"
                                 alt="Back teal cloud"
                                 className="w-full h-auto pixel-art"
-                                loading="lazy"
+                                loading="eager"
                             />
                         </div>
 
 
                         <div
-                            className="absolute transition-transform duration-300 ease-out"
+                            className="absolute transition-all duration-700 ease-out"
                             style={{
                                 top: '35%',
                                 left: '50%',
@@ -247,19 +255,20 @@ function App() {
                                 zIndex: 10,
                                 width: '100%',
                                 willChange: 'transform',
+                                opacity: loadedAssets['/images/backgrounds/4.webp'] ? 1 : 0,
                             }}
                         >
                             <img
                                 src="/images/backgrounds/4.webp"
                                 alt="Middle cloud"
                                 className="w-full h-auto pixel-art"
-                                loading="lazy"
+                                loading="eager"
                             />
                         </div>
 
 
                         <div
-                            className="absolute transition-transform duration-300 ease-out"
+                            className="absolute transition-all duration-700 ease-out"
                             style={{
                                 top: 'calc(50% + 100px)',
                                 left: '50%',
@@ -267,22 +276,23 @@ function App() {
                                 zIndex: 12,
                                 width: '100%',
                                 willChange: 'transform',
+                                opacity: loadedAssets['/images/backgrounds/3.webp'] ? 1 : 0,
                             }}
                         >
                             <img
                                 src="/images/backgrounds/3.webp"
                                 alt="Cloud below middle"
                                 className="w-full h-auto pixel-art"
-                                loading="lazy"
+                                loading="eager"
                             />
                         </div>
 
 
                         <div
-                            className="absolute transition-transform duration-300 ease-out"
+                            className="absolute transition-all duration-700 ease-out"
                             style={{
                                 bottom: '-2%',
-                                opacity: 0.95,
+                                opacity: loadedAssets['/images/backgrounds/2.webp'] ? 0.95 : 0,
                                 left: '0%',
                                 zIndex: 15,
                                 width: '100%',
@@ -294,13 +304,13 @@ function App() {
                                 src="/images/backgrounds/2.webp"
                                 alt="Bottom cloud"
                                 className="w-full h-auto pixel-art"
-                                loading="lazy"
+                                loading="eager"
                             />
                         </div>
 
 
                         <div
-                            className="absolute transition-transform duration-500 ease-out"
+                            className="absolute transition-all duration-700 ease-out"
                             style={{
                                 bottom: '-20%',
                                 left: '-2.5%',
@@ -308,13 +318,14 @@ function App() {
                                 width: '105%',
                                 transform: `translate(${mousePosition.x * 18}px, ${mousePosition.y * 18}px)`,
                                 willChange: 'transform',
+                                opacity: loadedAssets['/images/backgrounds/1.webp'] ? 1 : 0,
                             }}
                         >
                             <img
                                 src="/images/backgrounds/1.webp"
                                 alt="Cloud above bottom"
                                 className="w-full h-auto pixel-art"
-                                loading="lazy"
+                                loading="eager"
                             />
                         </div>
 
@@ -535,17 +546,18 @@ function App() {
                             >
                                 <div className="floating">
                                     <div
-                                        className="pixel-art"
+                                        className="pixel-art transition-opacity duration-700"
                                         style={{
                                             width: 'clamp(400px, 33vw, 800px)',
                                             position: 'relative',
+                                            opacity: loadedAssets['/images/characters/main_Chr.png'] ? 1 : 0,
                                         }}
                                     >
                                         <img
                                             src="/images/characters/main_Chr.png"
                                             alt="Assistant character"
                                             className="w-full h-auto block pixel-art"
-                                            loading="lazy"
+                                            loading="eager"
                                         />
                                     </div>
                                 </div>

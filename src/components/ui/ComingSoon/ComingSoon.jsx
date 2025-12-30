@@ -129,7 +129,7 @@ const ComingSoon = ({ title = 'Coming Soon', launchDate = '2024-01-01', transpar
       </div>
 
       {/* Global Styles */}
-      <style jsx global>{`
+      <style>{`
         @keyframes pulse {
           0%, 100% { transform: scale(1); opacity: 0.8; }
           50% { transform: scale(1.1); opacity: 1; }
