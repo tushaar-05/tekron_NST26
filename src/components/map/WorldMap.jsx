@@ -1,340 +1,248 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
-// Import all island images
-// Images are now in the public directory
-const homeIsland = '/images/map/islands/Untitled.png';
-const aboutIsland = '/images/map/islands/Untitled-1.webp';
-const compIsland = '/images/map/islands/Untitled-4.png';
-const contactIsland = '/images/map/islands/Untitled-3.png';
-const eventsIsland = '/images/map/islands/Untitled-2.png';
-const galleryIsland = '/images/map/islands/Untitled-5.png';
-const sponsorsIsland = '/images/map/islands/Untitled-7.png';
-const storeIsland = '/images/map/islands/Untitled-6.png';
+// Import optimized island images
+const homeIsland = '/images/map/islands/home_draft.webp';
+const aboutIsland = '/images/map/islands/about.webp';
+const compIsland = '/images/map/islands/comp.webp';
+const contactIsland = '/images/map/islands/contact.webp';
+const eventsIsland = '/images/map/islands/events.webp';
+const galleryIsland = '/images/map/islands/gallery.webp';
+const sponsorsIsland = '/images/map/islands/sponsors.webp';
+const storeIsland = '/images/map/islands/store.webp';
 
 function WorldMap() {
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-    const [dimensions, setDimensions] = useState({
-        baseSize: window.innerWidth < 768 ? 200 : 300,
-        homeSize: window.innerWidth < 768 ? 300 : 400,
-        distance: window.innerWidth < 768 ? 250 : 400
-    });
+    const navigate = useNavigate();
+    // Phases: 'void', 'seed', 'genesis', 'stabilized', 'connected'
+    const [phase, setPhase] = useState('void');
+    const [narrative, setNarrative] = useState('');
 
-    // Island data with positions in a circular layout
     const islands = [
-        {
-            id: 'home',
-            image: homeIsland,
-            size: dimensions.homeSize,
-            x: '50%',
-            y: '50%',
-            zIndex: 10
-        },
-        { id: 'about', image: aboutIsland, size: dimensions.baseSize, angle: 0, distance: dimensions.distance },
-        { id: 'comp', image: compIsland, size: dimensions.baseSize, angle: 220, distance: dimensions.distance },
-        { id: 'events', image: eventsIsland, size: dimensions.baseSize, angle: 320, distance: dimensions.distance },
-        { id: 'gallery', image: galleryIsland, size: dimensions.baseSize, angle: 135, distance: dimensions.distance },
-        { id: 'contact', image: contactIsland, size: dimensions.baseSize, angle: 90, distance: dimensions.distance },
-        { id: 'store', image: storeIsland, size: dimensions.baseSize, angle: 45, distance: dimensions.distance },
-        { id: 'sponsors', image: sponsorsIsland, size: dimensions.baseSize, angle: 175, distance: dimensions.distance }
+        { id: 'home', image: homeIsland, label: 'HOME', x: 50, y: 50, size: 280, route: '/' },
+        // Top
+        { id: 'contact', image: contactIsland, label: 'CONTACT', x: 50, y: 15, size: 130, route: '/contact' },
+        // Upper Flank
+        { id: 'about', image: aboutIsland, label: 'ABOUT', x: 20, y: 30, size: 160, route: '/about' },
+        { id: 'comp', image: compIsland, label: 'COMPETITIONS', x: 80, y: 30, size: 180, route: '/competition' },
+        // Mid Flank
+        { id: 'sponsors', image: sponsorsIsland, label: 'SPONSORS', x: 10, y: 55, size: 140, route: '/sponsors' },
+        { id: 'gallery', image: galleryIsland, label: 'GALLERY', x: 90, y: 55, size: 160, route: '/gallery' },
+        // Lower Flank
+        { id: 'events', image: eventsIsland, label: 'EVENTS', x: 30, y: 80, size: 150, route: '/events' },
+        { id: 'store', image: storeIsland, label: 'STORE', x: 70, y: 80, size: 140, route: '/store' }
     ];
 
-    // Handle window resize for responsive design
+    // The Genesis Sequence Controller
     useEffect(() => {
-        const handleResize = () => {
-            const isMobile = window.innerWidth < 768;
-            const isTablet = window.innerWidth < 1024;
+        const sequence = async () => {
+            // Phase 1: Void
+            setNarrative("SCANNING SECTOR...");
+            await new Promise(r => setTimeout(r, 1000));
+            setNarrative("ANOMALY DETECTED.");
+            await new Promise(r => setTimeout(r, 1000));
 
-            if (isMobile) {
-                // Compact layout for mobile
-                setDimensions({
-                    baseSize: 130,    // Smaller islands
-                    homeSize: 160,    // Slightly larger home island
-                    distance: 180     // Closer to center
-                });
-            } else if (isTablet) {
-                // Medium size for tablets
-                setDimensions({
-                    baseSize: 200,
-                    homeSize: 300,
-                    distance: 300
-                });
-            } else {
-                // Full size for desktops
-                setDimensions({
-                    baseSize: 220,
-                    homeSize: 400,
-                    distance: 350
-                });
-            }
+            // Phase 2: Seed
+            setPhase('seed');
+            setNarrative("ENERGY SPIKE DETECTED.");
+            await new Promise(r => setTimeout(r, 1500));
+            setNarrative("CRITICAL MASS IMMINENT.");
+            await new Promise(r => setTimeout(r, 1000));
+
+            // Phase 3: Genesis (BANG)
+            setPhase('genesis');
+            setNarrative("EXPANSION INITIATED.");
+            await new Promise(r => setTimeout(r, 500)); // Shockwave time
+
+            // Phase 4: Stabilized
+            setPhase('stabilized');
+            await new Promise(r => setTimeout(r, 1500)); // Drift time
+            setNarrative("STABILIZING ORBITS...");
+            await new Promise(r => setTimeout(r, 1000));
+
+            // Phase 5: Connected
+            setPhase('connected');
+            setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
         };
 
-        // Set initial sizes and handle resize immediately
-        handleResize();
-        window.dispatchEvent(new Event('resize'));
-
-        // Add event listener
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        sequence();
     }, []);
-
-    // Update mouse position
-    useEffect(() => {
-        const handleMouseMove = (e) => {
-            const x = (e.clientX / window.innerWidth) * 30;
-            const y = (e.clientY / window.innerHeight) * 30;
-            setMousePosition({ x, y });
-        };
-
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
-    }, []);
-
-    // Single parallax transformation for all elements
-    const parallaxTransform = `translate(${mousePosition.x * 0.3}px, ${mousePosition.y * 0.3}px)`;
-
-    const isMobile = window.innerWidth < 768;
-    const cloudBaseStyle = {
-        position: 'absolute',
-        width: isMobile ? '190px' : '300px',
-        height: isMobile ? '150px' : '300px',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        opacity: isMobile ? 0.6 : 0.8,  // Slightly more transparent on mobile
-        zIndex: 1,
-        willChange: 'transform',
-        transition: 'all 0.3s ease',
-        pointerEvents: 'none'  // Prevent clouds from blocking clicks
-    };
-
-    // Calculate position for circular layout
-    const getIslandPosition = (island) => {
-        if (isMobile) {
-            // Custom positions for mobile layout
-            const positions = {
-                store: { x: '65%', y: '70%' },
-                home: { x: '50%', y: '40%' },
-                events: { x: '80%', y: '30%' },
-                comp: { x: '50%', y: '13%' },
-                gallery: { x: '15%', y: '25%' },
-                contact: { x: '28%', y: '68%' },
-                sponsors: { x: '15%', y: '48%' },
-                about: { x: '85%', y: '55%' }
-            };
-
-            const pos = positions[island.id] || { x: '50%', y: '50%' };
-            return {
-                position: 'absolute',
-                top: `calc(${pos.y} - ${island.size / 2}px)`,
-                left: `calc(${pos.x} - ${island.size / 2}px)`,
-                zIndex: island.id === 'home' ? 10 : 5
-            };
-        }
-
-        if (island.x && island.y) {
-            return {
-                position: 'absolute',
-                top: `calc(${island.y} - ${island.size / 2}px - 50px)`,
-                left: `calc(${island.x} - ${island.size / 2}px)`,
-                zIndex: island.zIndex || 5
-            };
-        }
-
-        const centerX = window.innerWidth / 2;
-        const centerY = (window.innerHeight / 2) - 50;
-        const radian = (island.angle * Math.PI) / 180;
-        const x = centerX + Math.cos(radian) * island.distance;
-        const y = centerY + Math.sin(radian) * island.distance;
-
-        return {
-            position: 'absolute',
-            top: `${y - island.size / 2}px`,
-            left: `${x - island.size / 2}px`,
-            zIndex: 5
-        };
-    };
 
     return (
-        <div style={{
-            position: 'relative',
-            width: '100vw',
-            height: isMobile ? '100vh' : '100vh', // Full height for better mobile layout
-            overflow: 'hidden',
-            backgroundColor: '#1a365d', // Fallback background color
-            touchAction: 'none' // Better touch handling
-        }}>
-            {/* Water Background */}
-            <div
+        <div className="relative w-screen h-screen overflow-hidden bg-black font-sans selection:bg-purple-500 selection:text-white">
+
+            {/* Background Layer */}
+            <motion.div
+                className="absolute inset-[-10%]"
+                animate={phase === 'seed' ? { scale: [1, 1.02, 1], x: [-5, 5, -5, 5, 0] } : {}}
+                transition={{ duration: 0.2, repeat: phase === 'seed' ? Infinity : 0 }}
                 style={{
-                    position: 'fixed',
-                    top: "-10px",
-                    left: "-10px",
-                    width: '110%',
-                    height: '110%',
                     backgroundImage: 'url(/images/map/waterFinal.webp)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
-                    transform: parallaxTransform,
-                    willChange: 'transform',
-                    transition: 'transform 0.1s linear'
+                    filter: 'brightness(0.6) contrast(1.2) hue-rotate(240deg)',
                 }}
-            />
+            >
+                <motion.div
+                    className="absolute inset-0"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 200, repeat: Infinity, ease: "linear" }}
+                    style={{
+                        backgroundImage: 'url(/images/map/waterFinal.webp)',
+                        backgroundSize: 'cover',
+                        opacity: 0.5,
+                        mixBlendMode: 'overlay'
+                    }}
+                />
+            </motion.div>
 
-            {/* Cloud in top-left corner */}
-            <div style={{
-                ...cloudBaseStyle,
-                backgroundImage: 'url(/images/map/cloud-1.png)',
-                top: '-20px',
-                left: '-20px',
-                transform: parallaxTransform
-            }} />
+            {/* Shockwave Effect (Genesis Phase) */}
+            <AnimatePresence>
+                {phase === 'genesis' && (
+                    <motion.div
+                        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 border-2 border-white rounded-full z-50 box-content"
+                        initial={{ width: 0, height: 0, opacity: 1, borderWidth: '50px' }}
+                        animate={{ width: '200vw', height: '200vw', opacity: 0, borderWidth: '0px' }}
+                        transition={{ duration: 1.5, ease: "easeOut" }}
+                    />
+                )}
+            </AnimatePresence>
 
-            {/* Cloud in top-right corner */}
-            <div style={{
-                ...cloudBaseStyle,
-                backgroundImage: 'url(/images/map/clouds-2.png)',
-                top: '-20px',
-                right: '-20px',
-                transform: parallaxTransform
-            }} />
+            {/* White Flash Effect */}
+            <AnimatePresence>
+                {phase === 'genesis' && (
+                    <motion.div
+                        className="absolute inset-0 bg-white z-[100] pointer-events-none"
+                        initial={{ opacity: 1 }}
+                        animate={{ opacity: 0 }}
+                        transition={{ duration: 2, ease: "easeOut" }}
+                    />
+                )}
+            </AnimatePresence>
 
-            {/* Cloud in bottom-left corner */}
-            <div style={{
-                ...cloudBaseStyle,
-                backgroundImage: 'url(/images/map/clouds-3.png)',
-                bottom: isMobile ? '0' : '-20px',
-                left: isMobile ? '0' : '-20px',
-                width: isMobile ? '150px' : cloudBaseStyle.width,
-                height: isMobile ? '150px' : cloudBaseStyle.height,
-                transform: parallaxTransform
-            }} />
-
-            {/* Cloud in bottom-right corner */}
-            <div style={{
-                ...cloudBaseStyle,
-                backgroundImage: 'url(/images/map/clouds-4.png)',
-                bottom: isMobile ? '0' : '-20px',
-                right: isMobile ? '0' : '-20px',
-                width: isMobile ? '150px' : cloudBaseStyle.width,
-                height: isMobile ? '150px' : cloudBaseStyle.height,
-                transform: parallaxTransform
-            }} />
+            {/* Constellation Lines (Connected Phase) */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+                <svg className="w-full h-full">
+                    <AnimatePresence>
+                        {(phase === 'stabilized' || phase === 'connected') && islands.map((island, i) => {
+                            if (island.id === 'home') return null;
+                            return (
+                                <motion.line
+                                    key={i}
+                                    x1="50%" y1="50%"
+                                    x2={`${island.x}%`} y2={`${island.y}%`}
+                                    stroke="rgba(255, 255, 255, 0.2)"
+                                    strokeWidth="1"
+                                    initial={{ pathLength: 0 }}
+                                    animate={phase === 'connected' ? { pathLength: 1 } : { pathLength: 0 }}
+                                    transition={{ duration: 1.5, ease: "easeInOut", delay: i * 0.1 }}
+                                />
+                            )
+                        })}
+                    </AnimatePresence>
+                </svg>
+            </div>
 
             {/* Islands */}
-            {islands.map((island) => {
-                const position = getIslandPosition(island);
-                // Custom display names for islands
-                const displayNames = {
-                    comp: 'Competition',
-                    // Add other custom display names here if needed
-                };
-                const islandName = displayNames[island.id] || (island.id.charAt(0).toUpperCase() + island.id.slice(1));
+            <div className="relative w-full h-full z-10 perspective-1000">
+                {islands.map((island) => {
+                    const isHome = island.id === 'home';
+                    // Position Logic based on Phase
+                    // Void/Seed: Center
+                    // Genesis/Stabilized/Connected: Final Position
+                    const isExpanded = ['genesis', 'stabilized', 'connected'].includes(phase);
 
-                return (
-                    <div
-                        key={`${island.id}-${isMobile ? 'mobile' : 'desktop'}`}
-                        style={{
-                            position: 'absolute',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            ...position,
-                            zIndex: position.zIndex,
-                            width: 'auto',
-                            height: 'auto',
-
-                            cursor: 'pointer',
-                            transition: 'font-size 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-                            willChange: 'transform, z-index'
-                        }}
-                        onMouseEnter={(e) => {
-                            if (!isMobile) {
-                                e.currentTarget.querySelector('h3').style.fontSize = '1.5rem';
-                                e.currentTarget.style.zIndex = 20;
-                            }
-                        }}
-                        onMouseLeave={(e) => {
-                            if (!isMobile) {
-                                e.currentTarget.querySelector('h3').style.fontSize = '0.95rem';
-                                e.currentTarget.style.zIndex = position.zIndex;
-                            }
-                        }}
-                        onTouchStart={(e) => {
-                            if (isMobile) {
-                                e.currentTarget.querySelector('h3').style.fontSize = '0.95rem';
-                                e.currentTarget.style.zIndex = 20;
-                            }
-                        }}
-                        onTouchEnd={(e) => {
-                            if (isMobile) {
-                                e.currentTarget.querySelector('h3').style.fontSize = '0.85rem';
-                                e.currentTarget.style.zIndex = position.zIndex;
-                            }
-                        }}
-                        onClick={() => {
-                            // Navigate to the respective route based on island id
-                            const routes = {
-                                home: '/',
-                                about: '/about',
-                                events: '/events',
-                                comp: '/competition',
-                                gallery: '/gallery',
-                                contact: '/contact',
-                                sponsors: '/sponsors',
-                                store: '/store'
-                            };
-
-                            const route = routes[island.id] || '/';
-                            window.location.href = route;
-                        }}
-                    >
-                        <div style={{
-                            height: '30px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: '120px', // Fixed width to prevent movement
-                            minWidth: '120px', // Ensure minimum width
-                            marginBottom: '4px',
-                            transform: parallaxTransform,
-                            willChange: 'transform',
-                            transition: 'transform 0.1s linear',
-                            pointerEvents: 'none'
-                        }}>
-                            <h3 style={{
-                                color: '#d8c6f2',
-                                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)',
-                                fontSize: window.innerWidth < 768 ? '0.85rem' : '1.1rem',
-                                whiteSpace: 'nowrap', // Prevent text wrapping
-                                fontWeight: 'bold',
-                                textTransform: 'capitalize',
-                                textAlign: 'center',
-                                pointerEvents: 'none',
-                                userSelect: 'none',
-                                transition: 'all 0.3s ease-in-out',
-                                margin: 0,
-                                padding: '0 10px'
-                            }}>
-                                {islandName}
-                            </h3>
-                        </div>
-                        <div
-                            style={{
-                                width: `${island.size}px`,
-                                height: `${island.size}px`,
-                                backgroundImage: `url(${island.image})`,
-                                backgroundSize: 'contain',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: 'center',
-                                pointerEvents: 'none',
-                                transition: 'transform 0.1s linear',
-                                willChange: 'transform',
-                                transform: `scale(1) ${parallaxTransform}`.trim()
+                    return (
+                        <motion.div
+                            key={island.id}
+                            className="absolute cursor-pointer"
+                            initial={{ left: '50%', top: '50%', x: '-50%', y: '-50%', scale: 0, opacity: 0 }}
+                            animate={{
+                                left: isExpanded ? `${island.x}%` : '50%',
+                                top: isExpanded ? `${island.y}%` : '50%',
+                                scale: phase === 'void' ? 0 : isExpanded ? 1 : (isHome ? 1 : 0),
+                                opacity: phase === 'void' ? 0 : 1
                             }}
-                        />
-                    </div>
-                );
-            })}
+                            transition={{
+                                type: "spring", stiffness: 40, damping: 15,
+                                delay: isHome ? 0 : (isExpanded ? Math.random() * 0.2 : 0)
+                            }}
+                            whileHover={phase === 'connected' ? { scale: 1.1, zIndex: 50 } : {}}
+                            onClick={() => phase === 'connected' && navigate(island.route)}
+                        >
+                            <motion.img
+                                src={island.image}
+                                alt={island.label}
+                                className={`pixel-art drop-shadow-[0_0_30px_rgba(255,255,255,0.3)] ${isHome ? 'brightness-125' : ''}`}
+                                style={{ width: island.size }}
+                                animate={
+                                    phase === 'seed' && isHome ? {
+                                        scale: [1, 1.1, 0.9, 1.2, 1],
+                                        filter: ["brightness(1)", "brightness(2)", "brightness(1)"]
+                                    } : phase === 'connected' ? {
+                                        y: [0, -12, 0],
+                                        rotate: [0, 2, 0, -2, 0]
+                                    } : {}
+                                }
+                                transition={
+                                    phase === 'seed' ? { duration: 0.2, repeat: Infinity }
+                                        : phase === 'connected' ? {
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: "easeInOut",
+                                            delay: isHome ? 0 : Math.random() * 2
+                                        } : {}
+                                }
+                            />
+
+                            {/* Labels (Only when connected) */}
+                            <AnimatePresence>
+                                {phase === 'connected' && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: 0.5 }}
+                                        className="absolute -bottom-8 left-1/2 -translate-x-1/2 whitespace-nowrap"
+                                    >
+                                        <span className="text-xs font-bold text-white tracking-[0.2em] bg-black/50 px-2 py-1 rounded backdrop-blur-md border border-white/20">
+                                            {island.label}
+                                        </span>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </motion.div>
+                    );
+                })}
+            </div>
+
+            {/* Narrative HUD */}
+            <div className="absolute bottom-12 left-0 w-full text-center z-50 pointer-events-none">
+                <motion.div
+                    key={narrative} // Re-animate on text change
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0 }}
+                    className="inline-block bg-black/80 px-6 py-2 rounded-full border border-white/20 backdrop-blur-md"
+                >
+                    <span className="text-cyan-400 font-mono text-sm tracking-widest typewriter">
+                        {`> ${narrative}`}
+                    </span>
+                </motion.div>
+            </div>
+
+            <style jsx>{`
+                .typewriter {
+                    overflow: hidden;
+                    white-space: nowrap;
+                    border-right: 2px solid cyan;
+                    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+                }
+                @keyframes blink-caret {
+                    from, to { border-color: transparent }
+                    50% { border-color: cyan; }
+                }
+            `}</style>
+
         </div>
     );
 }
