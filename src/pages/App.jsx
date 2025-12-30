@@ -17,8 +17,39 @@ function App() {
     const [glitchActive, setGlitchActive] = useState(false);
     const [displayedText, setDisplayedText] = useState('');
     const [dialogueGlitch, setDialogueGlitch] = useState(false);
+    const [assetsLoaded, setAssetsLoaded] = useState(false);
 
     const navigate = useNavigate();
+
+    // Preload critical images
+    useEffect(() => {
+        const imagesToPreload = [
+            '/images/characters/main_Chr.png',
+            '/images/map/clouds-1.png',
+            '/images/map/clouds-2.png',
+            '/images/map/waterFinal.webp'
+        ];
+
+        let loadedCount = 0;
+        const totalImages = imagesToPreload.length;
+
+        imagesToPreload.forEach(src => {
+            const img = new Image();
+            img.onload = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    setAssetsLoaded(true);
+                }
+            };
+            img.onerror = () => {
+                loadedCount++;
+                if (loadedCount === totalImages) {
+                    setAssetsLoaded(true);
+                }
+            };
+            img.src = src;
+        });
+    }, []);
 
     const handleNavigateToMap = () => {
         setLoadingKey(prev => prev + 1);
@@ -71,14 +102,18 @@ function App() {
     }, []);
 
     useEffect(() => {
+        if (!assetsLoaded) return; // Don't start glitch until assets loaded
+
         const glitchInterval = setInterval(() => {
             setGlitchActive(true);
             setTimeout(() => setGlitchActive(false), 200);
         }, 5000);
         return () => clearInterval(glitchInterval);
-    }, []);
+    }, [assetsLoaded]);
 
     useEffect(() => {
+        if (!assetsLoaded) return; // Don't start typewriter until assets loaded
+
         const currentDialogue = dialogues[dialogueIndex].text;
         setDisplayedText('');
 
@@ -98,7 +133,7 @@ function App() {
         }, 30); // Typing speed: 30ms per character
 
         return () => clearInterval(typeInterval);
-    }, [dialogueIndex]);
+    }, [dialogueIndex, assetsLoaded]);
 
     useEffect(() => {
         const targetDate = new Date('2026-01-30T00:00:00').getTime();
@@ -127,7 +162,24 @@ function App() {
 
     return (
         <AnimatePresence mode="wait">
-            {isTransitioning ? (
+            {!assetsLoaded ? (
+                <motion.div
+                    key="loading"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-gradient-to-br from-purple-900 via-black to-blue-900 flex items-center justify-center z-50"
+                >
+                    <div className="text-center">
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                            className="w-16 h-16 border-4 border-cyan-500 border-t-transparent rounded-full mx-auto mb-4"
+                        />
+                        <p className="text-white text-xl font-mono tracking-wider">LOADING TEKRON...</p>
+                    </div>
+                </motion.div>
+            ) : isTransitioning ? (
                 <WorldLoading key={loadingKey} onLoadingComplete={handleLoadingComplete} />
             ) : showMap ? (
                 <motion.div
