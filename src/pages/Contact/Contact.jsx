@@ -53,8 +53,8 @@ function Contact() {
     };
 
     const coordinators = [
-        { role: 'Tech. Head', name: 'Ved Bhadani', phone: '+91 95467 85861', email: 'ved.bhadani@adypu.edu.in' },
-        { role: 'Hospitality Head', name: 'Ayush Shukla', phone: '+91 78753 93239', email: 'ayush.shukla@adypu.edu.in' },
+        { role: 'Tech. Head', name: 'Ved Bhadani', phone: '+91 95467 85861', email: 'ved.bhadani@adypu.edu.in', image: '/images/team/ved.jpg' },
+        { role: 'Hospitality Head', name: 'Ayush Shukla', phone: '+91 78753 93239', email: 'ayush.shukla@adypu.edu.in', image: '/images/team/ayush.jpg' },
         { role: 'Sponsorship Head', name: 'Harshit Jain', phone: '+91 74278 87050', email: 'harshit.jain@adypu.edu.in' },
         { role: 'Marketing Head', name: 'Vamshi Krishna Pendyala', phone: '+91 91215 07280', email: 'vamshikrishna.pendyala@adypu.edu.in' },
     ];
@@ -171,19 +171,25 @@ function Contact() {
                                 <motion.div
                                     key={index}
                                     whileHover={{ y: -10, backgroundColor: "rgba(255,255,255,0.08)" }}
-                                    className="bg-white/5 border border-white/10 p-8 rounded-2xl transition-all duration-300 backdrop-blur-md group"
+                                    className="bg-white/5 border border-white/10 p-8 rounded-2xl transition-all duration-300 backdrop-blur-md group relative overflow-hidden"
                                 >
-                                    <div className="w-12 h-12 bg-purple-500/20 rounded-full flex items-center justify-center mb-4 text-2xl group-hover:scale-110 transition-transform">
-                                        👤
-                                    </div>
+                                    {member.image ? (
+                                        <div className="w-24 h-24 rounded-full mb-4 border-2 border-purple-500/50 overflow-hidden group-hover:scale-105 transition-transform">
+                                            <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                        </div>
+                                    ) : (
+                                        <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-4 text-3xl group-hover:scale-110 transition-transform">
+                                            👤
+                                        </div>
+                                    )}
                                     <p className="text-purple-400 font-bold text-sm mb-3 uppercase tracking-widest border-b border-purple-500/30 pb-2 inline-block">{member.role}</p>
-                                    <h3 className="text-3xl font-bold text-white mb-4 leading-tight">{member.name}</h3>
-                                    <div className="space-y-3 text-gray-300 text-lg">
+                                    <h3 className="text-2xl font-bold text-white mb-4 leading-tight">{member.name}</h3>
+                                    <div className="space-y-3 text-gray-300 text-base">
                                         <a href={`tel:${member.phone}`} className="flex items-center gap-3 hover:text-purple-300 transition-colors">
                                             <span className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center">📞</span> {member.phone}
                                         </a>
                                         <a href={`mailto:${member.email}`} className="flex items-center gap-3 hover:text-purple-300 transition-colors">
-                                            <span className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center">✉️</span> {member.email}
+                                            <span className="w-8 h-8 rounded-full bg-black/20 flex items-center justify-center">✉️</span> <span className="text-xs">{member.email}</span>
                                         </a>
                                     </div>
                                 </motion.div>
@@ -356,9 +362,9 @@ function Contact() {
                         </div>
                         <p className="text-purple-400/50 text-sm mt-8">© 2026 Tekron. All rights reserved.</p>
                     </motion.div>
-                </motion.div>
-            </div>
-        </UnifiedBackground>
+                </motion.div >
+            </div >
+        </UnifiedBackground >
     );
 }
 
