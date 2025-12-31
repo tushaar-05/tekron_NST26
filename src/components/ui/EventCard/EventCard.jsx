@@ -170,7 +170,7 @@ const Title = styled.h3`
 
 const Description = styled.p`
   color: #c8b6e2;
-  font-size: 1.1rem;
+  font-size: 1.3rem;
   line-height: 1.4;
   margin: 0;
   opacity: 0.9;
@@ -200,7 +200,9 @@ const Particle = styled(motion.div)`
 
 const MetaInfo = styled.div`
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-top: 16px;
   padding-top: 16px;
@@ -211,12 +213,14 @@ const MetaItem = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.8rem;
+  font-size: 1.1rem;
   color: #c8b6e2;
   background: rgba(168, 85, 247, 0.1);
-  padding: 4px 8px;
+  padding: 6px 10px;
   border-radius: 6px;
   border: 1px solid rgba(168, 85, 247, 0.2);
+  font-family: 'VT323', monospace;
+  white-space: nowrap;
 
   span {
     color: #fff;
@@ -224,13 +228,48 @@ const MetaItem = styled.div`
   }
 `;
 
-const EventCard = ({ title, category, image, onClick }) => {
+const RegisterButton = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 8px;
+  border: 2px solid rgba(168, 85, 247, 0.5);
+  font-family: 'VT323', monospace;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+
+  &:hover {
+    background: linear-gradient(135deg, #7c3aed, #6366f1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(168, 85, 247, 0.5);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+`;
+
+const EventCard = ({ title, category, image, description, prizePool, unstopLink, onClick }) => {
   const particles = Array.from({ length: 8 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
     color: ['#a855f7', '#7c3aed', '#6366f1', '#8b5cf6'][Math.floor(Math.random() * 4)]
   }));
+
+  // Truncate description for card view
+  const truncate = (str, n) => {
+    return (str?.length > n) ? str.substr(0, n - 1) + '...' : str;
+  };
 
   return (
     <CardContainer
@@ -254,6 +293,34 @@ const EventCard = ({ title, category, image, onClick }) => {
       <Content>
         <CategoryBadge category={category}>{category}</CategoryBadge>
         <Title>{title}</Title>
+
+        {/* Description - Conditionally Rendered */}
+        {description && (
+          <Description>
+            {truncate(description, 100)}
+          </Description>
+        )}
+
+        {/* Meta Info (Prize Pool + Register Button) - Conditionally Rendered */}
+        {(prizePool || unstopLink) && (
+          <MetaInfo>
+            {prizePool && (
+              <MetaItem>
+                🏆 <span>Prize Pool:</span> {prizePool}
+              </MetaItem>
+            )}
+            {unstopLink && (
+              <RegisterButton
+                href={unstopLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+              >
+                📝 Register
+              </RegisterButton>
+            )}
+          </MetaInfo>
+        )}
       </Content>
 
       <Particles>
