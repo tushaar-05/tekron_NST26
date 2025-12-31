@@ -54,9 +54,9 @@ function Contact() {
 
     const coordinators = [
         { role: 'Tech. Head', name: 'Ved Bhadani', phone: '+91 95467 85861', email: 'ved.bhadani@adypu.edu.in' },
-        { role: 'Marketing Head', name: 'Vamshi Krishna Pendyala', phone: '+91 91215 07280', email: 'vamshikrishna.pendyala@adypu.edu.in' },
-        { role: 'Sponsorship Head', name: 'Harshit Jain', phone: '+91 74278 87050', email: 'harshit.jain@adypu.edu.in' },
         { role: 'Hospitality Head', name: 'Ayush Shukla', phone: '+91 78753 93239', email: 'ayush.shukla@adypu.edu.in' },
+        { role: 'Sponsorship Head', name: 'Harshit Jain', phone: '+91 74278 87050', email: 'harshit.jain@adypu.edu.in' },
+        { role: 'Marketing Head', name: 'Vamshi Krishna Pendyala', phone: '+91 91215 07280', email: 'vamshikrishna.pendyala@adypu.edu.in' },
     ];
 
     const containerVariants = {
@@ -143,6 +143,7 @@ function Contact() {
                                 <div>
                                     <p className="text-purple-300 text-sm font-bold uppercase tracking-wider mb-1">General Inquiry</p>
                                     <p className="text-white text-2xl">Nihal - +91 62825 00918</p>
+                                    <p className="text-white text-2xl mt-1">Ayush Shukla - +91 78753 93239</p>
                                 </div>
                                 <div className="pt-4 border-t border-purple-500/20 mt-2">
                                     <div className="flex items-center gap-3 mb-3">
