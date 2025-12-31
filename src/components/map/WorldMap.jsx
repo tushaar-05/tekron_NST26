@@ -3,14 +3,14 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { useNavigate, useLocation } from 'react-router-dom';
 
 // Import optimized island images
-const homeIsland = '/images/map/islands/home_draft.webp';
-const aboutIsland = '/images/map/islands/about.webp';
-const compIsland = '/images/map/islands/comp.webp';
-const contactIsland = '/images/map/islands/contact.webp';
-const eventsIsland = '/images/map/islands/events.webp';
-const galleryIsland = '/images/map/islands/gallery.webp';
-const sponsorsIsland = '/images/map/islands/sponsors.webp';
-const storeIsland = '/images/map/islands/store.webp';
+const homeIsland = '/images/map/islands/home_pixel.png';
+const aboutIsland = '/images/map/islands/about_pixel.webp';
+const compIsland = '/images/map/islands/comp_pixel.png';
+const contactIsland = '/images/map/islands/contact_pixel.png';
+const eventsIsland = '/images/map/islands/events_pixel.png';
+const galleryIsland = '/images/map/islands/gallery_pixel.png';
+const sponsorsIsland = '/images/map/islands/sponsors_pixel.png';
+const storeIsland = '/images/map/islands/store_pixel.png';
 import WorldLoading from './WorldLoading';
 
 function WorldMap() {
@@ -55,13 +55,13 @@ function WorldMap() {
         // Top
         { id: 'contact', image: contactIsland, label: 'CONTACT', x: 50, y: 15, size: 130, route: '/contact' },
         // Upper Flank
-        { id: 'about', image: aboutIsland, label: 'ABOUT', x: 20, y: 30, size: 160, route: '/about' },
+        { id: 'events', image: eventsIsland, label: 'EVENTS', x: 20, y: 30, size: 150, route: '/events' },
         { id: 'comp', image: compIsland, label: 'COMPETITIONS', x: 80, y: 30, size: 180, route: '/competition' },
         // Mid Flank
         { id: 'sponsors', image: sponsorsIsland, label: 'SPONSORS', x: 10, y: 55, size: 140, route: '/sponsors' },
         { id: 'gallery', image: galleryIsland, label: 'GALLERY', x: 90, y: 55, size: 160, route: '/gallery' },
         // Lower Flank
-        { id: 'events', image: eventsIsland, label: 'EVENTS', x: 30, y: 80, size: 150, route: '/events' },
+        { id: 'about', image: aboutIsland, label: 'ABOUT', x: 30, y: 80, size: 160, route: '/about' },
         { id: 'store', image: storeIsland, label: 'STORE', x: 70, y: 80, size: 140, route: '/store' }
     ];
 
