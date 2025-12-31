@@ -60,7 +60,6 @@ function App() {
     const handleNavigateToMap = () => {
         setLoadingKey(prev => prev + 1);
         setIsTransitioning(true);
-        setTimeout(() => navigate('/map'), 500); // Wait for transition
     };
 
     const handleNavigateToHome = () => {
@@ -70,8 +69,9 @@ function App() {
     };
 
     const handleLoadingComplete = () => {
-        setIsTransitioning(false);
-        setShowMap(!showMap);
+        // Global Session Flag: Ensure video plays ONLY once per session
+        sessionStorage.setItem('tekron_intro_complete', 'true');
+        navigate('/map');
     };
 
     const dialogues = [

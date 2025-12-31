@@ -10,47 +10,82 @@ function WorldLoading({ onLoadingComplete }) {
 
     useEffect(() => {
         const video = videoRef.current;
+        if (!video) return;
 
-        if (video) {
-            // Set playback speed to 7x
-            video.playbackRate = 7;
+        // Flags to prevent multiple completions
+        let isCompleted = false;
 
-            // Play the video with a check
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-                playPromise.catch(err => {
-                    if (err.name !== 'AbortError') {
-                        console.error('Error playing video:', err);
-                    }
-                });
+        const completeLoading = () => {
+            if (isCompleted) return;
+            isCompleted = true;
+            setProgress(100);
+            if (video) video.pause(); // Stop immediately
+            if (onLoadingComplete) {
+                onLoadingComplete(); // No delay
             }
+        };
 
-            // Update progress based on video time
-            const handleTimeUpdate = () => {
-                const currentProgress = (video.currentTime / video.duration) * 50;
+        const handleLoadedMetadata = () => {
+            if (video.duration === Infinity || isNaN(video.duration)) {
+                // If duration is invalid, we can't rely on timeupdate for progress
+                // We'll rely on fallback or 'ended'
+                console.warn("Video duration invalid, relying on fallback/ended events");
+                video.currentTime = 1e101; // Try to trigger end? No, just play.
+            }
+        };
+
+        const handleTimeUpdate = () => {
+            if (isCompleted) return;
+            if (video.duration && video.duration > 0) {
+                const currentProgress = (video.currentTime / video.duration) * 100;
                 setProgress(currentProgress);
-            };
 
-            // Handle video end
-            const handleVideoEnd = () => {
-                setProgress(100);
-                if (onLoadingComplete) {
-                    setTimeout(() => onLoadingComplete(), 200);
+                // Pre-emptive completion if we're basically done
+                if (currentProgress >= 99.5) {
+                    completeLoading();
                 }
-            };
+            }
+        };
 
-            video.addEventListener('timeupdate', handleTimeUpdate);
-            video.addEventListener('ended', handleVideoEnd);
+        const handleVideoEnd = () => {
+            completeLoading();
+        };
 
-            // Cleanup
-            return () => {
-                video.removeEventListener('timeupdate', handleTimeUpdate);
-                video.removeEventListener('ended', handleVideoEnd);
-                video.pause();
-                video.src = "";
-                video.load();
-            };
-        }
+        const handleError = (e) => {
+            console.error("Video playback error:", e);
+            // On error, finish immediately (or after short delay) to not block user
+            completeLoading();
+        };
+
+        // Attach listeners
+        video.addEventListener('loadedmetadata', handleLoadedMetadata);
+        video.addEventListener('timeupdate', handleTimeUpdate);
+        video.addEventListener('ended', handleVideoEnd);
+        video.addEventListener('error', handleError);
+
+        // Attempt to play
+        video.playbackRate = 5.0; // Adjusted speed for smoother visual
+        video.play().catch(err => {
+            console.warn("Video play failed (autoplay policy?):", err);
+            // If play fails, we should surely complete
+            completeLoading();
+        });
+
+        // Safety fallback: 8 seconds (generous for a loading screen)
+        const fallbackTimeout = setTimeout(() => {
+            if (!isCompleted) {
+                console.warn("Loading timed out, forcing completion");
+                completeLoading();
+            }
+        }, 8000);
+
+        return () => {
+            clearTimeout(fallbackTimeout);
+            video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+            video.removeEventListener('timeupdate', handleTimeUpdate);
+            video.removeEventListener('ended', handleVideoEnd);
+            video.removeEventListener('error', handleError);
+        };
     }, [onLoadingComplete]);
 
     useEffect(() => {
@@ -95,11 +130,12 @@ function WorldLoading({ onLoadingComplete }) {
                 className="absolute inset-0 w-full h-full object-cover"
                 muted
                 playsInline
+                preload="auto"
                 style={{
                     imageRendering: 'pixelated',
                 }}
             >
-                <source src="/images/map/Pixel_Art_Game_Loading_Screen_Animation.mp4" />
+                <source src="/images/map/Pixel_Art_Game_Loading_Screen_Animation.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
 
@@ -198,7 +234,7 @@ function WorldLoading({ onLoadingComplete }) {
                                 letterSpacing: '0.1em',
                             }}
                         >
-                            {Math.floor(progress)}%
+                            {!isNaN(progress) ? Math.floor(progress) : 0}%
                         </div>
                     </div>
                 </div>
