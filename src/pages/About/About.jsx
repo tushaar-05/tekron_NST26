@@ -429,11 +429,25 @@ function About() {
                 { name: 'OPS', value: 80 }
             ]
         },
+        {
+            id: 5,
+            name: 'Ayush Shukla',
+            role: 'Hospitality Team',
+            image: '/images/team/ayush.jpg',
+            color: '#ef4444', // Red
+            stats: [
+                { name: 'TECH', value: 55 },
+                { name: 'MGMT', value: 95 },
+                { name: 'CRTV', value: 65 },
+                { name: 'COMM', value: 95 },
+                { name: 'OPS', value: 90 }
+            ]
+        },
         ...Array.from({ length: 9 }, (_, i) => ({
-            id: i + 5,
-            name: `Member Name ${i + 5}`,
+            id: i + 6,
+            name: `Member Name ${i + 6}`,
             role: 'Core Member',
-            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i + 4}`, // Placeholder
+            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i + 5}`, // Placeholder
             color: '#9333ea', // General Purple
             stats: [
                 { name: 'TECH', value: 70 },

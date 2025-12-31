@@ -1,92 +1,131 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 
-function WorldLoading({ onLoadingComplete }) {
+function WorldLoading({ onLoadingComplete, assets = [] }) {
     const videoRef = useRef(null);
     const [progress, setProgress] = useState(0);
     const [glitchActive, setGlitchActive] = useState(false);
     const [scanlinePosition, setScanlinePosition] = useState(0);
     const [loadingText, setLoadingText] = useState('LOADING');
 
+    // Preloading State
+    const [assetsLoaded, setAssetsLoaded] = useState(false);
+    const [assetProgress, setAssetProgress] = useState(0);
+
+    // Asset Preloading Logic
+    useEffect(() => {
+        if (!assets || assets.length === 0) {
+            setAssetsLoaded(true);
+            setAssetProgress(100);
+            return;
+        }
+
+        let loadedCount = 0;
+        let isMounted = true;
+
+        const checkCompletion = () => {
+            if (!isMounted) return;
+            loadedCount++;
+            const currentProgress = (loadedCount / assets.length) * 100;
+            setAssetProgress(currentProgress);
+
+            if (loadedCount >= assets.length) {
+                console.log("All assets preloaded successfully.");
+                setAssetsLoaded(true);
+            }
+        };
+
+        assets.forEach(src => {
+            const img = new Image();
+            img.src = src;
+            img.onload = checkCompletion;
+            img.onerror = () => {
+                console.warn(`Failed to preload asset: ${src}`);
+                checkCompletion(); // Count errors as 'done' so we don't hang
+            };
+        });
+
+        return () => { isMounted = false; };
+    }, [assets]);
+
     useEffect(() => {
         const video = videoRef.current;
         if (!video) return;
 
-        // Flags to prevent multiple completions
+        let isVideoDone = false;
         let isCompleted = false;
 
-        const completeLoading = () => {
-            if (isCompleted) return;
-            isCompleted = true;
-            setProgress(100);
-            if (video) video.pause(); // Stop immediately
-            if (onLoadingComplete) {
-                onLoadingComplete(); // No delay
-            }
-        };
-
-        const handleLoadedMetadata = () => {
-            if (video.duration === Infinity || isNaN(video.duration)) {
-                // If duration is invalid, we can't rely on timeupdate for progress
-                // We'll rely on fallback or 'ended'
-                console.warn("Video duration invalid, relying on fallback/ended events");
-                video.currentTime = 1e101; // Try to trigger end? No, just play.
+        const checkFinalCompletion = () => {
+            // ONLY complete if both video is 'done' (or near end) AND assets are loaded
+            if (isVideoDone && assetsLoaded && !isCompleted) {
+                isCompleted = true;
+                setProgress(100);
+                if (video) video.pause();
+                if (onLoadingComplete) onLoadingComplete();
             }
         };
 
         const handleTimeUpdate = () => {
             if (isCompleted) return;
             if (video.duration && video.duration > 0) {
-                const currentProgress = (video.currentTime / video.duration) * 100;
-                setProgress(currentProgress);
+                const vidProgress = (video.currentTime / video.duration) * 100;
 
-                // Pre-emptive completion if we're basically done
-                if (currentProgress >= 99.5) {
-                    completeLoading();
+                // Weighted Progress: 30% Video Time, 70% Asset Loading
+                // This gives immediate feedback when assets load, then waits for video
+                const totalProgress = (vidProgress * 0.3) + (assetProgress * 0.7);
+                setProgress(totalProgress);
+
+                // If video is basically done, mark it
+                if (vidProgress >= 98) {
+                    isVideoDone = true;
+                    checkFinalCompletion();
                 }
             }
         };
 
         const handleVideoEnd = () => {
-            completeLoading();
+            isVideoDone = true;
+            checkFinalCompletion();
         };
+
+        // If assets load LATER than video ends
+        if (assetsLoaded && isVideoDone) {
+            checkFinalCompletion();
+        }
 
         const handleError = (e) => {
             console.error("Video playback error:", e);
-            // On error, finish immediately (or after short delay) to not block user
-            completeLoading();
+            isVideoDone = true; // treat as done
+            checkFinalCompletion();
         };
 
-        // Attach listeners
-        video.addEventListener('loadedmetadata', handleLoadedMetadata);
         video.addEventListener('timeupdate', handleTimeUpdate);
         video.addEventListener('ended', handleVideoEnd);
         video.addEventListener('error', handleError);
 
-        // Attempt to play
-        video.playbackRate = 5.0; // Adjusted speed for smoother visual
+        video.playbackRate = 4.0;
         video.play().catch(err => {
-            console.warn("Video play failed (autoplay policy?):", err);
-            // If play fails, we should surely complete
-            completeLoading();
+            console.warn("Video play failed:", err);
+            isVideoDone = true;
+            checkFinalCompletion();
         });
 
-        // Safety fallback: 8 seconds (generous for a loading screen)
+        // Safety fallback: 10 seconds (increased from 8 for heavy assets)
         const fallbackTimeout = setTimeout(() => {
             if (!isCompleted) {
                 console.warn("Loading timed out, forcing completion");
-                completeLoading();
+                isCompleted = true;
+                if (onLoadingComplete) onLoadingComplete();
             }
-        }, 8000);
+        }, 10000);
 
         return () => {
             clearTimeout(fallbackTimeout);
-            video.removeEventListener('loadedmetadata', handleLoadedMetadata);
             video.removeEventListener('timeupdate', handleTimeUpdate);
             video.removeEventListener('ended', handleVideoEnd);
             video.removeEventListener('error', handleError);
         };
-    }, [onLoadingComplete]);
+    }, [onLoadingComplete, assetsLoaded, assetProgress]); // Re-run check when assetsLoaded changes
 
     useEffect(() => {
         const glitchInterval = setInterval(() => {

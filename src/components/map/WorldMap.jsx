@@ -143,8 +143,14 @@ function WorldMap() {
         }));
     }, []);
 
+    // List of heavy assets to preload
+    const islandAssets = [
+        homeIsland, aboutIsland, compIsland, contactIsland,
+        eventsIsland, galleryIsland, sponsorsIsland, storeIsland
+    ];
+
     if (phase === 'loading') {
-        return <WorldLoading onLoadingComplete={handleLoadingComplete} />;
+        return <WorldLoading onLoadingComplete={handleLoadingComplete} assets={islandAssets} />;
     }
 
     return (
