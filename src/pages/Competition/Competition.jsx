@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
@@ -8,7 +8,7 @@ import CompetitionModal from '../../components/ui/CompetitionModal/CompetitionMo
 
 const Page = styled.div`
   min-height: 100vh;
-  padding: 100px 20px 40px;
+  padding: 120px 20px 40px;
   color: white;
 `;
 
@@ -38,15 +38,24 @@ const Subtitle = styled.p`
   color: #c8b6e2;
   max-width: 700px;
   margin: 0 auto;
-  line-height: 1.4;
+  line-height: 1.6;
   font-family: 'VT323', monospace;
+  white-space: pre-wrap;
 `;
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 30px;
   padding: 20px 0;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const BackButton = styled.button`
@@ -74,6 +83,13 @@ const BackButton = styled.button`
 
 const Competition = () => {
   const navigate = useNavigate();
+  const [selectedComp, setSelectedComp] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCardClick = (comp) => {
+    setSelectedComp(comp);
+    setIsModalOpen(true);
+  };
 
   return (
     <UnifiedBackground>
@@ -96,10 +112,17 @@ const Competition = () => {
               <EventCard
                 key={comp.id}
                 {...comp}
+                onClick={() => handleCardClick(comp)}
               />
             ))}
           </Grid>
         </Container>
+
+        <CompetitionModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          data={selectedComp}
+        />
       </Page>
     </UnifiedBackground>
   );

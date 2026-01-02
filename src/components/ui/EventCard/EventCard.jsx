@@ -10,6 +10,7 @@ const CardContainer = styled(motion.div)`
   overflow: hidden;
   position: relative;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
 
   &::before {
     content: '';
@@ -160,6 +161,9 @@ const Title = styled.h3`
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
   letter-spacing: 0.5px;
   line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   background: linear-gradient(135deg, #ffffff, #d8c6f2);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -257,7 +261,7 @@ const RegisterButton = styled.a`
   }
 `;
 
-const EventCard = ({ title, category, image, prizePool, unstopLink }) => {
+const EventCard = ({ title, category, image, description, prizePool, unstopLink, onClick }) => {
   const particles = Array.from({ length: 8 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
@@ -267,6 +271,7 @@ const EventCard = ({ title, category, image, prizePool, unstopLink }) => {
 
   return (
     <CardContainer
+      onClick={onClick}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -286,14 +291,8 @@ const EventCard = ({ title, category, image, prizePool, unstopLink }) => {
 
       <Content>
         <CategoryBadge category={category}>{category}</CategoryBadge>
-        <Title>
-          {title.split(' ').map((word, i) => (
-            <React.Fragment key={i}>
-              {word}
-              {i === 0 && <br />}
-            </React.Fragment>
-          ))}
-        </Title>
+        <Title>{title}</Title>
+        {description && <Description>{description}</Description>}
 
         {/* Meta Info (Prize Pool + Register Button) - Conditionally Rendered */}
         {(prizePool || unstopLink) && (
@@ -308,6 +307,7 @@ const EventCard = ({ title, category, image, prizePool, unstopLink }) => {
                 href={unstopLink}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
               >
                 📝 Register
               </RegisterButton>

@@ -157,13 +157,8 @@ const CoreMemberCard = ({ member, index }) => {
                 {/* Operative Data */}
                 <div className="space-y-4">
                     <div className="text-center">
-                        <h3 className="text-xl font-bold text-white tracking-widest pixel-font mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/60 transition-all duration-300">
-                            {member.name.split(' ').map((word, i) => (
-                                <React.Fragment key={i}>
-                                    {word}
-                                    {i === 0 && <br />}
-                                </React.Fragment>
-                            ))}
+                        <h3 className="text-xl font-bold text-white tracking-widest pixel-font mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/60 transition-all duration-300 whitespace-nowrap overflow-hidden text-ellipsis px-2">
+                            {member.name}
                         </h3>
                         <p className="text-[10px] font-mono tracking-[0.3em] uppercase opacity-50" style={{ color: accentColor }}>
                             {member.role}
@@ -794,14 +789,7 @@ function About() {
                             <div className="w-16 h-16 mb-2 rounded-full overflow-hidden border border-purple-500/30">
                                 <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" />
                             </div>
-                            <h3 className="text-white font-bold text-xs mb-0.5">
-                                {member.name.split(' ').map((word, i) => (
-                                    <React.Fragment key={i}>
-                                        {word}
-                                        {i === 0 && <br />}
-                                    </React.Fragment>
-                                ))}
-                            </h3>
+                            <h3 className="text-white font-bold text-xs mb-0.5">{member.name}</h3>
                             <p className="text-purple-400 text-[10px] font-mono">{member.role}</p>
                         </motion.div>
                     ))}

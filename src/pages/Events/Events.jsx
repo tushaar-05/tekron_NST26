@@ -102,7 +102,7 @@ const EventCard = ({ title, category, image }) => {
         </span>
 
         <h3
-          className="text-3xl font-extrabold m-0 leading-tight tracking-wide minecraft-font"
+          className="text-3xl font-extrabold m-0 leading-tight tracking-wide minecraft-font whitespace-nowrap overflow-hidden text-ellipsis px-2"
           style={{
             background: 'linear-gradient(135deg, #ffffff, #d8c6f2)',
             WebkitBackgroundClip: 'text',
@@ -111,12 +111,7 @@ const EventCard = ({ title, category, image }) => {
             textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)'
           }}
         >
-          {title.split(' ').map((word, i) => (
-            <React.Fragment key={i}>
-              {word}
-              {i === 0 && <br />}
-            </React.Fragment>
-          ))}
+          {title}
         </h3>
       </div>
 

@@ -279,91 +279,91 @@ const Section = styled.div`
 `;
 
 const CompetitionModal = ({ isOpen, onClose, data }) => {
-  if (!isOpen || !data) return null;
-
   return (
     <AnimatePresence>
-      <Overlay
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        onClick={onClose}
-      >
-        <ModalContainer
-          initial={{ scale: 0.9, opacity: 0, y: 20 }}
-          animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.9, opacity: 0, y: 20 }}
-          onClick={e => e.stopPropagation()}
+      {isOpen && data && (
+        <Overlay
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClose}
         >
-          <CloseButton onClick={onClose}>×</CloseButton>
+          <ModalContainer
+            initial={{ scale: 0.9, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 20 }}
+            onClick={e => e.stopPropagation()}
+          >
+            <CloseButton onClick={onClose}>×</CloseButton>
 
-          <Banner image={data.image} />
+            <Banner image={data.image} />
 
-          <Content>
-            <CategoryBadge>{data.category}</CategoryBadge>
-            <Title>{data.title}</Title>
+            <Content>
+              <CategoryBadge>{data.category}</CategoryBadge>
+              <Title>{data.title}</Title>
 
-            <Grid>
-              {data.teamSize && (
-                <InfoBox>
-                  <h4>Team Size</h4>
-                  <p>{data.teamSize}</p>
-                </InfoBox>
-              )}
-              {data.date && (
-                <InfoBox>
-                  <h4>Date</h4>
-                  <p>{data.date}</p>
-                </InfoBox>
-              )}
-              {data.prizePool && (
-                <InfoBox>
-                  <h4>Prize Pool</h4>
-                  <p>{data.prizePool}</p>
-                </InfoBox>
-              )}
-            </Grid>
-
-            <Description>
-              {data.description}
-            </Description>
-
-            {data.sections && data.sections.map((section, index) => (
-              <Section key={index}>
-                <h3>{section.title}</h3>
-                {section.content && <p>{section.content}</p>}
-                {section.items && (
-                  <ul>
-                    {section.items.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
+              <Grid>
+                {data.teamSize && (
+                  <InfoBox>
+                    <h4>Team Size</h4>
+                    <p>{data.teamSize}</p>
+                  </InfoBox>
                 )}
-              </Section>
-            ))}
+                {data.date && (
+                  <InfoBox>
+                    <h4>Date</h4>
+                    <p>{data.date}</p>
+                  </InfoBox>
+                )}
+                {data.prizePool && (
+                  <InfoBox>
+                    <h4>Prize Pool</h4>
+                    <p>{data.prizePool}</p>
+                  </InfoBox>
+                )}
+              </Grid>
 
-            <ButtonGroup>
-              <RegisterButton
-                href={data.unstopLink || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {data.unstopLink ? 'Register' : 'Allocating Slots Soon'}
-              </RegisterButton>
+              <Description>
+                {data.description}
+              </Description>
 
-              {data.rulebookLink && (
-                <RulebookButton
-                  href={data.rulebookLink}
+              {data.sections && data.sections.map((section, index) => (
+                <Section key={index}>
+                  <h3>{section.title}</h3>
+                  {section.content && <p>{section.content}</p>}
+                  {section.items && (
+                    <ul>
+                      {section.items.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </Section>
+              ))}
+
+              <ButtonGroup>
+                <RegisterButton
+                  href={data.unstopLink || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Rulebook
-                </RulebookButton>
-              )}
-            </ButtonGroup>
-          </Content>
-        </ModalContainer>
-      </Overlay>
+                  {data.unstopLink ? 'Register' : 'Allocating Slots Soon'}
+                </RegisterButton>
+
+                {data.rulebookLink && (
+                  <RulebookButton
+                    href={data.rulebookLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Rulebook
+                  </RulebookButton>
+                )}
+              </ButtonGroup>
+            </Content>
+          </ModalContainer>
+        </Overlay>
+      )}
     </AnimatePresence>
   );
 };
