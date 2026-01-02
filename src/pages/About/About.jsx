@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
@@ -23,7 +23,7 @@ const AnimatedCounter = ({ target }) => {
         requestAnimationFrame(animate);
     }, [target]);
 
-    return <span>{count.toLocaleString()}</span>;
+    return <span>{count}</span>;
 };
 
 // Radar Chart Component for Stats
@@ -94,112 +94,87 @@ const RadarChart = ({ stats, color }) => {
 };
 
 // New Card Component for Core Committee
-const CoreMemberCard = ({ member, onClick, index }) => {
-    const isSpecial = member.id <= 4;
-    const rarity = isSpecial ? (member.id === 1 ? 'LEGENDARY' : 'EPIC') : 'COMMON';
+const CoreMemberCard = ({ member, index }) => {
     const accentColor = member.color;
+    const uid = `TK-00${member.id}`;
 
     return (
         <motion.div
-            initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.05 }}
-            whileHover={{ y: -5, scale: 1.02 }}
-            onClick={onClick}
-            className="relative group p-[2px] overflow-hidden cursor-pointer"
-            style={{
-                clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)'
-            }}
+            whileHover={{ y: -8 }}
+            className="group relative"
         >
-            {/* Animated Border Gradient */}
+            {/* Holographic Card Base */}
             <div
-                className="absolute inset-0 bg-gradient-to-br transition-opacity duration-300 group-hover:opacity-100 opacity-40 px-4"
-                style={{ background: `linear-gradient(135deg, ${accentColor} 0%, transparent 100%)` }}
-            />
-
-            <div className="bg-black/90 relative p-6 h-full flex flex-col items-center">
-                {/* Rarity Tag */}
-                <div className="absolute top-4 right-4 flex flex-col items-end">
-                    <span
-                        className="text-[8px] pixel-font px-2 py-0.5 border"
-                        style={{ color: accentColor, borderColor: `${accentColor}33`, background: `${accentColor}11` }}
-                    >
-                        {rarity}
-                    </span>
-                    <span className="text-[10px] text-white/20 pixel-font mt-1">LVL: 99</span>
+                className="relative bg-black/40 backdrop-blur-xl border border-white/10 p-5 overflow-hidden transition-all duration-500 group-hover:border-white/20"
+                style={{
+                    clipPath: 'polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px))'
+                }}
+            >
+                {/* Animated Hex Background */}
+                <div className="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]" />
                 </div>
 
-                {/* Avatar with Glitch Effect */}
-                <div className="relative mb-6">
+                {/* Corner Accents */}
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 opacity-30 group-hover:opacity-60 transition-opacity" style={{ borderColor: accentColor }} />
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 opacity-30 group-hover:opacity-60 transition-opacity" style={{ borderColor: accentColor }} />
+
+                {/* ID Header */}
+                <div className="flex justify-between items-start mb-6">
+                    <div className="space-y-1">
+                        <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: accentColor }} />
+                            <span className="text-[10px] pixel-font text-white/40 tracking-widest">OPERATIVE ID</span>
+                        </div>
+                        <h4 className="text-white font-mono text-xs opacity-60 tracking-tighter">{uid}</h4>
+                    </div>
+                </div>
+
+                {/* Scanning Portrait */}
+                <div className="relative mx-auto mb-6 w-40 h-40">
+                    <div className="absolute inset-x-[-10px] inset-y-[-10px] border border-dashed border-white/5 group-hover:border-white/20 rounded-full animate-spin-slow transition-colors" />
+
                     <div
-                        className="w-32 h-32 overflow-hidden border-2 transition-transform duration-300 group-hover:scale-105"
-                        style={{ borderColor: accentColor, clipPath: 'polygon(15px 0, 100% 0, 100% 100%, 0 100%, 0 15px)' }}
+                        className="relative w-full h-full transition-all duration-700 overflow-hidden"
+                        style={{ clipPath: 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)' }}
                     >
                         <img
                             src={member.image}
                             alt={member.name}
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                            className="w-full h-full object-cover scale-110 transition-transform duration-700"
                         />
-                        {/* Scanlines Overlay */}
-                        <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-30"></div>
                     </div>
+
+                    {/* Biometric Corners */}
+                    <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-white/20" />
+                    <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-white/20" />
                 </div>
 
-                {/* Member Info */}
-                <div className="text-center w-full">
-                    <div className="flex items-center justify-center gap-2 mb-1">
-                        <div className="h-[px] w-4 bg-white/20 group-hover:w-8 transition-all" />
-                        <h3 className="text-white font-bold pixel-font text-[14px] tracking-wider uppercase">
-                            {member.name}
+                {/* Operative Data */}
+                <div className="space-y-4">
+                    <div className="text-center">
+                        <h3 className="text-xl font-bold text-white tracking-widest pixel-font mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/60 transition-all duration-300">
+                            {member.name.split(' ').map((word, i) => (
+                                <React.Fragment key={i}>
+                                    {word}
+                                    {i === 0 && <br />}
+                                </React.Fragment>
+                            ))}
                         </h3>
-                        <div className="h-[1px] w-4 bg-white/20 group-hover:w-8 transition-all" />
-                    </div>
-
-                    <p
-                        className="text-[10px] font-mono uppercase tracking-[0.2em] mb-4"
-                        style={{ color: accentColor }}
-                    >
-                        &lt; {member.role} /&gt;
-                    </p>
-
-                    {/* Fun Stats Mini Bars */}
-                    <div className="grid grid-cols-2 gap-2 mt-auto w-full px-4 opacity-60">
-                        <div className="flex flex-col gap-1">
-                            <div className="flex justify-between items-center text-[7px] pixel-font text-white/40">
-                                <span>INT</span>
-                                <span>MAX</span>
-                            </div>
-                            <div className="h-[3px] bg-white/10 w-full">
-                                <motion.div
-                                    className="h-full"
-                                    initial={{ width: 0 }}
-                                    whileInView={{ width: '100%' }}
-                                    style={{ background: accentColor }}
-                                />
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                            <div className="flex justify-between items-center text-[7px] pixel-font text-white/40">
-                                <span>AGI</span>
-                                <span>MAX</span>
-                            </div>
-                            <div className="h-[3px] bg-white/10 w-full">
-                                <motion.div
-                                    className="h-full"
-                                    initial={{ width: 0 }}
-                                    whileInView={{ width: '90%' }}
-                                    style={{ background: accentColor }}
-                                />
-                            </div>
-                        </div>
+                        <p className="text-[10px] font-mono tracking-[0.3em] uppercase opacity-50" style={{ color: accentColor }}>
+                            {member.role}
+                        </p>
                     </div>
                 </div>
 
-                {/* Active Indicator on Hover */}
+                {/* Holographic Glow */}
                 <div
-                    className="absolute bottom-0 left-0 w-full h-1 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"
-                    style={{ background: `linear-gradient(90deg, transparent, ${accentColor}, transparent)` }}
+                    className="absolute -inset-2 opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-tr from-transparent via-white/5 to-transparent blur-xl pointer-events-none"
+                    style={{ background: `radial-gradient(circle at 50% 120%, ${accentColor}20, transparent)` }}
                 />
             </div>
         </motion.div>
@@ -443,11 +418,39 @@ function About() {
                 { name: 'OPS', value: 90 }
             ]
         },
-        ...Array.from({ length: 9 }, (_, i) => ({
-            id: i + 6,
-            name: `Member Name ${i + 6}`,
+        {
+            id: 6,
+            name: 'Harshit Jain',
+            role: 'Sponsorship Team',
+            image: '/images/committee/harshit_jain.jpg',
+            color: '#f97316', // Orange
+            stats: [
+                { name: 'TECH', value: 40 },
+                { name: 'MGMT', value: 98 },
+                { name: 'CRTV', value: 75 },
+                { name: 'COMM', value: 95 },
+                { name: 'OPS', value: 88 }
+            ]
+        },
+        {
+            id: 7,
+            name: 'Aditya Chopra',
+            role: 'Cultural Team',
+            image: '/images/committee/aditya_chopra.jpg',
+            color: '#6366f1', // Indigo
+            stats: [
+                { name: 'TECH', value: 30 },
+                { name: 'MGMT', value: 85 },
+                { name: 'CRTV', value: 98 },
+                { name: 'COMM', value: 92 },
+                { name: 'OPS', value: 80 }
+            ]
+        },
+        ...Array.from({ length: 7 }, (_, i) => ({
+            id: i + 8,
+            name: `Member Name ${i + 8}`,
             role: 'Core Member',
-            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i + 5}`, // Placeholder
+            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i + 7}`, // Placeholder
             color: '#9333ea', // General Purple
             stats: [
                 { name: 'TECH', value: 70 },
@@ -469,9 +472,9 @@ function About() {
     }));
 
     const stats = {
-        events: 50,
-        participants: 500,
-        projects: 100,
+        events: 20,
+        participants: 1500,
+        projects: 25,
         hours: 10000
     };
 
@@ -538,7 +541,7 @@ function About() {
                         {/* Stat 1: Participants */}
                         <div className="text-center group cursor-default">
                             <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-cyan-400 transition-colors">PLAYERS</div>
-                            <div className="text-2xl md:text-4xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                            <div className="text-lg md:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
                                 <AnimatedCounter target={stats.participants} />
                                 <span className="text-purple-500">+</span>
                             </div>
@@ -547,16 +550,16 @@ function About() {
                         {/* Stat 2: Events */}
                         <div className="text-center group cursor-default">
                             <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-pink-400 transition-colors">QUESTS</div>
-                            <div className="text-2xl md:text-4xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                            <div className="text-lg md:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
                                 <AnimatedCounter target={stats.events} />
                                 <span className="text-purple-500">+</span>
                             </div>
                         </div>
 
-                        {/* Stat 3: Projects */}
+                        {/* Stat 3: Events */}
                         <div className="text-center group cursor-default">
-                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-green-400 transition-colors">LOOT</div>
-                            <div className="text-2xl md:text-4xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-green-400 transition-colors">EVENTS</div>
+                            <div className="text-lg md:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
                                 <AnimatedCounter target={stats.projects} />
                                 <span className="text-purple-500">+</span>
                             </div>
@@ -565,8 +568,8 @@ function About() {
                         {/* Stat 4: Prize Pool */}
                         <div className="text-center group cursor-default">
                             <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-yellow-400 transition-colors">BOUNTY</div>
-                            <div className="text-2xl md:text-4xl font-bold text-yellow-400 pixel-font" style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.5)' }}>
-                                ₹7L
+                            <div className="text-lg md:text-2xl font-bold text-yellow-400 pixel-font" style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.5)' }}>
+                                8L
                                 <span className="text-purple-500">+</span>
                             </div>
                         </div>
@@ -791,7 +794,14 @@ function About() {
                             <div className="w-16 h-16 mb-2 rounded-full overflow-hidden border border-purple-500/30">
                                 <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" />
                             </div>
-                            <h3 className="text-white font-bold text-xs mb-0.5">{member.name}</h3>
+                            <h3 className="text-white font-bold text-xs mb-0.5">
+                                {member.name.split(' ').map((word, i) => (
+                                    <React.Fragment key={i}>
+                                        {word}
+                                        {i === 0 && <br />}
+                                    </React.Fragment>
+                                ))}
+                            </h3>
                             <p className="text-purple-400 text-[10px] font-mono">{member.role}</p>
                         </motion.div>
                     ))}

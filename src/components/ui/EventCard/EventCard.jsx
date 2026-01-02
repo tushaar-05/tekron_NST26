@@ -9,7 +9,6 @@ const CardContainer = styled(motion.div)`
   border-radius: 20px;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   &::before {
@@ -31,7 +30,7 @@ const CardContainer = styled(motion.div)`
   }
 
   &:hover {
-    transform: translateY(-10px) scale(1.02);
+    transform: translateY(-10px);
     box-shadow: 
       0 20px 40px rgba(168, 85, 247, 0.3),
       0 0 60px rgba(124, 58, 237, 0.2),
@@ -258,7 +257,7 @@ const RegisterButton = styled.a`
   }
 `;
 
-const EventCard = ({ title, category, image, description, prizePool, unstopLink, onClick }) => {
+const EventCard = ({ title, category, image, prizePool, unstopLink }) => {
   const particles = Array.from({ length: 8 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
@@ -266,14 +265,8 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
     color: ['#a855f7', '#7c3aed', '#6366f1', '#8b5cf6'][Math.floor(Math.random() * 4)]
   }));
 
-  // Truncate description for card view
-  const truncate = (str, n) => {
-    return (str?.length > n) ? str.substr(0, n - 1) + '...' : str;
-  };
-
   return (
     <CardContainer
-      onClick={onClick}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -282,7 +275,8 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
       <ImageContainer image={image}>
         {!image && (
           <IconCircle
-            whileHover={{ scale: 1.1, rotate: 5 }}
+            initial={{ scale: 1.1, rotate: 5 }}
+            animate={{ scale: 1.1, rotate: 5 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
             {title.charAt(0)}
@@ -292,14 +286,14 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
 
       <Content>
         <CategoryBadge category={category}>{category}</CategoryBadge>
-        <Title>{title}</Title>
-
-        {/* Description - Conditionally Rendered */}
-        {description && (
-          <Description>
-            {truncate(description, 100)}
-          </Description>
-        )}
+        <Title>
+          {title.split(' ').map((word, i) => (
+            <React.Fragment key={i}>
+              {word}
+              {i === 0 && <br />}
+            </React.Fragment>
+          ))}
+        </Title>
 
         {/* Meta Info (Prize Pool + Register Button) - Conditionally Rendered */}
         {(prizePool || unstopLink) && (
@@ -314,7 +308,6 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
                 href={unstopLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
               >
                 📝 Register
               </RegisterButton>

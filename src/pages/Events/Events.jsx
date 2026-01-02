@@ -19,19 +19,12 @@ const EventCard = ({ title, category, image }) => {
     return 'from-violet-500 to-violet-800';
   };
 
-  const getDescription = (cat) => {
-    if (cat === 'Competition') return 'Compete with the best and showcase your skills';
-    if (cat === 'Workshop') return 'Learn from experts and gain hands-on experience';
-    return 'Experience innovation and technology firsthand';
-  };
-
   return (
     <div
-      className="relative overflow-hidden rounded-3xl cursor-pointer transition-all duration-500 ease-out"
+      className="relative overflow-hidden rounded-3xl transition-all duration-500 ease-out"
       style={{
         background: 'linear-gradient(135deg, rgba(30, 20, 56, 0.8), rgba(45, 27, 78, 0.6))',
         backdropFilter: 'blur(20px)',
-        transform: isHovered ? 'translateY(-10px) scale(1.02)' : 'translateY(0) scale(1)',
         boxShadow: isHovered
           ? '0 20px 40px rgba(168, 85, 247, 0.3), 0 0 60px rgba(124, 58, 237, 0.2)'
           : '0 4px 6px rgba(0, 0, 0, 0.1)'
@@ -83,7 +76,7 @@ const EventCard = ({ title, category, image }) => {
                 border: '3px solid rgba(168, 85, 247, 0.4)',
                 color: '#d8c6f2',
                 textShadow: '0 0 20px rgba(168, 85, 247, 0.6)',
-                transform: isHovered ? 'scale(1.1) rotate(5deg)' : 'scale(1) rotate(0deg)'
+                transform: 'scale(1.1) rotate(5deg)'
               }}
             >
               <div
@@ -118,7 +111,12 @@ const EventCard = ({ title, category, image }) => {
             textShadow: '0 2px 8px rgba(0, 0, 0, 0.5)'
           }}
         >
-          {title}
+          {title.split(' ').map((word, i) => (
+            <React.Fragment key={i}>
+              {word}
+              {i === 0 && <br />}
+            </React.Fragment>
+          ))}
         </h3>
       </div>
 

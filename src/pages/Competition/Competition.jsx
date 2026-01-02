@@ -74,7 +74,6 @@ const BackButton = styled.button`
 
 const Competition = () => {
   const navigate = useNavigate();
-  const [selectedCompetition, setSelectedCompetition] = React.useState(null);
 
   return (
     <UnifiedBackground>
@@ -97,17 +96,10 @@ const Competition = () => {
               <EventCard
                 key={comp.id}
                 {...comp}
-                onClick={() => setSelectedCompetition(comp)}
               />
             ))}
           </Grid>
         </Container>
-
-        <CompetitionModal
-          isOpen={!!selectedCompetition}
-          onClose={() => setSelectedCompetition(null)}
-          data={selectedCompetition}
-        />
       </Page>
     </UnifiedBackground>
   );

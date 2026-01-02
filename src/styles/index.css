@@ -56,11 +56,28 @@ body {
   image-rendering: pixelated;
 }
 
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
 /* Floating animation */
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-15px);
   }
@@ -72,14 +89,14 @@ body {
 
 /* Glow effect */
 .glow-purple {
-  box-shadow: 
+  box-shadow:
     0 0 10px rgba(147, 51, 234, 0.5),
     0 0 20px rgba(147, 51, 234, 0.3),
     0 0 30px rgba(147, 51, 234, 0.2);
 }
 
 .glow-cyan {
-  box-shadow: 
+  box-shadow:
     0 0 10px rgba(34, 211, 238, 0.6),
     0 0 20px rgba(34, 211, 238, 0.4),
     0 0 30px rgba(34, 211, 238, 0.2);
@@ -91,7 +108,7 @@ body {
   background: #7c3aed;
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     /* Pixelated multi-layer border for blocky effect */
     0 0 0 2px #000000,
     0 0 0 4px #c084fc,
@@ -124,7 +141,7 @@ body {
 .pixel-button:hover {
   background: #a855f7;
   transform: translate(-2px, -2px);
-  box-shadow: 
+  box-shadow:
     /* Pixelated multi-layer border for blocky effect */
     0 0 0 2px #000000,
     0 0 0 4px #c084fc,
@@ -136,7 +153,7 @@ body {
 
 .pixel-button:active {
   transform: translate(2px, 2px);
-  box-shadow: 
+  box-shadow:
     /* Pixelated multi-layer border for blocky effect */
     0 0 0 2px #000000,
     0 0 0 4px #c084fc,
@@ -151,7 +168,7 @@ body {
   background: rgba(30, 30, 40, 0.95);
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     0 0 0 1px #000000,
     0 0 0 2px #0a0a0a,
     0 0 0 3px #a855f7,
@@ -197,7 +214,7 @@ body {
   background: linear-gradient(135deg, rgba(124, 58, 237, 0.3) 0%, rgba(88, 28, 135, 0.3) 100%);
   border: 3px solid rgba(192, 132, 252, 0.6);
   backdrop-filter: blur(10px);
-  box-shadow: 
+  box-shadow:
     0 0 30px rgba(147, 51, 234, 0.4),
     inset 0 2px 0 rgba(255, 255, 255, 0.2);
 }
@@ -213,7 +230,7 @@ body {
   background: rgba(30, 30, 40, 0.95);
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     0 0 0 1px #000000,
     0 0 0 2px #0a0a0a,
     0 0 0 3px #a855f7,
@@ -229,7 +246,7 @@ body {
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
   image-rendering: -webkit-optimize-contrast;
-  text-shadow: 
+  text-shadow:
     1px 1px 0px #000000,
     0 0 10px rgba(168, 85, 247, 0.5);
   letter-spacing: 0.05em;
@@ -260,7 +277,7 @@ body {
   background: rgba(30, 30, 40, 0.9);
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     0 0 0 1px #000000,
     0 0 0 2px #1e1438,
     0 0 0 3px #a855f7,
@@ -289,7 +306,7 @@ body {
   background: rgba(0, 0, 0, 0.8);
   border: none;
   border-radius: 2px;
-  box-shadow: 
+  box-shadow:
     0 0 0 1px #000000,
     0 0 0 2px #a855f7,
     inset 0 0 5px rgba(0, 0, 0, 0.8);
@@ -298,7 +315,7 @@ body {
   font-size: 1.2rem;
   min-width: 40px;
   text-align: center;
-  text-shadow: 
+  text-shadow:
     1px 1px 0px #000000,
     0 0 8px rgba(168, 85, 247, 0.8),
     0 0 15px rgba(192, 132, 252, 0.4);
@@ -313,7 +330,7 @@ body {
 .countdown-label {
   color: #d8c6f2;
   font-size: 0.5rem;
-  text-shadow: 
+  text-shadow:
     1px 1px 0px #000000,
     0 0 5px rgba(168, 85, 247, 0.5);
   letter-spacing: 0.1em;
@@ -330,7 +347,7 @@ body {
   font-size: 1.5rem;
   line-height: 1;
   margin: 0 2px;
-  text-shadow: 
+  text-shadow:
     1px 1px 0px #000000,
     0 0 10px rgba(168, 85, 247, 0.8);
   animation: blink 1s infinite;
@@ -344,14 +361,17 @@ body {
   .countdown-item {
     min-width: 50px;
   }
+
   .countdown-value {
     font-size: 1.5rem;
     min-width: 50px;
     padding: 6px 8px;
   }
+
   .countdown-label {
     font-size: 0.6rem;
   }
+
   .countdown-separator {
     font-size: 1.8rem;
     margin: 0 4px;
@@ -363,18 +383,22 @@ body {
     gap: 8px;
     padding: 8px 16px;
   }
+
   .countdown-item {
     min-width: 60px;
     gap: 4px;
   }
+
   .countdown-value {
     font-size: 2rem;
     min-width: 60px;
     padding: 8px 10px;
   }
+
   .countdown-label {
     font-size: 0.7rem;
   }
+
   .countdown-separator {
     font-size: 2.2rem;
     margin: 0 6px;
@@ -386,18 +410,22 @@ body {
     gap: 12px;
     padding: 12px 24px;
   }
+
   .countdown-item {
     min-width: 80px;
     gap: 6px;
   }
+
   .countdown-value {
     font-size: 2.5rem;
     min-width: 80px;
     padding: 10px 12px;
   }
+
   .countdown-label {
     font-size: 0.8rem;
   }
+
   .countdown-separator {
     font-size: 3rem;
     margin: 0 8px;
@@ -405,10 +433,14 @@ body {
 }
 
 @keyframes blink {
-  0%, 50% {
+
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+
+  51%,
+  100% {
     opacity: 0.3;
   }
 }
@@ -428,30 +460,28 @@ body {
   overflow: visible;
   transition: all 0.3s ease;
   /* Pixel art notch shape - rounded top, jagged bottom */
-  clip-path: polygon(
-    0% 0%,
-    100% 0%,
-    100% calc(100% - 18px),
-    98% calc(100% - 15px),
-    95% 100%,
-    92% calc(100% - 16px),
-    88% calc(100% - 12px),
-    85% calc(100% - 8px),
-    80% calc(100% - 5px),
-    70% calc(100% - 3px),
-    60% calc(100% - 2px),
-    50% calc(100% - 1px),
-    40% calc(100% - 2px),
-    30% calc(100% - 3px),
-    20% calc(100% - 5px),
-    15% calc(100% - 8px),
-    12% calc(100% - 12px),
-    8% calc(100% - 16px),
-    5% 100%,
-    2% calc(100% - 15px),
-    0% calc(100% - 18px)
-  );
-  box-shadow: 
+  clip-path: polygon(0% 0%,
+      100% 0%,
+      100% calc(100% - 18px),
+      98% calc(100% - 15px),
+      95% 100%,
+      92% calc(100% - 16px),
+      88% calc(100% - 12px),
+      85% calc(100% - 8px),
+      80% calc(100% - 5px),
+      70% calc(100% - 3px),
+      60% calc(100% - 2px),
+      50% calc(100% - 1px),
+      40% calc(100% - 2px),
+      30% calc(100% - 3px),
+      20% calc(100% - 5px),
+      15% calc(100% - 8px),
+      12% calc(100% - 12px),
+      8% calc(100% - 16px),
+      5% 100%,
+      2% calc(100% - 15px),
+      0% calc(100% - 18px));
+  box-shadow:
     0 0 0 1px rgba(0, 240, 255, 0.2),
     0 0 20px rgba(0, 240, 255, 0.3),
     inset 0 0 10px rgba(0, 240, 255, 0.05);
@@ -472,7 +502,7 @@ body {
   width: 280px;
   background: rgba(0, 240, 255, 0.25);
   border-color: rgba(0, 240, 255, 0.7);
-  box-shadow: 
+  box-shadow:
     0 0 0 1px rgba(0, 240, 255, 0.3),
     0 0 30px rgba(0, 240, 255, 0.5),
     0 0 50px rgba(124, 58, 237, 0.3),
@@ -520,7 +550,7 @@ body {
 
 /* Pixelated Tech Grid Pattern */
 .tech-grid-pixel {
-  background-image: 
+  background-image:
     linear-gradient(rgba(192, 132, 252, 0.08) 2px, transparent 2px),
     linear-gradient(90deg, rgba(192, 132, 252, 0.08) 2px, transparent 2px);
   background-size: 40px 40px;
@@ -534,6 +564,7 @@ body {
   0% {
     transform: translate(0, 0);
   }
+
   100% {
     transform: translate(40px, 40px);
   }
@@ -541,13 +572,11 @@ body {
 
 /* Pixelated Scanning Line Effect */
 .scan-line-pixel {
-  background: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(192, 132, 252, 0.15) 2px,
-    rgba(192, 132, 252, 0.15) 4px,
-    transparent 6px
-  );
+  background: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(192, 132, 252, 0.15) 2px,
+      rgba(192, 132, 252, 0.15) 4px,
+      transparent 6px);
   background-size: 100% 20px;
   animation: scanPixel 4s linear infinite;
   pointer-events: none;
@@ -560,6 +589,7 @@ body {
   0% {
     transform: translateY(-100%);
   }
+
   100% {
     transform: translateY(100vh);
   }
@@ -567,7 +597,7 @@ body {
 
 /* Pixelated Glitch Overlay */
 .glitch-overlay-pixel {
-  background: 
+  background:
     linear-gradient(90deg, transparent 0%, rgba(255, 0, 0, 0.15) 2px, transparent 4px),
     linear-gradient(0deg, transparent 0%, rgba(0, 255, 255, 0.15) 2px, transparent 4px);
   background-size: 8px 8px;
@@ -582,15 +612,19 @@ body {
   0% {
     transform: translate(0);
   }
+
   25% {
     transform: translate(-2px, 2px);
   }
+
   50% {
     transform: translate(2px, -2px);
   }
+
   75% {
     transform: translate(-2px, -2px);
   }
+
   100% {
     transform: translate(0);
   }
@@ -602,16 +636,19 @@ body {
 }
 
 @keyframes pixelTechPulse {
-  0%, 100% {
-    text-shadow: 
-      6px 6px 0px rgba(0, 0, 0, 0.6), 
-      0 0 40px rgba(216, 198, 242, 0.3), 
+
+  0%,
+  100% {
+    text-shadow:
+      6px 6px 0px rgba(0, 0, 0, 0.6),
+      0 0 40px rgba(216, 198, 242, 0.3),
       0 0 60px rgba(124, 58, 237, 0.2);
   }
+
   50% {
-    text-shadow: 
-      6px 6px 0px rgba(0, 0, 0, 0.6), 
-      0 0 50px rgba(216, 198, 242, 0.5), 
+    text-shadow:
+      6px 6px 0px rgba(0, 0, 0, 0.6),
+      0 0 50px rgba(216, 198, 242, 0.5),
       0 0 80px rgba(124, 58, 237, 0.4),
       0 0 100px rgba(168, 85, 247, 0.2);
   }
@@ -623,15 +660,20 @@ body {
 }
 
 @keyframes textGlitchPixel {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0);
   }
+
   25% {
     transform: translate(-2px, 2px);
   }
+
   50% {
     transform: translate(2px, -2px);
   }
+
   75% {
     transform: translate(-2px, -2px);
   }
@@ -639,7 +681,7 @@ body {
 
 /* Pixel Button with Tech Glow */
 .pixel-tech-button {
-  box-shadow: 
+  box-shadow:
     /* Pixelated multi-layer border for blocky effect */
     0 0 0 2px #000000,
     0 0 0 4px #c084fc,
@@ -653,7 +695,7 @@ body {
 }
 
 .pixel-tech-button:hover {
-  box-shadow: 
+  box-shadow:
     /* Pixelated multi-layer border for blocky effect */
     0 0 0 2px #000000,
     0 0 0 4px #c084fc,
@@ -683,7 +725,7 @@ body {
   background: rgba(30, 30, 40, 0.9);
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     0 0 0 2px #000000,
     0 0 0 4px #1e1438,
     0 0 0 6px #a855f7,
@@ -693,7 +735,7 @@ body {
     inset 0 0 10px rgba(0, 0, 0, 0.5);
   color: #c084fc;
   font-size: clamp(8px, 0.8vw, 12px);
-  text-shadow: 
+  text-shadow:
     1px 1px 0px #000000,
     0 0 10px rgba(192, 132, 252, 0.5);
   transition: none;
@@ -705,7 +747,7 @@ body {
 
 .tech-badge-pixel:hover {
   background: rgba(40, 40, 50, 0.9);
-  box-shadow: 
+  box-shadow:
     0 0 0 2px #000000,
     0 0 0 4px #1e1438,
     0 0 0 6px #a855f7,
@@ -731,7 +773,7 @@ body {
 
 /* AI & ML Icon - Neural Network (Pixel Grid) */
 .pixel-icon-ai {
-  background: 
+  background:
     /* Grid pattern for neural network */
     linear-gradient(#c084fc 1px, transparent 1px),
     linear-gradient(90deg, #c084fc 1px, transparent 1px),
@@ -747,7 +789,7 @@ body {
 
 /* Quantum Icon - Atom (Pixel Style) */
 .pixel-icon-quantum {
-  background: 
+  background:
     /* Pixelated orbital rings */
     conic-gradient(from 0deg at 50% 50%, transparent 0deg, #00d9ff 90deg, transparent 180deg, #00d9ff 270deg, transparent 360deg),
     /* Nucleus */
@@ -755,9 +797,7 @@ body {
   background-size: 28px 28px, 28px 28px;
   border-radius: 0;
   filter: drop-shadow(0 0 6px rgba(0, 217, 255, 0.9));
-  clip-path: polygon(
-    50% 0%, 100% 25%, 100% 50%, 75% 50%, 50% 100%, 25% 50%, 0% 50%, 0% 25%
-  );
+  clip-path: polygon(50% 0%, 100% 25%, 100% 50%, 75% 50%, 50% 100%, 25% 50%, 0% 50%, 0% 25%);
 }
 
 .pixel-icon-quantum::before {
@@ -768,7 +808,7 @@ body {
   width: 4px;
   height: 4px;
   background: #00f0ff;
-  box-shadow: 
+  box-shadow:
     14px 0 0 #00f0ff,
     0 14px 0 #00f0ff,
     14px 14px 0 #00f0ff;
@@ -777,18 +817,25 @@ body {
 }
 
 @keyframes quantumPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.2); }
+
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.6;
+    transform: scale(1.2);
+  }
 }
 
 /* Security Icon - Shield (Pixel Style) */
 .pixel-icon-security {
-  background: 
+  background:
     /* Shield base */
     linear-gradient(to bottom, #a855f7 0%, #a855f7 40%, #c084fc 40%, #c084fc 60%, #a855f7 60%, #a855f7 100%);
-  clip-path: polygon(
-    50% 0%, 90% 20%, 90% 60%, 50% 100%, 10% 60%, 10% 20%
-  );
+  clip-path: polygon(50% 0%, 90% 20%, 90% 60%, 50% 100%, 10% 60%, 10% 20%);
   filter: drop-shadow(0 0 6px rgba(192, 132, 252, 0.9));
   position: relative;
 }
@@ -821,7 +868,7 @@ body {
 
 /* Web3 Icon - Blockchain (Pixel Blocks) */
 .pixel-icon-web3 {
-  background: 
+  background:
     /* Chain blocks */
     linear-gradient(90deg, #c084fc 0%, #c084fc 35%, transparent 35%, transparent 65%, #c084fc 65%, #c084fc 100%),
     linear-gradient(0deg, #a855f7 0%, #a855f7 35%, transparent 35%, transparent 65%, #a855f7 65%, #a855f7 100%);
@@ -836,7 +883,7 @@ body {
   width: 6px;
   height: 6px;
   background: #00f0ff;
-  box-shadow: 
+  box-shadow:
     11px 0 0 #00f0ff,
     0 11px 0 #00f0ff,
     11px 11px 0 #00f0ff;
@@ -845,7 +892,7 @@ body {
 
 /* Cloud Icon - Server/Cloud (Pixel Style) */
 .pixel-icon-cloud {
-  background: 
+  background:
     /* Cloud shape - pixelated */
     radial-gradient(circle at 30% 45%, #c084fc 5px, transparent 5px),
     radial-gradient(circle at 50% 45%, #a855f7 6px, transparent 6px),
@@ -863,14 +910,12 @@ body {
   left: 25%;
   width: 50%;
   height: 3px;
-  background: 
-    repeating-linear-gradient(
-      90deg,
+  background:
+    repeating-linear-gradient(90deg,
       #00f0ff 0px,
       #00f0ff 3px,
       transparent 3px,
-      transparent 6px
-    );
+      transparent 6px);
   filter: drop-shadow(0 0 4px rgba(0, 240, 255, 1));
 }
 
@@ -883,7 +928,7 @@ body {
   background: rgba(30, 30, 40, 0.9);
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     0 0 0 2px #000000,
     0 0 0 4px #1e1438,
     0 0 0 6px #a855f7,
@@ -897,12 +942,12 @@ body {
   background: rgba(0, 0, 0, 0.8);
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     0 0 0 2px #000000,
     0 0 0 4px #a855f7,
     inset 0 0 10px rgba(0, 0, 0, 0.8);
   color: #c084fc;
-  text-shadow: 
+  text-shadow:
     2px 2px 0px #000000,
     0 0 15px rgba(168, 85, 247, 0.8),
     0 0 30px rgba(192, 132, 252, 0.4);
@@ -910,7 +955,7 @@ body {
 
 .countdown-separator {
   color: #a855f7;
-  text-shadow: 
+  text-shadow:
     2px 2px 0px #000000,
     0 0 20px rgba(168, 85, 247, 0.8);
   animation: blink 1s infinite;
@@ -921,7 +966,7 @@ body {
   background: rgba(30, 30, 40, 0.95);
   border: none;
   border-radius: 0;
-  box-shadow: 
+  box-shadow:
     0 0 0 1px #000000,
     0 0 0 2px #0a0a0a,
     0 0 0 3px #a855f7,
@@ -949,10 +994,14 @@ body {
 }
 
 @keyframes blinkCursor {
-  0%, 50% {
+
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+
+  51%,
+  100% {
     opacity: 0;
   }
 }
@@ -962,40 +1011,46 @@ body {
 }
 
 @keyframes dialogueGlitchEffect {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translate(0);
-    text-shadow: 
-      1px 1px 0px #000000, 
+    text-shadow:
+      1px 1px 0px #000000,
       0 0 10px rgba(168, 85, 247, 0.3);
   }
+
   20% {
     transform: translate(-1px, 1px);
-    text-shadow: 
-      1px 1px 0px #000000, 
+    text-shadow:
+      1px 1px 0px #000000,
       -2px 0 0 rgba(255, 0, 0, 0.5),
       2px 0 0 rgba(0, 255, 255, 0.5),
       0 0 10px rgba(168, 85, 247, 0.3);
   }
+
   40% {
     transform: translate(1px, -1px);
-    text-shadow: 
-      1px 1px 0px #000000, 
+    text-shadow:
+      1px 1px 0px #000000,
       2px 0 0 rgba(255, 0, 0, 0.5),
       -2px 0 0 rgba(0, 255, 255, 0.5),
       0 0 10px rgba(168, 85, 247, 0.3);
   }
+
   60% {
     transform: translate(-1px, -1px);
-    text-shadow: 
-      1px 1px 0px #000000, 
+    text-shadow:
+      1px 1px 0px #000000,
       -2px 0 0 rgba(255, 0, 0, 0.5),
       2px 0 0 rgba(0, 255, 255, 0.5),
       0 0 15px rgba(168, 85, 247, 0.6);
   }
+
   80% {
     transform: translate(1px, 1px);
-    text-shadow: 
-      1px 1px 0px #000000, 
+    text-shadow:
+      1px 1px 0px #000000,
       2px 0 0 rgba(255, 0, 0, 0.5),
       -2px 0 0 rgba(0, 255, 255, 0.5),
       0 0 10px rgba(168, 85, 247, 0.3);
