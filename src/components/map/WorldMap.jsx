@@ -10,7 +10,6 @@ const contactIsland = '/images/map/islands/contact_pixel.png';
 const eventsIsland = '/images/map/islands/events_pixel.png';
 const galleryIsland = '/images/map/islands/gallery_pixel.png';
 const sponsorsIsland = '/images/map/islands/sponsors_pixel.png';
-const storeIsland = '/images/map/islands/store_pixel.png';
 import WorldLoading from './WorldLoading';
 
 function WorldMap() {
@@ -52,17 +51,13 @@ function WorldMap() {
 
     const islands = [
         { id: 'home', image: homeIsland, label: 'HOME', x: 50, y: 50, size: 280, route: '/' },
-        // Top
-        { id: 'contact', image: contactIsland, label: 'CONTACT', x: 50, y: 15, size: 130, route: '/contact' },
-        // Upper Flank
-        { id: 'events', image: eventsIsland, label: 'EVENTS', x: 20, y: 30, size: 150, route: '/events' },
-        { id: 'comp', image: compIsland, label: 'COMPETITIONS', x: 80, y: 30, size: 180, route: '/competition' },
-        // Mid Flank
-        { id: 'sponsors', image: sponsorsIsland, label: 'SPONSORS', x: 10, y: 55, size: 140, route: '/sponsors' },
-        { id: 'gallery', image: galleryIsland, label: 'GALLERY', x: 90, y: 55, size: 160, route: '/gallery' },
-        // Lower Flank
-        { id: 'about', image: aboutIsland, label: 'ABOUT', x: 30, y: 80, size: 160, route: '/about' },
-        { id: 'store', image: storeIsland, label: 'STORE', x: 70, y: 80, size: 140, route: '/store' }
+        // Symmetric hexagonal layout
+        { id: 'contact', image: contactIsland, label: 'CONTACT', x: 50, y: 10, size: 130, route: '/contact' },
+        { id: 'comp', image: compIsland, label: 'COMPETITIONS', x: 85, y: 25, size: 180, route: '/competition' },
+        { id: 'gallery', image: galleryIsland, label: 'GALLERY', x: 85, y: 65, size: 160, route: '/gallery' },
+        { id: 'about', image: aboutIsland, label: 'ABOUT', x: 50, y: 85, size: 160, route: '/about' },
+        { id: 'sponsors', image: sponsorsIsland, label: 'SPONSORS', x: 15, y: 65, size: 140, route: '/sponsors' },
+        { id: 'events', image: eventsIsland, label: 'EVENTS', x: 15, y: 25, size: 150, route: '/events' }
     ];
 
     // The Genesis Sequence Controller Combined with Physics
@@ -146,7 +141,7 @@ function WorldMap() {
     // List of heavy assets to preload
     const islandAssets = [
         homeIsland, aboutIsland, compIsland, contactIsland,
-        eventsIsland, galleryIsland, sponsorsIsland, storeIsland
+        eventsIsland, galleryIsland, sponsorsIsland
     ];
 
     if (phase === 'loading') {
@@ -433,7 +428,7 @@ function WorldMap() {
             </motion.div>
 
             {/* Narrative HUD */}
-            <div className="absolute bottom-12 left-0 w-full text-center z-50 pointer-events-none">
+            <div className="absolute bottom-12 right-12 z-50 pointer-events-none">
                 <motion.div
                     key={narrative} // Re-animate on text change
                     initial={{ opacity: 0, y: 10 }}

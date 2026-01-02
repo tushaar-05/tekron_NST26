@@ -184,7 +184,7 @@ const Particles = styled.div`
   opacity: 0;
   transition: opacity 0.4s ease;
 
-  ${CardContainer}:hover & {
+  \${CardContainer}:hover & {
     opacity: 1;
   }
 `;
@@ -193,9 +193,9 @@ const Particle = styled(motion.div)`
   position: absolute;
   width: 4px;
   height: 4px;
-  background: ${props => props.color || '#a855f7'};
+  background: \${props => props.color || '#a855f7'};
   border-radius: 50%;
-  box-shadow: 0 0 10px ${props => props.color || '#a855f7'};
+  box-shadow: 0 0 10px \${props => props.color || '#a855f7'};
 `;
 
 const MetaInfo = styled.div`
@@ -212,12 +212,12 @@ const MetaInfo = styled.div`
 const MetaItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 1.1rem;
+  gap: 8px;
+  font-size: 1.4rem;
   color: #c8b6e2;
   background: rgba(168, 85, 247, 0.1);
-  padding: 6px 10px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
   border: 1px solid rgba(168, 85, 247, 0.2);
   font-family: 'VT323', monospace;
   white-space: nowrap;
@@ -231,11 +231,11 @@ const MetaItem = styled.div`
 const RegisterButton = styled.a`
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 14px;
+  gap: 8px;
+  padding: 8px 18px;
   background: linear-gradient(135deg, #a855f7, #7c3aed);
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   font-weight: 700;
   text-decoration: none;
   border-radius: 8px;

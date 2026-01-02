@@ -23,14 +23,14 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-  font-size: 4rem;
+  font-size: 5rem;
   font-weight: 800;
   margin-bottom: 20px;
   background: linear-gradient(90deg, #a855f7, #6366f1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-family: 'VT323', monospace;
+  font-family: 'Press Start 2P', cursive;
 `;
 
 const Subtitle = styled.p`
@@ -44,7 +44,7 @@ const Subtitle = styled.p`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
   gap: 30px;
   padding: 20px 0;
 `;

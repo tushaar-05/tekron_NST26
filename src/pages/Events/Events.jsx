@@ -202,7 +202,7 @@ export default function Events() {
           {/* Header */}
           <header className="text-center mb-16">
             <h1
-              className="text-6xl font-extrabold mb-5 leading-tight"
+              className="text-5xl md:text-6xl font-extrabold mb-5 leading-tight"
               style={{
                 background: 'linear-gradient(90deg, #a855f7, #6366f1)',
                 WebkitBackgroundClip: 'text',
