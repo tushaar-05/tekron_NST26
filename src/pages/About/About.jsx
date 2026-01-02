@@ -569,7 +569,7 @@ function About() {
                         <div className="text-center group cursor-default">
                             <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-yellow-400 transition-colors">BOUNTY</div>
                             <div className="text-lg md:text-2xl font-bold text-yellow-400 pixel-font" style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.5)' }}>
-                                8L
+                                ₹8L
                                 <span className="text-purple-500">+</span>
                             </div>
                         </div>
@@ -724,7 +724,7 @@ function About() {
                         viewport={{ once: true }}
                         className="text-purple-300 pixel-font text-xs"
                     >
-                        &gt; SELECT_OPERATIVE_TO_VIEW_SPECIFICATIONS.
+                        &gt; THE_ARCHITECTS_OF_THE_REALM.
                     </motion.p>
                 </div>
 
