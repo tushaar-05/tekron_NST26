@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useNavigate, useLocation } from 'react-router-dom';
+import MapIsland from './MapIsland';
+import WorldLoading from './WorldLoading';
 
 // Import optimized island images
 const homeIsland = '/images/map/islands/home_pixel.png';
@@ -10,25 +12,25 @@ const contactIsland = '/images/map/islands/contact_pixel.png';
 const eventsIsland = '/images/map/islands/events_pixel.png';
 const galleryIsland = '/images/map/islands/gallery_pixel.png';
 const sponsorsIsland = '/images/map/islands/sponsors_pixel.png';
-import WorldLoading from './WorldLoading';
 
 function WorldMap() {
     const navigate = useNavigate();
     const location = useLocation();
-    // Phases: 'loading', 'void', 'seed', 'genesis', 'stabilized', 'connected'
+
     // Phases: 'loading', 'void', 'seed', 'genesis', 'stabilized', 'connected'
     const [phase, setPhase] = useState(() => {
-        // Global Flag Check: If user has EVER finished intro this session, skip it.
         const introComplete = sessionStorage.getItem('tekron_intro_complete') === 'true';
         return introComplete ? 'void' : 'loading';
     });
+
     const [narrative, setNarrative] = useState('');
+    const [visibleIslands, setVisibleIslands] = useState(['home']); // Start with only Home visible
 
     // --- 3D Physics State ---
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Smooth physics for tilt - Heavy/Premium feel
+    // Smooth physics for tilt
     const springConfig = { damping: 30, stiffness: 100 };
     const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), springConfig);
     const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), springConfig);
@@ -51,7 +53,6 @@ function WorldMap() {
 
     const islands = [
         { id: 'home', image: homeIsland, label: 'HOME', x: 50, y: 50, size: 280, route: '/' },
-        // Symmetric hexagonal layout
         { id: 'contact', image: contactIsland, label: 'CONTACT', x: 50, y: 10, size: 130, route: '/contact' },
         { id: 'comp', image: compIsland, label: 'COMPETITIONS', x: 85, y: 25, size: 180, route: '/competition' },
         { id: 'gallery', image: galleryIsland, label: 'GALLERY', x: 85, y: 65, size: 160, route: '/gallery' },
@@ -60,63 +61,69 @@ function WorldMap() {
         { id: 'events', image: eventsIsland, label: 'EVENTS', x: 15, y: 25, size: 150, route: '/events' }
     ];
 
+    // Progressive Island Loading
+    useEffect(() => {
+        // Once we hit phases where islands should appear, stagger their visibility
+        if (['stabilized', 'connected'].includes(phase)) {
+            const allIds = islands.map(i => i.id);
+            const remaining = allIds.filter(id => id !== 'home');
+
+            // Stagger reveal of other islands
+            remaining.forEach((id, index) => {
+                setTimeout(() => {
+                    setVisibleIslands(prev => [...new Set([...prev, id])]);
+                }, 500 + (index * 200));
+            });
+        }
+    }, [phase]);
+
     // The Genesis Sequence Controller Combined with Physics
     useEffect(() => {
         const sequence = async () => {
-            // Check if animation has already played this session
             const hasPlayedAnimation = sessionStorage.getItem('tekron_genesis_played');
 
             if (hasPlayedAnimation) {
-                // Skip animation, go directly to connected state
                 setPhase('connected');
                 setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
+                // Immediately show all islands if returning
+                setVisibleIslands(islands.map(i => i.id));
                 return;
             }
 
-            // Phase 1: Void
-            // We only reach here if phase is 'void', effectively starting the chain.
-            setNarrative("SCANNING SECTOR...");
-            await new Promise(r => setTimeout(r, 1000));
-            setNarrative("ANOMALY DETECTED.");
-            await new Promise(r => setTimeout(r, 1000));
+            if (phase === 'void') {
+                setNarrative("SCANNING SECTOR...");
+                await new Promise(r => setTimeout(r, 1000));
+                setNarrative("ANOMALY DETECTED.");
+                await new Promise(r => setTimeout(r, 1000));
 
-            // Phase 2: Seed
-            setPhase('seed');
-            setNarrative("ENERGY SPIKE DETECTED.");
-            await new Promise(r => setTimeout(r, 1500));
-            setNarrative("CRITICAL MASS IMMINENT.");
-            await new Promise(r => setTimeout(r, 1000));
+                setPhase('seed');
+                setNarrative("ENERGY SPIKE DETECTED.");
+                await new Promise(r => setTimeout(r, 1500));
+                setNarrative("CRITICAL MASS IMMINENT.");
+                await new Promise(r => setTimeout(r, 1000));
 
-            // Phase 3: Genesis (BANG)
-            setPhase('genesis');
-            setNarrative("EXPANSION INITIATED.");
-            await new Promise(r => setTimeout(r, 500));
+                setPhase('genesis');
+                setNarrative("EXPANSION INITIATED.");
+                await new Promise(r => setTimeout(r, 500));
 
-            // Phase 4: Stabilized
-            setPhase('stabilized');
-            await new Promise(r => setTimeout(r, 1500));
-            setNarrative("STABILIZING ORBITS...");
-            await new Promise(r => setTimeout(r, 1000));
+                setPhase('stabilized');
+                await new Promise(r => setTimeout(r, 1500));
+                setNarrative("STABILIZING ORBITS...");
+                await new Promise(r => setTimeout(r, 1000));
 
-            // Phase 5: Connected
-            setPhase('connected');
-            setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
-
-            // Mark animation as played for this session
-            sessionStorage.setItem('tekron_genesis_played', 'true');
+                setPhase('connected');
+                setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
+                sessionStorage.setItem('tekron_genesis_played', 'true');
+            }
         };
 
-        // ONLY trigger the sequence if we are in the 'void' phase.
-        // This prevents the effect from re-running when we setPhase('seed'), 'genesis', etc.
-        if (phase === 'void') {
-            sequence();
-        } else if (phase === 'connected') {
-            // Ensure narrative is correct if we jumped straight to connected (though handled inside logic too)
-            if (sessionStorage.getItem('tekron_genesis_played')) {
-                setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
-            }
+        sequence();
+
+        // DEFERRED LISTENER: Only start tracking mouse after heavy lifting
+        if (['stabilized', 'connected'].includes(phase)) {
+            window.addEventListener('mousemove', handleMouseMove);
         }
-        window.addEventListener('mousemove', handleMouseMove);
+
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, [phase]);
 
@@ -126,32 +133,29 @@ function WorldMap() {
 
     // Generate Space Debris (Refined for continuous circular motion)
     const debris = React.useMemo(() => {
-        return Array.from({ length: 108 }).map((_, i) => ({
+        return Array.from({ length: 60 }).map((_, i) => ({ // Reduced count from 108 to 60 for perf
             id: i,
             x: Math.random() * 100,
             y: Math.random() * 100,
             size: Math.random() * 3 + 1,
-            speed: Math.random() * 35 + 22, // Slower (increased duration)
+            speed: Math.random() * 35 + 22,
             opacity: Math.random() * 0.5 + 0.4,
-            width: Math.random() * 100 + 50, // Orbit width
-            height: Math.random() * 80 + 40, // Orbit height
+            width: Math.random() * 100 + 50,
+            height: Math.random() * 80 + 40,
         }));
     }, []);
 
-    // List of heavy assets to preload
-    const islandAssets = [
-        homeIsland, aboutIsland, compIsland, contactIsland,
-        eventsIsland, galleryIsland, sponsorsIsland
-    ];
+    // OPTIMIZATION: Only preload Home island and background primarily
+    const initialAssets = [homeIsland, '/images/map/waterFinal.webp'];
 
     if (phase === 'loading') {
-        return <WorldLoading onLoadingComplete={handleLoadingComplete} assets={islandAssets} />;
+        return <WorldLoading onLoadingComplete={handleLoadingComplete} assets={initialAssets} />;
     }
 
     return (
         <div className="relative w-screen h-screen overflow-hidden bg-black font-['VT323',_monospace] selection:bg-purple-500 selection:text-white perspective-[2000px]">
 
-            {/* 1. Deep Space Background (Fixed + Parallax) - Z-INDEX 0 */}
+            {/* 1. Deep Space Background (Fixed + Parallax) */}
             <motion.div
                 className="absolute inset-[-15%] z-0"
                 style={{
@@ -160,7 +164,8 @@ function WorldMap() {
                     backgroundImage: 'url(/images/map/waterFinal.webp)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    filter: 'brightness(0.5) contrast(1.1) hue-rotate(240deg)', // Darker, cleaner
+                    filter: 'brightness(0.5) contrast(1.1) hue-rotate(240deg)',
+                    willChange: 'transform' // GPU Hint
                 }}
             >
                 <motion.div
@@ -171,14 +176,15 @@ function WorldMap() {
                         backgroundImage: 'url(/images/map/waterFinal.webp)',
                         backgroundSize: 'cover',
                         opacity: 0.3,
-                        mixBlendMode: 'overlay'
+                        mixBlendMode: 'overlay',
+                        willChange: 'transform' // GPU Hint
                     }}
                 />
             </motion.div>
 
             {/* 2. Independent Floating Debris - Z-INDEX 10 */}
             <div className="absolute inset-0 pointer-events-none z-10">
-                {debris.map((d, i) => (
+                {debris.map((d) => (
                     <motion.div
                         key={d.id}
                         className="absolute rounded-full bg-white"
@@ -189,7 +195,6 @@ function WorldMap() {
                             height: d.size,
                             opacity: d.opacity,
                         }}
-                        // Continuous Elliptical Orbit
                         animate={{
                             x: [0, d.width, 0, -d.width, 0],
                             y: [0, d.height / 2, 0, -d.height / 2, 0],
@@ -197,15 +202,15 @@ function WorldMap() {
                         transition={{
                             duration: d.speed,
                             repeat: Infinity,
-                            ease: "linear", // Continuous non-stop motion
-                            times: [0, 0.25, 0.5, 0.75, 1], // Perfect quadrature pacing
-                            delay: Math.random() * -20 // Negative delay to start mid-orbit (no initial sync)
+                            ease: "linear",
+                            times: [0, 0.25, 0.5, 0.75, 1],
+                            delay: Math.random() * -20
                         }}
                     />
                 ))}
             </div>
 
-            {/* Shockwave Effect (Genesis Phase) - ENHANCED */}
+            {/* Shockwave Effect (Genesis Phase) */}
             <AnimatePresence>
                 {phase === 'genesis' && (
                     <motion.div
@@ -229,65 +234,48 @@ function WorldMap() {
                 )}
             </AnimatePresence>
 
-            {/* Constellation Lines (Connected Phase) - SMALL DEBRIS BRIDGES */}
+            {/* Constellation Lines */}
             <div className="absolute inset-0 z-10 pointer-events-none">
                 <AnimatePresence>
                     {(phase === 'stabilized' || phase === 'connected') && islands.map((island) => {
-                        if (island.id === 'home') return null;
+                        if (island.id === 'home' || !visibleIslands.includes(island.id)) return null;
 
-                        const startX = 50;
-                        const startY = 50;
-                        const endX = island.x;
-                        const endY = island.y;
-                        const particleCount = 12; // Moderate density
-
-                        // Generate particles for a flowing stream
-                        return Array.from({ length: 8 }).map((_, k) => {
-                            // Staggered delay for continuous flow
-                            const delay = k * 0.5;
-                            const duration = 4;
-
-                            return (
-                                <motion.div
-                                    key={`${island.id}-stream-${k}`}
-                                    className="absolute bg-white rounded-full"
-                                    initial={{
-                                        left: '50%',
-                                        top: '50%',
-                                        opacity: 0,
-                                        scale: 0.5
-                                    }}
-                                    animate={{
-                                        left: `${island.x}%`,
-                                        top: `${island.y}%`,
-                                        opacity: [0, 0.4, 0], // Low intensity fade in/out
-                                        scale: [0.5, 1, 0.5]
-                                    }}
-                                    transition={{
-                                        duration: duration,
-                                        repeat: Infinity,
-                                        delay: delay,
-                                        ease: "linear"
-                                    }}
-                                    style={{
-                                        width: '3px', // Increased size
-                                        height: '3px',
-                                        boxShadow: 'none' // No glow
-                                    }}
-                                />
-                            );
-                        });
+                        return Array.from({ length: 8 }).map((_, k) => (
+                            <motion.div
+                                key={`${island.id}-stream-${k}`}
+                                className="absolute bg-white rounded-full"
+                                initial={{ left: '50%', top: '50%', opacity: 0, scale: 0.5 }}
+                                animate={{
+                                    left: `${island.x}%`,
+                                    top: `${island.y}%`,
+                                    opacity: [0, 0.4, 0],
+                                    scale: [0.5, 1, 0.5]
+                                }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    delay: k * 0.5,
+                                    ease: "linear"
+                                }}
+                                style={{
+                                    width: '3px',
+                                    height: '3px',
+                                    boxShadow: 'none'
+                                }}
+                            />
+                        ));
                     })}
                 </AnimatePresence>
             </div>
 
             {/* 3D Islands Field */}
-            <motion.div
-                className="relative w-full h-full z-10 transform-3d"
-            >
+            <motion.div className="relative w-full h-full z-10 transform-3d">
                 {islands.map((island) => {
                     const isHome = island.id === 'home';
                     const isExpanded = ['genesis', 'stabilized', 'connected'].includes(phase);
+                    const isVisible = visibleIslands.includes(island.id);
+
+                    if (!isVisible && !isHome) return null;
 
                     return (
                         <motion.div
@@ -300,35 +288,32 @@ function WorldMap() {
                                 scale: phase === 'void' ? 0 : isExpanded ? 1 : (isHome ? 1 : 0),
                                 opacity: phase === 'void' ? 0 : 1,
                                 filter: (isHome && phase === 'seed') ? 'blur(0px)' : (phase === 'void' ? 'blur(20px)' : 'blur(0px)'),
-                                // SHAKE (Pre-Blast) or FLOAT (Post-Blast)
                                 x: (isHome && phase === 'seed')
                                     ? ['-50%', '-52%', '-48%', '-51%', '-49%', '-50%']
                                     : '-50%',
                                 y: (isHome && phase === 'seed')
-                                    ? ['-50%', '-49%', '-51%', '-48%', '-52%', '-50%'] // Shake
+                                    ? ['-50%', '-49%', '-51%', '-48%', '-52%', '-50%']
                                     : (phase === 'stabilized' || phase === 'connected')
-                                        ? ['-50%', '-58%', '-50%'] // Heavy Float (Visible)
+                                        ? ['-50%', '-58%', '-50%']
                                         : '-50%',
                             }}
                             transition={{
-                                // Default Spring for Layout
                                 default: { type: "spring", stiffness: 40, damping: 15 },
-                                // Specific Shake/Float Transition
                                 x: (isHome && phase === 'seed') ? { duration: 0.08, repeat: Infinity, ease: "linear" } : { type: "spring", stiffness: 40, damping: 15 },
                                 y: (isHome && phase === 'seed')
                                     ? { duration: 0.08, repeat: Infinity, ease: "linear" }
                                     : (phase === 'stabilized' || phase === 'connected')
-                                        ? { duration: 6, repeat: Infinity, ease: "easeInOut", delay: Math.random() * 2 } // Slower, Heavier
+                                        ? { duration: 6, repeat: Infinity, ease: "easeInOut", delay: Math.random() * 2 }
                                         : { type: "spring", stiffness: 40, damping: 15 },
                                 delay: isHome ? 0 : (isExpanded ? Math.random() * 0.2 : 0)
                             }}
                             style={{
-                                zIndex: isHome ? 50 : 20, // Robust z-index
+                                zIndex: isHome ? 50 : 20,
                                 transformStyle: 'preserve-3d'
                             }}
                             onClick={() => phase === 'connected' && navigate(island.route)}
                         >
-                            {/* Green Nebula Vortex (Home Emergence only) */}
+                            {/* Green Nebula Vortex (Home only) */}
                             {isHome && (phase === 'seed' || phase === 'genesis' || phase === 'stabilized' || phase === 'connected') && (
                                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-[-1]">
                                     <motion.div
@@ -351,29 +336,6 @@ function WorldMap() {
                                             borderRadius: '50%',
                                         }}
                                     />
-                                    {/* Secondary Glow */}
-                                    <motion.div
-                                        animate={{
-                                            scale: [1, 1.3, 1],
-                                            opacity: [0.2, 0.4, 0.2],
-                                        }}
-                                        transition={{
-                                            duration: 4,
-                                            repeat: Infinity,
-                                            ease: "easeInOut"
-                                        }}
-                                        style={{
-                                            position: 'absolute',
-                                            top: '50%',
-                                            left: '50%',
-                                            transform: 'translate(-50%, -50%)',
-                                            width: isHome ? island.size * 2 : 0,
-                                            height: isHome ? island.size * 2 : 0,
-                                            background: 'radial-gradient(circle, rgba(0, 255, 200, 0.2) 0%, transparent 60%)',
-                                            filter: 'blur(50px)',
-                                            borderRadius: '50%',
-                                        }}
-                                    />
                                 </div>
                             )}
 
@@ -386,11 +348,12 @@ function WorldMap() {
                                 }}
                                 initial={{ rotateX: 0, rotateY: 0 }}
                             >
-                                <img
+                                <MapIsland
                                     src={island.image}
                                     alt={island.label}
-                                    className={`pixel-art drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] ${isHome ? 'brightness-125' : ''}`}
-                                    style={{ width: island.size }}
+                                    size={island.size}
+                                    isHome={isHome}
+                                    phase={phase}
                                 />
 
                                 {/* Dynamic Glare Overlay */}
