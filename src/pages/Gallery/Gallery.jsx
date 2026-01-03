@@ -1,489 +1,686 @@
-import React, { useState, useEffect } from 'react';
+
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import styled, { keyframes, css } from 'styled-components';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 
-// --- Shared Animations ---
-const fadeInUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true },
-  transition: { duration: 0.8, ease: [0.21, 0.45, 0.32, 0.9] }
-};
+// Asset Mappings
+import opt0 from '../../assets/images/gallery/ui/opt_0.jpg';
+import opt1 from '../../assets/images/gallery/ui/opt_1.jpg'; // Light Bloom / Rays
+import opt2 from '../../assets/images/gallery/ui/opt_2.jpg'; // Texture
+import opt3 from '../../assets/images/gallery/ui/opt_3.jpg'; // Clouds / Mist
+import opt5 from '../../assets/images/gallery/ui/opt_5.png'; // Photo Frame
+import opt6 from '../../assets/images/gallery/ui/opt_6.jpg'; // Decorative Icon
+
+// --- Animations ---
+const bob = keyframes`
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(1deg); }
+`;
+
+const cloudDriftLeft = keyframes`
+  0% { transform: translate(-60%, -50%) scale(1.2) rotate(0deg); opacity: 0.2; }
+  100% { transform: translate(-40%, -55%) scale(1.5) rotate(10deg); opacity: 0.4; }
+`;
+
+const cloudDriftRight = keyframes`
+  0% { transform: translate(-40%, -50%) scale(1.1) rotate(0deg); opacity: 0.1; }
+  100% { transform: translate(-60%, -45%) scale(1.4) rotate(-8deg); opacity: 0.3; }
+`;
+
+const noticeFade = keyframes`
+  0% { opacity: 0; transform: translateY(20px); }
+  20%, 80% { opacity: 0.5; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+`;
 
 // --- Styled Components ---
-const PageContent = styled.div`
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 120px 20px 100px;
-  position: relative;
-  z-index: 10;
-`;
 
-const Section = styled.section`
-  margin-bottom: 120px;
-  @media (max-width: 768px) {
-    margin-bottom: 80px;
-  }
-`;
-
-const VaultContainer = styled(motion.div)`
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  background: black; 
-`;
-
-const VaultDoor = styled(motion.div)`
-  position: absolute;
-  inset: 0;
+const PageContainer = styled.div`
+  min-height: 100vh;
   width: 100%;
-  height: 100%;
+  background: #000;
+  position: relative;
   overflow: hidden;
 `;
 
-const BentoBlock = styled(motion.div)`
-  background: rgba(168, 85, 247, 0.05);
-  border: 1px solid rgba(168, 85, 247, 0.1);
-  border-radius: 24px;
-  padding: 24px;
+// --- Video Entry ---
+const VideoPortal = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: #000;
+  
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+const SkipGate = styled.button`
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  z-index: 2001;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  padding: 10px 20px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3em;
+  cursor: pointer;
   transition: all 0.4s ease;
   
   &:hover {
-    background: rgba(168, 85, 247, 0.1);
-    border-color: rgba(168, 85, 247, 0.3);
+    color: #fff;
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.05);
   }
 `;
 
-const ValueHub = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 40px;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.5), transparent);
-  }
+const UnlockOverlay = styled(motion.div)`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2005;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
 `;
 
-const ImageCard = styled(motion.div)`
-  position: relative;
-  background: rgba(10, 10, 10, 0.6);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 32px;
-  overflow: hidden;
+const UnlockButton = styled(motion.button)`
+  background: transparent;
+  border: 2px solid #a855f7;
+  color: #fff;
+  padding: 20px 40px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
   cursor: pointer;
-  aspect-ratio: ${props => props.$aspect || '1/1'};
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.3);
   
   &::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.15), transparent 70%);
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.4) 0%, transparent 60%);
+    transform: translate(-50%, -50%);
     opacity: 0;
-    transition: opacity 0.4s;
-    pointer-events: none;
+    transition: opacity 0.4s ease;
   }
   
   &:hover::before {
     opacity: 1;
   }
   
-  &:hover {
-    transform: translateY(-10px);
-    border-color: rgba(168, 85, 247, 0.3);
-    box-shadow: 0 20px 40px -20px rgba(168, 85, 247, 0.3);
-  }
-  
-  img, video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  
-  &:hover img,
-  &:hover video {
-    transform: scale(1.05);
+  .label-sub {
+    display: block;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6rem;
+    margin-top: 10px;
+    opacity: 0.4;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
   }
 `;
 
-const CategoryTab = styled(motion.button)`
-  padding: 14px 36px;
-  background: ${props => props.$active ? 'rgba(168, 85, 247, 0.2)' : 'rgba(255, 255, 255, 0.03)'};
-  border: 1px solid ${props => props.$active ? 'rgba(168, 85, 247, 0.5)' : 'rgba(255, 255, 255, 0.1)'};
-  border-radius: 20px;
-  color: ${props => props.$active ? '#a855f7' : 'rgba(255, 255, 255, 0.5)'};
+const EntranceBloom = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  background-image: url(${opt1});
+  background-size: cover;
+  background-position: center;
+  mix-blend-mode: screen;
+  pointer-events: none;
+`;
+
+// --- Atmospheric Memory Space ---
+const VaultInterior = styled.div`
+  position: fixed;
+  inset: 0;
+  background-image: url(${opt0});
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url(${opt2});
+    background-size: 500px;
+    opacity: 0.08;
+    mix-blend-mode: overlay;
+    pointer-events: none;
+  }
+`;
+
+const MistLayer = styled(motion.div)`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 200vw;
+  height: 200vh;
+  background-image: url(${opt3});
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: ${props => props.$z || 1};
+  animation: ${props => props.$reverse ? cloudDriftRight : cloudDriftLeft} ${props => props.$dur || '30s'} infinite alternate linear;
+`;
+
+
+const SystemAlert = styled.div`
+  position: fixed;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: 'Press Start 2P', monospace;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  cursor: pointer;
-  transition: all 0.3s;
-  backdrop-filter: blur(10px);
-  
-  &:hover {
-    background: rgba(168, 85, 247, 0.15);
-    border-color: rgba(168, 85, 247, 0.4);
-    color: #a855f7;
-    transform: translateY(-2px);
-  }
+  font-size: 0.55rem;
+  color: #fff;
+  text-align: center;
+  line-height: 2.2;
+  z-index: 100;
+  opacity: 0;
+  animation: ${noticeFade} 5s forwards;
+  pointer-events: none;
+  letter-spacing: 0.1em;
 `;
 
-const PixelLabel = ({ children, color = '#a855f7' }) => (
-  <span className="text-[10px] pixel-font tracking-widest uppercase mb-4 block" style={{ color }}>
-    {children}
-  </span>
-);
+// --- Memory Bundle (Cluster Card) ---
 
-// --- Gallery Data ---
-const galleryData = {
-  all: [
-    { id: 1, type: 'image', src: '/images/gallery/event1.jpg', category: 'events', aspect: '16/9', title: 'Opening Ceremony' },
-    { id: 2, type: 'image', src: '/images/gallery/team1.jpg', category: 'team', aspect: '1/1', title: 'Core Team' },
-    { id: 3, type: 'video', src: '/videos/gallery/highlight1.mp4', category: 'highlights', aspect: '9/16', title: 'Event Highlights' },
-    { id: 4, type: 'image', src: '/images/gallery/event2.jpg', category: 'events', aspect: '4/3', title: 'Hackathon' },
-    { id: 5, type: 'image', src: '/images/gallery/sponsor1.jpg', category: 'sponsors', aspect: '16/9', title: 'Sponsor Booth' },
-    { id: 6, type: 'image', src: '/images/gallery/team2.jpg', category: 'team', aspect: '1/1', title: 'Volunteers' },
-    { id: 7, type: 'image', src: '/images/gallery/event3.jpg', category: 'events', aspect: '16/9', title: 'Cultural Night' },
-    { id: 8, type: 'video', src: '/videos/gallery/highlight2.mp4', category: 'highlights', aspect: '16/9', title: 'Aftermovie' },
-  ],
-  events: [],
-  team: [],
-  highlights: [],
-  sponsors: []
-};
-
-// Populate categories
-galleryData.all.forEach(item => {
-  if (galleryData[item.category]) {
-    galleryData[item.category].push(item);
-  }
-});
-
-// --- Vault Animation Component with Video ---
-const VaultAnimation = ({ onUnlock }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const videoRef = React.useRef(null);
-
-  const handleClick = () => {
-    if (isPlaying) return;
-    setIsPlaying(true);
-
-    // Play the video
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  };
+const MemoryPack = ({ category, onClick, index }) => {
+  // Pre-generate random offsets for the "bundle" look
+  const photoOffsets = useMemo(() => [
+    { x: -40, y: 10, r: -12, scale: 0.85, id: 'back-left' },
+    { x: 50, y: -20, r: 15, scale: 0.8, id: 'back-right' },
+    { x: -10, y: 40, r: 5, scale: 0.9, id: 'mid-left' },
+    { x: 0, y: 0, r: 0, scale: 1.1, id: 'front-center', primary: true }
+  ], []);
 
   return (
-    <VaultContainer
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+    <BundleContainer
+      $dur={`${7 + index * 0.4}s`}
+      $delay={`${index * 0.2}s`}
+      onClick={() => onClick(category)}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 1.5 + (index * 0.2), duration: 1 }}
+      whileHover="hover"
     >
-      <VaultDoor
-        onClick={handleClick}
-        style={{ cursor: !isPlaying ? 'pointer' : 'default' }}
-      >
-        {/* Vault Video Background */}
-        <div className="absolute inset-0">
-          <video
-            ref={videoRef}
-            src="/videos/vault.mp4"
-            className="w-full h-full object-cover"
-            muted
-            playsInline
-            onEnded={() => onUnlock()}
-          />
-          {/* Overlay gradient for better text visibility */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/60" />
-        </div>
+      <categoryGlow className="category-glow" />
 
-        {/* Title & Status */}
-        <motion.div
-          className="absolute top-16 left-0 right-0 text-center px-4"
-          animate={isPlaying ? {
-            opacity: [1, 1, 0],
-            y: [0, 0, -30]
-          } : {}}
-          transition={{ duration: 3, delay: 0.6 }}
+      {photoOffsets.map((off, i) => (
+        <PhotoFrame
+          key={off.id}
+          $z={off.primary ? 5 : 2}
+          variants={{
+            hover: {
+              x: off.x * 1.5,
+              y: off.y * 1.5,
+              rotate: off.r * 1.2,
+              scale: off.scale * 1.05
+            }
+          }}
+          style={{
+            x: off.x,
+            y: off.y,
+            rotate: off.r,
+            scale: off.scale
+          }}
         >
-          <PixelLabel color={isPlaying ? "#22c55e" : "#00fff9"}>
-            {isPlaying ? 'UNLOCKING_VAULT...' : 'MEMORY_VAULT_v2.6'}
-          </PixelLabel>
-          <h1 className="text-5xl md:text-7xl font-bold pixel-font text-white mb-6 tracking-tight"
-            style={{ textShadow: `0 0 40px ${isPlaying ? 'rgba(34, 197, 94, 0.5)' : 'rgba(0, 255, 249, 0.5)'}` }}>
-            GALLERY
-          </h1>
-          <div className="flex items-center justify-center gap-3">
-            <motion.div
-              className={`w-3 h-3 rounded-full ${isPlaying ? 'bg-green-500' : 'bg-cyan-400'}`}
-              animate={{ scale: [1, 1.3, 1] }}
-              transition={{ duration: 1, repeat: Infinity }}
-              style={{ boxShadow: `0 0 15px ${isPlaying ? 'rgba(34, 197, 94, 0.8)' : 'rgba(0, 255, 249, 0.8)'}` }}
-            />
-            <p className="text-sm font-mono uppercase tracking-widest"
-              style={{ color: isPlaying ? '#22c55e' : '#00fff9', textShadow: `0 0 10px ${isPlaying ? 'rgba(34, 197, 94, 0.5)' : 'rgba(0, 255, 249, 0.5)'}` }}>
-              {isPlaying ? '&gt; ACCESS_GRANTED' : '&gt; CLICK_TO_UNLOCK'}
-            </p>
-          </div>
-        </motion.div>
+          <img src={category.images[i % category.images.length]} alt="" />
+        </PhotoFrame>
+      ))}
 
-        {/* Corner Frame Accents */}
-        {[0, 1, 2, 3].map(i => (
-          <motion.div
-            key={i}
-            className="absolute"
-            style={{
-              top: i < 2 ? '20px' : 'auto',
-              bottom: i >= 2 ? '20px' : 'auto',
-              left: i % 2 === 0 ? '20px' : 'auto',
-              right: i % 2 === 1 ? '20px' : 'auto',
-              width: '60px',
-              height: '60px',
-              border: `2px solid ${isPlaying ? 'rgba(34, 197, 94, 0.5)' : 'rgba(0, 255, 249, 0.5)'}`,
-              borderRadius: '8px',
-            }}
-            animate={isPlaying ? {
-              scale: [1, 1.1, 0],
-              opacity: [1, 1, 0]
-            } : {
-              opacity: [0.3, 1, 0.3]
-            }}
-            transition={isPlaying ? {
-              duration: 3,
-              delay: i * 0.2
-            } : {
-              duration: 2,
-              repeat: Infinity,
-              delay: i * 0.2
-            }}
-          />
-        ))}
-
-        {/* Click Indicator (only when not playing) */}
-        {!isPlaying && (
-          <motion.div
-            className="absolute bottom-20 left-1/2 transform -translate-x-1/2"
-            animate={{
-              y: [0, -10, 0],
-              opacity: [0.5, 1, 0.5]
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity
-            }}
-          >
-            <div className="text-4xl">👆</div>
-          </motion.div>
-        )}
-      </VaultDoor>
-    </VaultContainer>
+      <EngravedLabel $color={category.color}>
+        <div className="title">{category.title}</div>
+        <div className="accent" />
+      </EngravedLabel>
+    </BundleContainer>
   );
 };
 
-// --- Main Gallery Component ---
+const BundleContainer = styled(motion.div)`
+  position: relative;
+  width: 260px;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${bob} ${props => props.$dur || '8s'} ease-in-out infinite;
+  animation-delay: ${props => props.$delay || '0s'};
+  cursor: pointer;
+  z-index: 5;
+`;
+
+const PhotoFrame = styled(motion.div)`
+  position: absolute;
+  width: 150px;
+  height: 200px;
+  z-index: ${props => props.$z || 2};
+  background-image: url(${opt5});
+  background-size: 100% 100%;
+  padding: 12px;
+  filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: brightness(0.8);
+    transition: filter 0.4s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+    pointer-events: none;
+  }
+`;
+
+const EngravedLabel = styled.div`
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+
+  .title {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.75rem;
+    color: #fff;
+    text-shadow: 
+      0 0 10px ${props => props.$color || '#a855f7'},
+      0 0 20px ${props => props.$color || '#a855f7'},
+      2px 2px 0px rgba(0,0,0,0.8);
+    letter-spacing: 0.2em;
+    opacity: 0.8;
+  }
+
+  .accent {
+    width: 30px;
+    height: 2px;
+    background: ${props => props.$color || '#a855f7'};
+    box-shadow: 0 0 10px ${props => props.$color || '#a855f7'};
+  }
+`;
+
+// --- Category Explorer Overlay ---
+
+const ArchiveOverlay = styled(motion.div)`
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  background: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(25px);
+  padding: 70px 50px;
+  overflow-y: auto;
+`;
+
+const ArchiveHeader = styled.div`
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-left: 2px solid ${props => props.$color || '#fff'};
+  padding-left: 30px;
+
+  .vault-id {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.6rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.5em;
+    margin-bottom: 5px;
+  }
+
+  h2 {
+    font-family: 'Press Start 2P', monospace;
+    color: #fff;
+    font-size: 2.5rem;
+  }
+
+  .close-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 5px;
+    transition: all 0.3s ease;
+    
+    &:hover { color: #fff; border-color: #fff; }
+  }
+`;
+
+const StaggeredGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-auto-rows: 240px;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+`;
+
+const ArchivePhoto = styled(motion.div)`
+  grid-row-end: span ${props => props.$span || 1};
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  cursor: zoom-in;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &:hover img { transform: scale(1.08); }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 30px rgba(168, 85, 247, 0);
+    transition: box-shadow 0.4s ease;
+  }
+
+  &:hover::after { box-shadow: inset 0 0 50px rgba(168, 85, 247, 0.2); }
+`;
+
+// --- Main Logic ---
+
 const Gallery = () => {
   const navigate = useNavigate();
-  const [vaultUnlocked, setVaultUnlocked] = useState(false);
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [stage, setStage] = useState('loading'); // loading, entry, revealing, inside
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
+  const [viewState, setViewState] = useState('grid'); // grid, zoom-in
+  const [isOpened, setIsOpened] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
+
+  const videoRef = useRef(null);
+  const hasFinished = useRef(false);
+
+  useEffect(() => {
+    const hasAccessed = sessionStorage.getItem('tekron_vault_session') === 'true';
+    if (hasAccessed) {
+      setStage('inside');
+      setIsOpened(true);
+      setIsStarted(true);
+    } else {
+      setStage('entry');
+    }
+  }, []);
+
+  const startVaultSequence = () => {
+    setIsStarted(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(err => {
+        console.warn("Autoplay blocked, attempting with mute:", err);
+        videoRef.current.muted = true;
+        videoRef.current.play();
+      });
+    }
+  };
+
+  const handleGateFinished = () => {
+    if (hasFinished.current) return;
+    hasFinished.current = true;
+
+    sessionStorage.setItem('tekron_vault_session', 'true');
+    setStage('revealing');
+    setTimeout(() => {
+      setStage('inside');
+      setIsOpened(true);
+    }, 1800);
+  };
 
   const categories = [
-    { id: 'all', label: 'ALL_MEMORIES', icon: '🎯' },
-    { id: 'events', label: 'EVENTS', icon: '🎪' },
-    { id: 'team', label: 'TEAM', icon: '👥' },
-    { id: 'highlights', label: 'HIGHLIGHTS', icon: '⚡' },
-    { id: 'sponsors', label: 'SPONSORS', icon: '🤝' }
+    {
+      id: 'competitions',
+      title: 'COMPETITIONS',
+      desc: 'Artifacts of tactical triumph and binary warfare.',
+      color: '#00f2ff',
+      images: [
+        'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=800',
+        'https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=800',
+        'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?q=80&w=800',
+        'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=800'
+      ]
+    },
+    {
+      id: 'cultural',
+      title: 'CULTURAL',
+      desc: 'The rhythmic pulse of the Tekron legacy.',
+      color: '#f0f',
+      images: [
+        'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?q=80&w=800',
+        'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=800',
+        'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=800',
+        'https://images.unsplash.com/photo-1514525253361-b83f8b9627c5?q=80&w=800'
+      ]
+    },
+    {
+      id: 'workshops',
+      title: 'WORKSHOPS',
+      desc: 'Encoded knowledge from the pioneers of innovation.',
+      color: '#7000ff',
+      images: [
+        'https://images.unsplash.com/photo-1531482615713-2afd69097998?q=80&w=800',
+        'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800',
+        'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800',
+        'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=800'
+      ]
+    },
+    {
+      id: 'master',
+      title: 'MASTERCLASSES',
+      desc: 'Strategic frequency adjustments by industry veterans.',
+      color: '#ffaa00',
+      images: [
+        'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=800',
+        'https://images.unsplash.com/photo-1505373633560-fa91a7042a32?q=80&w=800',
+        'https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=800',
+        'https://images.unsplash.com/photo-1515187029135-18ee286d815b?q=80&w=800'
+      ]
+    }
   ];
-
-  const currentGallery = galleryData[activeCategory] || [];
 
   return (
     <UnifiedBackground>
-      <AnimatePresence>
-        {!vaultUnlocked && (
-          <VaultAnimation onUnlock={() => setVaultUnlocked(true)} />
-        )}
-      </AnimatePresence>
+      <PageContainer>
+        <AnimatePresence>
+          {stage === 'entry' && (
+            <VideoPortal
+              key="gate"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2 }}
+            >
+              <SkipGate onClick={handleGateFinished}>Skip Sequence</SkipGate>
 
-      {vaultUnlocked && (
-        <>
-          <motion.button
-            onClick={() => navigate('/map')}
-            className="fixed top-12 left-12 z-[100] px-8 py-4 pixel-font text-[10px] bg-[#7c3aed] text-white hover:scale-110 active:scale-95 transition-all shadow-[4px_4px_0px_#000]"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-          >
-            ← EXIT_MAP
-          </motion.button>
-
-          <PageContent>
-            {/* Header */}
-            <Section>
-              <motion.div
-                className="text-center"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-              >
-                <PixelLabel color="#a855f7">MEMORY_VAULT_ACCESSED</PixelLabel>
-                <h1 className="text-7xl md:text-9xl font-bold pixel-font text-white mb-8 tracking-tight"
-                  style={{ textShadow: '0 0 40px rgba(168, 85, 247, 0.4)' }}>
-                  GALLERY
-                </h1>
-                <p className="text-xl font-mono text-white/40 max-w-2xl mx-auto">
-                  &gt; ARCHIVED_MOMENTS // TEKRON_LEGACY // v.1.0_TO_2.6
-                </p>
-                <motion.div className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent mt-12 mx-auto max-w-xl"
-                  animate={{ opacity: [0.2, 0.8, 0.2] }} transition={{ duration: 3, repeat: Infinity }} />
-              </motion.div>
-            </Section>
-
-            {/* Category Tabs */}
-            <Section>
-              <ValueHub className="p-8 md:p-12">
-                <div className="flex flex-wrap justify-center gap-4">
-                  {categories.map((cat, i) => (
-                    <CategoryTab
-                      key={cat.id}
-                      $active={activeCategory === cat.id}
-                      onClick={() => setActiveCategory(cat.id)}
+              <AnimatePresence>
+                {!isStarted && (
+                  <UnlockOverlay
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                  >
+                    <UnlockButton
+                      onClick={startVaultSequence}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4 + i * 0.1 }}
                     >
-                      <span className="mr-2">{cat.icon}</span>
-                      {cat.label}
-                    </CategoryTab>
-                  ))}
-                </div>
-              </ValueHub>
-            </Section>
+                      OPEN VAULT
+                      <span className="label-sub">INITIALIZE DECRYPTION</span>
+                    </UnlockButton>
+                  </UnlockOverlay>
+                )}
+              </AnimatePresence>
 
-            {/* Gallery Grid */}
-            <Section>
-              <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-                layout
-              >
-                <AnimatePresence mode="popLayout">
-                  {currentGallery.map((item, i) => (
-                    <ImageCard
-                      key={item.id}
-                      $aspect={item.aspect}
-                      onClick={() => setSelectedImage(item)}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ delay: i * 0.05 }}
-                      layout
-                    >
-                      {item.type === 'image' ? (
-                        <img src={item.src} alt={item.title} />
-                      ) : (
-                        <video src={item.src} muted loop autoPlay playsInline />
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity flex items-end p-8">
-                        <div>
-                          <div className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-2">
-                            {item.category}_ARCHIVE
-                          </div>
-                          <div className="text-lg font-bold pixel-font text-white">
-                            {item.title}
-                          </div>
-                        </div>
+              <video
+                ref={videoRef}
+                src="/videos/vault.mp4"
+                muted
+                playsInline
+                onTimeUpdate={(e) => {
+                  // End at 6 seconds per user request
+                  if (e.target.currentTime >= 6) {
+                    handleGateFinished();
+                  }
+                }}
+                onEnded={handleGateFinished}
+              />
+            </VideoPortal>
+          )}
+
+          {stage === 'revealing' && (
+            <EntranceBloom
+              key="bloom"
+              initial={{ opacity: 0, scale: 1 }}
+              animate={{ opacity: [0, 0.4, 0], scale: [1, 1.1] }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+            />
+          )}
+        </AnimatePresence>
+
+        {stage === 'inside' && (
+          <>
+            <VaultInterior />
+
+            <MistLayer $z={1} $dur="35s" />
+
+
+            {isOpened && (
+              <SystemAlert>
+                SYSTEM NOTICE:<br />
+                ARCHIVE DECRYPTED. VISUAL MEMORIES SYNCHRONIZED.<br />
+                TEKRON PRESERVATION UNIT // SECTOR 07
+              </SystemAlert>
+            )}
+
+            <motion.button
+              onClick={() => navigate('/map')}
+              className="fixed top-12 left-12 z-[100] text-white/30 hover:text-white transition-all pixel-font text-[10px] tracking-tighter flex items-center gap-2 group"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1 }}
+            >
+              <span className="text-lg group-hover:-translate-x-1 transition-transform">←</span> EXIT VAULT
+            </motion.button>
+
+            <motion.div
+              style={{ height: '100vh', width: '100%', perspective: '2000px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              animate={{
+                scale: selectedCategory ? 1.5 : 1,
+                rotateX: selectedCategory ? 10 : 0,
+              }}
+              transition={{ duration: 0.8, ease: 'easeInOut' }}
+            >
+              <div className="grid grid-cols-2 gap-x-8 gap-y-16 md:gap-x-24 md:gap-y-20 p-6 md:p-12 max-w-6xl mx-auto">
+                {categories.map((cat, i) => (
+                  <MemoryPack
+                    key={cat.id}
+                    category={cat}
+                    index={i}
+                    onClick={setSelectedCategory}
+                  />
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Archive Overlay Detail */}
+            <AnimatePresence>
+              {selectedCategory && (
+                <ArchiveOverlay
+                  initial={{ opacity: 0, y: '20%' }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: '50%' }}
+                  transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                >
+                  <div className="max-w-6xl mx-auto h-full relative">
+                    <ArchiveHeader $color={selectedCategory.color}>
+                      <div>
+                        <div className="vault-id">TK-UNIT-0{categories.indexOf(selectedCategory) + 1}</div>
+                        <h2>{selectedCategory.title}</h2>
+                        <p className="text-white/50 font-space-grotesk mt-2">{selectedCategory.desc}</p>
                       </div>
-                    </ImageCard>
-                  ))}
-                </AnimatePresence>
-              </motion.div>
+                      <div className="close-btn" onClick={() => setSelectedCategory(null)}>
+                        RESTORE DASHBOARD ×
+                      </div>
+                    </ArchiveHeader>
 
-              {/* Empty State */}
-              {currentGallery.length === 0 && (
+                    <StaggeredGrid>
+                      {selectedCategory.images.map((img, i) => (
+                        <ArchivePhoto
+                          key={i}
+                          $span={i % 3 === 0 ? 1.5 : 1}
+                          onClick={() => setSelectedImage(img)}
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          transition={{ delay: 0.2 + (i * 0.1) }}
+                        >
+                          <img src={img} alt="" />
+                        </ArchivePhoto>
+                      ))}
+                    </StaggeredGrid>
+                  </div>
+                </ArchiveOverlay>
+              )}
+            </AnimatePresence>
+
+            {/* Modal Detail View */}
+            <AnimatePresence>
+              {selectedImage && (
                 <motion.div
-                  className="text-center py-32"
+                  className="fixed inset-0 z-[4000] bg-black/98 flex items-center justify-center p-12"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  onClick={() => setSelectedImage(null)}
                 >
-                  <BentoBlock className="max-w-md mx-auto p-16">
-                    <div className="text-6xl mb-8">📸</div>
-                    <p className="text-2xl font-mono text-white/20 uppercase tracking-widest">
-                      NO_MEMORIES_FOUND
-                    </p>
-                  </BentoBlock>
+                  <motion.img
+                    src={selectedImage}
+                    className="max-w-full max-h-full object-contain shadow-[0_0_80px_rgba(168,85,247,0.4)] rounded-lg"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                  <div className="absolute top-10 right-10 text-white/30 hover:text-white pixel-font text-[10px] cursor-pointer">
+                    ESC ARCHIVE
+                  </div>
                 </motion.div>
               )}
-            </Section>
-          </PageContent>
-
-          {/* Lightbox */}
-          <AnimatePresence>
-            {selectedImage && (
-              <motion.div
-                className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setSelectedImage(null)}
-              >
-                <motion.div
-                  className="relative max-w-6xl max-h-[90vh] w-full bg-black/60 border border-purple-500/30 rounded-[3rem] overflow-hidden backdrop-blur-2xl"
-                  initial={{ scale: 0.9, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0.9, opacity: 0 }}
-                  onClick={(e) => e.stopPropagation()}
-                  style={{ boxShadow: '0 0 80px rgba(168, 85, 247, 0.3)' }}
-                >
-                  {selectedImage.type === 'image' ? (
-                    <img
-                      src={selectedImage.src}
-                      alt={selectedImage.title}
-                      className="w-full h-full object-contain"
-                    />
-                  ) : (
-                    <video
-                      src={selectedImage.src}
-                      controls
-                      autoPlay
-                      className="w-full h-full object-contain"
-                    />
-                  )}
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 to-transparent p-8">
-                    <div className="text-xs font-mono text-purple-400 uppercase tracking-widest mb-2">
-                      {selectedImage.category}_ARCHIVE
-                    </div>
-                    <div className="text-2xl font-bold pixel-font text-white">
-                      {selectedImage.title}
-                    </div>
-                  </div>
-                  <button
-                    onClick={() => setSelectedImage(null)}
-                    className="absolute top-8 right-8 w-14 h-14 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all backdrop-blur-sm"
-                    style={{ boxShadow: '0 0 20px rgba(168, 85, 247, 0.3)' }}
-                  >
-                    ✕
-                  </button>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </>
-      )}
+            </AnimatePresence>
+          </>
+        )}
+      </PageContainer>
     </UnifiedBackground>
   );
 };
