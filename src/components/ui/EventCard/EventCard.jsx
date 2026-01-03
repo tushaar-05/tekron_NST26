@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
 
 const CardContainer = styled(motion.div)`
@@ -58,7 +58,7 @@ const CardContainer = styled(motion.div)`
 const ImageContainer = styled.div`
   width: 100%;
   height: 220px;
-  background: ${props => props.image ? `url(${props.image}) center/cover no-repeat` : 'linear-gradient(135deg, #1e1438 0%, #2d1b4e 50%, #1a0b2e 100%)'};
+  background: linear-gradient(135deg, #1e1438 0%, #2d1b4e 50%, #1a0b2e 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,6 +84,19 @@ const ImageContainer = styled.div`
         transparent 2px,
         rgba(168, 85, 247, 0.03) 3px
       );
+    z-index: 2;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    z-index: 1;
+  }
+
+  ${CardContainer}:hover & img {
+    transform: scale(1.1);
   }
 `;
 
@@ -187,7 +200,7 @@ const Particles = styled.div`
   opacity: 0;
   transition: opacity 0.4s ease;
 
-  \${CardContainer}:hover & {
+  ${CardContainer}:hover & {
     opacity: 1;
   }
 `;
@@ -196,9 +209,9 @@ const Particle = styled(motion.div)`
   position: absolute;
   width: 4px;
   height: 4px;
-  background: \${props => props.color || '#a855f7'};
+  background: ${props => props.color || '#a855f7'};
   border-radius: 50%;
-  box-shadow: 0 0 10px \${props => props.color || '#a855f7'};
+  box-shadow: 0 0 10px ${props => props.color || '#a855f7'};
 `;
 
 const MetaInfo = styled.div`
@@ -261,24 +274,49 @@ const RegisterButton = styled.a`
   }
 `;
 
-const EventCard = ({ title, category, image, description, prizePool, unstopLink, onClick }) => {
-  const particles = Array.from({ length: 8 }, (_, i) => ({
+const EventCard = ({ title, category, image, description, prizePool, unstopLink, onClick, priority = false }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  // Memoize particles to prevent re-creation
+  const particles = React.useMemo(() => Array.from({ length: 6 }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
     y: Math.random() * 100,
-    color: ['#a855f7', '#7c3aed', '#6366f1', '#8b5cf6'][Math.floor(Math.random() * 4)]
-  }));
+    color: ['#a855f7', '#7c3aed', '#6366f1'][Math.floor(Math.random() * 3)]
+  })), []);
 
   return (
     <CardContainer
       onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      viewport={{ once: true, margin: "50px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <ImageContainer image={image}>
-        {!image && (
+      <ImageContainer>
+        {image ? (
+          <>
+            {/* Blur Placeholder */}
+            {!imageLoaded && (
+              <div
+                className="absolute inset-0 bg-white/5 blur-xl transition-opacity duration-500"
+                style={{ opacity: imageLoaded ? 0 : 1 }}
+              />
+            )}
+
+            <img
+              src={image}
+              alt={title}
+              loading={priority ? "eager" : "lazy"}
+              decoding="async"
+              onLoad={() => setImageLoaded(true)}
+              style={{ opacity: imageLoaded ? 1 : 0 }}
+            />
+          </>
+        ) : (
           <IconCircle
             initial={{ scale: 1.1, rotate: 5 }}
             animate={{ scale: 1.1, rotate: 5 }}
@@ -320,8 +358,9 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
         )}
       </Content>
 
+      {/* Optimized Particles: Only animate when hovered */}
       <Particles>
-        {particles.map(particle => (
+        {isHovered && particles.map(particle => (
           <Particle
             key={particle.id}
             color={particle.color}

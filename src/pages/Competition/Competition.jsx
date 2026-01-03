@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import { competitions } from '../../data/eventsData';
 import EventCard from '../../components/ui/EventCard/EventCard';
 import CompetitionModal from '../../components/ui/CompetitionModal/CompetitionModal';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Page = styled.div`
   min-height: 100vh;
@@ -86,10 +87,25 @@ const Competition = () => {
   const [selectedComp, setSelectedComp] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Progressive Rendering State
+  const [visibleCount, setVisibleCount] = useState(6); // Start with 6 items
+
+  useEffect(() => {
+    // If there are more items to show, load them progressively
+    if (visibleCount < competitions.length) {
+      const timer = setTimeout(() => {
+        setVisibleCount(prev => Math.min(prev + 4, competitions.length));
+      }, 500); // Load next batch after delay
+      return () => clearTimeout(timer);
+    }
+  }, [visibleCount]);
+
   const handleCardClick = (comp) => {
     setSelectedComp(comp);
     setIsModalOpen(true);
   };
+
+  const visibleCompetitions = competitions.slice(0, visibleCount);
 
   return (
     <UnifiedBackground>
@@ -108,14 +124,24 @@ const Competition = () => {
           </Header>
 
           <Grid>
-            {competitions.map((comp) => (
-              <EventCard
-                key={comp.id}
-                {...comp}
-                onClick={() => handleCardClick(comp)}
-              />
-            ))}
+            <AnimatePresence>
+              {visibleCompetitions.map((comp, index) => (
+                <EventCard
+                  key={comp.id}
+                  {...comp}
+                  onClick={() => handleCardClick(comp)}
+                  priority={index < 4} // Eager load first 4 images
+                />
+              ))}
+            </AnimatePresence>
           </Grid>
+
+          {/* Loading Indicator for Lazy Items */}
+          {visibleCount < competitions.length && (
+            <div className="text-center py-8 opacity-50 font-mono text-purple-300">
+              SCANNING_FURTHER_SIGNALS...
+            </div>
+          )}
         </Container>
 
         <CompetitionModal
