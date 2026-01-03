@@ -292,7 +292,11 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
       <Content>
         <CategoryBadge category={category}>{category}</CategoryBadge>
         <Title>{title}</Title>
-        {description && <Description>{description}</Description>}
+        {description && (
+          <Description>
+            {description.length > 140 ? description.substring(0, 140) + "..." : description}
+          </Description>
+        )}
 
         {/* Meta Info (Prize Pool + Register Button) - Conditionally Rendered */}
         {(prizePool || unstopLink) && (

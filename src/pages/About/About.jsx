@@ -146,6 +146,7 @@ const CoreMemberCard = ({ member, index }) => {
                             src={member.image}
                             alt={member.name}
                             className="w-full h-full object-cover scale-110 transition-transform duration-700"
+                            style={{ objectPosition: member.objectPosition || 'center' }}
                         />
                     </div>
 
@@ -157,7 +158,7 @@ const CoreMemberCard = ({ member, index }) => {
                 {/* Operative Data */}
                 <div className="space-y-4">
                     <div className="text-center">
-                        <h3 className="text-xl font-bold text-white tracking-widest pixel-font mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/60 transition-all duration-300 whitespace-nowrap overflow-hidden text-ellipsis px-2">
+                        <h3 className="text-xl font-bold text-white tracking-widest pixel-font mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/60 transition-all duration-300 px-2 min-h-[3rem] flex items-center justify-center text-center">
                             {member.name}
                         </h3>
                         <p className="text-[10px] font-mono tracking-[0.3em] uppercase opacity-50" style={{ color: accentColor }}>
@@ -224,6 +225,7 @@ const HolographicDisplay = ({ member, color, onClose }) => {
                             animate={{ scale: 1, filter: 'grayscale(0) brightness(1.2)' }}
                             src={member.image}
                             className="w-full h-full object-cover"
+                            style={{ objectPosition: member.objectPosition || 'center' }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
                         {/* Scanlines Overlay */}
@@ -441,11 +443,68 @@ function About() {
                 { name: 'OPS', value: 80 }
             ]
         },
-        ...Array.from({ length: 7 }, (_, i) => ({
-            id: i + 8,
-            name: `Member Name ${i + 8}`,
+        {
+            id: 8,
+            name: 'Nilesh Nand Lal',
+            role: 'Marketing Team',
+            image: '/images/committee/nilesh.jpg',
+            color: '#10b981', // Emerald
+            stats: [
+                { name: 'TECH', value: 45 },
+                { name: 'MGMT', value: 85 },
+                { name: 'CRTV', value: 92 },
+                { name: 'COMM', value: 95 },
+                { name: 'OPS', value: 80 }
+            ]
+        },
+        {
+            id: 9,
+            name: 'Vansh Agarwal',
+            role: 'Operations Team',
+            image: '/images/committee/vansh_agarwal.jpg',
+            color: '#3b82f6', // Blue
+            stats: [
+                { name: 'TECH', value: 40 },
+                { name: 'MGMT', value: 90 },
+                { name: 'CRTV', value: 65 },
+                { name: 'COMM', value: 85 },
+                { name: 'OPS', value: 98 }
+            ]
+        },
+        {
+            id: 10,
+            name: 'Priyabrata Singh',
+            role: 'Design Team',
+            image: '/images/committee/priyabrata_singh.jpg',
+            color: '#facc15', // Yellow
+            stats: [
+                { name: 'TECH', value: 35 },
+                { name: 'MGMT', value: 75 },
+                { name: 'CRTV', value: 98 },
+                { name: 'COMM', value: 80 },
+                { name: 'OPS', value: 70 }
+            ]
+        },
+        {
+            id: 11,
+            name: 'Jay Patil',
+            role: 'Design Team',
+            image: '/images/committee/jay_patil.jpg',
+            objectPosition: 'top',
+            color: '#fb7185', // Rose
+            stats: [
+                { name: 'TECH', value: 30 },
+                { name: 'MGMT', value: 70 },
+                { name: 'CRTV', value: 95 },
+                { name: 'COMM', value: 85 },
+                { name: 'OPS', value: 75 }
+            ]
+        },
+        ...Array.from({ length: 3 }, (_, i) => ({
+            id: i + 12,
+            name: `Member Name ${i + 12}`,
             role: 'Core Member',
-            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i + 7}`, // Placeholder
+            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i + 11}`, // Placeholder
             color: '#9333ea', // General Purple
             stats: [
                 { name: 'TECH', value: 70 },
