@@ -1,7 +1,7 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 
 function Contact() {
@@ -12,6 +12,17 @@ function Contact() {
         subject: '',
         message: ''
     });
+
+    // MAP OPTIMIZATION: Defer loading state & Transition
+    const [mapState, setMapState] = useState('locked'); // 'locked', 'connecting', 'active'
+
+    // Simulate connection delay for effect
+    const handleUnlock = () => {
+        setMapState('connecting');
+        setTimeout(() => {
+            setMapState('active');
+        }, 1500);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -113,7 +124,7 @@ function Contact() {
                         </p>
                     </motion.div>
 
-                    {/* 1. Official Contact Info (Moved to Top) */}
+                    {/* 1. Official Contact Info */}
                     <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <motion.div
                             whileHover={{ scale: 1.02 }}
@@ -175,8 +186,16 @@ function Contact() {
                                     className="bg-white/5 border border-white/10 p-8 rounded-2xl transition-all duration-300 backdrop-blur-md group relative overflow-hidden"
                                 >
                                     {member.image ? (
-                                        <div className="w-24 h-24 rounded-full mb-4 border-2 border-purple-500/50 overflow-hidden group-hover:scale-105 transition-transform">
-                                            <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
+                                        <div className="w-24 h-24 rounded-full mb-4 border-2 border-purple-500/50 overflow-hidden group-hover:scale-105 transition-transform bg-black/30">
+                                            <img
+                                                src={member.image}
+                                                alt={member.name}
+                                                className="w-full h-full object-cover"
+                                                loading="lazy"
+                                                decoding="async"
+                                                width="96"
+                                                height="96"
+                                            />
                                         </div>
                                     ) : (
                                         <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mb-4 text-3xl group-hover:scale-110 transition-transform">
@@ -198,7 +217,7 @@ function Contact() {
                         </div>
                     </motion.div>
 
-                    {/* 3. Venue Details (Professional Design) */}
+                    {/* 3. Venue Details */}
                     <motion.div variants={itemVariants} className="bg-gradient-to-r from-white/10 to-white/5 border border-white/10 p-8 md:p-12 rounded-3xl backdrop-blur-xl shadow-2xl relative overflow-hidden">
                         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-40 h-40 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
                         <div className="absolute bottom-0 left-0 -mb-10 -ml-10 w-40 h-40 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -245,23 +264,103 @@ function Contact() {
                         </div>
                     </motion.div>
 
-                    {/* 4. Map & Contact Form (Side-by-Side) */}
+                    {/* 4. TACTICAL MAP & Contact Form (Side-by-Side) */}
                     <motion.div variants={itemVariants} className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
 
-                        {/* Left: Map */}
-                        <div className="h-[600px] lg:h-auto min-h-[500px] rounded-3xl overflow-hidden border border-white/10 shadow-2xl relative group">
-                            <div className="absolute inset-0 border-4 border-white/5 rounded-3xl pointer-events-none z-10 group-hover:border-purple-500/30 transition-colors duration-500"></div>
-                            <iframe
-                                src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Ajeenkya%20DY%20Patil%20University,%20Charholi%20Budruk,%20Pune&t=&z=15&ie=UTF8&iwloc=B&output=embed"
-                                width="100%"
-                                height="100%"
-                                style={{ border: 0 }}
-                                allowFullScreen=""
-                                loading="lazy"
-                                referrerPolicy="no-referrer-when-downgrade"
-                                title="Ajeenkya DY Patil University Map"
-                                className="group-hover:opacity-100 transition-all duration-700 invert-0"
-                            ></iframe>
+                        {/* Left: TACTICAL TERMINAL MAP */}
+                        <div className="h-[600px] lg:h-auto min-h-[500px] rounded-3xl overflow-hidden border border-white/10 shadow-[0_0_50px_rgba(139,92,246,0.15)] relative group bg-gradient-to-br from-gray-900 to-black backdrop-blur-2xl flex flex-col">
+                            {/* Decorative Header */}
+                            <div className="absolute top-0 left-0 w-full h-12 bg-white/5 border-b border-white/10 flex items-center justify-between px-6 z-20">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                                </div>
+                                <div className="text-xs font-mono text-white/40 tracking-widest">SATELLITE_UPLINK_V2.0</div>
+                            </div>
+
+                            {/* Main Content Area */}
+                            <div className="flex-1 relative w-full h-full pt-12">
+                                <AnimatePresence mode='wait'>
+                                    {mapState === 'active' ? (
+                                        <motion.iframe
+                                            key="map"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ duration: 1 }}
+                                            src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Ajeenkya%20DY%20Patil%20University,%20Charholi%20Budruk,%20Pune&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                                            width="100%"
+                                            height="100%"
+                                            style={{ border: 0 }}
+                                            allowFullScreen=""
+                                            loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"
+                                            title="Ajeenkya DY Patil University Map"
+                                            className="w-full h-full invert-0 grayscale-[0.2] contrast-[1.1] saturate-[1.2]"
+                                        />
+                                    ) : (
+                                        <motion.div
+                                            key="locked"
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            exit={{ opacity: 0, scale: 1.1, filter: 'blur(10px)' }}
+                                            className="absolute inset-0 flex flex-col items-center justify-center relative overflow-hidden"
+                                        >
+                                            {/* Radar Grid Background */}
+                                            <div className="absolute inset-0 bg-[linear-gradient(rgba(139,92,246,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(139,92,246,0.1)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_at_center,black_40%,transparent_100%)] pointer-events-none"></div>
+
+                                            {/* Rotating Radar Sweep */}
+                                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30">
+                                                <motion.div
+                                                    animate={{ rotate: 360 }}
+                                                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                                                    className="w-[500px] h-[500px] border border-purple-500/30 rounded-full border-dashed"
+                                                />
+                                                <motion.div
+                                                    animate={{ rotate: -360 }}
+                                                    transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                                                    className="absolute w-[300px] h-[300px] border border-white/10 rounded-full"
+                                                />
+                                            </div>
+
+                                            {/* Terminal Interface */}
+                                            <div className="relative z-10 text-center space-y-6 p-8 bg-black/40 backdrop-blur-md rounded-2xl border border-white/10 shadow-2xl">
+                                                {mapState === 'connecting' ? (
+                                                    <div className="flex flex-col items-center space-y-4">
+                                                        <div className="w-16 h-16 border-4 border-purple-500 border-t-transparent rounded-full animate-spin"></div>
+                                                        <div className="space-y-1">
+                                                            <h3 className="text-2xl font-bold text-white minecraft-font tracking-widest animate-pulse">ESTABLISHING UPLINK...</h3>
+                                                            <p className="text-green-400 font-mono text-sm">Targeting: 18.6193° N, 73.9317° E</p>
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    <div className="flex flex-col items-center space-y-4">
+                                                        <div className="w-20 h-20 bg-red-500/10 rounded-full flex items-center justify-center border border-red-500/50 shadow-[0_0_30px_rgba(239,68,68,0.2)]">
+                                                            <span className="text-4xl">🔒</span>
+                                                        </div>
+                                                        <div>
+                                                            <h3 className="text-2xl font-bold text-red-400 minecraft-font tracking-widest">LOCATION DATA LOCKED</h3>
+                                                            <p className="text-white/50 text-sm font-mono mt-1">Initialize uplink to acquire live coordinates.</p>
+                                                        </div>
+
+                                                        <button
+                                                            onClick={handleUnlock}
+                                                            className="group relative px-8 py-3 bg-purple-600/20 hover:bg-purple-600/40 text-purple-300 hover:text-white font-bold rounded-lg border border-purple-500/50 hover:border-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.2)] hover:shadow-[0_0_40px_rgba(168,85,247,0.4)] transition-all active:scale-95 minecraft-font tracking-widest overflow-hidden"
+                                                        >
+                                                            <span className="relative z-10 flex items-center gap-2">
+                                                                <span className="w-2 h-2 bg-purple-400 rounded-full animate-pulse"></span>
+                                                                ACTIVATE UPLINK
+                                                            </span>
+                                                            {/* Scanning bar effect */}
+                                                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/20 to-transparent -translate-x-full group-hover:animate-shimmer pointer-events-none"></div>
+                                                        </button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         </div>
 
                         {/* Right: Contact Form */}
@@ -381,4 +480,3 @@ function SocialLink({ href, label, icon }) {
 }
 
 export default Contact;
-
