@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import styled, { keyframes, css } from 'styled-components';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
+import MiniNavbar from '../../components/layout/MiniNavbar';
 
 // Asset Mappings
 import opt0 from '../../assets/images/gallery/ui/opt_0.jpg';
@@ -585,15 +586,7 @@ const Gallery = () => {
               </SystemAlert>
             )}
 
-            <motion.button
-              onClick={() => navigate('/map')}
-              className="fixed top-12 left-12 z-[100] text-white/30 hover:text-white transition-all pixel-font text-[10px] tracking-tighter flex items-center gap-2 group"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
-              <span className="text-lg group-hover:-translate-x-1 transition-transform">←</span> EXIT VAULT
-            </motion.button>
+            <MiniNavbar label="EXIT VAULT" />
 
             <motion.div
               style={{ height: '100vh', width: '100%', perspective: '2000px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}

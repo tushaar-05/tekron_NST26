@@ -1,383 +1,101 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import styled from 'styled-components';
-
-const CardContainer = styled(motion.div)`
-  background: linear-gradient(135deg, rgba(30, 20, 56, 0.8), rgba(45, 27, 78, 0.6));
-  backdrop-filter: blur(20px);
-  border: 2px solid transparent;
-  border-radius: 20px;
-  overflow: hidden;
-  position: relative;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  cursor: pointer;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    padding: 2px;
-    background: linear-gradient(135deg, #a855f7, #7c3aed, #6366f1);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  &:hover::before {
-    opacity: 1;
-  }
-
-  &:hover {
-    transform: translateY(-10px);
-    box-shadow: 
-      0 20px 40px rgba(168, 85, 247, 0.3),
-      0 0 60px rgba(124, 58, 237, 0.2),
-      inset 0 0 30px rgba(168, 85, 247, 0.1);
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.1) 0%, transparent 70%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-
-  &:hover::after {
-    opacity: 1;
-  }
-`;
-
-const ImageContainer = styled.div`
-  width: 100%;
-  height: 220px;
-  background: linear-gradient(135deg, #1e1438 0%, #2d1b4e 50%, #1a0b2e 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: 
-      repeating-linear-gradient(
-        0deg,
-        rgba(168, 85, 247, 0.03) 0px,
-        transparent 1px,
-        transparent 2px,
-        rgba(168, 85, 247, 0.03) 3px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        rgba(168, 85, 247, 0.03) 0px,
-        transparent 1px,
-        transparent 2px,
-        rgba(168, 85, 247, 0.03) 3px
-      );
-    z-index: 2;
-  }
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-    z-index: 1;
-  }
-
-  ${CardContainer}:hover & img {
-    transform: scale(1.1);
-  }
-`;
-
-const IconCircle = styled(motion.div)`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(168, 85, 247, 0.2), rgba(124, 58, 237, 0.3));
-  border: 3px solid rgba(168, 85, 247, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 3rem;
-  color: #d8c6f2;
-  font-weight: 800;
-  text-shadow: 0 0 20px rgba(168, 85, 247, 0.6);
-  position: relative;
-  z-index: 2;
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -10px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(168, 85, 247, 0.2) 0%, transparent 70%);
-    animation: pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% {
-      transform: scale(1);
-      opacity: 0.5;
-    }
-    50% {
-      transform: scale(1.2);
-      opacity: 0.8;
-    }
-  }
-`;
-
-const Content = styled.div`
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  position: relative;
-  z-index: 1;
-`;
-
-const CategoryBadge = styled.span`
-  display: inline-block;
-  padding: 0.4rem 1rem;
-  background: ${props => {
-    if (props.category === 'Competition') return 'linear-gradient(135deg, #a855f7, #7c3aed)';
-    if (props.category === 'Workshop') return 'linear-gradient(135deg, #6366f1, #4f46e5)';
-    return 'linear-gradient(135deg, #8b5cf6, #6d28d9)';
-  }};
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  border-radius: 8px;
-  width: fit-content;
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  font-family: 'VT323', monospace;
-`;
-
-const Title = styled.h3`
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 800;
-  margin: 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  letter-spacing: 0.5px;
-  line-height: 1.3;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  background: linear-gradient(135deg, #ffffff, #d8c6f2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-family: 'VT323', monospace;
-`;
-
-const Description = styled.p`
-  color: #c8b6e2;
-  font-size: 1.3rem;
-  line-height: 1.4;
-  margin: 0;
-  opacity: 0.9;
-  font-family: 'VT323', monospace;
-`;
-
-const Particles = styled.div`
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-
-  ${CardContainer}:hover & {
-    opacity: 1;
-  }
-`;
-
-const Particle = styled(motion.div)`
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: ${props => props.color || '#a855f7'};
-  border-radius: 50%;
-  box-shadow: 0 0 10px ${props => props.color || '#a855f7'};
-`;
-
-const MetaInfo = styled.div`
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 16px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(168, 85, 247, 0.2);
-`;
-
-const MetaItem = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.4rem;
-  color: #c8b6e2;
-  background: rgba(168, 85, 247, 0.1);
-  padding: 8px 14px;
-  border-radius: 8px;
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  font-family: 'VT323', monospace;
-  white-space: nowrap;
-
-  span {
-    color: #fff;
-    font-weight: 600;
-  }
-`;
-
-const RegisterButton = styled.a`
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
-  background: linear-gradient(135deg, #a855f7, #7c3aed);
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 700;
-  text-decoration: none;
-  border-radius: 8px;
-  border: 2px solid rgba(168, 85, 247, 0.5);
-  font-family: 'VT323', monospace;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(168, 85, 247, 0.3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  white-space: nowrap;
-
-  &:hover {
-    background: linear-gradient(135deg, #7c3aed, #6366f1);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(168, 85, 247, 0.5);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;
+import { motion } from 'framer-motion';
 
 const EventCard = ({ title, category, image, description, prizePool, unstopLink, onClick, priority = false }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  // Memoize particles to prevent re-creation
-  const particles = React.useMemo(() => Array.from({ length: 6 }, (_, i) => ({
-    id: i,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    color: ['#a855f7', '#7c3aed', '#6366f1'][Math.floor(Math.random() * 3)]
-  })), []);
-
   return (
-    <CardContainer
+    <motion.div
       onClick={onClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "50px" }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
+      className="group relative w-full bg-black/40 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden cursor-pointer transition-all duration-500 hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]"
     >
-      <ImageContainer>
+      {/* Animated Gradient Border Overlay */}
+      <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent translate-x-[-100%] transition-transform duration-1000 group-hover:translate-x-[100%] z-0 pointer-events-none`} />
+
+      {/* Hero Image Section */}
+      <div className="relative h-48 w-full overflow-hidden bg-slate-900 border-b border-white/5">
+        {/* Dynamic Scanline */}
+        <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent z-10 translate-y-[-100%] ${isHovered ? 'animate-scan-fast' : ''}`} />
+
+        {/* Corner Accents */}
+        <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-purple-500/50 z-20" />
+        <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-purple-500/50 z-20" />
+        <div className="absolute bottom-2 left-2 w-3 h-3 border-l border-b border-purple-500/50 z-20" />
+        <div className="absolute bottom-2 right-2 w-3 h-3 border-r border-b border-purple-500/50 z-20" />
+
         {image ? (
           <>
-            {/* Blur Placeholder */}
-            {!imageLoaded && (
-              <div
-                className="absolute inset-0 bg-white/5 blur-xl transition-opacity duration-500"
-                style={{ opacity: imageLoaded ? 0 : 1 }}
-              />
-            )}
-
+            <div
+              className={`absolute inset-0 bg-slate-800 animate-pulse transition-opacity duration-500 ${imageLoaded ? 'opacity-0' : 'opacity-100'} z-0`}
+            />
             <img
               src={image}
               alt={title}
               loading={priority ? "eager" : "lazy"}
-              decoding="async"
               onLoad={() => setImageLoaded(true)}
-              style={{ opacity: imageLoaded ? 1 : 0 }}
+              className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:contrast-125 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             />
           </>
         ) : (
-          <IconCircle
-            initial={{ scale: 1.1, rotate: 5 }}
-            animate={{ scale: 1.1, rotate: 5 }}
-            transition={{ type: "spring", stiffness: 300 }}
-          >
-            {title.charAt(0)}
-          </IconCircle>
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-900 to-slate-800">
+            <span className="text-4xl font-bold text-white/10">{title.charAt(0)}</span>
+          </div>
         )}
-      </ImageContainer>
 
-      <Content>
-        <CategoryBadge category={category}>{category}</CategoryBadge>
-        <Title>{title}</Title>
+        {/* Category Tag */}
+        <div className="absolute top-3 right-3 z-20">
+          <span className="px-2 py-1 bg-black/60 border border-white/10 backdrop-blur-sm text-[10px] uppercase tracking-widest text-purple-300 font-mono rounded">
+            {category}
+          </span>
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="p-5 md:p-6 relative z-10">
+        <h3 className="text-2xl font-bold text-white mb-2 font-['VT323'] tracking-wide group-hover:text-purple-300 transition-colors uppercase truncate">
+          {title}
+        </h3>
+
         {description && (
-          <Description>
-            {description.length > 140 ? description.substring(0, 140) + "..." : description}
-          </Description>
+          <p className="text-sm text-gray-400 line-clamp-2 mb-6 font-mono leading-relaxed h-10">
+            {description}
+          </p>
         )}
 
-        {/* Meta Info (Prize Pool + Register Button) - Conditionally Rendered */}
-        {(prizePool || unstopLink) && (
-          <MetaInfo>
-            {prizePool && (
-              <MetaItem>
-                🏆 <span>Prize Pool:</span> {prizePool}
-              </MetaItem>
-            )}
-            {unstopLink && (
-              <RegisterButton
-                href={unstopLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-              >
-                📝 Register
-              </RegisterButton>
-            )}
-          </MetaInfo>
-        )}
-      </Content>
+        {/* Footer Meta */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/5">
+          <div className="flex flex-col">
+            <span className="text-xs text-purple-200 uppercase tracking-wider font-mono font-bold mb-1">Prize Pool</span>
+            <span className="text-3xl text-yellow-400 font-bold font-['VT323'] drop-shadow-[0_0_10px_rgba(250,204,21,0.4)]">
+              {prizePool || 'TBA'}
+            </span>
+          </div>
 
-      {/* Optimized Particles: Only animate when hovered */}
-      <Particles>
-        {isHovered && particles.map(particle => (
-          <Particle
-            key={particle.id}
-            color={particle.color}
-            style={{ left: `${particle.x}%`, top: `${particle.y}%` }}
-            animate={{
-              y: [0, -20, 0],
-              opacity: [0, 1, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              delay: particle.id * 0.2,
-            }}
-          />
-        ))}
-      </Particles>
-    </CardContainer>
+          {unstopLink ? (
+            <a
+              href={unstopLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-2 px-6 py-2.5 bg-purple-600 hover:bg-purple-500 border border-purple-400 hover:border-purple-300 rounded shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-all group/btn"
+            >
+              <span className="text-sm font-bold uppercase tracking-wider text-white">Register</span>
+              <svg className="w-4 h-4 text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+            </a>
+          ) : (
+            <div className="px-4 py-2 opacity-50 cursor-not-allowed border border-white/10 rounded">
+              <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Closed</span>
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
   );
 };
 

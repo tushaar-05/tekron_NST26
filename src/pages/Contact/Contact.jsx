@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
+import MiniNavbar from '../../components/layout/MiniNavbar';
 
 function Contact() {
     const navigate = useNavigate();
@@ -85,14 +86,7 @@ function Contact() {
             <div className="text-white min-h-screen pt-24 pb-12 px-4 md:px-8 overflow-hidden relative font-['VT323',_monospace]">
 
                 {/* Back Button */}
-                <motion.button
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    onClick={() => navigate('/map')}
-                    className="fixed top-8 left-8 z-50 px-6 py-2 bg-black/60 border border-purple-500/50 backdrop-blur-md text-white hover:bg-purple-900/60 transition-all duration-300 flex items-center gap-2 group pixel-tech-button text-lg"
-                >
-                    <span className="group-hover:-translate-x-1 transition-transform">{`<<`}</span> RETURN TO MAP
-                </motion.button>
+                <MiniNavbar />
 
                 <motion.div
                     variants={containerVariants}

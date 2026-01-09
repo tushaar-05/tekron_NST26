@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
+import MiniNavbar from '../../components/layout/MiniNavbar';
 
 // --- Shared Animations ---
 const fadeInUp = {
@@ -938,12 +939,7 @@ const Sponsors = () => {
     const navigate = useNavigate();
     return (
         <UnifiedBackground>
-            <motion.button
-                onClick={() => navigate('/map')}
-                className="fixed top-12 left-12 z-[100] px-8 py-4 pixel-font text-[10px] bg-[#7c3aed] text-white hover:scale-110 active:scale-95 transition-all shadow-[4px_4px_0px_#000]"
-            >
-                ← EXIT_MAP
-            </motion.button>
+            <MiniNavbar label="EXIT MAP" />
 
             <PageContent>
                 <HeroSection />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
+import MiniNavbar from '../../components/layout/MiniNavbar';
 
 // EventCard Component
 const EventCard = ({ title, category, image }) => {
@@ -169,26 +170,8 @@ export default function Events() {
     <UnifiedBackground>
       <div className="w-full overflow-x-hidden relative" style={{ color: 'white', padding: '80px 20px 60px', minHeight: '100vh' }}>
         {/* Back Button */}
-        <button
-          onClick={() => navigate('/map')}
-          className="fixed top-8 left-8 px-6 py-3 rounded-lg font-semibold text-base cursor-pointer transition-all duration-300 z-50 minecraft-font"
-          style={{
-            background: 'rgba(168, 85, 247, 0.1)',
-            border: '2px solid rgba(168, 85, 247, 0.3)',
-            backdropFilter: 'blur(10px)',
-            color: 'white'
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = 'rgba(168, 85, 247, 0.2)';
-            e.currentTarget.style.transform = 'translateY(-2px)';
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = 'rgba(168, 85, 247, 0.1)';
-            e.currentTarget.style.transform = 'translateY(0)';
-          }}
-        >
-          ← Back to Map
-        </button>
+        {/* Back Button */}
+        <MiniNavbar />
 
         {/* Content Wrapper */}
         <div className="max-w-7xl mx-auto px-5">
