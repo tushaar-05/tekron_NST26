@@ -17,6 +17,15 @@ function WorldMap() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Mobile Detection
+    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+    useEffect(() => {
+        const handleResize = () => setIsMobile(window.innerWidth < 768);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
     // Phases: 'loading', 'void', 'seed', 'genesis', 'stabilized', 'connected'
     const [phase, setPhase] = useState(() => {
         const introComplete = sessionStorage.getItem('tekron_intro_complete') === 'true';
@@ -51,15 +60,74 @@ function WorldMap() {
         mouseY.set(y);
     };
 
-    const islands = [
-        { id: 'home', image: homeIsland, label: 'HOME', x: 50, y: 50, size: 280, route: '/' },
-        { id: 'contact', image: contactIsland, label: 'CONTACT', x: 50, y: 10, size: 130, route: '/contact' },
-        { id: 'comp', image: compIsland, label: 'COMPETITIONS', x: 85, y: 25, size: 180, route: '/competition' },
-        { id: 'gallery', image: galleryIsland, label: 'GALLERY', x: 85, y: 65, size: 160, route: '/gallery' },
-        { id: 'about', image: aboutIsland, label: 'ABOUT', x: 50, y: 85, size: 160, route: '/about' },
-        { id: 'sponsors', image: sponsorsIsland, label: 'SPONSORS', x: 15, y: 65, size: 140, route: '/sponsors' },
-        { id: 'events', image: eventsIsland, label: 'EVENTS', x: 15, y: 25, size: 150, route: '/events' }
+    const islandsConfig = [
+        {
+            id: 'home',
+            image: homeIsland,
+            label: 'HOME',
+            route: '/',
+            desktop: { x: 50, y: 50, size: 280 },
+            mobile: { x: 50, y: 46, size: 190 }
+        },
+        {
+            id: 'contact',
+            image: contactIsland,
+            label: 'CONTACT',
+            route: '/contact',
+            desktop: { x: 50, y: 10, size: 130 },
+            mobile: { x: 45, y: 9, size: 100 }
+        },
+        {
+            id: 'comp',
+            image: compIsland,
+            label: 'COMPETITIONS',
+            route: '/competition',
+            desktop: { x: 85, y: 25, size: 180 },
+            mobile: { x: 60, y: 25, size: 120 }
+        },
+        {
+            id: 'gallery',
+            image: galleryIsland,
+            label: 'GALLERY',
+            route: '/gallery',
+            desktop: { x: 85, y: 65, size: 160 },
+            mobile: { x: 69, y: 65, size: 120 }
+        },
+        {
+            id: 'about',
+            image: aboutIsland,
+            label: 'ABOUT',
+            route: '/about',
+            desktop: { x: 50, y: 85, size: 160 },
+            mobile: { x: 50, y: 80, size: 120 }
+        },
+        {
+            id: 'sponsors',
+            image: sponsorsIsland,
+            label: 'SPONSORS',
+            route: '/sponsors',
+            desktop: { x: 15, y: 65, size: 140 },
+            mobile: { x: 17, y: 60, size: 100 }
+        },
+        {
+            id: 'events',
+            image: eventsIsland,
+            label: 'EVENTS',
+            route: '/events',
+            desktop: { x: 15, y: 25, size: 150 },
+            mobile: { x: 20, y: 25, size: 110 }
+        }
     ];
+
+    const islands = islandsConfig.map(config => ({
+        id: config.id,
+        image: config.image,
+        label: config.label,
+        route: config.route,
+        x: isMobile ? config.mobile.x : config.desktop.x,
+        y: isMobile ? config.mobile.y : config.desktop.y,
+        size: isMobile ? config.mobile.size : config.desktop.size
+    }));
 
     // Progressive Island Loading
     useEffect(() => {
@@ -164,7 +232,7 @@ function WorldMap() {
                     backgroundImage: 'url(/images/map/waterFinal.webp)',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                    filter: 'brightness(0.5) contrast(1.1) hue-rotate(240deg)',
+                    filter: 'brightness(0.5) contrast(1.1)',
                     willChange: 'transform' // GPU Hint
                 }}
             >
@@ -391,15 +459,15 @@ function WorldMap() {
             </motion.div>
 
             {/* Narrative HUD */}
-            <div className="absolute bottom-12 right-12 z-50 pointer-events-none">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:bottom-12 md:right-12 z-50 pointer-events-none w-max max-w-[90vw]">
                 <motion.div
                     key={narrative} // Re-animate on text change
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="inline-block bg-black/80 px-6 py-2 rounded-full border border-white/20 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]"
+                    className="inline-block bg-black/80 px-4 py-1.5 md:px-6 md:py-2 rounded-full border border-white/20 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]"
                 >
-                    <span className="text-cyan-400 text-xl tracking-widest typewriter drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" style={{ fontFamily: "'VT323', monospace" }}>
+                    <span className="text-cyan-400 text-base md:text-xl tracking-widest typewriter drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" style={{ fontFamily: "'VT323', monospace" }}>
                         {`> ${narrative}`}
                     </span>
                 </motion.div>
