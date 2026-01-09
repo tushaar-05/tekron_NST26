@@ -532,12 +532,20 @@ function About() {
 
     const selectedMember = coreCommittee.find(m => m.id === selectedId) || coreCommittee[0];
 
-    const organizingCommittee = Array.from({ length: 30 }, (_, i) => ({
-        id: i + 1,
-        name: `Volunteer ${i + 1}`,
-        role: 'Organizer',
-        image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Org${i}`, // Placeholder
-    }));
+    const organizingCommittee = [
+        {
+            id: 1,
+            name: 'Tushar',
+            role: 'Organizer',
+            image: '/images/volunteer/Tushar.png',
+        },
+        ...Array.from({ length: 29 }, (_, i) => ({
+            id: i + 2,
+            name: `Volunteer ${i + 2}`,
+            role: 'Organizer',
+            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Org${i + 1}`, // Placeholder for others
+        }))
+    ];
 
     const stats = {
         events: 20,
@@ -859,8 +867,8 @@ function About() {
                             whileHover={{ scale: 1.05 }}
                             className="bg-black/30 backdrop-blur-sm border border-purple-500/20 p-3 flex flex-col items-center text-center hover:bg-purple-900/10 transition-colors"
                         >
-                            <div className="w-16 h-16 mb-2 rounded-full overflow-hidden border border-purple-500/30">
-                                <img src={member.image} alt={member.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all" />
+                            <div className="w-24 h-24 mb-2 rounded-full overflow-hidden border border-purple-500/30">
+                                <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-all" />
                             </div>
                             <h3 className="text-white font-bold text-xs mb-0.5">{member.name}</h3>
                             <p className="text-purple-400 text-[10px] font-mono">{member.role}</p>
