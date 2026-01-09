@@ -347,6 +347,20 @@ function About() {
     const coreCommittee = [
         {
             id: 1,
+            name: 'Vamshi',
+            role: 'Marketing Team',
+            image: '/images/committee/Vamshi.jpg',
+            color: '#fbbf24',
+            stats: [
+                { name: 'TECH', value: 50 },
+                { name: 'MGMT', value: 85 },
+                { name: 'CRTV', value: 95 },
+                { name: 'COMM', value: 90 },
+                { name: 'OPS', value: 75 }
+            ]
+        }, 
+        {
+            id: 2,
             name: 'Ved Bhadani',
             role: 'Tech Team',
             image: '/images/committee/ved_bhadani.jpg',
@@ -360,7 +374,7 @@ function About() {
             ]
         },
         {
-            id: 2,
+            id: 3,
             name: 'Nihal C',
             role: 'Sponsorship Team',
             image: '/images/committee/nihal_c.jpg',
@@ -374,7 +388,7 @@ function About() {
             ]
         },
         {
-            id: 3,
+            id: 4,
             name: 'Rithwik Kuchana',
             role: 'Marketing Team',
             image: '/images/committee/rithwik_kuchna.jpg',
@@ -388,7 +402,7 @@ function About() {
             ]
         },
         {
-            id: 4,
+            id: 5,
             name: 'Sarthak Ghoderao',
             role: 'Comms Team',
             image: '/images/committee/sarthak_ghoderao.jpg',
@@ -402,7 +416,7 @@ function About() {
             ]
         },
         {
-            id: 5,
+            id: 6,
             name: 'Ayush Shukla',
             role: 'Hospitality Team',
             image: '/images/team/ayush.jpg',
@@ -416,7 +430,7 @@ function About() {
             ]
         },
         {
-            id: 6,
+            id: 7,
             name: 'Harshit Jain',
             role: 'Sponsorship Team',
             image: '/images/committee/harshit_jain.jpg',
@@ -430,7 +444,7 @@ function About() {
             ]
         },
         {
-            id: 7,
+            id: 8,
             name: 'Aditya Chopra',
             role: 'Cultural Team',
             image: '/images/committee/aditya_chopra.jpg',
@@ -444,7 +458,7 @@ function About() {
             ]
         },
         {
-            id: 8,
+            id: 9,
             name: 'Nilesh Nand Lal',
             role: 'Marketing Team',
             image: '/images/committee/nilesh.jpg',
@@ -458,7 +472,7 @@ function About() {
             ]
         },
         {
-            id: 9,
+            id: 10,
             name: 'Vansh Agarwal',
             role: 'Operations Team',
             image: '/images/committee/vansh_agarwal.jpg',
@@ -472,7 +486,7 @@ function About() {
             ]
         },
         {
-            id: 10,
+            id: 11,
             name: 'Priyabrata Singh',
             role: 'Design Team',
             image: '/images/committee/priyabrata_singh.jpg',
@@ -486,7 +500,7 @@ function About() {
             ]
         },
         {
-            id: 11,
+            id: 12,
             name: 'Jay Patil',
             role: 'Design Team',
             image: '/images/committee/jay_patil.jpg',
