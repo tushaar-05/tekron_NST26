@@ -535,9 +535,15 @@ function About() {
     const organizingCommittee = [
         {
             id: 1,
-            name: 'Tushar',
-            role: 'Organizer',
+            name: 'Tushar Singh',
+            role: 'Tech Team',
             image: '/images/volunteer/Tushar.png',
+        },
+        {
+            id: 2,
+            name: 'Madhav Agarwal',
+            role: 'Marketing Team',
+            image: '/images/volunteer/Madhav.JPG',
         },
         ...Array.from({ length: 29 }, (_, i) => ({
             id: i + 2,
