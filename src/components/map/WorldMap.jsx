@@ -74,7 +74,7 @@ function WorldMap() {
             image: contactIsland,
             label: 'CONTACT',
             route: '/contact',
-            desktop: { x: 50, y: 10, size: 130 },
+            desktop: { x: 50, y: 15, size: 200 },
             mobile: { x: 45, y: 9, size: 100 }
         },
         {
@@ -82,7 +82,7 @@ function WorldMap() {
             image: compIsland,
             label: 'COMPETITIONS',
             route: '/competition',
-            desktop: { x: 85, y: 25, size: 180 },
+            desktop: { x: 75, y: 25, size: 200 },
             mobile: { x: 60, y: 25, size: 120 }
         },
         {
@@ -90,7 +90,7 @@ function WorldMap() {
             image: galleryIsland,
             label: 'GALLERY',
             route: '/gallery',
-            desktop: { x: 85, y: 65, size: 160 },
+            desktop: { x: 75, y: 65, size: 200 },
             mobile: { x: 69, y: 65, size: 120 }
         },
         {
@@ -98,7 +98,7 @@ function WorldMap() {
             image: aboutIsland,
             label: 'ABOUT',
             route: '/about',
-            desktop: { x: 50, y: 85, size: 160 },
+            desktop: { x: 50, y: 85, size: 200 },
             mobile: { x: 50, y: 80, size: 120 }
         },
         {
@@ -106,7 +106,7 @@ function WorldMap() {
             image: sponsorsIsland,
             label: 'SPONSORS',
             route: '/sponsors',
-            desktop: { x: 15, y: 65, size: 140 },
+            desktop: { x: 25, y: 65, size: 200 },
             mobile: { x: 17, y: 60, size: 100 }
         },
         {
@@ -114,7 +114,7 @@ function WorldMap() {
             image: eventsIsland,
             label: 'EVENTS',
             route: '/events',
-            desktop: { x: 15, y: 25, size: 150 },
+            desktop: { x: 25, y: 25, size: 200 },
             mobile: { x: 20, y: 25, size: 110 }
         }
     ];

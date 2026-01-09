@@ -158,10 +158,10 @@ const CoreMemberCard = ({ member, index }) => {
                 {/* Operative Data */}
                 <div className="space-y-4">
                     <div className="text-center">
-                        <h3 className="text-xl font-bold text-white tracking-widest pixel-font mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/60 transition-all duration-300 px-2 min-h-[3rem] flex items-center justify-center text-center">
+                        <h3 className="text-base sm:text-lg md:text-xl font-bold text-white tracking-widest pixel-font mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white/60 transition-all duration-300 px-2 min-h-[3rem] flex items-center justify-center text-center leading-tight">
                             {member.name}
                         </h3>
-                        <p className="text-[10px] font-mono tracking-[0.3em] uppercase opacity-50" style={{ color: accentColor }}>
+                        <p className="text-[8px] sm:text-[9px] md:text-[10px] font-mono tracking-[0.2em] sm:tracking-[0.3em] uppercase opacity-50" style={{ color: accentColor }}>
                             {member.role}
                         </p>
                     </div>
@@ -239,24 +239,24 @@ const HolographicDisplay = ({ member, color, onClose }) => {
                         <motion.div
                             initial={{ x: -20, opacity: 0 }}
                             animate={{ x: 0, opacity: 1 }}
-                            className="flex items-center gap-4 mb-4"
+                            className="flex flex-wrap items-center gap-2 sm:gap-3 md:gap-4 mb-4"
                         >
-                            <span className="text-[12px] pixel-font px-3 py-1 border-2"
+                            <span className="text-[9px] sm:text-[10px] md:text-[12px] pixel-font px-2 sm:px-3 py-1 border-2"
                                 style={{ color, borderColor: `${color}44`, background: `${color}11` }}>
                                 {member.id <= 4 ? 'LEGENDARY UNIT' : 'CORE MEMBER'}
                             </span>
-                            <span className="text-white/20 text-[12px] pixel-font">ID_042{member.id}</span>
+                            <span className="text-white/20 text-[9px] sm:text-[10px] md:text-[12px] pixel-font">ID_042{member.id}</span>
                         </motion.div>
 
                         <motion.h3
                             key={member.name}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-5xl md:text-7xl font-bold text-white pixel-font tracking-tighter mb-2"
+                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white pixel-font tracking-tighter mb-2"
                         >
                             {member.name}
                         </motion.h3>
-                        <p className="text-xl md:text-2xl uppercase tracking-[0.4em] font-mono" style={{ color }}>
+                        <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] font-mono" style={{ color }}>
                             &lt; {member.role} /&gt;
                         </p>
                     </div>
@@ -265,19 +265,19 @@ const HolographicDisplay = ({ member, color, onClose }) => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div className="space-y-6">
                             <div className="space-y-3">
-                                <span className="text-[12px] pixel-font text-white/40">MEMBER_LORE:</span>
-                                <p className="text-md font-mono text-white/80 leading-relaxed italic border-l-2 pl-4" style={{ borderColor: `${color}44` }}>
+                                <span className="text-[10px] sm:text-[11px] md:text-[12px] pixel-font text-white/40">MEMBER_LORE:</span>
+                                <p className="text-xs sm:text-sm md:text-base font-mono text-white/80 leading-relaxed italic border-l-2 pl-3 sm:pl-4" style={{ borderColor: `${color}44` }}>
                                     "The cornerstone of TEKRON's architecture, specialized in {member.role.toLowerCase()} operations. High affinity for system optimization and strategic deployment."
                                 </p>
                             </div>
-                            <div className="flex gap-4">
-                                <div className="bg-white/5 p-4 flex-1 border-l-2" style={{ borderColor: color }}>
-                                    <div className="text-[10px] pixel-font text-white/40 mb-1">XP_GAIN</div>
-                                    <div className="text-white font-mono text-lg">MAXIMIZED</div>
+                            <div className="flex gap-2 sm:gap-3 md:gap-4">
+                                <div className="bg-white/5 p-2 sm:p-3 md:p-4 flex-1 border-l-2" style={{ borderColor: color }}>
+                                    <div className="text-[8px] sm:text-[9px] md:text-[10px] pixel-font text-white/40 mb-1">XP_GAIN</div>
+                                    <div className="text-white font-mono text-sm sm:text-base md:text-lg">MAXIMIZED</div>
                                 </div>
-                                <div className="bg-white/5 p-4 flex-1 border-l-2" style={{ borderColor: color }}>
-                                    <div className="text-[10px] pixel-font text-white/40 mb-1">BATTLE_EFF</div>
-                                    <div className="text-white font-mono text-lg">100%</div>
+                                <div className="bg-white/5 p-2 sm:p-3 md:p-4 flex-1 border-l-2" style={{ borderColor: color }}>
+                                    <div className="text-[8px] sm:text-[9px] md:text-[10px] pixel-font text-white/40 mb-1">BATTLE_EFF</div>
+                                    <div className="text-white font-mono text-sm sm:text-base md:text-lg">100%</div>
                                 </div>
                             </div>
                         </div>
@@ -347,7 +347,7 @@ function About() {
     const coreCommittee = [
         {
             id: 1,
-            name: 'Vamshi',
+            name: 'Vamshi Pendyala',
             role: 'Marketing Team',
             image: '/images/committee/Vamshi.jpg',
             color: '#fbbf24',
@@ -358,7 +358,7 @@ function About() {
                 { name: 'COMM', value: 90 },
                 { name: 'OPS', value: 75 }
             ]
-        }, 
+        },
         {
             id: 2,
             name: 'Ved Bhadani',
@@ -514,20 +514,7 @@ function About() {
                 { name: 'OPS', value: 75 }
             ]
         },
-        ...Array.from({ length: 3 }, (_, i) => ({
-            id: i + 12,
-            name: `Member Name ${i + 12}`,
-            role: 'Core Member',
-            image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Core${i + 11}`, // Placeholder
-            color: '#9333ea', // General Purple
-            stats: [
-                { name: 'TECH', value: 70 },
-                { name: 'MGMT', value: 70 },
-                { name: 'CRTV', value: 70 },
-                { name: 'COMM', value: 70 },
-                { name: 'OPS', value: 70 }
-            ]
-        }))
+
     ];
 
     const selectedMember = coreCommittee.find(m => m.id === selectedId) || coreCommittee[0];
@@ -562,23 +549,34 @@ function About() {
 
     return (
         <UnifiedBackground>
-            {/* Back to Map Button - Pixel Style */}
-            <motion.button
-                onClick={() => navigate('/map')}
-                className="fixed top-6 left-6 z-50 px-6 py-3 pixel-font text-xs pixel-button"
-                style={{
-                    background: '#7c3aed',
-                    fontSize: '10px',
-                    imageRendering: 'pixelated'
-                }}
-                whileHover={{ scale: 1.05, x: -5 }}
-                whileTap={{ scale: 0.95 }}
+            {/* Mini Navbar - Centered & Subtle */}
+            <motion.div
+                initial={{ y: -50, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="fixed top-6 left-0 w-full flex justify-center z-50 pointer-events-none"
             >
-                ← BACK
-            </motion.button>
+                <motion.button
+                    onClick={() => navigate('/map')}
+                    className="pointer-events-auto px-6 py-2 pixel-font text-[10px] sm:text-xs backdrop-blur-md border border-purple-400/30 rounded-full shadow-lg flex items-center gap-2"
+                    style={{
+                        background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.2) 0%, rgba(168, 85, 247, 0.2) 100%)',
+                        boxShadow: '0 0 15px rgba(124, 58, 237, 0.3), 0 4px 8px rgba(0, 0, 0, 0.2)'
+                    }}
+                    whileHover={{
+                        scale: 1.05,
+                        background: 'linear-gradient(135deg, rgba(124, 58, 237, 0.3) 0%, rgba(168, 85, 247, 0.3) 100%)',
+                        boxShadow: '0 0 20px rgba(168, 85, 247, 0.4), 0 6px 12px rgba(0, 0, 0, 0.3)'
+                    }}
+                    whileTap={{ scale: 0.95 }}
+                >
+                    <span className="text-base">←</span>
+                    <span className="tracking-widest opacity-90">BACK TO MAP</span>
+                </motion.button>
+            </motion.div>
 
             {/* HERO SECTION - Title + Terminal + Stats */}
-            <section className="min-h-screen flex flex-col items-center justify-center px-4 relative z-10 pt-20">
+            <section className="min-h-screen flex flex-col items-center justify-center px-4 relative z-10 mt-[-60px]">
 
 
                 {/* MAIN PAGE HEADER */}
@@ -589,7 +587,7 @@ function About() {
                     className="relative text-center mb-12"
                 >
                     <h1
-                        className={`text-6xl md:text-9xl font-bold text-center pixel-font ${glitchActive ? 'glitch-text-pixel' : ''}`}
+                        className={`text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-center pixel-font ${glitchActive ? 'glitch-text-pixel' : ''}`}
                         style={{
                             color: '#d8c6f2',
                             letterSpacing: '0.1em',
@@ -622,8 +620,8 @@ function About() {
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 p-4 bg-black/40 backdrop-blur-md border-y-2 border-purple-500/30">
                         {/* Stat 1: Participants */}
                         <div className="text-center group cursor-default">
-                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-cyan-400 transition-colors">PLAYERS</div>
-                            <div className="text-lg md:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                            <div className="text-[10px] sm:text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-cyan-400 transition-colors">PLAYERS</div>
+                            <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
                                 <AnimatedCounter target={stats.participants} />
                                 <span className="text-purple-500">+</span>
                             </div>
@@ -631,8 +629,8 @@ function About() {
 
                         {/* Stat 2: Events */}
                         <div className="text-center group cursor-default">
-                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-pink-400 transition-colors">QUESTS</div>
-                            <div className="text-lg md:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                            <div className="text-[10px] sm:text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-pink-400 transition-colors">QUESTS</div>
+                            <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
                                 <AnimatedCounter target={stats.events} />
                                 <span className="text-purple-500">+</span>
                             </div>
@@ -640,8 +638,8 @@ function About() {
 
                         {/* Stat 3: Events */}
                         <div className="text-center group cursor-default">
-                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-green-400 transition-colors">EVENTS</div>
-                            <div className="text-lg md:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
+                            <div className="text-[10px] sm:text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-green-400 transition-colors">EVENTS</div>
+                            <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white pixel-font" style={{ textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>
                                 <AnimatedCounter target={stats.projects} />
                                 <span className="text-purple-500">+</span>
                             </div>
@@ -649,8 +647,8 @@ function About() {
 
                         {/* Stat 4: Prize Pool */}
                         <div className="text-center group cursor-default">
-                            <div className="text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-yellow-400 transition-colors">BOUNTY</div>
-                            <div className="text-lg md:text-2xl font-bold text-yellow-400 pixel-font" style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.5)' }}>
+                            <div className="text-[10px] sm:text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-yellow-400 transition-colors">BOUNTY</div>
+                            <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-yellow-400 pixel-font" style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.5)' }}>
                                 ₹8L
                                 <span className="text-purple-500">+</span>
                             </div>
@@ -658,124 +656,182 @@ function About() {
                     </div>
                 </motion.div>
 
-                <div className="absolute bottom-10 animate-bounce text-purple-500">
+                <div className="absolute bottom-10 animate-bounce text-purple-500 text-xs sm:text-sm md:text-base">
                     Scroll to Start
                 </div>
             </section>
 
-            {/* SECTION 2: VISION & MISSION - Holographic Data Terminals */}
+            {/* SECTION 2: VISION & MISSION - Enhanced Modern Cards */}
             <section className="px-4 py-20 max-w-7xl mx-auto relative z-10 w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
 
-                    {/* Vision Terminal */}
+                    {/* Vision Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8 }}
+                        transition={{ duration: 0.6 }}
+                        whileHover={{ y: -10, scale: 1.02 }}
                         className="relative group"
                     >
-                        {/* Connecting Lines */}
-                        <div className="absolute -left-4 top-1/2 w-4 h-[2px] bg-cyan-500/50 hidden md:block"></div>
+                        {/* Animated Gradient Background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-blue-500/10 to-purple-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-50 group-hover:opacity-100"></div>
 
-                        <div className="bg-black/80 border border-cyan-500/30 p-1 relative overflow-hidden"
-                            style={{
-                                boxShadow: '0 0 20px rgba(6, 182, 212, 0.15)',
-                                clipPath: 'polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px)'
-                            }}>
+                        {/* Main Card */}
+                        <div className="relative bg-gradient-to-br from-cyan-950/40 via-black/60 to-blue-950/40 backdrop-blur-xl border-2 border-cyan-500/30 rounded-2xl p-8 md:p-10 overflow-hidden h-full group-hover:border-cyan-400/50 transition-all duration-500">
 
-                            {/* Terminal Header */}
-                            <div className="bg-cyan-900/20 px-4 py-2 flex justify-between items-center border-b border-cyan-500/20">
-                                <span className="text-cyan-400 text-[10px] pixel-font">TERMINAL_01 // VISION.LOG</span>
-                                <div className="flex gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-cyan-500/50 animate-pulse"></div>
-                                    <div className="w-2 h-2 rounded-full bg-cyan-500/20"></div>
+                            {/* Floating Particles */}
+                            <div className="absolute top-0 right-0 w-32 h-32 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
+                            <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+
+                            {/* Animated Corner Accents */}
+                            <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-cyan-400/40 rounded-tl-2xl group-hover:w-24 group-hover:h-24 transition-all duration-500"></div>
+                            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 border-cyan-400/40 rounded-br-2xl group-hover:w-24 group-hover:h-24 transition-all duration-500"></div>
+
+                            {/* Header Badge */}
+                            <div className="relative flex items-center gap-3 mb-6">
+                                <div className="px-4 py-1.5 bg-cyan-500/20 border border-cyan-400/40 rounded-full backdrop-blur-sm">
+                                    <span className="text-cyan-300 text-xs pixel-font tracking-wider">VISION.SYS</span>
+                                </div>
+                                <div className="flex gap-1.5">
+                                    <div className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></div>
+                                    <div className="w-2 h-2 rounded-full bg-cyan-400/50 animate-pulse delay-150"></div>
+                                    <div className="w-2 h-2 rounded-full bg-cyan-400/30 animate-pulse delay-300"></div>
                                 </div>
                             </div>
 
-                            {/* Terminal Content */}
-                            <div className="p-8 relative">
-                                {/* Scanline background */}
-                                <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(6,182,212,0.05)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
+                            {/* Icon & Title */}
+                            <div className="relative flex items-start gap-6 mb-8">
+                                <motion.div
+                                    whileHover={{ rotate: 360, scale: 1.1 }}
+                                    transition={{ duration: 0.6 }}
+                                    className="text-6xl md:text-7xl filter drop-shadow-[0_0_20px_rgba(6,182,212,0.6)]"
+                                >
+                                    🎯
+                                </motion.div>
+                                <div className="flex-1">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-400 pixel-font mb-3 leading-tight">
+                                        THE VISION
+                                    </h2>
+                                    <div className="h-1 w-32 bg-gradient-to-r from-cyan-400 via-blue-400 to-transparent rounded-full"></div>
+                                </div>
+                            </div>
 
-                                <div className="flex items-start gap-6 mb-6">
-                                    <div className="text-5xl border border-cyan-500/30 p-4 bg-cyan-900/10">🎯</div>
-                                    <div>
-                                        <h2 className="text-2xl md:text-3xl font-bold text-white pixel-font mb-2">
-                                            THE VISION
-                                        </h2>
-                                        <div className="h-0.5 w-24 bg-cyan-500/50 mb-4"></div>
+                            {/* Content */}
+                            <div className="relative space-y-4">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <div className="w-1 h-1 bg-cyan-400 rounded-full animate-pulse"></div>
+                                    <p className="text-cyan-300/60 font-mono text-xs tracking-wider">INITIALIZING...</p>
+                                </div>
+                                <p className="text-cyan-50/90 text-base md:text-lg leading-relaxed font-light">
+                                    To render a future where technology isn't just a tool, but a <span className="text-cyan-300 font-semibold">playground</span>.
+                                    We envision a sandbox where students <span className="text-cyan-400 font-bold bg-cyan-400/10 px-2 py-0.5 rounded">compile, debug, and deploy</span> ideas to change the world.
+                                </p>
+
+                                {/* Progress Bar Effect */}
+                                <div className="mt-6 space-y-2">
+                                    <div className="flex justify-between text-xs text-cyan-400/60 font-mono">
+                                        <span>PROGRESS</span>
+                                        <span>∞%</span>
+                                    </div>
+                                    <div className="h-1.5 bg-cyan-950/50 rounded-full overflow-hidden">
+                                        <motion.div
+                                            className="h-full bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-400"
+                                            initial={{ width: "0%" }}
+                                            whileInView={{ width: "100%" }}
+                                            transition={{ duration: 2, ease: "easeOut" }}
+                                        ></motion.div>
                                     </div>
                                 </div>
-
-                                <div className="font-mono text-cyan-100/80 leading-relaxed text-sm md:text-base space-y-4">
-                                    <p>&gt; RENDERING_FUTURE_STATE...</p>
-                                    <p>
-                                        To render a future where technology isn't just a tool, but a playground.
-                                        We envision a sandbox where students <span className="text-cyan-400 font-bold">compile, debug, and deploy</span> ideas to change the world.
-                                    </p>
-                                    <p className="text-cyan-500/50 text-xs mt-4">_END_OF_FILE</p>
-                                </div>
                             </div>
 
-                            {/* Interactive Hover Glow */}
-                            <div className="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                            {/* Hover Glow Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"></div>
                         </div>
                     </motion.div>
 
-                    {/* Mission Terminal */}
+                    {/* Mission Card */}
                     <motion.div
-                        initial={{ opacity: 0, x: 50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                        whileHover={{ y: -10, scale: 1.02 }}
                         className="relative group"
                     >
-                        {/* Connecting Lines */}
-                        <div className="absolute -right-4 top-1/2 w-4 h-[2px] bg-pink-500/50 hidden md:block"></div>
+                        {/* Animated Gradient Background */}
+                        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/20 via-purple-500/10 to-fuchsia-500/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-50 group-hover:opacity-100"></div>
 
-                        <div className="bg-black/80 border border-pink-500/30 p-1 relative overflow-hidden"
-                            style={{
-                                boxShadow: '0 0 20px rgba(236, 72, 153, 0.15)',
-                                clipPath: 'polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px))'
-                            }}>
+                        {/* Main Card */}
+                        <div className="relative bg-gradient-to-br from-pink-950/40 via-black/60 to-purple-950/40 backdrop-blur-xl border-2 border-pink-500/30 rounded-2xl p-8 md:p-10 overflow-hidden h-full group-hover:border-pink-400/50 transition-all duration-500">
 
-                            {/* Terminal Header */}
-                            <div className="bg-pink-900/20 px-4 py-2 flex justify-between items-center border-b border-pink-500/20">
-                                <span className="text-pink-400 text-[10px] pixel-font">TERMINAL_02 // MISSION.EXE</span>
-                                <div className="flex gap-2">
-                                    <div className="w-2 h-2 rounded-full bg-pink-500/50 animate-pulse"></div>
-                                    <div className="w-2 h-2 rounded-full bg-pink-500/20"></div>
+                            {/* Floating Particles */}
+                            <div className="absolute top-0 left-0 w-32 h-32 bg-pink-500/10 rounded-full blur-3xl animate-pulse"></div>
+                            <div className="absolute bottom-0 right-0 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-700"></div>
+
+                            {/* Animated Corner Accents */}
+                            <div className="absolute top-0 right-0 w-20 h-20 border-t-4 border-r-4 border-pink-400/40 rounded-tr-2xl group-hover:w-24 group-hover:h-24 transition-all duration-500"></div>
+                            <div className="absolute bottom-0 left-0 w-20 h-20 border-b-4 border-l-4 border-pink-400/40 rounded-bl-2xl group-hover:w-24 group-hover:h-24 transition-all duration-500"></div>
+
+                            {/* Header Badge */}
+                            <div className="relative flex items-center gap-3 mb-6">
+                                <div className="px-4 py-1.5 bg-pink-500/20 border border-pink-400/40 rounded-full backdrop-blur-sm">
+                                    <span className="text-pink-300 text-xs pixel-font tracking-wider">MISSION.EXE</span>
+                                </div>
+                                <div className="flex gap-1.5">
+                                    <div className="w-2 h-2 rounded-full bg-pink-400 animate-pulse"></div>
+                                    <div className="w-2 h-2 rounded-full bg-pink-400/50 animate-pulse delay-150"></div>
+                                    <div className="w-2 h-2 rounded-full bg-pink-400/30 animate-pulse delay-300"></div>
                                 </div>
                             </div>
 
-                            {/* Terminal Content */}
-                            <div className="p-8 relative">
-                                {/* Scanline background */}
-                                <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(236,72,153,0.05)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
+                            {/* Icon & Title */}
+                            <div className="relative flex items-start gap-6 mb-8">
+                                <motion.div
+                                    whileHover={{ rotate: 360, scale: 1.1 }}
+                                    transition={{ duration: 0.6 }}
+                                    className="text-6xl md:text-7xl filter drop-shadow-[0_0_20px_rgba(236,72,153,0.6)]"
+                                >
+                                    🚀
+                                </motion.div>
+                                <div className="flex-1">
+                                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-purple-300 to-pink-400 pixel-font mb-3 leading-tight">
+                                        THE MISSION
+                                    </h2>
+                                    <div className="h-1 w-32 bg-gradient-to-r from-pink-400 via-purple-400 to-transparent rounded-full"></div>
+                                </div>
+                            </div>
 
-                                <div className="flex items-start gap-6 mb-6">
-                                    <div className="text-5xl border border-pink-500/30 p-4 bg-pink-900/10">🚀</div>
-                                    <div>
-                                        <h2 className="text-2xl md:text-3xl font-bold text-white pixel-font mb-2">
-                                            THE MISSION
-                                        </h2>
-                                        <div className="h-0.5 w-24 bg-pink-500/50 mb-4"></div>
+                            {/* Content */}
+                            <div className="relative space-y-4">
+                                <div className="flex items-center gap-2 mb-3">
+                                    <div className="w-1 h-1 bg-pink-400 rounded-full animate-pulse"></div>
+                                    <p className="text-pink-300/60 font-mono text-xs tracking-wider">EXECUTING...</p>
+                                </div>
+                                <p className="text-pink-50/90 text-base md:text-lg leading-relaxed font-light">
+                                    To equip the next generation with the ultimate <span className="text-pink-300 font-semibold">inventory</span>: <span className="text-pink-400 font-bold bg-pink-400/10 px-2 py-0.5 rounded">Skills, Network, and Opportunity</span>.
+                                    Fostering a guild of collaborators ready to patch the bugs of tomorrow.
+                                </p>
+
+                                {/* Progress Bar Effect */}
+                                <div className="mt-6 space-y-2">
+                                    <div className="flex justify-between text-xs text-pink-400/60 font-mono">
+                                        <span>STATUS</span>
+                                        <span>ACTIVE</span>
+                                    </div>
+                                    <div className="h-1.5 bg-pink-950/50 rounded-full overflow-hidden">
+                                        <motion.div
+                                            className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-pink-400"
+                                            initial={{ width: "0%" }}
+                                            whileInView={{ width: "100%" }}
+                                            transition={{ duration: 2, ease: "easeOut" }}
+                                        ></motion.div>
                                     </div>
                                 </div>
-
-                                <div className="font-mono text-pink-100/80 leading-relaxed text-sm md:text-base space-y-4">
-                                    <p>&gt; EXECUTING_PROTOCOL...</p>
-                                    <p>
-                                        To equip the next generation with the ultimate inventory: <span className="text-pink-400 font-bold">Skills, Network, and Opportunity.</span>
-                                        Fostering a guild of collaborators ready to patch the bugs of tomorrow.
-                                    </p>
-                                    <p className="text-pink-500/50 text-xs mt-4">_TASK_COMPLETE</p>
-                                </div>
                             </div>
 
-                            {/* Interactive Hover Glow */}
-                            <div className="absolute inset-0 bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                            {/* Hover Glow Effect */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-pink-500/0 via-pink-500/5 to-pink-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"></div>
                         </div>
                     </motion.div>
 
@@ -791,7 +847,7 @@ function About() {
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        className="text-4xl md:text-5xl font-bold mb-4 pixel-font text-base md:text-xl"
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 pixel-font"
                         style={{
                             color: '#d8c6f2',
                             textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(216, 198, 242, 0.4)',
@@ -804,7 +860,7 @@ function About() {
                         initial={{ opacity: 0 }}
                         whileInView={{ opacity: 1 }}
                         viewport={{ once: true }}
-                        className="text-purple-300 pixel-font text-xs"
+                        className="text-purple-300 pixel-font text-[10px] sm:text-xs md:text-sm"
                     >
                         &gt; THE_ARCHITECTS_OF_THE_REALM.
                     </motion.p>
@@ -844,7 +900,7 @@ function About() {
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-4xl md:text-5xl font-bold text-center mb-4 pixel-font text-base md:text-xl"
+                    className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-4 pixel-font"
                     style={{
                         color: '#d8c6f2',
                         textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(216, 198, 242, 0.4)',
@@ -857,12 +913,12 @@ function About() {
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
-                    className="text-center text-purple-300 pixel-font text-xs mb-12 max-w-2xl mx-auto"
+                    className="text-center text-purple-300 pixel-font text-[10px] sm:text-xs md:text-sm mb-12 max-w-2xl mx-auto"
                 >
                     &gt; THE_FORCE_BEHIND_THE_REALM.
                 </motion.p>
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
                     {organizingCommittee.map((member, index) => (
                         <motion.div
                             key={member.id}
@@ -871,13 +927,13 @@ function About() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.02 }}
                             whileHover={{ scale: 1.05 }}
-                            className="bg-black/30 backdrop-blur-sm border border-purple-500/20 p-3 flex flex-col items-center text-center hover:bg-purple-900/10 transition-colors"
+                            className="bg-black/30 backdrop-blur-sm border border-purple-500/20 p-4 sm:p-6 md:p-8 flex flex-col items-center text-center hover:bg-purple-900/10 transition-colors min-h-[250px] sm:min-h-[280px] md:min-h-[300px] justify-center"
                         >
-                            <div className="w-24 h-24 mb-2 rounded-full overflow-hidden border border-purple-500/30">
+                            <div className="w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 mb-4 sm:mb-5 md:mb-6 rounded-full overflow-hidden border-2 border-purple-500/30 shadow-[0_0_20px_rgba(168,85,247,0.2)]">
                                 <img src={member.image} alt={member.name} className="w-full h-full object-cover transition-all" />
                             </div>
-                            <h3 className="text-white font-bold text-xs mb-0.5">{member.name}</h3>
-                            <p className="text-purple-400 text-[10px] font-mono">{member.role}</p>
+                            <h3 className="text-white font-bold text-sm sm:text-base md:text-lg mb-2 px-2">{member.name}</h3>
+                            <p className="text-purple-400 text-[10px] sm:text-xs font-mono tracking-wider sm:tracking-widest px-2">{member.role}</p>
                         </motion.div>
                     ))}
                 </div>

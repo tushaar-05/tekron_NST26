@@ -1069,3 +1069,46 @@ body {
 .z-3 {
   z-index: 3;
 }
+
+/* Animations */
+@keyframes progress {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.animate-progress {
+  animation: progress 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.group:hover .animate-shimmer {
+  animation: shimmer 1.5s infinite linear;
+}
+
+@keyframes scan {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+.scanner-bar {
+  animation: scan 4s linear infinite;
+}
