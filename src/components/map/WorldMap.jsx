@@ -399,7 +399,7 @@ function WorldMap() {
                                 left: isExpanded ? `${island.x}%` : '50%',
                                 top: isExpanded ? `${island.y}%` : '50%',
                                 scale: phase === 'void' ? 0 : isExpanded ? 1 : (isHome ? 1 : 0),
-                                opacity: phase === 'void' ? 0 : 0.8,
+                                opacity: phase === 'void' ? 0 : 0.9,
                                 filter: (isHome && phase === 'seed') ? 'blur(0px)' : (phase === 'void' ? 'blur(20px)' : 'blur(0px)'),
                                 x: (isHome && phase === 'seed')
                                     ? ['-50%', '-52%', '-48%', '-51%', '-49%', '-50%']
