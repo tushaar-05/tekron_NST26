@@ -399,7 +399,7 @@ function WorldMap() {
                                 left: isExpanded ? `${island.x}%` : '50%',
                                 top: isExpanded ? `${island.y}%` : '50%',
                                 scale: phase === 'void' ? 0 : isExpanded ? 1 : (isHome ? 1 : 0),
-                                opacity: phase === 'void' ? 0 : 1,
+                                opacity: phase === 'void' ? 0 : 0.9,
                                 filter: (isHome && phase === 'seed') ? 'blur(0px)' : (phase === 'void' ? 'blur(20px)' : 'blur(0px)'),
                                 x: (isHome && phase === 'seed')
                                     ? ['-50%', '-52%', '-48%', '-51%', '-49%', '-50%']
@@ -410,6 +410,7 @@ function WorldMap() {
                                         ? ['-50%', '-58%', '-50%']
                                         : '-50%',
                             }}
+                            whileHover={{ opacity: 1, scale: 1.05 }}
                             transition={{
                                 default: { type: "spring", stiffness: 40, damping: 15 },
                                 x: (isHome && phase === 'seed') ? { duration: 0.08, repeat: Infinity, ease: "linear" } : { type: "spring", stiffness: 40, damping: 15 },
