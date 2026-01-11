@@ -92,13 +92,13 @@ function Contact() {
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
-                    className="max-w-7xl mx-auto space-y-24 relative z-10"
+                    className="max-w-7xl mx-auto space-y-12 md:space-y-24 relative z-10"
                 >
 
                     {/* Hero Header */}
                     <motion.div variants={itemVariants} className="text-center space-y-2 relative">
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-32 bg-purple-500/5 blur-[100px] pointer-events-none" />
-                        <h1 className="text-7xl md:text-9xl font-black tracking-tighter glitch-text-pixel text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" data-text="CONTACT_US">
+                        <h1 className="text-5xl md:text-7xl lg:text-9xl font-black tracking-tighter glitch-text-pixel text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" data-text="CONTACT_US">
                             CONTACT_US
                         </h1>
                         <div className="flex items-center justify-center gap-4 text-cyan-400/80 text-xl tracking-[0.5em] uppercase">
@@ -115,7 +115,7 @@ function Contact() {
                         style={{ clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)" }}
                     >
                         {/* Status Bar */}
-                        <div className="flex items-center justify-between px-6 py-3 bg-black/80 border-b border-cyan-500/20 text-xs font-mono tracking-widest relative">
+                        <div className="flex flex-wrap md:flex-nowrap items-center justify-between px-4 md:px-6 py-3 bg-black/80 border-b border-cyan-500/20 text-xs font-mono tracking-widest relative gap-2">
                             {/* Bg Scanline */}
                             <div className="absolute inset-0 bg-[linear-gradient(90deg,transparent_0%,rgba(6,182,212,0.05)_50%,transparent_100%)] w-full animate-shimmer pointer-events-none" />
 
@@ -222,8 +222,8 @@ function Contact() {
 
                     {/* 2. Personnel Manifest (Team) */}
                     <motion.div variants={itemVariants} className="space-y-12">
-                        <div className="flex items-end gap-4 border-b border-white/10 pb-4">
-                            <h2 className="text-6xl text-white tracking-[0.2em] uppercase">
+                        <div className="flex flex-col md:flex-row md:items-end gap-2 md:gap-4 border-b border-white/10 pb-4">
+                            <h2 className="text-4xl md:text-6xl text-white tracking-[0.2em] uppercase break-words">
                                 <span className="text-purple-400 mr-2">/</span>Core_Personnel
                             </h2>
                             <span className="text-white/30 text-lg mb-1">directory_v2.4</span>
@@ -255,12 +255,12 @@ function Contact() {
                                         )}
                                         {/* Overlay readout */}
                                         <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 pt-12 z-20">
-                                            <p className="text-purple-400 text-xs uppercase tracking-widest mb-1">{member.role}</p>
-                                            <h3 className="text-xl text-white leading-tight uppercase">{member.name}</h3>
+                                            <p className="text-purple-400 text-sm md:text-base uppercase tracking-widest mb-1">{member.role}</p>
+                                            <h3 className="text-2xl md:text-3xl text-white leading-tight uppercase">{member.name}</h3>
                                         </div>
                                     </div>
 
-                                    <div className="p-4 space-y-3 bg-white/5 border-t border-white/10 text-base">
+                                    <div className="p-4 space-y-3 bg-white/5 border-t border-white/10 text-xl md:text-2xl">
                                         <div className="flex items-center gap-3 text-gray-400 group-hover:text-purple-300 transition-colors">
                                             <span className="text-xl">📞</span> <a href={`tel:${member.phone}`} className="tracking-wider">{member.phone}</a>
                                         </div>
@@ -281,8 +281,8 @@ function Contact() {
                             <div className="bg-white/5 border border-white/10 p-8 relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 blur-2xl rounded-full" />
                                 <h3 className="text-2xl text-purple-300 uppercase tracking-widest mb-4">Target_Location</h3>
-                                <p className="text-4xl text-white mb-2">Ajeenkya DY Patil University</p>
-                                <p className="text-xl text-gray-400">Charholi Budruk, via Lohegaon, Pune - 412105</p>
+                                <p className="text-2xl md:text-4xl text-white mb-2 break-words">Ajeenkya DY Patil University</p>
+                                <p className="text-lg md:text-xl text-gray-400">Charholi Budruk, via Lohegaon, Pune - 412105</p>
                                 <div className="mt-6 flex gap-4 text-sm font-mono text-gray-500">
                                     <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10">
                                         <span className="w-1.5 h-1.5 bg-green-500 rounded-full" /> SECTOR_04
@@ -294,7 +294,7 @@ function Contact() {
                             </div>
 
                             {/* Actual Map Container */}
-                            <div className="flex-1 min-h-[400px] border-2 border-white/10 bg-black/50 relative overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                            <div className="flex-1 min-h-[300px] md:min-h-[400px] border-2 border-white/10 bg-black/50 relative overflow-hidden shadow-[0_0_30px_rgba(0,0,0,0.5)]">
                                 {/* Corner Markers */}
                                 <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-purple-500 z-20" />
                                 <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-purple-500 z-20" />
@@ -313,18 +313,18 @@ function Contact() {
                                     allowFullScreen=""
                                     loading="lazy"
                                     title="Map"
-                                    className="w-full h-full grayscale-[0.5] invert-[0.9] contrast-[1.2] opacity-80"
+                                    className="w-full h-full grayscale-0 invert-0 contrast-100 opacity-100"
                                 />
                             </div>
                         </div>
 
                         {/* Terminal Form */}
-                        <div className="bg-slate-900 border-2 border-cyan-500/30 p-1 shadow-[0_0_50px_rgba(6,182,212,0.15)] backdrop-blur-xl relative overflow-visible">
+                        <div className="bg-slate-900 border-2 border-purple-500/30 p-1 shadow-[0_0_50px_rgba(168,85,247,0.15)] backdrop-blur-xl relative overflow-visible">
                             {/* Decorative Corners for high visibility */}
-                            <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-cyan-400 z-20" />
-                            <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-cyan-400 z-20" />
-                            <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-cyan-400 z-20" />
-                            <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-cyan-400 z-20" />
+                            <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-purple-400 z-20" />
+                            <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-purple-400 z-20" />
+                            <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-purple-400 z-20" />
+                            <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-purple-400 z-20" />
 
                             <div className="h-full bg-black/40 border border-white/10 p-8 md:p-12 relative overflow-hidden">
                                 {/* Terminal Header */}
@@ -334,45 +334,45 @@ function Contact() {
                                         <div className="w-3 h-3 rounded-full bg-yellow-500" />
                                         <div className="w-3 h-3 rounded-full bg-green-500" />
                                     </div>
-                                    <div className="text-cyan-400/60 text-xs font-mono tracking-widest">/ROOT/MAIL_CLIENT_V2</div>
+                                    <div className="text-purple-400/60 text-xs font-mono tracking-widest">/ROOT/MAIL_CLIENT_V2</div>
                                 </div>
 
                                 <form onSubmit={handleSubmit} className="space-y-8 relative z-10">
                                     <div className="group">
-                                        <label htmlFor="name" className="block text-cyan-400 text-sm font-bold tracking-widest mb-3 uppercase">{`> input_name:`}</label>
+                                        <label htmlFor="name" className="block text-purple-400 text-sm font-bold tracking-widest mb-3 uppercase">{`> input_name:`}</label>
                                         <input
                                             type="text"
                                             id="name"
                                             name="name"
                                             value={formData.name}
                                             onChange={handleChange}
-                                            className="w-full bg-white/5 border border-white/10 focus:border-cyan-400 px-4 py-3 text-white text-lg focus:outline-none transition-all placeholder-white/20 font-mono focus:bg-cyan-500/10 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+                                            className="w-full bg-white/5 border border-white/10 focus:border-purple-400 px-4 py-3 text-white text-lg focus:outline-none transition-all placeholder-white/20 font-mono focus:bg-purple-500/10 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
                                             placeholder="ENTER NAME..."
                                             required
                                         />
                                     </div>
                                     <div className="group">
-                                        <label htmlFor="email" className="block text-cyan-400 text-sm font-bold tracking-widest mb-3 uppercase">{`> input_email:`}</label>
+                                        <label htmlFor="email" className="block text-purple-400 text-sm font-bold tracking-widest mb-3 uppercase">{`> input_email:`}</label>
                                         <input
                                             type="email"
                                             id="email"
                                             name="email"
                                             value={formData.email}
                                             onChange={handleChange}
-                                            className="w-full bg-white/5 border border-white/10 focus:border-cyan-400 px-4 py-3 text-white text-lg focus:outline-none transition-all placeholder-white/20 font-mono focus:bg-cyan-500/10 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+                                            className="w-full bg-white/5 border border-white/10 focus:border-purple-400 px-4 py-3 text-white text-lg focus:outline-none transition-all placeholder-white/20 font-mono focus:bg-purple-500/10 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
                                             placeholder="ENTER EMAIL..."
                                             required
                                         />
                                     </div>
                                     <div className="group">
-                                        <label htmlFor="message" className="block text-cyan-400 text-sm font-bold tracking-widest mb-3 uppercase">{`> input_message:`}</label>
+                                        <label htmlFor="message" className="block text-purple-400 text-sm font-bold tracking-widest mb-3 uppercase">{`> input_message:`}</label>
                                         <textarea
                                             id="message"
                                             name="message"
                                             rows="5"
                                             value={formData.message}
                                             onChange={handleChange}
-                                            className="w-full bg-white/5 border border-white/10 focus:border-cyan-400 px-4 py-3 text-white text-lg focus:outline-none transition-all placeholder-white/20 font-mono resize-none focus:bg-cyan-500/10 focus:shadow-[0_0_20px_rgba(6,182,212,0.2)]"
+                                            className="w-full bg-white/5 border border-white/10 focus:border-purple-400 px-4 py-3 text-white text-lg focus:outline-none transition-all placeholder-white/20 font-mono resize-none focus:bg-purple-500/10 focus:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
                                             placeholder="ENTER MESSAGE..."
                                             required
                                         ></textarea>
@@ -381,7 +381,7 @@ function Contact() {
                                     <button
                                         type="submit"
                                         disabled={status === 'sending'}
-                                        className={`w-full py-4 mt-6 bg-cyan-600 hover:bg-cyan-500 text-black font-bold uppercase tracking-[0.2em] transition-all relative overflow-hidden shadow-[0_0_20px_rgba(6,182,212,0.4)] hover:shadow-[0_0_40px_rgba(6,182,212,0.6)] ${status === 'sending' ? 'cursor-wait opacity-80' : ''}`}
+                                        className={`w-full py-4 mt-6 bg-purple-600 hover:bg-purple-500 text-white font-bold uppercase tracking-[0.2em] transition-all relative overflow-hidden shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] ${status === 'sending' ? 'cursor-wait opacity-80' : ''}`}
                                     >
                                         <span className="relative z-10 flex items-center justify-center gap-4">
                                             {status === 'sending' ? 'TRANSMITTING...' : 'EXECUTE_SEND_PROTOCOL'} {status !== 'sending' && <span>→</span>}
@@ -394,12 +394,12 @@ function Contact() {
 
                     {/* Social Footer */}
                     <div className="border-t border-white/10 pt-12 pb-6 text-center">
-                        <h2 className="text-3xl text-white mb-8 tracking-[0.2em] uppercase opacity-80">Connect_Network</h2>
+                        <h2 className="text-2xl md:text-3xl text-white mb-8 tracking-[0.2em] uppercase opacity-80">Connect_Network</h2>
                         <div className="flex justify-center gap-6 mb-8">
-                            <a href="https://www.instagram.com/tekron.nst/" className="w-16 h-16 border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-purple-500 hover:text-purple-400 transition-all">
+                            <a href="https://www.instagram.com/tekronfest/" className="w-16 h-16 border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-purple-500 hover:text-purple-400 transition-all">
                                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
                             </a>
-                            <a href="https://www.youtube.com/@Tekron_NST" className="w-16 h-16 border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-red-500 hover:text-red-400 transition-all">
+                            <a href="https://www.youtube.com/@NewtonSchoolOfTechnology-ADYPU" className="w-16 h-16 border border-white/20 flex items-center justify-center hover:bg-white/10 hover:border-red-500 hover:text-red-400 transition-all">
                                 <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" /></svg>
                             </a>
                         </div>

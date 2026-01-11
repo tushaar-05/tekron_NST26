@@ -82,7 +82,7 @@ function WorldMap() {
             image: compIsland,
             label: 'COMPETITIONS',
             route: '/competition',
-            desktop: { x: 75, y: 25, size: 200 },
+            desktop: { x: 75, y: 25, size: 220 },
             mobile: { x: 60, y: 25, size: 120 }
         },
         {
@@ -90,7 +90,7 @@ function WorldMap() {
             image: galleryIsland,
             label: 'GALLERY',
             route: '/gallery',
-            desktop: { x: 75, y: 65, size: 200 },
+            desktop: { x: 75, y: 65, size: 220 },
             mobile: { x: 69, y: 65, size: 120 }
         },
         {
@@ -106,7 +106,7 @@ function WorldMap() {
             image: sponsorsIsland,
             label: 'SPONSORS',
             route: '/sponsors',
-            desktop: { x: 25, y: 65, size: 200 },
+            desktop: { x: 25, y: 65, size: 220 },
             mobile: { x: 17, y: 60, size: 100 }
         },
         {
@@ -114,7 +114,7 @@ function WorldMap() {
             image: eventsIsland,
             label: 'EVENTS',
             route: '/events',
-            desktop: { x: 25, y: 25, size: 200 },
+            desktop: { x: 25, y: 25, size: 220 },
             mobile: { x: 20, y: 25, size: 110 }
         }
     ];
