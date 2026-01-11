@@ -1,5 +1,6 @@
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
+import Footer from '../../components/layout/Footer';
 import ComingSoon from '../../components/ui/ComingSoon/ComingSoon';
 
 function Store() {
@@ -7,6 +8,7 @@ function Store() {
         <UnifiedBackground>
             <MiniNavbar />
             <ComingSoon title="Store" launchDate="2024-02-01" transparent={true} />
+            <Footer />
         </UnifiedBackground>
     );
 }

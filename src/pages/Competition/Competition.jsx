@@ -6,6 +6,7 @@ import EventCard from '../../components/ui/EventCard/EventCard';
 import CompetitionModal from '../../components/ui/CompetitionModal/CompetitionModal';
 import { motion, AnimatePresence } from 'framer-motion';
 import MiniNavbar from '../../components/layout/MiniNavbar';
+import Footer from '../../components/layout/Footer';
 
 
 
@@ -35,7 +36,7 @@ const Competition = () => {
 
   return (
     <UnifiedBackground>
-      <div className="min-h-screen pb-20 pt-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="min-h-screen pb-12 sm:pb-20 pt-20 sm:pt-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
         <MiniNavbar />
 
         {/* Decorative Background Elements */}
@@ -47,15 +48,16 @@ const Competition = () => {
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Hero Section */}
-          <header className="text-center mb-20 relative">
+          <header className="text-center mb-12 sm:mb-16 lg:mb-20 relative">
             <div className="mb-6">
               <span className="inline-block py-1 px-3 rounded border border-purple-500/30 bg-purple-500/10 text-purple-300 text-[10px] tracking-[0.3em] font-mono mb-4 backdrop-blur-sm">
                 SYSTEM_CONFIRMED // PROTOCOL_INITIATED
               </span>
             </div>
             <h1
-              className="text-4xl md:text-6xl lg:text-7xl font-bold text-center pixel-font mb-4"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center pixel-font mb-3 sm:mb-4 w-full break-words px-2"
               style={{
+                fontSize: 'clamp(1.5rem, 5vw, 4.5rem)',
                 letterSpacing: '0.1em',
                 textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6)',
                 imageRendering: 'pixelated',
@@ -70,7 +72,7 @@ const Competition = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
-              className="mt-8 text-lg md:text-xl text-purple-200/60 max-w-2xl mx-auto font-['VT323'] leading-relaxed"
+              className="mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl text-purple-200/60 max-w-2xl mx-auto font-['VT323'] leading-relaxed px-2"
             >
               Test your skills in the crucible of code and creativity.
               Compete with the elite in scenarios designed to push your cognitive limits.
@@ -78,7 +80,7 @@ const Competition = () => {
           </header>
 
           {/* Grid Layout */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-5 lg:gap-6 auto-rows-fr">
             <AnimatePresence>
               {visibleCompetitions.map((comp, index) => (
                 <motion.div
@@ -109,11 +111,7 @@ const Competition = () => {
             </div>
           )}
 
-          <div className="mt-20 pt-10 border-t border-white/5 text-center">
-            <p className="text-white/20 font-mono text-[10px] uppercase tracking-[0.5em]">
-              Dominance is not given. It is seized.
-            </p>
-          </div>
+          <Footer />
         </div>
 
         <CompetitionModal

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
+import Footer from '../../components/layout/Footer';
 
 
 
@@ -921,6 +922,8 @@ function About() {
 
             {/* Spacer */}
             <div className="h-20"></div>
+
+            <Footer />
 
             <style>{`
                 /* Twinkle Animation for Pixel Stars */

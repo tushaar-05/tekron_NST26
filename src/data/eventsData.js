@@ -8,6 +8,7 @@ export const competitions = [
         teamSize: '3-5 Members',
         date: 'Jan 30 - 31',
         prizePool: '₹90,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/hakron-24-hour-hackathon-tekron-20-newton-school-of-technology-1615176',
         rulebookLink: 'https://docs.google.com/document/d/1CP5PcvD6wEkggU6iDNK6TmWFJJa-Eem_Sk8JFa7tLkE/edit?usp=sharing',
         sections: [
@@ -66,6 +67,7 @@ export const competitions = [
         teamSize: '3 Members',
         date: 'Day 1',
         prizePool: '₹70,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/cybox-newton-school-of-technology-1615144',
         rulebookLink: 'https://docs.google.com/document/d/1dnGvwixfj6KVaKHzZiYF2QyxYMbeRAgU8YZ-S1lEgUY/edit?pli=1&tab=t.0',
         sections: [
@@ -121,6 +123,7 @@ export const competitions = [
         teamSize: 'Individual',
         date: 'Jan 20 & 31',
         prizePool: '₹80,000',
+        registrationDeadline: '2026-01-19T23:59:59',
         unstopLink: 'https://unstop.com/p/codewar-20-tekron-20-newton-school-of-technology-1615172',
         rulebookLink: 'https://docs.google.com/document/d/1NwNz39OdRqmBXCRlb3dv0wWCRJec9DuP_2XpdxVy3ys/edit?usp=sharing',
         sections: [
@@ -167,6 +170,7 @@ export const competitions = [
         teamSize: 'Max 4 Members',
         date: 'Day 1 & 2',
         prizePool: '₹1,00,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/drone-harvoc-tekron-20-newton-school-of-technology-1615308',
         rulebookLink: 'https://docs.google.com/document/d/1zSVXoWN5gk3xVzV3V_WudlTX3hlkQtT-4LIwgFHpzB0/edit?usp=sharing',
         sections: [
@@ -227,6 +231,7 @@ export const competitions = [
         teamSize: 'Up to 5 Members',
         date: 'Day 2',
         prizePool: '₹1,20,000',
+        registrationDeadline: '2026-01-15T23:59:59',
         unstopLink: 'https://unstop.com/p/robokick-robosoccer-tekron26-newton-school-of-technology-1612193',
         rulebookLink: 'https://docs.google.com/document/d/1vXBfZIkSzwLTSbPNs4655R8LjolA_SMZdSubksfBCD4/edit?usp=sharing',
         sections: [
@@ -297,6 +302,7 @@ export const competitions = [
         teamSize: 'Teams (Unspecified Size)',
         date: 'Day 2',
         prizePool: '₹80,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/throttle-x-rc-car-race-competition-electric-only-tekron-20-newton-school-of-technology-1615301',
         rulebookLink: 'https://docs.google.com/document/d/1YKnW-fKgOSrBIRauIlnP1sb48vegS-vs6DSHG1hwnw8/edit?usp=sharing',
         sections: [
@@ -388,6 +394,7 @@ export const competitions = [
         teamSize: '3-7 Members',
         date: 'Jan 18 & 30',
         prizePool: '₹40,000',
+        registrationDeadline: '2026-01-17T23:59:59',
         unstopLink: 'https://unstop.com/p/battle-of-bands-tekron-20-newton-school-of-technology-1615135',
         rulebookLink: 'https://docs.google.com/document/d/1-csUq7WWPgSLIt0KgRkrHpvnmRLiTqYAUsOKFoBGmoo/edit?usp=sharing',
         sections: [
@@ -441,6 +448,7 @@ export const competitions = [
         teamSize: 'Individual',
         date: 'Day 1 (10 AM - 6 PM)',
         prizePool: '₹30,000',
+        registrationDeadline: '2026-01-30T10:00:00',
         unstopLink: 'https://unstop.com/p/photography-tekron-20-newton-school-of-technology-1615305',
         rulebookLink: 'https://docs.google.com/document/d/1IlrCLKZhlh472rByEyyeuIAFh9xMO031iNHhD4KdbzI/edit?usp=sharing',
         sections: [
@@ -485,6 +493,7 @@ export const competitions = [
         teamSize: 'Individual',
         date: 'Day 1 (3 Hours)',
         prizePool: '₹30,000',
+        registrationDeadline: '2026-01-30T09:00:00',
         unstopLink: 'https://unstop.com/p/tradex-tekron-20-newton-school-of-technology-1615162',
         rulebookLink: 'https://docs.google.com/document/d/1e0b4qNc8mcoWGBAax24hq8qATv86ix0cB6OZEDsXk-Y/edit?usp=sharing',
         sections: [
@@ -529,6 +538,7 @@ export const competitions = [
         teamSize: '4 Members',
         date: 'Jan 18, 30-31',
         prizePool: '₹1,00,000',
+        registrationDeadline: '2026-01-17T23:59:59',
         unstopLink: 'https://unstop.com/p/bgmi-tournament-tekron-20-newton-school-of-technology-1615307',
         rulebookLink: 'https://docs.google.com/document/d/1ttq1CF-ruue6WZMs9yxtn8nkyh8M4AOyWljICUi7wzI/edit?usp=sharing',
         sections: [

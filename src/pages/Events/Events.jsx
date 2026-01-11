@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
+import Footer from '../../components/layout/Footer';
 
 // EventCard Component
 const EventCard = ({ title, category, image }) => {
@@ -209,6 +210,7 @@ export default function Events() {
           </div>
         </div>
       </div>
+      <Footer />
     </UnifiedBackground>
   );
 }

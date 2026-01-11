@@ -5,6 +5,7 @@ import styled, { keyframes, css } from 'styled-components';
 import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
+import Footer from '../../components/layout/Footer';
 
 
 // Asset Mappings - Kept for potential future use or specific effects
@@ -880,6 +881,7 @@ const Gallery = () => {
                   />
                 ))}
               </div>
+              <Footer />
             </div>
 
             {/* Archive Overlay Detail */}

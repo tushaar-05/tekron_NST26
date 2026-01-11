@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
+import Footer from '../../components/layout/Footer';
 
 // --- Shared Animations ---
 const fadeInUp = {
@@ -952,10 +953,7 @@ const Sponsors = () => {
                 <HeritagePartners />
                 <ReachStats />
                 <ContactBrochure />
-
-                <div className="mt-40 pt-10 border-t border-white/5 opacity-20 font-mono text-[9px] uppercase tracking-[0.5em] text-center">
-                    Sponsorship Protocol v.2.6.0 // Built for the Bold // © 2026 TEKRON
-                </div>
+                <Footer />
             </PageContent>
 
             <div className="fixed inset-0 pointer-events-none z-[100] opacity-[0.03]" style={{
