@@ -52,6 +52,19 @@ function WorldMap() {
     const glareX = useSpring(useTransform(mouseX, [-0.5, 0.5], [0, 100]), springConfig);
     const glareY = useSpring(useTransform(mouseY, [-0.5, 0.5], [0, 100]), springConfig);
 
+    // Cloud Parallax (Variable Speeds for Depth)
+    const cloud1X = useSpring(useTransform(mouseX, [-0.5, 0.5], [-40, 40]), springConfig);
+    const cloud1Y = useSpring(useTransform(mouseY, [-0.5, 0.5], [-20, 20]), springConfig);
+
+    const cloud2X = useSpring(useTransform(mouseX, [-0.5, 0.5], [30, -30]), springConfig); // Inverse movement
+    const cloud2Y = useSpring(useTransform(mouseY, [-0.5, 0.5], [15, -15]), springConfig);
+
+    const cloud3X = useSpring(useTransform(mouseX, [-0.5, 0.5], [-60, 60]), springConfig); // Faster (foreground)
+    const cloud3Y = useSpring(useTransform(mouseY, [-0.5, 0.5], [-30, 30]), springConfig);
+
+    const cloud4X = useSpring(useTransform(mouseX, [-0.5, 0.5], [50, -50]), springConfig);
+    const cloud4Y = useSpring(useTransform(mouseY, [-0.5, 0.5], [25, -25]), springConfig);
+
     const handleMouseMove = (e) => {
         // Normalize coordinates -0.5 to 0.5
         const x = (e.clientX / window.innerWidth) - 0.5;
@@ -152,7 +165,7 @@ function WorldMap() {
 
             if (hasPlayedAnimation) {
                 setPhase('connected');
-                setNarrative("SYSTEM ONLINE. WELCOME TO TEKRON.");
+                setNarrative("WELCOME TO TEKRON.");
                 // Immediately show all islands if returning
                 setVisibleIslands(islands.map(i => i.id));
                 return;
@@ -276,6 +289,38 @@ function WorldMap() {
                         }}
                     />
                 ))}
+            </div>
+
+            {/* 3. Corner Clouds - Atmospheric Depth */}
+            <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
+                {/* Top Left - Cloud 1 */}
+                <motion.img
+                    src="/images/map/cloud-1.png"
+                    alt=""
+                    className="absolute -top-20 -left-20 w-[400px] opacity-40 mix-blend-screen param-cloud"
+                    style={{ x: cloud1X, y: cloud1Y }}
+                />
+                {/* Top Right - Cloud 2 */}
+                <motion.img
+                    src="/images/map/clouds-2.png"
+                    alt=""
+                    className="absolute -top-32 -right-10 w-[500px] opacity-30 mix-blend-screen param-cloud"
+                    style={{ x: cloud2X, y: cloud2Y }}
+                />
+                {/* Bottom Left - Cloud 3 */}
+                <motion.img
+                    src="/images/map/clouds-3.png"
+                    alt=""
+                    className="absolute -bottom-20 -left-10 w-[450px] opacity-30 mix-blend-screen param-cloud"
+                    style={{ x: cloud3X, y: cloud3Y }}
+                />
+                {/* Bottom Right - Cloud 4 */}
+                <motion.img
+                    src="/images/map/clouds-4.png"
+                    alt=""
+                    className="absolute -bottom-32 -right-20 w-[550px] opacity-40 mix-blend-screen param-cloud"
+                    style={{ x: cloud4X, y: cloud4Y }}
+                />
             </div>
 
             {/* Shockwave Effect (Genesis Phase) */}
