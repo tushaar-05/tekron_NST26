@@ -297,28 +297,28 @@ function WorldMap() {
                 <motion.img
                     src="/images/map/cloud-1.png"
                     alt=""
-                    className="absolute -top-20 -left-20 w-[400px] opacity-40 mix-blend-screen param-cloud"
+                    className="absolute -top-20 -left-20 w-[400px] opacity-70 brightness-150 mix-blend-screen param-cloud"
                     style={{ x: cloud1X, y: cloud1Y }}
                 />
                 {/* Top Right - Cloud 2 */}
                 <motion.img
                     src="/images/map/clouds-2.png"
                     alt=""
-                    className="absolute -top-32 -right-10 w-[500px] opacity-30 mix-blend-screen param-cloud"
+                    className="absolute -top-32 -right-10 w-[500px] opacity-60 brightness-150 mix-blend-screen param-cloud"
                     style={{ x: cloud2X, y: cloud2Y }}
                 />
                 {/* Bottom Left - Cloud 3 */}
                 <motion.img
                     src="/images/map/clouds-3.png"
                     alt=""
-                    className="absolute -bottom-20 -left-10 w-[450px] opacity-30 mix-blend-screen param-cloud"
+                    className="absolute -bottom-20 -left-10 w-[450px] opacity-60 brightness-150 mix-blend-screen param-cloud"
                     style={{ x: cloud3X, y: cloud3Y }}
                 />
                 {/* Bottom Right - Cloud 4 */}
                 <motion.img
                     src="/images/map/clouds-4.png"
                     alt=""
-                    className="absolute -bottom-32 -right-20 w-[550px] opacity-40 mix-blend-screen param-cloud"
+                    className="absolute -bottom-32 -right-20 w-[550px] opacity-70 brightness-150 mix-blend-screen param-cloud"
                     style={{ x: cloud4X, y: cloud4Y }}
                 />
             </div>
