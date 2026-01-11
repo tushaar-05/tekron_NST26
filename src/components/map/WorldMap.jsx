@@ -512,7 +512,7 @@ function WorldMap() {
                     exit={{ opacity: 0 }}
                     className="inline-block bg-black/80 px-4 py-1.5 md:px-6 md:py-2 rounded-full border border-white/20 backdrop-blur-md shadow-[0_0_20px_rgba(0,0,0,0.5)]"
                 >
-                    <span className="text-cyan-400 text-base md:text-xl tracking-widest typewriter drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]" style={{ fontFamily: "'VT323', monospace" }}>
+                    <span className="text-purple-400 text-base md:text-xl tracking-widest typewriter drop-shadow-[0_0_5px_rgba(168,85,247,0.5)]" style={{ fontFamily: "'VT323', monospace" }}>
                         {`> ${narrative}`}
                     </span>
                 </motion.div>
@@ -522,12 +522,12 @@ function WorldMap() {
                 .typewriter {
                     overflow: hidden;
                     white-space: nowrap;
-                    border-right: 2px solid cyan;
+                    border-right: 2px solid #a855f7;
                     animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
                 }
                 @keyframes blink-caret {
                     from, to { border-color: transparent }
-                    50% { border-color: cyan; }
+                    50% { border-color: #a855f7; }
                 }
                 .transform-3d {
                     transform-style: preserve-3d;
