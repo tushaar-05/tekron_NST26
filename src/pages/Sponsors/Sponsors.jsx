@@ -396,7 +396,7 @@ const TierSection = () => {
                 </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
                 {tiers.map((tier, i) => (
                     <HolographicTierCard
                         key={i}
@@ -405,7 +405,7 @@ const TierSection = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className="flex flex-col h-full cursor-pointer group"
+                        className="flex flex-col h-full w-full cursor-pointer group"
                         onClick={() => setSelectedTier(tier)}
                     >
                         <div className="flex justify-between items-start mb-10">
