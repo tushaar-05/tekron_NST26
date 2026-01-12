@@ -6,8 +6,8 @@ export const competitions = [
         image: '/images/events/hackron.png',
         description: 'Agentic AI Hackathon 2026 is a 24-hour offline hackathon where students build real AI agents capable of thinking, planning, using tools, and completing tasks autonomously. Join the future of AI — Agentic Systems — through hands-on learning and competitive building.',
         teamSize: '3-5 Members',
-        date: 'Jan 30 - 31',
-        prizePool: '₹90,000',
+        date: '30th - Jan - 2026',
+        prizePool: '₹70,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/hakron-24-hour-hackathon-tekron-20-newton-school-of-technology-1615176',
         rulebookLink: 'https://docs.google.com/document/d/1CP5PcvD6wEkggU6iDNK6TmWFJJa-Eem_Sk8JFa7tLkE/edit?usp=sharing',
@@ -58,62 +58,62 @@ export const competitions = [
             }
         ]
     },
-    {
-        id: 2,
-        title: 'CYBOX',
-        category: 'Competition',
-        image: '/images/events/cybox.png',
-        description: 'CYBOX is an offline Capture The Flag (CTF) cybersecurity competition. The event focuses on real-world offensive security and penetration testing scenarios in a professional red-team environment.',
-        teamSize: '3 Members',
-        date: 'Day 1',
-        prizePool: '₹70,000',
-        registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/cybox-newton-school-of-technology-1615144',
-        rulebookLink: 'https://docs.google.com/document/d/1dnGvwixfj6KVaKHzZiYF2QyxYMbeRAgU8YZ-S1lEgUY/edit?pli=1&tab=t.0',
-        sections: [
-            {
-                title: 'Event Overview',
-                items: [
-                    'Mode: Offline Only (NST Campus)',
-                    'Duration: 8 hours (12:00 PM – 5:00 PM)',
-                    'Registration Fee: ₹500',
-                    'Requirement: Bring your own laptops',
-                    'Access: VPN connection required (Credentials provided)'
-                ]
-            },
-            {
-                title: 'Rules & Regulations',
-                items: [
-                    'Only students eligible; Exactly 3 members per team',
-                    'No flag sharing or collaboration between teams',
-                    'Attacking outside authorize scope is strictly forbidden',
-                    'DoS, DDoS, and infrastructure abuse are not allowed'
-                ]
-            },
-            {
-                title: 'Judging & Scoring',
-                items: [
-                    'Ranked by total points scored',
-                    'Completion of all flags mandatory for full points',
-                    'Tie-breaker: Time of last valid submission',
-                    'Bonus points applicable'
-                ]
-            },
-            {
-                title: 'Prize Pool',
-                items: [
-                    '1st Prize: ₹30,000',
-                    '2nd Prize: ₹20,000',
-                    '3rd Prize: ₹10,000',
-                    '4th-10th: Goodies'
-                ]
-            },
-            {
-                title: 'Contact',
-                content: 'Aditya Prakash – 7052921027'
-            }
-        ]
-    },
+    // {
+    //     id: 2,
+    //     title: 'CYBOX',
+    //     category: 'Competition',
+    //     image: '/images/events/cybox.png',
+    //     description: 'CYBOX is an offline Capture The Flag (CTF) cybersecurity competition. The event focuses on real-world offensive security and penetration testing scenarios in a professional red-team environment.',
+    //     teamSize: '3 Members',
+    //     date: '30th - Jan - 2026',
+    //     prizePool: '₹75,000',
+    //     registrationDeadline: '2026-01-29T23:59:59',
+    //     unstopLink: 'https://unstop.com/p/cybox-newton-school-of-technology-1615144',
+    //     rulebookLink: 'https://docs.google.com/document/d/1dnGvwixfj6KVaKHzZiYF2QyxYMbeRAgU8YZ-S1lEgUY/edit?pli=1&tab=t.0',
+    //     sections: [
+    //         {
+    //             title: 'Event Overview',
+    //             items: [
+    //                 'Mode: Offline Only (NST Campus)',
+    //                 'Duration: 8 hours (12:00 PM – 5:00 PM)',
+    //                 'Registration Fee: ₹500',
+    //                 'Requirement: Bring your own laptops',
+    //                 'Access: VPN connection required (Credentials provided)'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Rules & Regulations',
+    //             items: [
+    //                 'Only students eligible; Exactly 3 members per team',
+    //                 'No flag sharing or collaboration between teams',
+    //                 'Attacking outside authorize scope is strictly forbidden',
+    //                 'DoS, DDoS, and infrastructure abuse are not allowed'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Judging & Scoring',
+    //             items: [
+    //                 'Ranked by total points scored',
+    //                 'Completion of all flags mandatory for full points',
+    //                 'Tie-breaker: Time of last valid submission',
+    //                 'Bonus points applicable'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Prize Pool',
+    //             items: [
+    //                 '1st Prize: ₹30,000',
+    //                 '2nd Prize: ₹20,000',
+    //                 '3rd Prize: ₹10,000',
+    //                 '4th-10th: Goodies'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Contact',
+    //             content: 'Aditya Prakash – 7052921027'
+    //         }
+    //     ]
+    // },
     {
         id: 3,
         title: 'CodeWars',
@@ -121,9 +121,9 @@ export const competitions = [
         image: '/images/events/codewars.png',
         description: 'CodeWars is a flagship competitive programming contest designed to challenge students’ problem-solving skills, algorithmic thinking, and coding efficiency in a high-pressure environment. The contest follows an ICPC-style individual format.',
         teamSize: 'Individual',
-        date: 'Jan 20 & 31',
-        prizePool: '₹80,000',
-        registrationDeadline: '2026-01-19T23:59:59',
+        date: '30th - Jan - 2026',
+        prizePool: '₹50,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/codewar-20-tekron-20-newton-school-of-technology-1615172',
         rulebookLink: 'https://docs.google.com/document/d/1NwNz39OdRqmBXCRlb3dv0wWCRJec9DuP_2XpdxVy3ys/edit?usp=sharing',
         sections: [
@@ -168,8 +168,8 @@ export const competitions = [
         image: '/images/events/dronehavoc.png',
         description: 'Drone Havoc is an adrenaline-filled drone racing and obstacle navigation competition featuring timed trials, knockout rounds, and finals in a specially designed arena with aerial obstacles and checkpoints.',
         teamSize: 'Max 4 Members',
-        date: 'Day 1 & 2',
-        prizePool: '₹1,00,000',
+        date: '30th - Jan - 2026',
+        prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/drone-harvoc-tekron-20-newton-school-of-technology-1615308',
         rulebookLink: 'https://docs.google.com/document/d/1zSVXoWN5gk3xVzV3V_WudlTX3hlkQtT-4LIwgFHpzB0/edit?usp=sharing',
@@ -229,9 +229,9 @@ export const competitions = [
         image: '/images/events/robokick.png',
         description: 'Design and control robots to play soccer. Strategy and engineering come together in this robotic sports showdown where teams compete to score goals in an arena.',
         teamSize: 'Up to 5 Members',
-        date: 'Day 2',
-        prizePool: '₹1,20,000',
-        registrationDeadline: '2026-01-15T23:59:59',
+        date: '30th - Jan - 2026',
+        prizePool: '₹75,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/robokick-robosoccer-tekron26-newton-school-of-technology-1612193',
         rulebookLink: 'https://docs.google.com/document/d/1vXBfZIkSzwLTSbPNs4655R8LjolA_SMZdSubksfBCD4/edit?usp=sharing',
         sections: [
@@ -300,8 +300,8 @@ export const competitions = [
         image: '/images/events/throttlex.png',
         description: 'Welcome to RC Car Race (electric only), a thrilling enthusiast competition to check the control of players on their joysticks.\n\nTime: 4–7 hours\nVenue: Oval Ground\nEach team will get to show their full potential in the arena while competing with other competitors.',
         teamSize: 'Teams (Unspecified Size)',
-        date: 'Day 2',
-        prizePool: '₹80,000',
+        date: '30th - Jan - 2026',
+        prizePool: '₹60,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/throttle-x-rc-car-race-competition-electric-only-tekron-20-newton-school-of-technology-1615301',
         rulebookLink: 'https://docs.google.com/document/d/1YKnW-fKgOSrBIRauIlnP1sb48vegS-vs6DSHG1hwnw8/edit?usp=sharing',
@@ -392,9 +392,9 @@ export const competitions = [
         image: '/images/events/battleofbands.png',
         description: 'A high-energy live music competition designed to showcase the best emerging college bands. Emphasizing originality, musicianship, synchronization, and stage presence.',
         teamSize: '3-7 Members',
-        date: 'Jan 18 & 30',
-        prizePool: '₹40,000',
-        registrationDeadline: '2026-01-17T23:59:59',
+        date: '30th - Jan - 2026',
+        prizePool: '₹30,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/battle-of-bands-tekron-20-newton-school-of-technology-1615135',
         rulebookLink: 'https://docs.google.com/document/d/1-csUq7WWPgSLIt0KgRkrHpvnmRLiTqYAUsOKFoBGmoo/edit?usp=sharing',
         sections: [
@@ -439,96 +439,96 @@ export const competitions = [
             }
         ]
     },
-    {
-        id: 8,
-        title: 'Photography',
-        category: 'Competition',
-        image: '/images/events/photography.png',
-        description: 'The Tekron Photography Competition is a solo event open to school and college students. Capture the energy, moments, and spirit of Tekron.',
-        teamSize: 'Individual',
-        date: 'Day 1 (10 AM - 6 PM)',
-        prizePool: '₹30,000',
-        registrationDeadline: '2026-01-30T10:00:00',
-        unstopLink: 'https://unstop.com/p/photography-tekron-20-newton-school-of-technology-1615305',
-        rulebookLink: 'https://docs.google.com/document/d/1IlrCLKZhlh472rByEyyeuIAFh9xMO031iNHhD4KdbzI/edit?usp=sharing',
-        sections: [
-            {
-                title: 'Event Format',
-                items: [
-                    'Shooting Window: Day 1 (10:00 AM – 6:00 PM)',
-                    'Submission Deadline: Same day by 7:00 PM',
-                    'Cameras: DSLR / Mirrorless / Mobile',
-                    'Editing: Basic edits only (exposure, contrast, cropping)'
-                ]
-            },
-            {
-                title: 'Technical Guidelines',
-                items: [
-                    'Format: JPEG / JPG; Max Size: 10 MB per photo',
-                    'Naming: Name_College/School_Year',
-                    'No AI-generated, stolen, or heavily edited content'
-                ]
-            },
-            {
-                title: 'Prize Pool',
-                items: [
-                    '1st Prize: ₹15,000 + Trophy',
-                    '2nd Prize: ₹9,000 + Trophy',
-                    '3rd Prize: ₹6,000 + Trophy',
-                    'Certificates for all participants'
-                ]
-            },
-            {
-                title: 'Contact & Community',
-                content: 'Nilesh Nand Lal: 9523983494\nJoin Community: https://chat.whatsapp.com/Fq9mWlsYoh7C9DHfz63Krj'
-            }
-        ]
-    },
-    {
-        id: 9,
-        title: 'Trade X',
-        category: 'Competition',
-        image: '/images/events/tradex.png',
-        description: 'TradeX is a high-intensity, real-time trading simulation event designed to test participants’ financial analysis, risk management, and strategic thinking.',
-        teamSize: 'Individual',
-        date: 'Day 1 (3 Hours)',
-        prizePool: '₹30,000',
-        registrationDeadline: '2026-01-30T09:00:00',
-        unstopLink: 'https://unstop.com/p/tradex-tekron-20-newton-school-of-technology-1615162',
-        rulebookLink: 'https://docs.google.com/document/d/1e0b4qNc8mcoWGBAax24hq8qATv86ix0cB6OZEDsXk-Y/edit?usp=sharing',
-        sections: [
-            {
-                title: 'Event Format',
-                items: [
-                    'Mode: Live trading simulation (TradeX Platform)',
-                    '2-hour live session; Limit 150 participants',
-                    'Simulation Logic: 1 week = 2 real hours; 1 day = 15 mins',
-                    'Starting Capital: Equal virtual capital for all'
-                ]
-            },
-            {
-                title: 'Rules & Fair Play',
-                items: [
-                    'All trades on TradeX platform exclusively',
-                    'No leaving hall during active trading windows',
-                    'No bots, scripts, multiple accounts, or external assistance',
-                    'Ranked by final portfolio value'
-                ]
-            },
-            {
-                title: 'Prize Pool',
-                items: [
-                    '1st Place: ₹15,000',
-                    '2nd Place: ₹10,000',
-                    '3rd Place: ₹5,000'
-                ]
-            },
-            {
-                title: 'Contact',
-                content: 'Harshit Jain: 7427887050\nPathan Amaan: 9423671864'
-            }
-        ]
-    },
+    // {
+    //     id: 8,
+    //     title: 'Photography',
+    //     category: 'Competition',
+    //     image: '/images/events/photography.png',
+    //     description: 'The Tekron Photography Competition is a solo event open to school and college students. Capture the energy, moments, and spirit of Tekron.',
+    //     teamSize: 'Individual',
+    //     date: 'Day 1 (10 AM - 6 PM)',
+    //     prizePool: '₹30,000',
+    //     registrationDeadline: '2026-01-29T23:59:59',
+    //     unstopLink: 'https://unstop.com/p/photography-tekron-20-newton-school-of-technology-1615305',
+    //     rulebookLink: 'https://docs.google.com/document/d/1IlrCLKZhlh472rByEyyeuIAFh9xMO031iNHhD4KdbzI/edit?usp=sharing',
+    //     sections: [
+    //         {
+    //             title: 'Event Format',
+    //             items: [
+    //                 'Shooting Window: Day 1 (10:00 AM – 6:00 PM)',
+    //                 'Submission Deadline: Same day by 7:00 PM',
+    //                 'Cameras: DSLR / Mirrorless / Mobile',
+    //                 'Editing: Basic edits only (exposure, contrast, cropping)'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Technical Guidelines',
+    //             items: [
+    //                 'Format: JPEG / JPG; Max Size: 10 MB per photo',
+    //                 'Naming: Name_College/School_Year',
+    //                 'No AI-generated, stolen, or heavily edited content'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Prize Pool',
+    //             items: [
+    //                 '1st Prize: ₹15,000 + Trophy',
+    //                 '2nd Prize: ₹9,000 + Trophy',
+    //                 '3rd Prize: ₹6,000 + Trophy',
+    //                 'Certificates for all participants'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Contact & Community',
+    //             content: 'Nilesh Nand Lal: 9523983494\nJoin Community: https://chat.whatsapp.com/Fq9mWlsYoh7C9DHfz63Krj'
+    //         }
+    //     ]
+    // },
+    // {
+    //     id: 9,
+    //     title: 'Trade X',
+    //     category: 'Competition',
+    //     image: '/images/events/tradex.png',
+    //     description: 'TradeX is a high-intensity, real-time trading simulation event designed to test participants’ financial analysis, risk management, and strategic thinking.',
+    //     teamSize: 'Individual',
+    //     date: 'Day 1 (3 Hours)',
+    //     prizePool: '₹30,000',
+    //     registrationDeadline: '2026-01-29T23:59:59',
+    //     unstopLink: 'https://unstop.com/p/tradex-tekron-20-newton-school-of-technology-1615162',
+    //     rulebookLink: 'https://docs.google.com/document/d/1e0b4qNc8mcoWGBAax24hq8qATv86ix0cB6OZEDsXk-Y/edit?usp=sharing',
+    //     sections: [
+    //         {
+    //             title: 'Event Format',
+    //             items: [
+    //                 'Mode: Live trading simulation (TradeX Platform)',
+    //                 '2-hour live session; Limit 150 participants',
+    //                 'Simulation Logic: 1 week = 2 real hours; 1 day = 15 mins',
+    //                 'Starting Capital: Equal virtual capital for all'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Rules & Fair Play',
+    //             items: [
+    //                 'All trades on TradeX platform exclusively',
+    //                 'No leaving hall during active trading windows',
+    //                 'No bots, scripts, multiple accounts, or external assistance',
+    //                 'Ranked by final portfolio value'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Prize Pool',
+    //             items: [
+    //                 '1st Place: ₹15,000',
+    //                 '2nd Place: ₹10,000',
+    //                 '3rd Place: ₹5,000'
+    //             ]
+    //         },
+    //         {
+    //             title: 'Contact',
+    //             content: 'Harshit Jain: 7427887050\nPathan Amaan: 9423671864'
+    //         }
+    //     ]
+    // },
     {
         id: 10,
         title: 'BGMI',
@@ -536,9 +536,9 @@ export const competitions = [
         image: '/images/events/bgmi.png',
         description: 'The BGMI Tournament at TEKRON 2.0 is a high-stakes competitive esports event featuring a structured qualification pathway from Online Qualifiers to the Grand Finals.',
         teamSize: '4 Members',
-        date: 'Jan 18, 30-31',
-        prizePool: '₹1,00,000',
-        registrationDeadline: '2026-01-17T23:59:59',
+        date: '30th - Jan - 2026',
+        prizePool: '₹30,000',
+        registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/p/bgmi-tournament-tekron-20-newton-school-of-technology-1615307',
         rulebookLink: 'https://docs.google.com/document/d/1ttq1CF-ruue6WZMs9yxtn8nkyh8M4AOyWljICUi7wzI/edit?usp=sharing',
         sections: [

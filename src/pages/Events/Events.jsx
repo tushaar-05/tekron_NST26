@@ -189,7 +189,7 @@ export default function Events() {
             >
               Events & Workshops
             </h1>
-            <p className="text-2xl max-w-3xl mx-auto leading-relaxed minecraft-font" style={{ color: '#c8b6e2' }}>
+            <p className="mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-lg lg:text-xl text-purple-200/60 max-w-2xl mx-auto font-['VT323'] leading-relaxed px-2">
               Immerse yourself in cutting-edge technology experiences and hands-on learning.
               From inspiring talks to interactive workshops, discover the future of innovation.
             </p>

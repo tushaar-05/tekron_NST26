@@ -77,7 +77,7 @@ function App() {
 
     const dialogues = [
         {
-            text: "Welcome to TEKRON 2026! Join us for cutting-edge tech talks, AI innovations, and quantum computing breakthroughs."
+            text: "Welcome to TEKRON 2026! Join us for cutting-edge tech talks, AI innovations."
         },
         {
             text: "Network with industry leaders, attend hands-on workshops, and explore the future of technology. Register now to secure your spot!"
@@ -473,13 +473,13 @@ function App() {
                                 <p
                                     className="pixel-font text-center leading-relaxed px-4 sm:px-0"
                                     style={{
-                                        fontSize: 'clamp(8px, 0.9vw, 14px)',
+                                        fontSize: 'clamp(7.5px, 0.9vw, 14px)',
                                         color: '#e9e5eeff',
                                         lineHeight: '1.8',
                                         textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 182, 226, 0.3)',
                                     }}
                                 >
-                                    Step into the future at TEKRON 2026 Explore AI, quantum tech, cybersecurity, and more—through hands-on workshops, bold ideas, and epic networking. Don’t just watch the future. Be part of it.
+                                    Step into the future at TEKRON 2026 Explore AI, cybersecurity, and more—through hands-on workshops, bold ideas, and epic networking. Don’t just watch the future. Be part of it.
                                 </p>
                             </div>
 
