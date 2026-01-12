@@ -234,6 +234,54 @@ function App() {
                         />
 
 
+                        {/* Mobile clouds at top - visible only on mobile */}
+                        <div
+                            className="block sm:hidden absolute top-0 left-0 z-5 w-full"
+                            style={{
+                                opacity: 0.6,
+                            }}
+                        >
+                            <img
+                                src="/images/backgrounds/mobile-cloud-1.png"
+                                alt="Mobile cloud top-left"
+                                className="absolute top-[10px] left-[-20px] w-[40%] pixel-art"
+                                style={{
+                                    animation: 'float 6s ease-in-out infinite',
+                                }}
+                            />
+                            <img
+                                src="/images/backgrounds/mobile-cloud-1.png"
+                                alt="Mobile cloud top-right"
+                                className="absolute top-[30px] right-[-30px] w-[50%] pixel-art"
+                                style={{
+                                    animation: 'float 8s ease-in-out infinite',
+                                    transform: 'scaleX(-1)',
+                                }}
+                            />
+                            <img
+                                src="/images/backgrounds/mobile-cloud-1.png"
+                                alt="Mobile cloud top-center"
+                                className="absolute top-[5px] left-[30%] w-[35%] pixel-art"
+                                style={{
+                                    animation: 'float 7s ease-in-out infinite',
+                                    opacity: 0.5,
+                                }}
+                            />
+                        </div>
+
+
+                        {/* Mobile background at bottom - visible only on mobile */}
+                        <div
+                            className="block sm:hidden absolute bottom-[-120px] left-0 z-8 w-full"
+                        >
+                            <img
+                                src="/images/backgrounds/mobile-bg.png"
+                                alt="Mobile background"
+                                className="w-full h-auto pixel-art"
+                            />
+                        </div>
+
+
                         <div
                             className="hidden sm:block absolute transition-all duration-700 ease-out"
                             style={{
