@@ -82,7 +82,7 @@ function App() {
             text: "Network with industry leaders, attend hands-on workshops, and explore the future of technology. Register now to secure your spot!"
         },
         {
-            text: "Use the navigation menu above to explore speakers, schedule, workshops, and more. Each section is packed with tech insights!"
+            text: "Use the explore button to explore the map."
         }
     ];
 
@@ -93,6 +93,15 @@ function App() {
     const prevDialogue = () => {
         setDialogueIndex((prev) => (prev - 1 + dialogues.length) % dialogues.length);
     };
+
+    // Auto-change dialogue every 4 seconds
+    useEffect(() => {
+        const timer = setInterval(() => {
+            nextDialogue();
+        }, 8000);
+
+        return () => clearInterval(timer);
+    }, [dialogueIndex]);
 
     useEffect(() => {
         const handleMouseMove = (e) => {
@@ -416,14 +425,12 @@ function App() {
                                     className="pixel-font text-center leading-relaxed px-4 sm:px-0"
                                     style={{
                                         fontSize: 'clamp(8px, 0.9vw, 14px)',
-                                        color: '#c8b6e2',
+                                        color: '#e9e5eeff',
                                         lineHeight: '1.8',
                                         textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 182, 226, 0.3)',
                                     }}
                                 >
-                                    Join TEKRON 2026 for an immersive tech experience featuring cutting-edge AI, quantum computing,
-                                    cybersecurity, and emerging technologies. Network with industry leaders, attend hands-on workshops,
-                                    and explore the innovations shaping tomorrow. Register now to be part of the future.
+                                    Step into the future at TEKRON 2026 🚀 Explore AI, quantum tech, cybersecurity, and more—through hands-on workshops, bold ideas, and epic networking. Don’t just watch the future. Be part of it.
                                 </p>
                             </div>
 
