@@ -58,7 +58,7 @@ const Section = styled.section`
 
 const BiometricCard = styled(motion.div)`
   position: relative;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 30px;
@@ -73,8 +73,8 @@ const BiometricCard = styled(motion.div)`
 `;
 
 const ValueHub = styled(motion.div)`
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(15px);
+  background: rgba(10, 10, 10, 0.7);
+  backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 40px;
   position: relative;
@@ -92,14 +92,15 @@ const ValueHub = styled(motion.div)`
 `;
 
 const BentoBlock = styled(motion.div)`
-  background: rgba(168, 85, 247, 0.05);
+  background: rgba(10, 10, 10, 0.8);
   border: 1px solid rgba(168, 85, 247, 0.1);
   border-radius: 24px;
   padding: 24px;
+  backdrop-filter: blur(10px);
   transition: all 0.4s ease;
   
   &:hover {
-    background: rgba(168, 85, 247, 0.1);
+    background: rgba(168, 85, 247, 0.15);
     border-color: rgba(168, 85, 247, 0.3);
   }
 `;
@@ -243,7 +244,7 @@ const WhySponsor = () => (
                         </BentoBlock>
                     </div>
 
-                    <BentoBlock className="bg-white/[0.02] border-white/5">
+                    <BentoBlock className="bg-black/60 border-white/5">
                         <div className="flex items-center gap-4">
                             <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">
                                 <Rocket className="w-6 h-6 text-purple-400" />
@@ -296,7 +297,7 @@ const Benefits = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className="p-6 md:p-10 border-white/5 hover:bg-white/[0.03]"
+                        className="p-6 md:p-10 border-white/5"
                     >
                         <div className="text-4xl mb-8 opacity-80 group-hover:scale-110 transition-transform">{benefit.icon}</div>
                         <h4 className="text-lg font-bold pixel-font text-white mb-4 tracking-tighter">{benefit.title}</h4>
@@ -624,7 +625,7 @@ const VisibilityMatrix = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className="p-6 md:p-10 border-white/5 bg-white/[0.02] hover:bg-white/[0.04]"
+                        className="p-6 md:p-10 border-white/5 bg-black/60 hover:bg-black/80"
                     >
                         <div className="w-12 h-1 mb-8" style={{ background: p.color }} />
                         <PixelLabel color={p.color}>{p.label}</PixelLabel>
@@ -657,7 +658,7 @@ const EventWiseSponsorship = () => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {tracks.map((track, i) => (
-                    <div key={i} className="p-6 md:p-8 bg-black/40 border border-white/5 rounded-3xl backdrop-blur-md group hover:border-pink-500/30 transition-all">
+                    <div key={i} className="p-6 md:p-8 bg-black/80 border border-white/5 rounded-3xl backdrop-blur-md group hover:border-pink-500/30 transition-all">
                         <div className="text-5xl mb-6">{track.icon}</div>
                         <h4 className="text-xl sm:text-2xl font-bold pixel-font text-white mb-4">{track.name}</h4>
                         <p className="font-mono text-white/30 text-sm leading-relaxed">{track.desc}</p>
@@ -700,7 +701,7 @@ const StarPower = () => {
                     </h4>
                     <div className="grid grid-cols-2 gap-4">
                         {artists.map((a, i) => (
-                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-white/[0.02]">
+                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-black/60">
                                 <div className="text-2xl mb-3">{a.icon}</div>
                                 <div className="text-xs font-bold pixel-font text-white mb-1">{a.name}</div>
                                 <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">{a.role}</div>
@@ -716,7 +717,7 @@ const StarPower = () => {
                     </h4>
                     <div className="grid grid-cols-2 gap-4">
                         {influencers.map((inf, i) => (
-                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-white/[0.02]">
+                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-black/60">
                                 <div className="text-2xl mb-3">{inf.icon}</div>
                                 <div className="text-xs font-bold pixel-font text-white mb-1">{inf.name}</div>
                                 <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">{inf.role}</div>
@@ -788,7 +789,7 @@ const HeritagePartners = () => {
                 </div>
             </div>
 
-            <ValueHub className="overflow-hidden border-white/5 bg-white/[0.01] p-0">
+            <ValueHub className="overflow-hidden border-white/5 bg-black/60 p-0">
                 <div className="grid grid-cols-1 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-white/5">
                     {sectors.map((sector, i) => (
                         <motion.div
@@ -865,7 +866,7 @@ const ReachStats = () => {
 
     return (
         <Section>
-            <div className="bg-white/[0.02] border border-white/5 rounded-[40px] p-8 md:p-20">
+            <div className="bg-black/80 border border-white/5 rounded-[40px] p-8 md:p-20 backdrop-blur-md">
                 <div className="text-center mb-16">
                     <PixelLabel color="#a855f7">METRIC_VAULT</PixelLabel>
                     <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white">Impact Archive</h2>
@@ -880,7 +881,7 @@ const ReachStats = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {historicalStats.map((stat, i) => (
-                                <BentoBlock key={i} className="p-8 border-white/5 bg-white/[0.01]">
+                                <BentoBlock key={i} className="p-8 border-white/5 bg-black/60">
                                     <div className="text-3xl mb-4">{stat.icon}</div>
                                     <div className="text-3xl font-bold pixel-font mb-2" style={{ color: stat.color }}>
                                         <AnimatedCounter target={stat.value} />{stat.suffix}
@@ -899,7 +900,7 @@ const ReachStats = () => {
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {targetStats.map((stat, i) => (
-                                <BentoBlock key={i} className="p-8 border-white/5 bg-white/[0.01]">
+                                <BentoBlock key={i} className="p-8 border-white/5 bg-black/60">
                                     <div className="text-3xl mb-4">{stat.icon}</div>
                                     <div className="text-3xl font-bold pixel-font mb-2" style={{ color: stat.color }}>
                                         <AnimatedCounter target={stat.value} />{stat.suffix}
