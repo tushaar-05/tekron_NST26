@@ -111,7 +111,7 @@ const HolographicTierCard = styled(motion.div)`
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 32px;
-  padding: 40px;
+  padding: 30px;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   
@@ -131,8 +131,8 @@ const HolographicTierCard = styled(motion.div)`
     position: absolute;
     top: 0;
     right: 0;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     background: linear-gradient(135deg, transparent 50%, ${props => props.color}22 50%);
     border-radius: 0 32px 0 0;
   }
@@ -408,7 +408,7 @@ const TierSection = () => {
                         className="flex flex-col h-full w-full cursor-pointer group"
                         onClick={() => setSelectedTier(tier)}
                     >
-                        <div className="flex justify-between items-start mb-10">
+                        <div className="flex justify-between items-center mb-6">
                             <div className="flex flex-col">
                                 <span className="text-xs font-mono text-white/20 uppercase tracking-[0.3em] mb-1">ID // 0{i + 1}</span>
                                 <div className="w-8 h-[1px]" style={{ background: tier.color }} />
@@ -419,15 +419,15 @@ const TierSection = () => {
                             </div>
                         </div>
 
-                        <h3 className="text-2xl sm:text-3xl font-bold pixel-font text-white mb-8 tracking-tighter leading-none transition-transform duration-500 group-hover:translate-x-1">
+                        <h3 className="text-2xl sm:text-3xl font-bold pixel-font text-white mb-4 tracking-tighter leading-none transition-transform duration-500 group-hover:translate-x-1">
                             {tier.name.split('_').join(' ')}
                         </h3>
 
-                        <ul className="space-y-4 mb-12 flex-grow">
+                        <ul className="space-y-4 mb-8 flex-grow">
                             {tier.features.map((f, fi) => (
-                                <li key={fi} className="text-sm font-mono text-white/40 flex items-center gap-3">
-                                    <div className="w-1 h-1 rounded-full shrink-0" style={{ background: tier.color }} />
-                                    <span className="opacity-80 group-hover:opacity-100">{f}</span>
+                                <li key={fi} className="text-sm font-mono text-white/40 flex items-start gap-3">
+                                    <div className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5" style={{ background: tier.color }} />
+                                    <span className="opacity-80 group-hover:opacity-100 leading-snug">{f}</span>
                                 </li>
                             ))}
                         </ul>
