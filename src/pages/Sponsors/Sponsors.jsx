@@ -432,7 +432,7 @@ const TierSection = () => {
                             ))}
                         </ul>
 
-                        <div className="mt-auto pt-6 border-t border-white/5 font-mono text-[10px] text-white/20 tracking-[0.2em] group-hover:text-white/60 transition-colors">
+                        <div className="mt-auto pt-6 border-t border-white/5 font-mono text-[10px] tracking-[0.2em] font-bold transition-all duration-300 group-hover:tracking-[0.25em] group-hover:brightness-150" style={{ color: tier.color }}>
                             &gt; CLICK_FOR_FULL_LOADOUT
                         </div>
                     </HolographicTierCard>
