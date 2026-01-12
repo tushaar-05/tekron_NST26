@@ -178,7 +178,7 @@ const HeroSection = () => (
     <Section className="min-h-[60vh] flex flex-col items-center justify-center text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <PixelLabel color="#00fff9">INITIATING PARTNERSHIP HUB // 2026</PixelLabel>
-            <h1 className="text-4xl sm:text-6xl md:text-9xl font-bold pixel-font leading-tight mb-8"
+            <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold pixel-font leading-tight mb-8"
                 style={{
                     color: '#fff',
                     textShadow: '0 0 40px rgba(168, 85, 247, 0.4)',
@@ -186,7 +186,7 @@ const HeroSection = () => (
                 BECOME OUR<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">SPONSOR</span>
             </h1>
-            <p className="mt-8 text-base sm:text-xl md:text-2xl font-mono text-white/40 max-w-2xl mx-auto px-4">
+            <p className="mt-8 text-sm sm:text-base md:text-xl font-mono text-white/40 max-w-2xl mx-auto px-4">
                 &gt; ARCHITECT THE FUTURE OF TECHNOLOGY WITH US. INTEGRATE YOUR BRAND INTO THE TEKRON ECOSYSTEM.
             </p>
             <motion.div className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent mt-12 mx-auto max-w-xl"
@@ -195,80 +195,233 @@ const HeroSection = () => (
     </Section>
 );
 
-// --- 🎯 2. Why Sponsor Us? (Bento Hub Design) ---
-const WhySponsor = () => (
-    <Section>
-        <ValueHub
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="p-6 md:p-16"
-        >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[100px] pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 blur-[100px] pointer-events-none" />
+// --- 🎯 2. Why Sponsor Us? (Redesigned Holographic Vision) ---
+const WhySponsor = () => {
+    const stats = [
+        { value: '5000+', label: 'ATTENDEES', color: '#a855f7', icon: <Users className="w-6 h-6" /> },
+        { value: '30+', label: 'COLLEGES', color: '#00fff9', icon: <Building2 className="w-6 h-6" /> },
+        { value: '250+', label: 'LEGACY_REACH', color: '#fbbf24', icon: <Globe className="w-6 h-6" /> }
+    ];
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch relative z-10">
-                {/* Left Content */}
-                <div className="lg:col-span-7 flex flex-col justify-center">
-                    <div className="flex items-center gap-3 mb-6">
-                        <div className="w-10 h-[2px] bg-purple-500" />
-                        <PixelLabel color="#a855f7" className="mb-0">THE VISION</PixelLabel>
+    return (
+        <Section className="relative overflow-hidden">
+            {/* Animated Background Grid */}
+            <div className="absolute inset-0 opacity-20">
+                <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                        linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '50px 50px',
+                    animation: 'gridPulse 4s ease-in-out infinite'
+                }} />
+            </div>
+
+            {/* Floating Orbs */}
+            <motion.div
+                className="absolute top-20 right-20 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent)' }}
+                animate={{
+                    scale: [1, 1.2, 1],
+                    opacity: [0.3, 0.5, 0.3]
+                }}
+                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+                className="absolute bottom-20 left-20 w-96 h-96 rounded-full blur-[120px] pointer-events-none"
+                style={{ background: 'radial-gradient(circle, rgba(0, 255, 249, 0.2), transparent)' }}
+                animate={{
+                    scale: [1.2, 1, 1.2],
+                    opacity: [0.2, 0.4, 0.2]
+                }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            />
+
+            <div className="relative z-10 max-w-7xl mx-auto">
+                {/* Header Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="text-center mb-20"
+                >
+                    <div className="flex items-center justify-center gap-4 mb-8">
+                        <motion.div
+                            className="h-[2px] w-16 bg-gradient-to-r from-transparent via-purple-500 to-purple-500"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: 64 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1 }}
+                        />
+                        <PixelLabel color="#a855f7">THE VISION</PixelLabel>
+                        <motion.div
+                            className="h-[2px] w-16 bg-gradient-to-l from-transparent via-purple-500 to-purple-500"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: 64 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1 }}
+                        />
                     </div>
-                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold pixel-font text-white mb-8 leading-tight">
-                        Crafting<br />Legacy.
+
+                    <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold pixel-font mb-8 leading-tight">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">
+                            Crafting
+                        </span>
+                        <br />
+                        <span className="text-white" style={{
+                            textShadow: '0 0 40px rgba(168, 85, 247, 0.5), 0 0 80px rgba(168, 85, 247, 0.3)'
+                        }}>
+                            Legacy.
+                        </span>
                     </h2>
-                    <p className="font-mono text-white/50 leading-relaxed text-sm sm:text-lg max-w-xl">
-                        TEKRON 2026 is an immersive sandbox for technical excellence.
-                        With a legacy of 250+ participating colleges and a reach that defines the digital archive of tomorrow,
-                        we offer a unique gateway to the most talented minds in the industry.
-                    </p>
-                </div>
+                </motion.div>
 
-                {/* Right Bento Section */}
-                <div className="lg:col-span-5 grid grid-cols-1 gap-6">
-                    <BentoBlock>
-                        <PixelLabel color="#00fff9">AUDIENCE_DEMOGRAPHICS</PixelLabel>
-                        <p className="text-white/60 font-mono text-sm mb-0">
-                            A concentrated hub of students, developers, and tech-disruptors hungry for the next leap in innovation.
-                        </p>
-                    </BentoBlock>
+                {/* Main Content Grid */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+                    {/* Left: Holographic Card */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="relative"
+                    >
+                        <div className="relative p-8 md:p-12 bg-gradient-to-br from-black/60 via-purple-900/20 to-black/60 rounded-3xl border border-purple-500/30 backdrop-blur-xl overflow-hidden group">
+                            {/* Animated Scan Line */}
+                            <motion.div
+                                className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
+                                animate={{ top: ['0%', '100%'] }}
+                                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                style={{ opacity: 0.5 }}
+                            />
 
-                    <div className="grid grid-cols-2 gap-6">
-                        <BentoBlock className="flex flex-col justify-center items-center text-center">
-                            <div className="text-2xl sm:text-4xl font-bold pixel-font text-white mb-2">5000+</div>
-                            <div className="text-[8px] sm:text-[10px] font-mono text-white/30 uppercase tracking-widest">ATTENDEES</div>
-                        </BentoBlock>
-                        <BentoBlock className="flex flex-col justify-center items-center text-center">
-                            <div className="text-2xl sm:text-4xl font-bold pixel-font text-white mb-2">30+</div>
-                            <div className="text-[8px] sm:text-[10px] font-mono text-white/30 uppercase tracking-widest">COLLEGES</div>
-                        </BentoBlock>
-                    </div>
+                            {/* Corner Accents */}
+                            <div className="absolute top-0 left-0 w-20 h-20 border-t-2 border-l-2 border-purple-500/50 rounded-tl-3xl" />
+                            <div className="absolute bottom-0 right-0 w-20 h-20 border-b-2 border-r-2 border-cyan-500/50 rounded-br-3xl" />
 
-                    <BentoBlock className="bg-black/40 border-white/5">
-                        <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">
-                                <Rocket className="w-6 h-6 text-purple-400" />
-                            </div>
-                            <div>
-                                <h4 className="text-white text-sm font-bold pixel-font">RAPID_SCALING</h4>
-                                <p className="text-xs text-white/30 font-mono mb-0">Year-on-year growth in digital presence.</p>
+                            <div className="relative z-10">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="w-3 h-3 rounded-full bg-purple-500 animate-pulse" style={{
+                                        boxShadow: '0 0 20px rgba(168, 85, 247, 0.8)'
+                                    }} />
+                                    <span className="text-[10px] font-mono text-purple-400 uppercase tracking-[0.3em]">SYSTEM_ACTIVE</span>
+                                </div>
+
+                                <p className="font-mono text-white/70 leading-relaxed text-sm sm:text-base mb-6">
+                                    TEKRON 2026 is an <span className="text-purple-400 font-bold">immersive sandbox</span> for technical excellence.
+                                </p>
+
+                                <p className="font-mono text-white/50 leading-relaxed text-xs sm:text-sm">
+                                    With a legacy of <span className="text-cyan-400 font-bold">250+ participating colleges</span> and a reach that defines the digital archive of tomorrow,
+                                    we offer a unique gateway to the most talented minds in the industry.
+                                </p>
+
+                                {/* Data Stream Effect */}
+                                <div className="mt-8 pt-6 border-t border-white/10">
+                                    <div className="flex items-center gap-2 text-[8px] font-mono text-white/30 uppercase tracking-widest">
+                                        <Rocket className="w-3 h-3 text-purple-400" />
+                                        RAPID_SCALING // YEAR_ON_YEAR_GROWTH
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </BentoBlock>
+                    </motion.div>
+
+                    {/* Right: Floating Stats Cards */}
+                    <div className="relative h-full min-h-[400px] flex items-center justify-center">
+                        {stats.map((stat, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, scale: 0.8, y: 50 }}
+                                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.2, type: "spring", stiffness: 100 }}
+                                whileHover={{ scale: 1.05, rotate: i % 2 === 0 ? 2 : -2 }}
+                                className="absolute"
+                                style={{
+                                    top: i === 0 ? '10%' : i === 1 ? '45%' : '75%',
+                                    left: i === 1 ? '50%' : i === 0 ? '10%' : '20%',
+                                    transform: 'translateX(-50%)',
+                                    zIndex: 3 - i
+                                }}
+                            >
+                                <div
+                                    className="relative p-6 sm:p-8 bg-black/80 rounded-2xl border backdrop-blur-xl min-w-[200px] sm:min-w-[240px]"
+                                    style={{
+                                        borderColor: `${stat.color}40`,
+                                        boxShadow: `0 0 30px ${stat.color}20, inset 0 0 30px ${stat.color}05`
+                                    }}
+                                >
+                                    {/* Glow Effect */}
+                                    <div
+                                        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                        style={{
+                                            background: `radial-gradient(circle at top right, ${stat.color}15, transparent 70%)`
+                                        }}
+                                    />
+
+                                    <div className="relative z-10">
+                                        <div className="flex items-center justify-between mb-4">
+                                            <div
+                                                className="w-10 h-10 rounded-lg flex items-center justify-center"
+                                                style={{
+                                                    background: `${stat.color}20`,
+                                                    color: stat.color
+                                                }}
+                                            >
+                                                {stat.icon}
+                                            </div>
+                                            <div
+                                                className="w-2 h-2 rounded-full animate-pulse"
+                                                style={{
+                                                    background: stat.color,
+                                                    boxShadow: `0 0 10px ${stat.color}`
+                                                }}
+                                            />
+                                        </div>
+
+                                        <div
+                                            className="text-3xl sm:text-4xl font-bold pixel-font mb-2"
+                                            style={{
+                                                color: stat.color,
+                                                textShadow: `0 0 20px ${stat.color}60`
+                                            }}
+                                        >
+                                            {stat.value}
+                                        </div>
+
+                                        <div className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-[0.2em]">
+                                            {stat.label}
+                                        </div>
+                                    </div>
+
+                                    {/* Animated Border */}
+                                    <motion.div
+                                        className="absolute inset-0 rounded-2xl"
+                                        style={{
+                                            background: `linear-gradient(45deg, ${stat.color}00, ${stat.color}40, ${stat.color}00)`,
+                                            backgroundSize: '200% 200%'
+                                        }}
+                                        animate={{
+                                            backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                                        }}
+                                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                                    />
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
                 </div>
             </div>
 
-            <div className="mt-16 pt-8 border-t border-white/5 flex flex-wrap gap-8 justify-between items-center opacity-30">
-                <div className="text-[8px] sm:text-[10px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.4em]">SYSTEM_READY // 2026.01</div>
-                <div className="flex gap-4">
-                    <div className="w-2 h-2 rounded-full bg-purple-500" />
-                    <div className="w-2 h-2 rounded-full bg-purple-500/50" />
-                    <div className="w-2 h-2 rounded-full bg-purple-500/20" />
-                </div>
-            </div>
-        </ValueHub>
-    </Section>
-);
+            <style jsx>{`
+                @keyframes gridPulse {
+                    0%, 100% { opacity: 0.1; }
+                    50% { opacity: 0.3; }
+                }
+            `}</style>
+        </Section>
+    );
+};
 
 // --- 🏆 3. Sponsorship Benefits (Redesigned) ---
 const Benefits = () => {
@@ -502,7 +655,7 @@ const TierSection = () => {
                                 </div>
                                 <button
                                     onClick={() => setSelectedTier(null)}
-                                    className="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-all ml-4"
+                                    className="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-white/20 hover:bg-white/30 text-white border border-white/20 transition-all ml-4"
                                 ><X className="w-6 h-6" /></button>
                             </div>
 
@@ -547,9 +700,9 @@ const TierSection = () => {
                                                 SYNERGY_CHECK
                                             </div>
                                             <div className="space-y-6">
-                                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-[10px] gap-1">
+                                                <div className="flex flex-col items-start text-[10px] gap-2 w-full">
                                                     <span className="text-white/40 uppercase tracking-wider">Visibility</span>
-                                                    <span className="font-bold tracking-widest" style={{ color: selectedTier.color }}>HIGH_PRIORITY</span>
+                                                    <span className="font-bold tracking-wide break-all text-left" style={{ color: selectedTier.color }}>HIGH_PRIORITY</span>
                                                 </div>
                                                 <div className="w-full h-2 bg-white/5 rounded-full overflow-hidden">
                                                     <motion.div
@@ -581,10 +734,10 @@ const TierSection = () => {
                                                 setSelectedTier(null);
                                                 document.getElementById('uplink')?.scrollIntoView({ behavior: 'smooth' });
                                             }}
-                                            className="w-full py-5 sm:py-7 bg-white text-black font-bold pixel-font text-xs sm:text-sm hover:scale-[1.02] transition-all shadow-[10px_10px_0px_rgba(0,0,0,0.6)] active:translate-x-2 active:translate-y-2 active:shadow-none rounded-xl relative overflow-hidden group"
+                                            className="w-full py-5 sm:py-7 bg-white text-black font-bold pixel-font text-[10px] sm:text-sm hover:scale-[1.02] transition-all shadow-[10px_10px_0px_rgba(0,0,0,0.6)] active:translate-x-2 active:translate-y-2 active:shadow-none rounded-xl relative overflow-hidden group"
                                         >
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
-                                            INITIATE_PARTNERSHIP
+                                            <span className="break-all whitespace-normal text-center w-full px-2 block">INITIATE <br />PARTNERSHIP</span>
                                         </button>
 
                                         <p className="text-[8px] text-center text-white/15 uppercase tracking-[0.25em] leading-loose font-mono px-4">
@@ -597,7 +750,7 @@ const TierSection = () => {
                             {/* Modal Close (Desktop) */}
                             <button
                                 onClick={() => setSelectedTier(null)}
-                                className="absolute top-6 right-6 z-50 text-white/20 hover:text-white transition-all hidden md:flex items-center gap-3 group"
+                                className="absolute top-6 right-6 z-50 text-white/80 hover:text-white transition-all hidden md:flex items-center gap-3 group"
                             >
                                 <span className="pixel-font text-[10px] tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">ESC</span>
                                 <div className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all">
@@ -651,90 +804,313 @@ const VisibilityMatrix = () => {
     );
 };
 
-// --- 🎤 6. Event-Wise Sponsorship ---
-const EventWiseSponsorship = () => {
-    const tracks = [
-        { name: 'HACKATHON', icon: <Monitor className="w-16 h-16 text-blue-400" />, desc: 'Own the hardware/software arena. Deeply engage with builders.' },
-        { name: 'ESPORTS', icon: <Gamepad2 className="w-16 h-16 text-green-400" />, desc: 'Sponsor the BGMI or CodeWars league. Connect with Gen-Z gamers.' },
-        { name: 'CULTURAL', icon: <Guitar className="w-16 h-16 text-yellow-400" />, desc: 'Partner with Battle of Bands or Cultural Night for high-energy exposure.' }
-    ];
-    return (
-        <Section>
-            <div className="mb-12">
-                <PixelLabel color="#ec4899">TARGETED DEPLOYMENT</PixelLabel>
-                <h2 className="text-3xl sm:text-5xl font-bold pixel-font text-white">Event Synergy</h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {tracks.map((track, i) => (
-                    <div key={i} className="p-6 md:p-8 bg-black/60 border border-white/5 rounded-3xl backdrop-blur-md group hover:border-pink-500/30 transition-all">
-                        <div className="text-5xl mb-6">{track.icon}</div>
-                        <h4 className="text-xl sm:text-2xl font-bold pixel-font text-white mb-4">{track.name}</h4>
-                        <p className="font-mono text-white/30 text-sm leading-relaxed">{track.desc}</p>
-                    </div>
-                ))}
-            </div>
-        </Section>
-    );
-};
 
-// --- ✨ 7a. Star Power (Artists & Influencers) ---
+
+// --- ✨ 7a. Star Power (Artists & Influencers) - Redesigned Bento Grid ---
 const StarPower = () => {
     const artists = [
-        { name: 'SHREYA JAIN', role: 'Singer / Performer', icon: <Mic className="w-8 h-8 text-yellow-400" /> },
-        { name: 'DJ SUITUP', role: 'Electronic Artist', icon: <Headphones className="w-8 h-8 text-cyan-400" /> },
-        { name: 'KULLU BAAZI', role: 'Standup Comedy', icon: <Drama className="w-8 h-8 text-purple-400" /> },
-        { name: 'DJ NAAIRO', role: 'Music Producer', icon: <Music className="w-8 h-8 text-pink-400" /> }
+        { name: 'SHREYA JAIN', role: 'Singer / Performer', image: '/images/artists/shreya_jain.jpg', color: '#fbbf24', gridArea: 'artist1' },
+        { name: 'DJ SUITUP', role: 'Electronic Artist', image: '/images/artists/dj_suitup.jpg', color: '#00fff9', gridArea: 'artist2' },
+        { name: 'KULLU BAAZI', role: 'Standup Comedy', image: '/images/artists/kullu_baazi.jpg', color: '#a855f7', gridArea: 'artist3' },
+        { name: 'DJ NAAIRO', role: 'Music Producer', image: '/images/artists/dj_naairo.jpg', color: '#ec4899', gridArea: 'artist4' }
     ];
     const influencers = [
-        { name: 'YASH GARG', role: 'Tech Influencer', icon: <Smartphone className="w-8 h-8 text-blue-400" /> },
-        { name: 'DRISHTI SHARMA', role: 'Content Creator', icon: <Sparkles className="w-8 h-8 text-yellow-200" /> },
-        { name: 'BHARAT CHANDAK', role: 'Keynote Speaker', icon: <Mic2 className="w-8 h-8 text-orange-400" /> },
-        { name: 'ARSH GOYAL', role: 'Career Mentor', icon: <Rocket className="w-8 h-8 text-red-400" /> },
-        { name: 'AKASH MAJUMDER', role: 'Finance Catalyst', icon: <TrendingUp className="w-8 h-8 text-green-400" /> }
+        { name: 'DRISHTI SHARMA', role: 'Content Creator', image: '/images/influencers/drishti_sharma.jpg', color: '#fbbf24', gridArea: 'inf1' },
+        { name: 'YASH GARG', role: 'Tech Influencer', image: '/images/influencers/yash_garg.jpg', color: '#3b82f6', gridArea: 'inf2' },
+        { name: 'ARSH GOYAL', role: 'Career Mentor', image: '/images/influencers/arsh_goyal.jpg', color: '#ef4444', gridArea: 'inf3' },
+        { name: 'BHARAT CHANDAK', role: 'Keynote Speaker', image: '/images/influencers/bharat_chandak.jpg', color: '#f97316', gridArea: 'inf4' },
+        { name: 'AKASH MAJUMDER', role: 'Finance Catalyst', image: '/images/influencers/akash_majumder.jpg', color: '#22c55e', gridArea: 'inf5' }
     ];
 
+    const PersonCard = ({ person, index, type }) => (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.1 }}
+            whileHover={{ y: -10, scale: 1.02 }}
+            className="group relative h-full"
+            style={{ gridArea: person.gridArea }}
+        >
+            <div className="relative overflow-hidden rounded-3xl bg-black/60 border border-white/10 backdrop-blur-sm hover:border-white/20 transition-all duration-500 h-full">
+                {/* Image Container */}
+                <div className="relative overflow-hidden h-full">
+                    <div
+                        className="absolute inset-0 z-10"
+                        style={{
+                            background: `linear-gradient(135deg, ${person.color}15, transparent 60%, ${person.color}08)`
+                        }}
+                    />
+                    <img
+                        src={person.image}
+                        alt={person.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.nextSibling.style.display = 'flex';
+                        }}
+                    />
+                    {/* Fallback gradient when image fails */}
+                    <div
+                        className="hidden absolute inset-0 items-center justify-center"
+                        style={{
+                            background: `linear-gradient(135deg, ${person.color}40, ${person.color}10)`
+                        }}
+                    >
+                        {type === 'artist' ?
+                            <Music className="w-20 h-20 text-white/20" /> :
+                            <Sparkles className="w-20 h-20 text-white/20" />
+                        }
+                    </div>
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 z-10" />
+
+                    {/* Holographic Scan Line */}
+                    <motion.div
+                        className="absolute inset-x-0 h-[3px] bg-gradient-to-r from-transparent via-white/60 to-transparent z-20"
+                        animate={{ top: ['0%', '100%'] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: index * 0.5 }}
+                        style={{ opacity: 0.4 }}
+                    />
+
+                    {/* Corner Accents */}
+                    <div
+                        className="absolute top-0 left-0 w-16 h-16 border-t-2 border-l-2 rounded-tl-3xl z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{ borderColor: person.color }}
+                    />
+                    <div
+                        className="absolute bottom-0 right-0 w-16 h-16 border-b-2 border-r-2 rounded-br-3xl z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                        style={{ borderColor: person.color }}
+                    />
+                </div>
+
+                {/* Content Overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-30">
+                    {/* ID Badge */}
+                    <div className="flex items-center gap-2 mb-3">
+                        <div
+                            className="w-2.5 h-2.5 rounded-full animate-pulse"
+                            style={{
+                                background: person.color,
+                                boxShadow: `0 0 15px ${person.color}`
+                            }}
+                        />
+                        <span className="text-[9px] font-mono text-white/50 uppercase tracking-[0.2em]">
+                            {type === 'artist' ? 'ARTIST' : 'SPEAKER'}_ID // 0{index + 1}
+                        </span>
+                    </div>
+
+                    {/* Name */}
+                    <h3
+                        className="font-bold pixel-font mb-2 tracking-tight leading-none text-xl sm:text-2xl lg:text-3xl"
+                        style={{
+                            color: person.color,
+                            textShadow: `0 0 20px ${person.color}60`
+                        }}
+                    >
+                        {person.name}
+                    </h3>
+
+                    {/* Role */}
+                    <p className="text-[11px] font-mono text-white/40 uppercase tracking-wider mb-4">
+                        {person.role}
+                    </p>
+
+                    {/* Status Bar */}
+                    <div className="flex items-center gap-2 pt-3 border-t border-white/10">
+                        <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
+                            <motion.div
+                                className="h-full rounded-full"
+                                style={{ background: person.color }}
+                                initial={{ width: 0 }}
+                                whileInView={{ width: '100%' }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 1.5, delay: index * 0.2 }}
+                            />
+                        </div>
+                        <span
+                            className="text-[8px] font-mono uppercase tracking-wider"
+                            style={{ color: person.color }}
+                        >
+                            VERIFIED
+                        </span>
+                    </div>
+                </div>
+
+                {/* Hover Glow Effect */}
+                <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl z-20"
+                    style={{
+                        boxShadow: `inset 0 0 80px ${person.color}15, 0 0 40px ${person.color}20`
+                    }}
+                />
+            </div>
+        </motion.div>
+    );
+
     return (
-        <Section>
-            <div className="text-center mb-16">
-                <PixelLabel color="#fbbf24">STAR_POWER_ARCHIVE</PixelLabel>
-                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white mb-4">Past Lineup</h2>
-                <p className="font-mono text-white/30 uppercase tracking-[0.2em]">Artists & Influencers who ignited the stage.</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
-                {/* Artists */}
-                <div>
-                    <h4 className="text-lg sm:text-xl font-bold pixel-font text-white/60 mb-8 flex items-center gap-4">
-                        <div className="w-8 h-[2px] bg-yellow-500" /> ARTISTS_ARCHIVE
-                    </h4>
-                    <div className="grid grid-cols-2 gap-4">
-                        {artists.map((a, i) => (
-                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-black/40">
-                                <div className="text-2xl mb-3">{a.icon}</div>
-                                <div className="text-xs font-bold pixel-font text-white mb-1">{a.name}</div>
-                                <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">{a.role}</div>
-                            </BentoBlock>
-                        ))}
+        <>
+            {/* Artists Section - Asymmetric Bento Grid */}
+            <Section className="pb-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-16"
+                >
+                    <div className="flex items-center gap-4 mb-8">
+                        <motion.div
+                            className="h-[2px] w-12 bg-gradient-to-r from-transparent to-yellow-500"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: 48 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        />
+                        <PixelLabel color="#fbbf24">ARTISTS_ARCHIVE</PixelLabel>
+                        <motion.div
+                            className="h-[2px] flex-1 bg-gradient-to-r from-yellow-500 to-transparent"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '100%' }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        />
                     </div>
+                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold pixel-font text-white mb-4 leading-tight">
+                        Past Artists
+                    </h2>
+                    <p className="font-mono text-white/40 text-sm sm:text-base max-w-2xl">
+                        Legendary performers who brought energy and entertainment to TEKRON 1.0
+                    </p>
+                </motion.div>
+
+                {/* Asymmetric Bento Grid for Artists */}
+                <div
+                    className="grid gap-6"
+                    style={{
+                        gridTemplateColumns: 'repeat(6, 1fr)',
+                        gridTemplateRows: 'repeat(4, 200px)',
+                        gridTemplateAreas: `
+                            "artist1 artist1 artist1 artist2 artist2 artist2"
+                            "artist1 artist1 artist1 artist2 artist2 artist2"
+                            "artist3 artist3 artist3 artist4 artist4 artist4"
+                            "artist3 artist3 artist3 artist4 artist4 artist4"
+                        `
+                    }}
+                >
+                    {artists.map((artist, i) => (
+                        <PersonCard key={i} person={artist} index={i} type="artist" />
+                    ))}
                 </div>
 
-                {/* Influencers */}
-                <div>
-                    <h4 className="text-lg sm:text-xl font-bold pixel-font text-white/60 mb-8 flex items-center gap-4">
-                        <div className="w-8 h-[2px] bg-purple-500" /> INFLUENCER_NODE
-                    </h4>
-                    <div className="grid grid-cols-2 gap-4">
-                        {influencers.map((inf, i) => (
-                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-black/40">
-                                <div className="text-2xl mb-3">{inf.icon}</div>
-                                <div className="text-xs font-bold pixel-font text-white mb-1">{inf.name}</div>
-                                <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">{inf.role}</div>
-                            </BentoBlock>
-                        ))}
+                {/* Mobile/Tablet Responsive Grid */}
+                <style jsx>{`
+                    @media (max-width: 1024px) {
+                        .grid[style*="gridTemplateAreas"] {
+                            grid-template-columns: repeat(4, 1fr) !important;
+                            grid-template-rows: repeat(4, 180px) !important;
+                            grid-template-areas: 
+                                "artist1 artist1 artist2 artist2"
+                                "artist1 artist1 artist2 artist2"
+                                "artist3 artist3 artist4 artist4"
+                                "artist3 artist3 artist4 artist4" !important;
+                        }
+                    }
+                    @media (max-width: 640px) {
+                        .grid[style*="gridTemplateAreas"] {
+                            grid-template-columns: 1fr !important;
+                            grid-template-rows: repeat(4, 280px) !important;
+                            grid-template-areas: 
+                                "artist1"
+                                "artist2"
+                                "artist3"
+                                "artist4" !important;
+                        }
+                    }
+                `}</style>
+            </Section>
+
+            {/* Influencers Section - Asymmetric Bento Grid */}
+            <Section className="pt-8">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-16"
+                >
+                    <div className="flex items-center gap-4 mb-8">
+                        <motion.div
+                            className="h-[2px] w-12 bg-gradient-to-r from-transparent to-purple-500"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: 48 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        />
+                        <PixelLabel color="#a855f7">INFLUENCER_NODE</PixelLabel>
+                        <motion.div
+                            className="h-[2px] flex-1 bg-gradient-to-r from-purple-500 to-transparent"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: '100%' }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        />
                     </div>
+                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold pixel-font text-white mb-4 leading-tight">
+                        Past Influencers
+                    </h2>
+                    <p className="font-mono text-white/40 text-sm sm:text-base max-w-2xl">
+                        Industry leaders and thought pioneers who shared their insights at TEKRON 1.0
+                    </p>
+                </motion.div>
+
+                {/* Asymmetric Bento Grid for Influencers */}
+                <div
+                    className="grid gap-6"
+                    style={{
+                        gridTemplateColumns: 'repeat(10, 1fr)',
+                        gridTemplateRows: 'repeat(4, 200px)',
+                        gridTemplateAreas: `
+                            "inf1 inf1 inf1 inf1 inf2 inf2 inf2 inf3 inf3 inf3"
+                            "inf1 inf1 inf1 inf1 inf2 inf2 inf2 inf3 inf3 inf3"
+                            "inf4 inf4 inf4 inf4 inf4 inf5 inf5 inf5 inf5 inf5"
+                            "inf4 inf4 inf4 inf4 inf4 inf5 inf5 inf5 inf5 inf5"
+                        `
+                    }}
+                >
+                    {influencers.map((influencer, i) => (
+                        <PersonCard key={i} person={influencer} index={i} type="influencer" />
+                    ))}
                 </div>
-            </div>
-        </Section>
+
+                {/* Mobile/Tablet Responsive Grid for Influencers */}
+                <style jsx>{`
+                    @media (max-width: 1024px) {
+                        .grid[style*="inf1"] {
+                            grid-template-columns: repeat(6, 1fr) !important;
+                            grid-template-rows: repeat(5, 180px) !important;
+                            grid-template-areas: 
+                                "inf1 inf1 inf1 inf2 inf2 inf2"
+                                "inf1 inf1 inf1 inf3 inf3 inf3"
+                                "inf4 inf4 inf4 inf5 inf5 inf5"
+                                "inf4 inf4 inf4 inf5 inf5 inf5"
+                                ". . . . . ." !important;
+                        }
+                    }
+                    @media (max-width: 640px) {
+                        .grid[style*="inf1"] {
+                            grid-template-columns: 1fr !important;
+                            grid-template-rows: repeat(5, 280px) !important;
+                            grid-template-areas: 
+                                "inf1"
+                                "inf2"
+                                "inf3"
+                                "inf4"
+                                "inf5" !important;
+                        }
+                    }
+                `}</style>
+            </Section>
+        </>
     );
 };
 
@@ -934,7 +1310,7 @@ const ContactBrochure = () => {
         image: '/images/committee/harshit_jain.jpg'
     };
     return (
-        <Section className="mb-0">
+        <Section id="uplink" className="mb-0">
             <div className="text-center mb-24">
                 <h2 className="text-5xl sm:text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">CONNECT.</h2>
                 <div className="flex flex-col md:flex-row justify-center gap-6 mt-12 px-6">
@@ -989,7 +1365,7 @@ const Sponsors = () => {
                 <Benefits />
                 <TierSection />
                 <VisibilityMatrix />
-                <EventWiseSponsorship />
+
                 <StarPower />
                 <HeritagePartners />
                 <ReachStats />
