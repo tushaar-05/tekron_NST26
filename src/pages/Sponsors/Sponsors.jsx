@@ -1057,38 +1057,259 @@ const TierSection = () => {
 // --- 📢 5. Branding Visibility Matrix (Redesigned) ---
 const VisibilityMatrix = () => {
     const protocols = [
-        { label: 'PLATFORM_NODES', items: ['Main Stage Backdrop', 'Entry Archways', 'Directional Hoardings', 'Booth/Stall Space'], color: '#ec4899' },
-        { label: 'EQUIPMENT_LOADOUT', items: ['Attendee ID Cards', 'Event Lanyards', 'Custom T-Shirts', 'Swag/Goodie Bags'], color: '#a855f7' },
-        { label: 'DIGITAL_OVERLAY', items: ['Web Portal Banner', 'Sponsored Reels', 'Social Post Blasts', 'AV Shoutouts'], color: '#00fff9' }
+        {
+            label: 'PHYSICAL_PRESENCE',
+            items: ['Main Stage Backdrop', 'Entry Archways', 'Directional Hoardings', 'Booth/Stall Space'],
+            color: '#ec4899',
+            icon: <Monitor className="w-6 h-6" />,
+            description: 'On-ground visibility across all venue touchpoints'
+        },
+        {
+            label: 'BRANDED_ASSETS',
+            items: ['Attendee ID Cards', 'Event Lanyards', 'Custom T-Shirts', 'Swag/Goodie Bags'],
+            color: '#a855f7',
+            icon: <Sparkles className="w-6 h-6" />,
+            description: 'Direct brand integration with participant materials'
+        },
+        {
+            label: 'DIGITAL_ECOSYSTEM',
+            items: ['Web Portal Banner', 'Sponsored Reels', 'Social Post Blasts', 'AV Shoutouts'],
+            color: '#00fff9',
+            icon: <Globe className="w-6 h-6" />,
+            description: 'Multi-channel digital amplification strategy'
+        }
     ];
+
     return (
-        <Section>
-            <div className="text-center mb-16">
-                <PixelLabel color="#ff00c1">VISIBILITY MATRIX</PixelLabel>
-                <h2 className="text-3xl sm:text-5xl font-bold pixel-font text-white">Branding Protocols</h2>
+        <Section className="relative overflow-hidden">
+            {/* Subtle Background Grid */}
+            <div className="absolute inset-0 opacity-[0.02] pointer-events-none">
+                <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                        linear-gradient(90deg, rgba(168, 85, 247, 0.3) 1px, transparent 1px),
+                        linear-gradient(0deg, rgba(168, 85, 247, 0.3) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '80px 80px'
+                }} />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {protocols.map((p, i) => (
-                    <BentoBlock
+
+            {/* Header Section */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative z-10 mb-20"
+            >
+                <div className="flex flex-col items-center text-center">
+                    {/* Top Accent Line */}
+                    <div className="flex items-center gap-4 mb-6">
+                        <motion.div
+                            className="h-[2px] w-16 bg-gradient-to-r from-transparent via-pink-500 to-pink-500"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: 64 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        />
+                        <PixelLabel color="#ff00c1">VISIBILITY MATRIX</PixelLabel>
+                        <motion.div
+                            className="h-[2px] w-16 bg-gradient-to-l from-transparent via-pink-500 to-pink-500"
+                            initial={{ width: 0 }}
+                            whileInView={{ width: 64 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                        />
+                    </div>
+
+                    {/* Main Title */}
+                    <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold pixel-font text-white mb-6 leading-none">
+                        Branding Protocols
+                    </h2>
+
+                    {/* Subtitle */}
+                    <p className="font-mono text-white/40 text-sm max-w-2xl leading-relaxed">
+                        Strategic touchpoints designed to maximize brand exposure across physical, material, and digital channels.
+                    </p>
+
+                    {/* Status Indicator */}
+                    <div className="flex items-center gap-3 mt-6">
+                        <div className="w-2 h-2 rounded-full bg-pink-500 animate-pulse" style={{
+                            boxShadow: '0 0 15px #ec4899'
+                        }} />
+                        <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em]">
+                            INTEGRATION_CHANNELS_ACTIVE
+                        </span>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Protocol Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 relative z-10">
+                {protocols.map((protocol, i) => (
+                    <motion.div
                         key={i}
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        className="p-6 md:p-10 border-white/5 bg-black/40 hover:bg-black/60"
+                        transition={{
+                            delay: i * 0.15,
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 20
+                        }}
+                        whileHover={{ y: -8, scale: 1.02 }}
+                        className="group relative"
                     >
-                        <div className="w-12 h-1 mb-8" style={{ background: p.color }} />
-                        <PixelLabel color={p.color}>{p.label}</PixelLabel>
-                        <ul className="space-y-4 font-mono text-white/50">
-                            {p.items.map((item, ii) => (
-                                <li key={ii} className="flex gap-4 text-sm group-hover:text-white/80 transition-colors">
-                                    <ChevronRight size={14} color={p.color} /> {item}
-                                </li>
-                            ))}
-                        </ul>
-                    </BentoBlock>
+                        {/* Main Card */}
+                        <div className="relative h-full bg-black/40 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-white/20"
+                            style={{
+                                boxShadow: `0 0 0 1px ${protocol.color}10, 0 20px 60px -10px rgba(0,0,0,0.5)`
+                            }}
+                        >
+                            {/* Gradient Overlay on Hover */}
+                            <div
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                style={{
+                                    background: `linear-gradient(135deg, ${protocol.color}15, transparent 60%)`
+                                }}
+                            />
+
+                            {/* Scanning Line Effect */}
+                            <motion.div
+                                className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100"
+                                animate={{
+                                    top: ['0%', '100%']
+                                }}
+                                transition={{
+                                    duration: 2.5,
+                                    repeat: Infinity,
+                                    ease: "linear"
+                                }}
+                            />
+
+                            {/* Content */}
+                            <div className="relative z-10 p-8 lg:p-10 h-full flex flex-col">
+                                {/* Icon and Color Bar */}
+                                <div className="flex items-start justify-between mb-6">
+                                    {/* Icon Container */}
+                                    <motion.div
+                                        className="relative p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-500"
+                                        style={{
+                                            boxShadow: `0 0 0 1px ${protocol.color}20`
+                                        }}
+                                        whileHover={{ scale: 1.1, rotate: 5 }}
+                                    >
+                                        <div style={{ color: protocol.color }}>
+                                            {protocol.icon}
+                                        </div>
+                                        {/* Icon Glow */}
+                                        <div
+                                            className="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+                                            style={{ background: protocol.color }}
+                                        />
+                                    </motion.div>
+
+                                    {/* Vertical Color Bar */}
+                                    <div className="w-1 h-16 rounded-full" style={{ background: protocol.color }} />
+                                </div>
+
+                                {/* Label */}
+                                <div className="mb-4">
+                                    <PixelLabel color={protocol.color}>{protocol.label}</PixelLabel>
+                                </div>
+
+                                {/* Description */}
+                                <p className="text-xs font-mono text-white/40 mb-6 leading-relaxed group-hover:text-white/60 transition-colors duration-500">
+                                    {protocol.description}
+                                </p>
+
+                                {/* Items List */}
+                                <ul className="space-y-3 font-mono text-sm flex-grow">
+                                    {protocol.items.map((item, ii) => (
+                                        <motion.li
+                                            key={ii}
+                                            className="flex items-start gap-3 text-white/50 group-hover:text-white/70 transition-colors duration-300"
+                                            initial={{ opacity: 0, x: -10 }}
+                                            whileInView={{ opacity: 1, x: 0 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.15 + ii * 0.05 }}
+                                        >
+                                            <ChevronRight
+                                                size={16}
+                                                color={protocol.color}
+                                                className="mt-0.5 flex-shrink-0"
+                                            />
+                                            <span className="leading-relaxed">{item}</span>
+                                        </motion.li>
+                                    ))}
+                                </ul>
+
+                                {/* Bottom Accent */}
+                                <div className="mt-8 pt-6 border-t border-white/5">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-[8px] font-mono text-white/20 uppercase tracking-[0.3em]">
+                                            CHANNEL_{String(i + 1).padStart(2, '0')}
+                                        </span>
+                                        <div className="flex gap-1">
+                                            {[...Array(4)].map((_, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    className="w-1 h-2 rounded-full"
+                                                    style={{
+                                                        background: protocol.color,
+                                                        opacity: 0.3 + (idx * 0.2)
+                                                    }}
+                                                    initial={{ scaleY: 0 }}
+                                                    whileInView={{ scaleY: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: i * 0.15 + idx * 0.05 }}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Corner Accents */}
+                                <div
+                                    className="absolute top-0 right-0 w-16 h-16 border-t-2 border-r-2 rounded-tr-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                                    style={{ borderColor: protocol.color }}
+                                />
+                                <div
+                                    className="absolute bottom-0 left-0 w-16 h-16 border-b-2 border-l-2 rounded-bl-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                                    style={{ borderColor: protocol.color }}
+                                />
+                            </div>
+
+                            {/* Glow Effect on Hover */}
+                            <div
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
+                                style={{
+                                    boxShadow: `inset 0 0 60px ${protocol.color}10, 0 0 40px ${protocol.color}15`
+                                }}
+                            />
+                        </div>
+
+                        {/* External Glow */}
+                        <div
+                            className="absolute inset-0 -z-10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                            style={{ background: protocol.color }}
+                        />
+                    </motion.div>
                 ))}
             </div>
+
+            {/* Bottom Decorative Line */}
+            <motion.div
+                className="mt-20 flex items-center justify-center gap-4 opacity-20"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.2 }}
+                viewport={{ once: true }}
+            >
+                <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-pink-500" />
+                <span className="text-[8px] font-mono tracking-[0.4em] uppercase text-white">
+                    VISIBILITY_PROTOCOL_V3.0
+                </span>
+                <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-pink-500" />
+            </motion.div>
         </Section>
     );
 };
@@ -1405,121 +1626,151 @@ const StarPower = () => {
 
 // --- 🤝 7b. Heritage Partners (Tekron 1.0 Archive - Redesigned) ---
 const HeritagePartners = () => {
-    const sectors = [
+    const partners = [
         {
-            id: 'SEC_01',
-            label: 'PRODUCTION',
-            partners: [
-                { name: 'Jiny Entertainments', logo: 'https://jiny.co/images/logo-white.png' }
-            ],
-            color: '#22c55e'
+            name: 'Jiny Entertainments',
+            logo: '/images/brands/jiny_entertainments.png',
+            category: 'PRODUCTION',
+            color: '#22c55e',
+            id: 'PRD_01'
         },
         {
-            id: 'SEC_02',
-            label: 'HACKATHON',
-            partners: [
-                { name: 'Blinkit', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Blinkit_logo.svg' }
-            ],
-            color: '#eab308'
+            name: 'Blinkit',
+            logo: '/images/brands/blinkit.png',
+            category: 'HACKATHON',
+            color: '#eab308',
+            id: 'HCK_01'
         },
         {
-            id: 'SEC_03',
-            label: 'OUTREACH',
-            partners: [
-                { name: 'AIESEC', logo: 'https://aiesec.org/assets/images/AIESEC-logo-white.svg' },
-                { name: 'unstop', logo: 'https://d8it4huxumps7.cloudfront.net/uploads/images/unstop/unstop-logo.svg' }
-            ],
-            color: '#3b82f6'
+            name: 'AIESEC',
+            logo: '/images/brands/aiesec.png',
+            category: 'OUTREACH',
+            color: '#3b82f6',
+            id: 'OUT_01'
         },
         {
-            id: 'SEC_04',
-            label: 'VENUE',
-            partners: [
-                { name: 'Club Charholi', logo: 'https://clubcharholi.com/images/logo-white.png' }
-            ],
-            color: '#a855f7'
+            name: 'unstop',
+            logo: '/images/brands/unstop.png',
+            category: 'OUTREACH',
+            color: '#3b82f6',
+            id: 'OUT_02'
         },
         {
-            id: 'SEC_05',
-            label: 'CATERING',
-            partners: [
-                { name: 'HITCHKI', logo: 'https://hitchki.co/images/logo.png' },
-                { name: 'Pizza Hut', logo: 'https://upload.wikimedia.org/wikipedia/sco/thumb/d/d2/Pizza_Hut_logo.svg/2193px-Pizza_Hut_logo.svg.png' }
-            ],
-            color: '#ef4444'
+            name: 'Club Charholi',
+            logo: '/images/brands/club_charholi.png',
+            category: 'VENUE',
+            color: '#a855f7',
+            id: 'VEN_01'
+        },
+        {
+            name: 'HITCHKI',
+            logo: '/images/brands/hitchki.png',
+            category: 'CATERING',
+            color: '#ef4444',
+            id: 'CAT_01'
+        },
+        {
+            name: 'Pizza Hut',
+            logo: '/images/brands/pizza_hut.png',
+            category: 'CATERING',
+            color: '#ef4444',
+            id: 'CAT_02'
         }
     ];
 
     return (
-        <Section>
-            <div className="text-center mb-16">
+        <Section className="relative z-10">
+            <div className="text-center mb-20">
                 <PixelLabel color="#00fff9">HERITAGE_PARTNERS</PixelLabel>
-                <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold pixel-font text-white mb-4 tracking-tighter">Tekron 1.0 Protocol</h2>
-                <div className="flex items-center justify-center gap-4 opacity-20">
-                    <div className="w-12 h-[1px] bg-white" />
-                    <span className="text-[8px] sm:text-[10px] font-mono tracking-widest uppercase">Global Archive Access</span>
-                    <div className="w-12 h-[1px] bg-white" />
+                <h2 className="text-4xl sm:text-6xl md:text-8xl font-bold pixel-font text-white mb-6 tracking-tighter">
+                    Tekron 1.0 <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-cyan-400 to-blue-400">Protocol</span>
+                </h2>
+                <div className="flex items-center justify-center gap-4 opacity-40">
+                    <div className="w-16 h-[1px] bg-gradient-to-r from-transparent to-white" />
+                    <span className="text-[10px] font-mono tracking-[0.3em] uppercase">Archive_Access_Granted</span>
+                    <div className="w-16 h-[1px] bg-gradient-to-l from-transparent to-white" />
                 </div>
             </div>
 
-            <ValueHub className="overflow-hidden border-white/5 bg-black/40 p-0">
-                <div className="grid grid-cols-1 lg:grid-cols-5 divide-y lg:divide-y-0 lg:divide-x divide-white/5">
-                    {sectors.map((sector, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0 }}
-                            whileInView={{ opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.1 }}
-                            className="p-6 md:p-10 flex flex-col items-center group relative hover:bg-white/[0.02] transition-all"
-                        >
-                            {/* Sector Header */}
-                            <div className="w-full flex justify-between items-center mb-8 md:mb-12">
-                                <span className="text-[8px] font-mono opacity-20 group-hover:opacity-100 transition-opacity" style={{ color: sector.color }}>{sector.id}</span>
-                                <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: sector.color, boxShadow: `0 0 10px ${sector.color}` }} />
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 max-w-7xl mx-auto px-4">
+                {partners.map((partner, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                        whileHover={{ y: -5 }}
+                        className="group relative h-48 sm:h-56 cursor-pointer"
+                    >
+                        {/* Card Body */}
+                        <div className="absolute inset-0 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden flex flex-col items-center justify-center p-6 transition-all duration-500 group-hover:bg-white/[0.08] group-hover:border-white/20"
+                            style={{ boxShadow: `0 0 0 0 transparent` }}>
+
+                            {/* Category Label */}
+                            <div className="absolute top-4 right-4 z-20">
+                                <div className="text-[7px] font-mono font-bold px-2 py-1 rounded bg-black/40 border border-white/10 text-white/40 group-hover:text-white/90 transition-all uppercase tracking-wider"
+                                    style={{ borderColor: 'rgba(255,255,255,0.1)' }}>
+                                    {partner.category}
+                                </div>
                             </div>
 
-                            <div className="text-[10px] font-mono text-white/30 mb-8 uppercase tracking-[0.3em] text-center font-bold">
-                                {sector.label}
+                            {/* Logo */}
+                            <div className="w-32 h-32 relative flex items-center justify-center z-10">
+                                <img
+                                    src={partner.logo}
+                                    alt={partner.name}
+                                    className="max-w-full max-h-full object-contain opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
+                                    onError={(e) => {
+                                        e.target.style.display = 'none';
+                                        e.target.nextSibling.style.display = 'flex';
+                                    }}
+                                />
+                                <div className="hidden w-full h-full items-center justify-center text-center">
+                                    <span className="text-sm font-bold pixel-font text-white/50">{partner.name}</span>
+                                </div>
                             </div>
 
-                            <div className="flex flex-col gap-8 items-center justify-center flex-grow w-full">
-                                {sector.partners.map((p, pi) => (
-                                    <div key={pi} className="flex flex-col items-center gap-3 w-full group/logo">
-                                        <div className="h-12 w-full flex items-center justify-center px-4">
-                                            <img
-                                                src={p.logo}
-                                                alt={p.name}
-                                                className="max-h-full max-w-full object-contain grayscale opacity-60 group-hover/logo:grayscale-0 group-hover/logo:opacity-100 transition-all duration-500"
-                                                onError={(e) => {
-                                                    e.target.style.display = 'none';
-                                                    e.target.nextSibling.style.display = 'block';
-                                                }}
-                                            />
-                                            <div className="hidden text-[10px] font-bold pixel-font text-white/40 uppercase text-center">{p.name}</div>
-                                        </div>
-                                    </div>
-                                ))}
+                            {/* ID */}
+                            <div className="absolute bottom-4 left-4 font-mono text-[9px] text-white/20 group-hover:text-white/40 transition-colors z-20">
+                                {partner.id}
                             </div>
 
-                            {/* Bottom Accent */}
-                            <div className="mt-12 w-8 h-[1px] opacity-10 group-hover:opacity-100 transition-all duration-700 group-hover:w-full" style={{ background: sector.color }} />
-                        </motion.div>
-                    ))}
-                </div>
+                            {/* Hover Effects */}
+                            <div className="absolute inset-0 bg-gradient-to-br from-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0" />
 
-                {/* Footer Sync */}
-                <div className="bg-white/[0.02] p-4 border-t border-white/5 flex justify-between items-center px-6 md:px-10">
-                    <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">
-                        // ALLIED_ECOSYSTEM_STATUS: STABLE // DATALINK_ESTABLISHED
+                            {/* Color Glow on Hover */}
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-2xl"
+                                style={{ background: `radial-gradient(circle at center, ${partner.color}, transparent 70%)` }} />
+
+                            {/* Corner Accents */}
+                            <div className="absolute bottom-0 right-0 w-8 h-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="absolute bottom-0 right-0 w-full h-[2px]" style={{ backgroundColor: partner.color }} />
+                                <div className="absolute bottom-0 right-0 w-[2px] h-full" style={{ backgroundColor: partner.color }} />
+                            </div>
+                        </div>
+                    </motion.div>
+                ))}
+
+                {/* Empty Slot Filler / Join Us Card */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 }}
+                    whileHover={{ y: -5 }}
+                    className="group relative h-48 sm:h-56 cursor-pointer"
+                    onClick={() => document.getElementById('uplink')?.scrollIntoView({ behavior: 'smooth' })}
+                >
+                    <div className="absolute inset-0 bg-dashed border-2 border-white/10 rounded-2xl flex flex-col items-center justify-center p-6 hover:border-white/30 transition-all duration-300 bg-white/[0.01]">
+                        <div className="text-3xl font-thin text-white/20 mb-2 group-hover:text-white/50 group-hover:scale-110 transition-all">+</div>
+                        <div className="text-[10px] font-mono uppercase tracking-widest text-white/30 group-hover:text-white/60">
+                            Your_Brand_Here
+                        </div>
                     </div>
-                    <div className="flex gap-2">
-                        <div className="w-1.5 h-1.5 bg-green-500 rounded-full" />
-                        <div className="w-1.5 h-1.5 bg-green-500/50 rounded-full" />
-                        <div className="w-1.5 h-1.5 bg-green-500/20 rounded-full" />
-                    </div>
-                </div>
-            </ValueHub>
+                </motion.div>
+            </div>
         </Section>
     );
 };
