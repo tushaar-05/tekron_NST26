@@ -547,7 +547,7 @@ const TierSection = () => {
                                                 SYNERGY_CHECK
                                             </div>
                                             <div className="space-y-6">
-                                                <div className="flex justify-between items-center text-[10px]">
+                                                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center text-[10px] gap-1">
                                                     <span className="text-white/40 uppercase tracking-wider">Visibility</span>
                                                     <span className="font-bold tracking-widest" style={{ color: selectedTier.color }}>HIGH_PRIORITY</span>
                                                 </div>
@@ -581,7 +581,7 @@ const TierSection = () => {
                                                 setSelectedTier(null);
                                                 document.getElementById('uplink')?.scrollIntoView({ behavior: 'smooth' });
                                             }}
-                                            className="w-full py-7 bg-white text-black font-bold pixel-font text-sm hover:scale-[1.02] transition-all shadow-[10px_10px_0px_rgba(0,0,0,0.6)] active:translate-x-2 active:translate-y-2 active:shadow-none rounded-xl relative overflow-hidden group"
+                                            className="w-full py-5 sm:py-7 bg-white text-black font-bold pixel-font text-xs sm:text-sm hover:scale-[1.02] transition-all shadow-[10px_10px_0px_rgba(0,0,0,0.6)] active:translate-x-2 active:translate-y-2 active:shadow-none rounded-xl relative overflow-hidden group"
                                         >
                                             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700" />
                                             INITIATE_PARTNERSHIP
@@ -597,7 +597,7 @@ const TierSection = () => {
                             {/* Modal Close (Desktop) */}
                             <button
                                 onClick={() => setSelectedTier(null)}
-                                className="absolute top-14 right-14 text-white/20 hover:text-white transition-all hidden md:flex items-center gap-3 group"
+                                className="absolute top-6 right-6 z-50 text-white/20 hover:text-white transition-all hidden md:flex items-center gap-3 group"
                             >
                                 <span className="pixel-font text-[10px] tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">ESC</span>
                                 <div className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all">
