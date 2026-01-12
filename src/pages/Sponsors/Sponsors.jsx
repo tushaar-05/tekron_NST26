@@ -423,41 +423,330 @@ const WhySponsor = () => {
     );
 };
 
-// --- 🏆 3. Sponsorship Benefits (Redesigned) ---
+// --- 🏆 3. Sponsorship Benefits (Redesigned with Premium Aesthetics) ---
 const Benefits = () => {
     const items = [
-        { title: 'BRAND VISIBILITY', desc: 'Dominant placement on banners, stages, and the main ecosystem backdrop.', icon: <BarChart3 className="w-10 h-10 text-purple-400" /> },
-        { title: 'SOCIAL PROMOTION', desc: 'Strategic multi-channel social media blasts and partner feature stories.', icon: <Smartphone className="w-10 h-10 text-blue-400" /> },
-        { title: 'TALENT PIPELINE', desc: 'Direct recruitment access and lead generation through technical challenges.', icon: <Target className="w-10 h-10 text-pink-400" /> },
-        { title: 'DIGITAL REACH', desc: 'Logo integration across the official website, posters, and digital assets.', icon: <Globe className="w-10 h-10 text-cyan-400" /> }
+        {
+            title: 'BRAND VISIBILITY',
+            desc: 'Dominant placement on banners, stages, and the main ecosystem backdrop with guaranteed prime positioning.',
+            icon: <BarChart3 className="w-10 h-10" />,
+            color: '#a855f7',
+            metric: '95%',
+            metricLabel: 'EXPOSURE',
+            gradient: 'from-purple-500/20 via-purple-600/10 to-transparent'
+        },
+        {
+            title: 'SOCIAL PROMOTION',
+            desc: 'Strategic multi-channel social media blasts and partner feature stories across all platforms.',
+            icon: <Smartphone className="w-10 h-10" />,
+            color: '#3b82f6',
+            metric: '700K+',
+            metricLabel: 'REACH',
+            gradient: 'from-blue-500/20 via-blue-600/10 to-transparent'
+        },
+        {
+            title: 'TALENT PIPELINE',
+            desc: 'Direct recruitment access and lead generation through technical challenges and competitions.',
+            icon: <Target className="w-10 h-10" />,
+            color: '#ec4899',
+            metric: '10K+',
+            metricLabel: 'STUDENTS',
+            gradient: 'from-pink-500/20 via-pink-600/10 to-transparent'
+        },
+        {
+            title: 'DIGITAL REACH',
+            desc: 'Logo integration across the official website, posters, certificates, and all digital assets.',
+            icon: <Globe className="w-10 h-10" />,
+            color: '#00fff9',
+            metric: '1M+',
+            metricLabel: 'IMPRESSIONS',
+            gradient: 'from-cyan-500/20 via-cyan-600/10 to-transparent'
+        }
     ];
+
     return (
-        <Section>
-            <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
-                <div>
-                    <PixelLabel color="#a855f7">STRATEGIC ADVANTAGE</PixelLabel>
-                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white">Why Partner?</h2>
-                </div>
-                <div className="font-mono text-white/30 text-sm max-w-xs md:text-right">
-                    Integrating your core identity into the technical archive of tomorrow.
-                </div>
+        <Section className="relative overflow-hidden">
+            {/* Animated Background Grid */}
+            <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+                <div className="absolute inset-0" style={{
+                    backgroundImage: `
+                        linear-gradient(90deg, rgba(168, 85, 247, 0.3) 1px, transparent 1px),
+                        linear-gradient(0deg, rgba(168, 85, 247, 0.3) 1px, transparent 1px)
+                    `,
+                    backgroundSize: '60px 60px',
+                    animation: 'gridFloat 20s linear infinite'
+                }} />
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {items.map((benefit, i) => (
-                    <BentoBlock
+
+            {/* Floating Particles */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                {[...Array(8)].map((_, i) => (
+                    <motion.div
                         key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        className="p-6 md:p-10 border-white/5"
-                    >
-                        <div className="text-4xl mb-8 opacity-80 group-hover:scale-110 transition-transform">{benefit.icon}</div>
-                        <h4 className="text-lg font-bold pixel-font text-white mb-4 tracking-tighter">{benefit.title}</h4>
-                        <p className="text-sm text-white/40 font-mono leading-relaxed">{benefit.desc}</p>
-                    </BentoBlock>
+                        className="absolute w-1 h-1 rounded-full"
+                        style={{
+                            background: items[i % 4].color,
+                            left: `${(i * 12) + 10}%`,
+                            top: `${(i * 15) % 80}%`,
+                            boxShadow: `0 0 10px ${items[i % 4].color}`
+                        }}
+                        animate={{
+                            y: [0, -100, 0],
+                            opacity: [0, 1, 0]
+                        }}
+                        transition={{
+                            duration: 4 + i,
+                            repeat: Infinity,
+                            delay: i * 0.5,
+                            ease: "easeInOut"
+                        }}
+                    />
                 ))}
             </div>
+
+            {/* Header Section */}
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative z-10 mb-20"
+            >
+                <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
+                    <div className="flex-1">
+                        <div className="flex items-center gap-4 mb-6">
+                            <motion.div
+                                className="w-16 h-[2px] bg-gradient-to-r from-purple-500 to-transparent"
+                                initial={{ width: 0 }}
+                                whileInView={{ width: 64 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.8 }}
+                            />
+                            <PixelLabel color="#a855f7">STRATEGIC_ADVANTAGE</PixelLabel>
+                        </div>
+                        <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold pixel-font text-white mb-6 leading-none tracking-tighter">
+                            Why Partner?
+                        </h2>
+                        <div className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" style={{
+                                boxShadow: '0 0 15px #a855f7'
+                            }} />
+                            <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em]">
+                                INTEGRATION_PROTOCOL_ACTIVE
+                            </span>
+                        </div>
+                    </div>
+                    <div className="lg:max-w-md">
+                        <p className="font-mono text-white/40 text-sm leading-relaxed">
+                            Integrating your core identity into the technical archive of tomorrow.
+                            <span className="block mt-2 text-white/60">
+                                Join the ecosystem that connects <span className="text-purple-400 font-bold">10,000+ students</span> with industry leaders.
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </motion.div>
+
+            {/* Benefits Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 relative z-10">
+                {items.map((benefit, i) => (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 40, rotateX: 10 }}
+                        whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+                        viewport={{ once: true }}
+                        transition={{
+                            delay: i * 0.15,
+                            type: "spring",
+                            stiffness: 100,
+                            damping: 20
+                        }}
+                        whileHover={{
+                            y: -8,
+                            scale: 1.02,
+                            rotateY: 2,
+                            rotateX: -2
+                        }}
+                        className="group relative"
+                        style={{ perspective: '1000px' }}
+                    >
+                        {/* Main Card Container */}
+                        <div className="relative h-full bg-black/40 backdrop-blur-xl rounded-3xl border border-white/10 overflow-hidden transition-all duration-500 group-hover:border-white/20"
+                            style={{
+                                boxShadow: `0 0 0 1px ${benefit.color}10, 0 20px 60px -10px rgba(0,0,0,0.5)`,
+                                transformStyle: 'preserve-3d'
+                            }}
+                        >
+                            {/* Animated Gradient Overlay */}
+                            <div className={`absolute inset-0 bg-gradient-to-br ${benefit.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                            {/* Holographic Border Animation */}
+                            <motion.div
+                                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                                style={{
+                                    background: `linear-gradient(135deg, ${benefit.color}30, transparent 40%, ${benefit.color}20)`,
+                                }}
+                                animate={{
+                                    backgroundPosition: ['0% 0%', '100% 100%'],
+                                }}
+                                transition={{
+                                    duration: 3,
+                                    repeat: Infinity,
+                                    repeatType: 'reverse'
+                                }}
+                            />
+
+                            {/* Scanning Line Effect */}
+                            <motion.div
+                                className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-0 group-hover:opacity-100"
+                                animate={{
+                                    top: ['0%', '100%']
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "linear"
+                                }}
+                            />
+
+                            {/* Content */}
+                            <div className="relative z-10 p-8 lg:p-10 h-full flex flex-col">
+                                {/* Header with Icon and Metric */}
+                                <div className="flex items-start justify-between mb-8">
+                                    {/* Icon Container */}
+                                    <div className="relative">
+                                        <motion.div
+                                            className="relative z-10 p-4 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-500"
+                                            style={{
+                                                boxShadow: `0 0 0 1px ${benefit.color}20`
+                                            }}
+                                            whileHover={{ scale: 1.1, rotate: 5 }}
+                                        >
+                                            <div style={{ color: benefit.color }}>
+                                                {benefit.icon}
+                                            </div>
+                                        </motion.div>
+                                        {/* Icon Glow */}
+                                        <div
+                                            className="absolute inset-0 rounded-2xl blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-500"
+                                            style={{ background: benefit.color }}
+                                        />
+                                    </div>
+
+                                    {/* Metric Display */}
+                                    <div className="text-right">
+                                        <div
+                                            className="text-2xl lg:text-3xl font-bold pixel-font mb-1 transition-all duration-500"
+                                            style={{
+                                                color: benefit.color,
+                                                textShadow: `0 0 20px ${benefit.color}40`
+                                            }}
+                                        >
+                                            {benefit.metric}
+                                        </div>
+                                        <div className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">
+                                            {benefit.metricLabel}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Title */}
+                                <h4 className="text-xl lg:text-2xl font-bold pixel-font text-white mb-4 tracking-tight leading-none group-hover:translate-x-1 transition-transform duration-500">
+                                    {benefit.title}
+                                </h4>
+
+                                {/* Description */}
+                                <p className="text-sm lg:text-base text-white/50 font-mono leading-relaxed mb-8 group-hover:text-white/70 transition-colors duration-500 flex-grow">
+                                    {benefit.desc}
+                                </p>
+
+                                {/* Bottom Bar with Progress */}
+                                <div className="space-y-3">
+                                    <div className="flex items-center justify-between">
+                                        <span className="text-[8px] font-mono text-white/20 uppercase tracking-[0.3em]">
+                                            IMPACT_LEVEL
+                                        </span>
+                                        <div className="flex gap-1">
+                                            {[...Array(5)].map((_, idx) => (
+                                                <motion.div
+                                                    key={idx}
+                                                    className="w-1 h-3 rounded-full"
+                                                    style={{
+                                                        background: idx < 4 ? benefit.color : 'rgba(255,255,255,0.1)'
+                                                    }}
+                                                    initial={{ scaleY: 0 }}
+                                                    whileInView={{ scaleY: 1 }}
+                                                    viewport={{ once: true }}
+                                                    transition={{ delay: i * 0.15 + idx * 0.1 }}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    {/* Progress Bar */}
+                                    <div className="w-full h-1 bg-white/5 rounded-full overflow-hidden">
+                                        <motion.div
+                                            className="h-full rounded-full"
+                                            style={{
+                                                background: `linear-gradient(90deg, ${benefit.color}, ${benefit.color}80)`,
+                                                boxShadow: `0 0 10px ${benefit.color}60`
+                                            }}
+                                            initial={{ width: 0 }}
+                                            whileInView={{ width: '85%' }}
+                                            viewport={{ once: true }}
+                                            transition={{ duration: 1.5, delay: i * 0.2, ease: "easeOut" }}
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Corner Accents */}
+                                <div
+                                    className="absolute top-0 right-0 w-20 h-20 border-t-2 border-r-2 rounded-tr-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                                    style={{ borderColor: benefit.color }}
+                                />
+                                <div
+                                    className="absolute bottom-0 left-0 w-20 h-20 border-b-2 border-l-2 rounded-bl-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                                    style={{ borderColor: benefit.color }}
+                                />
+                            </div>
+
+                            {/* Glow Effect on Hover */}
+                            <div
+                                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
+                                style={{
+                                    boxShadow: `inset 0 0 60px ${benefit.color}10, 0 0 40px ${benefit.color}15`
+                                }}
+                            />
+                        </div>
+
+                        {/* External Glow */}
+                        <div
+                            className="absolute inset-0 -z-10 rounded-3xl blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+                            style={{ background: benefit.color }}
+                        />
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Bottom Decorative Line */}
+            <motion.div
+                className="mt-20 flex items-center justify-center gap-4 opacity-20"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.2 }}
+                viewport={{ once: true }}
+            >
+                <div className="w-12 h-[1px] bg-gradient-to-r from-transparent to-purple-500" />
+                <span className="text-[8px] font-mono tracking-[0.4em] uppercase text-white">
+                    PARTNERSHIP_MATRIX_V2.6
+                </span>
+                <div className="w-12 h-[1px] bg-gradient-to-l from-transparent to-purple-500" />
+            </motion.div>
+
+            <style jsx>{`
+                @keyframes gridFloat {
+                    0% { transform: translateY(0); }
+                    100% { transform: translateY(60px); }
+                }
+            `}</style>
         </Section>
     );
 };
