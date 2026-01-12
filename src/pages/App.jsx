@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import WorldMap from '../components/map/WorldMap';
 import WorldLoading from '../components/map/WorldLoading';
+import { sample } from 'three/tsl';
 
 function App() {
     const [showMap, setShowMap] = useState(false);
@@ -603,7 +604,7 @@ function App() {
                                     <div
                                         className="pixel-art transition-opacity duration-700"
                                         style={{
-                                            width: 'clamp(300px, 50vw, 800px)',
+                                            width: window.innerWidth < 640 ? 'clamp(300px, 50vw, 400px)' : 'clamp(400px, 33vw, 800px)',
                                             position: 'relative',
                                             opacity: loadedAssets['/images/characters/main_Chr.png'] ? 1 : 0,
                                         }}
