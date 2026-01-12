@@ -498,8 +498,8 @@ function App() {
 
 
                             {isDialogueOpen && (
-                                <div className="absolute bottom-[280px] right-[10px] w-auto sm:left-auto sm:right-[10px] sm:bottom-[500px] z-50">
-                                    <div className="dialogue-bubble px-3 py-2 sm:px-8 sm:py-6 relative">
+                                <div className="absolute bottom-[280px] right-[5px] w-[90%] max-w-[500px] sm:w-auto sm:max-w-none sm:left-auto sm:right-[10px] sm:bottom-[500px] z-50">
+                                    <div className="dialogue-bubble px-2 py-1 sm:px-8 sm:py-6 relative">
 
                                         <button
                                             onClick={() => setIsDialogueOpen(false)}
