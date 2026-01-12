@@ -297,28 +297,28 @@ function WorldMap() {
                 <motion.img
                     src="/images/map/cloud-1.png"
                     alt=""
-                    className="absolute top-[-20px] sm:-top-20 left-[-20px] sm:-left-20 w-[200px] sm:w-[400px] mix-blend-screen param-cloud"
+                    className="absolute top-[-20px] sm:-top-20 left-[-20px] sm:-left-20 w-[160px] sm:w-[400px] mix-blend-screen param-cloud"
                     style={{ x: cloud1X, y: cloud1Y }}
                 />
                 {/* Top Right - Cloud 2 */}
                 <motion.img
                     src="/images/map/clouds-2.png"
                     alt=""
-                    className="absolute top-[-20px] sm:-top-32 right-[-20px] sm:-right-10 w-[250px] sm:w-[500px] mix-blend-screen param-cloud"
+                    className="absolute top-[-20px] sm:-top-32 right-[-20px] sm:-right-10 w-[160px] sm:w-[500px] mix-blend-screen param-cloud"
                     style={{ x: cloud2X, y: cloud2Y }}
                 />
                 {/* Bottom Left - Cloud 3 */}
                 <motion.img
                     src="/images/map/clouds-3.png"
                     alt=""
-                    className="absolute bottom-[-20px] sm:-bottom-20 left-[-20px] sm:-left-10 w-[225px] sm:w-[450px] mix-blend-screen param-cloud"
+                    className="absolute bottom-[-20px] sm:-bottom-20 left-[-20px] sm:-left-10 w-[185px] sm:w-[450px] mix-blend-screen param-cloud"
                     style={{ x: cloud3X, y: cloud3Y }}
                 />
                 {/* Bottom Right - Cloud 4 */}
                 <motion.img
                     src="/images/map/clouds-4.png"
                     alt=""
-                    className="absolute bottom-[-20px] sm:-bottom-32 right-[-20px] sm:-right-20 w-[275px] sm:w-[550px] mix-blend-screen param-cloud"
+                    className="absolute bottom-[-20px] sm:-bottom-32 right-[-20px] sm:-right-20 w-[145px] sm:w-[550px] mix-blend-screen param-cloud"
                     style={{ x: cloud4X, y: cloud4Y }}
                 />
             </div>

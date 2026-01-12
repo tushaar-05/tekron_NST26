@@ -479,7 +479,7 @@ function App() {
                                         textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 182, 226, 0.3)',
                                     }}
                                 >
-                                    Step into the future at TEKRON 2026 🚀 Explore AI, quantum tech, cybersecurity, and more—through hands-on workshops, bold ideas, and epic networking. Don’t just watch the future. Be part of it.
+                                    Step into the future at TEKRON 2026 Explore AI, quantum tech, cybersecurity, and more—through hands-on workshops, bold ideas, and epic networking. Don’t just watch the future. Be part of it.
                                 </p>
                             </div>
 

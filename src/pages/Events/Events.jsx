@@ -104,7 +104,7 @@ const EventCard = ({ title, category, image }) => {
         </span>
 
         <h3
-          className="text-3xl font-extrabold m-0 leading-tight tracking-wide minecraft-font whitespace-nowrap overflow-hidden text-ellipsis px-2"
+          className="text-3xl font-extrabold m-0 leading-tight tracking-wide minecraft-font px-2 break-words"
           style={{
             background: 'linear-gradient(135deg, #ffffff, #d8c6f2)',
             WebkitBackgroundClip: 'text',
@@ -179,7 +179,7 @@ export default function Events() {
           {/* Header */}
           <header className="text-center mb-16">
             <h1
-              className="text-5xl md:text-6xl font-extrabold mb-5 leading-tight"
+              className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-5 leading-tight px-2"
               style={{
                 background: 'linear-gradient(90deg, #a855f7, #6366f1)',
                 WebkitBackgroundClip: 'text',
