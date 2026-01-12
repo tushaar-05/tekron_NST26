@@ -432,8 +432,16 @@ const TierSection = () => {
                             ))}
                         </ul>
 
-                        <div className="mt-auto pt-6 border-t border-white/5 font-mono text-[10px] tracking-[0.2em] font-bold transition-all duration-300 group-hover:tracking-[0.25em] group-hover:brightness-150" style={{ color: tier.color }}>
-                            &gt; CLICK_FOR_FULL_LOADOUT
+                        <div
+                            className="mt-auto py-3 px-4 rounded-xl font-mono text-xs tracking-[0.15em] font-bold transition-all duration-300 group-hover:tracking-[0.25em] group-hover:scale-105 flex items-center justify-center gap-2"
+                            style={{
+                                color: tier.color,
+                                background: `${tier.color}15`,
+                                border: `1px solid ${tier.color}30`,
+                                boxShadow: `0 0 15px ${tier.color}10`
+                            }}
+                        >
+                            CLICK_FOR_FULL_LOADOUT <ChevronRight size={14} />
                         </div>
                     </HolographicTierCard>
                 ))}
