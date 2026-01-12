@@ -410,29 +410,29 @@ const TierSection = () => {
                     >
                         <div className="flex justify-between items-start mb-10">
                             <div className="flex flex-col">
-                                <span className="text-[10px] font-mono text-white/20 uppercase tracking-[0.3em] mb-1">ID // 0{i + 1}</span>
+                                <span className="text-xs font-mono text-white/20 uppercase tracking-[0.3em] mb-1">ID // 0{i + 1}</span>
                                 <div className="w-8 h-[1px]" style={{ background: tier.color }} />
                             </div>
                             <div className="text-right">
-                                <div className="text-[10px] font-mono text-white/30 uppercase mb-1">ALLOCATION</div>
-                                <div className="text-xs sm:text-sm font-bold font-mono tracking-wider" style={{ color: tier.color }}>{tier.cost}</div>
+                                <div className="text-xs font-mono text-white/30 uppercase mb-1">ALLOCATION</div>
+                                <div className="text-sm sm:text-base font-bold font-mono tracking-wider" style={{ color: tier.color }}>{tier.cost}</div>
                             </div>
                         </div>
 
-                        <h3 className="text-xl sm:text-2xl font-bold pixel-font text-white mb-8 tracking-tighter leading-none transition-transform duration-500 group-hover:translate-x-1">
+                        <h3 className="text-2xl sm:text-3xl font-bold pixel-font text-white mb-8 tracking-tighter leading-none transition-transform duration-500 group-hover:translate-x-1">
                             {tier.name.split('_').join(' ')}
                         </h3>
 
                         <ul className="space-y-4 mb-12 flex-grow">
                             {tier.features.map((f, fi) => (
-                                <li key={fi} className="text-[10px] font-mono text-white/40 flex items-center gap-3">
+                                <li key={fi} className="text-sm font-mono text-white/40 flex items-center gap-3">
                                     <div className="w-1 h-1 rounded-full shrink-0" style={{ background: tier.color }} />
                                     <span className="opacity-80 group-hover:opacity-100">{f}</span>
                                 </li>
                             ))}
                         </ul>
 
-                        <div className="mt-auto pt-6 border-t border-white/5 font-mono text-[8px] text-white/20 tracking-[0.2em] group-hover:text-white/60 transition-colors">
+                        <div className="mt-auto pt-6 border-t border-white/5 font-mono text-[10px] text-white/20 tracking-[0.2em] group-hover:text-white/60 transition-colors">
                             &gt; CLICK_FOR_FULL_LOADOUT
                         </div>
                     </HolographicTierCard>
