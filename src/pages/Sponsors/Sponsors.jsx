@@ -5,6 +5,31 @@ import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
 import Footer from '../../components/layout/Footer';
+import {
+    Rocket,
+    BarChart3,
+    Smartphone,
+    Target,
+    Globe,
+    Monitor,
+    Gamepad2,
+    Music,
+    Mic,
+    Headphones,
+    Drama,
+    Sparkles,
+    Mic2,
+    TrendingUp,
+    Footprints,
+    Users,
+    Building2,
+    Download,
+    Phone,
+    Mail,
+    ChevronRight,
+    X,
+    Guitar
+} from 'lucide-react';
 
 // --- Shared Animations ---
 const fadeInUp = {
@@ -220,7 +245,9 @@ const WhySponsor = () => (
 
                     <BentoBlock className="bg-white/[0.02] border-white/5">
                         <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">🚀</div>
+                            <div className="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center text-xl">
+                                <Rocket className="w-6 h-6 text-purple-400" />
+                            </div>
                             <div>
                                 <h4 className="text-white text-sm font-bold pixel-font">RAPID_SCALING</h4>
                                 <p className="text-xs text-white/30 font-mono mb-0">Year-on-year growth in digital presence.</p>
@@ -245,10 +272,10 @@ const WhySponsor = () => (
 // --- 🏆 3. Sponsorship Benefits (Redesigned) ---
 const Benefits = () => {
     const items = [
-        { title: 'BRAND VISIBILITY', desc: 'Dominant placement on banners, stages, and the main ecosystem backdrop.', icon: '📊' },
-        { title: 'SOCIAL PROMOTION', desc: 'Strategic multi-channel social media blasts and partner feature stories.', icon: '📱' },
-        { title: 'TALENT PIPELINE', desc: 'Direct recruitment access and lead generation through technical challenges.', icon: '🎯' },
-        { title: 'DIGITAL REACH', desc: 'Logo integration across the official website, posters, and digital assets.', icon: '🌐' }
+        { title: 'BRAND VISIBILITY', desc: 'Dominant placement on banners, stages, and the main ecosystem backdrop.', icon: <BarChart3 className="w-10 h-10 text-purple-400" /> },
+        { title: 'SOCIAL PROMOTION', desc: 'Strategic multi-channel social media blasts and partner feature stories.', icon: <Smartphone className="w-10 h-10 text-blue-400" /> },
+        { title: 'TALENT PIPELINE', desc: 'Direct recruitment access and lead generation through technical challenges.', icon: <Target className="w-10 h-10 text-pink-400" /> },
+        { title: 'DIGITAL REACH', desc: 'Logo integration across the official website, posters, and digital assets.', icon: <Globe className="w-10 h-10 text-cyan-400" /> }
     ];
     return (
         <Section>
@@ -467,7 +494,7 @@ const TierSection = () => {
                                 <button
                                     onClick={() => setSelectedTier(null)}
                                     className="md:hidden w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-all ml-4"
-                                >✕</button>
+                                ><X className="w-6 h-6" /></button>
                             </div>
 
                             {/* Modal Content */}
@@ -565,7 +592,7 @@ const TierSection = () => {
                             >
                                 <span className="pixel-font text-[10px] tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-opacity">ESC</span>
                                 <div className="w-10 h-10 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 flex items-center justify-center transition-all">
-                                    ✕
+                                    <X className="w-5 h-5" />
                                 </div>
                             </button>
                         </motion.div>
@@ -604,7 +631,7 @@ const VisibilityMatrix = () => {
                         <ul className="space-y-4 font-mono text-white/50">
                             {p.items.map((item, ii) => (
                                 <li key={ii} className="flex gap-4 text-sm group-hover:text-white/80 transition-colors">
-                                    <span style={{ color: p.color }}>▶</span> {item}
+                                    <ChevronRight size={14} color={p.color} /> {item}
                                 </li>
                             ))}
                         </ul>
@@ -618,9 +645,9 @@ const VisibilityMatrix = () => {
 // --- 🎤 6. Event-Wise Sponsorship ---
 const EventWiseSponsorship = () => {
     const tracks = [
-        { name: 'HACKATHON', icon: '💻', desc: 'Own the hardware/software arena. Deeply engage with builders.' },
-        { name: 'ESPORTS', icon: '🎮', desc: 'Sponsor the BGMI or CodeWars league. Connect with Gen-Z gamers.' },
-        { name: 'CULTURAL', icon: '🎸', desc: 'Partner with Battle of Bands or Cultural Night for high-energy exposure.' }
+        { name: 'HACKATHON', icon: <Monitor className="w-16 h-16 text-blue-400" />, desc: 'Own the hardware/software arena. Deeply engage with builders.' },
+        { name: 'ESPORTS', icon: <Gamepad2 className="w-16 h-16 text-green-400" />, desc: 'Sponsor the BGMI or CodeWars league. Connect with Gen-Z gamers.' },
+        { name: 'CULTURAL', icon: <Guitar className="w-16 h-16 text-yellow-400" />, desc: 'Partner with Battle of Bands or Cultural Night for high-energy exposure.' }
     ];
     return (
         <Section>
@@ -644,17 +671,17 @@ const EventWiseSponsorship = () => {
 // --- ✨ 7a. Star Power (Artists & Influencers) ---
 const StarPower = () => {
     const artists = [
-        { name: 'SHREYA JAIN', role: 'Singer / Performer', icon: '🎤' },
-        { name: 'DJ SUITUP', role: 'Electronic Artist', icon: '🎧' },
-        { name: 'KULLU BAAZI', role: 'Standup Comedy', icon: '🎭' },
-        { name: 'DJ NAAIRO', role: 'Music Producer', icon: '🎹' }
+        { name: 'SHREYA JAIN', role: 'Singer / Performer', icon: <Mic className="w-8 h-8 text-yellow-400" /> },
+        { name: 'DJ SUITUP', role: 'Electronic Artist', icon: <Headphones className="w-8 h-8 text-cyan-400" /> },
+        { name: 'KULLU BAAZI', role: 'Standup Comedy', icon: <Drama className="w-8 h-8 text-purple-400" /> },
+        { name: 'DJ NAAIRO', role: 'Music Producer', icon: <Music className="w-8 h-8 text-pink-400" /> }
     ];
     const influencers = [
-        { name: 'YASH GARG', role: 'Tech Influencer', icon: '📱' },
-        { name: 'DRISHTI SHARMA', role: 'Content Creator', icon: '✨' },
-        { name: 'BHARAT CHANDAK', role: 'Keynote Speaker', icon: '🎙️' },
-        { name: 'ARSH GOYAL', role: 'Career Mentor', icon: '🚀' },
-        { name: 'AKASH MAJUMDER', role: 'Finance Catalyst', icon: '💹' }
+        { name: 'YASH GARG', role: 'Tech Influencer', icon: <Smartphone className="w-8 h-8 text-blue-400" /> },
+        { name: 'DRISHTI SHARMA', role: 'Content Creator', icon: <Sparkles className="w-8 h-8 text-yellow-200" /> },
+        { name: 'BHARAT CHANDAK', role: 'Keynote Speaker', icon: <Mic2 className="w-8 h-8 text-orange-400" /> },
+        { name: 'ARSH GOYAL', role: 'Career Mentor', icon: <Rocket className="w-8 h-8 text-red-400" /> },
+        { name: 'AKASH MAJUMDER', role: 'Finance Catalyst', icon: <TrendingUp className="w-8 h-8 text-green-400" /> }
     ];
 
     return (
@@ -826,14 +853,14 @@ const HeritagePartners = () => {
 // --- 📊 8. Reach Stats (Historical & Future) ---
 const ReachStats = () => {
     const historicalStats = [
-        { label: '1.0_OUTREACH', value: 700000, suffix: '+', icon: '🌐', color: '#3b82f6' },
-        { label: '1.0_ONLINE_ATTENDEES', value: 10000, suffix: '+', icon: '💻', color: '#10b981' },
-        { label: '1.0_FOOTFALL', value: 5000, suffix: '+', icon: '👟', color: '#fbbf24' }
+        { label: '1.0_OUTREACH', value: 700000, suffix: '+', icon: <Globe className="w-8 h-8 text-blue-500" />, color: '#3b82f6' },
+        { label: '1.0_ONLINE_ATTENDEES', value: 10000, suffix: '+', icon: <Monitor className="w-8 h-8 text-green-500" />, color: '#10b981' },
+        { label: '1.0_FOOTFALL', value: 5000, suffix: '+', icon: <Footprints className="w-8 h-8 text-yellow-500" />, color: '#fbbf24' }
     ];
     const targetStats = [
-        { label: '2026_EXPECTED_FOOTFALL', value: 10000, suffix: '+', icon: '👥', color: '#a855f7' },
-        { label: 'COLLEGES_NODES', value: 50, suffix: '+', icon: '🏫', color: '#00fff9' },
-        { label: 'TOTAL_IMPRESSIONS', value: 1000000, suffix: '+', icon: '📈', color: '#ec4899' }
+        { label: '2026_EXPECTED_FOOTFALL', value: 10000, suffix: '+', icon: <Users className="w-8 h-8 text-purple-500" />, color: '#a855f7' },
+        { label: 'COLLEGES_NODES', value: 50, suffix: '+', icon: <Building2 className="w-8 h-8 text-cyan-500" />, color: '#00fff9' },
+        { label: 'TOTAL_IMPRESSIONS', value: 1000000, suffix: '+', icon: <TrendingUp className="w-8 h-8 text-pink-500" />, color: '#ec4899' }
     ];
 
     return (
@@ -902,8 +929,8 @@ const ContactBrochure = () => {
             <div className="text-center mb-24">
                 <h2 className="text-5xl sm:text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">CONNECT.</h2>
                 <div className="flex flex-col md:flex-row justify-center gap-6 mt-12 px-6">
-                    <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-black font-bold pixel-font text-xs sm:text-sm hover:scale-105 transition-all shadow-[8px_8px_0px_#7c3aed]">
-                        📥 DOWNLOAD BROCHURE (PDF)
+                    <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-black font-bold pixel-font text-xs sm:text-sm hover:scale-105 transition-all shadow-[8px_8px_0px_#7c3aed] flex items-center gap-2">
+                        <Download className="w-4 h-4" /> DOWNLOAD BROCHURE (PDF)
                     </button>
                     <button className="px-6 py-4 sm:px-12 sm:py-6 bg-black/40 border-2 border-purple-500 text-white font-bold pixel-font text-xs sm:text-sm hover:bg-purple-500/20 transition-all">
                         INITIATE UPLINK (QUICK)
@@ -922,8 +949,12 @@ const ContactBrochure = () => {
                             <PixelLabel color="#a855f7">{coordinator.role}</PixelLabel>
                             <h3 className="text-2xl sm:text-4xl font-bold pixel-font text-white mb-6 tracking-tighter">{coordinator.name}</h3>
                             <div className="space-y-4 font-mono text-sm sm:text-lg text-white/60">
-                                <a href={`tel:${coordinator.phone}`} className="block hover:text-white transition-colors">📞 {coordinator.phone}</a>
-                                <a href={`mailto:${coordinator.email}`} className="block hover:text-white transition-colors">✉️ {coordinator.email}</a>
+                                <a href={`tel:${coordinator.phone}`} className="hover:text-white transition-colors flex items-center gap-3">
+                                    <Phone className="w-4 h-4" /> {coordinator.phone}
+                                </a>
+                                <a href={`mailto:${coordinator.email}`} className="hover:text-white transition-colors flex items-center gap-3">
+                                    <Mail className="w-4 h-4" /> {coordinator.email}
+                                </a>
                             </div>
                         </div>
                     </div>
