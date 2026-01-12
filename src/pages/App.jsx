@@ -235,7 +235,7 @@ function App() {
 
 
                         <div
-                            className="absolute transition-all duration-700 ease-out"
+                            className="hidden sm:block absolute transition-all duration-700 ease-out"
                             style={{
                                 bottom: '-3%',
                                 left: '0%',
@@ -256,7 +256,7 @@ function App() {
 
 
                         <div
-                            className="absolute transition-all duration-700 ease-out"
+                            className="hidden sm:block absolute transition-all duration-700 ease-out"
                             style={{
                                 top: '35%',
                                 left: '50%',
@@ -277,7 +277,7 @@ function App() {
 
 
                         <div
-                            className="absolute transition-all duration-700 ease-out"
+                            className="hidden sm:block absolute transition-all duration-700 ease-out"
                             style={{
                                 top: 'calc(50% + 100px)',
                                 left: '50%',
@@ -298,7 +298,7 @@ function App() {
 
 
                         <div
-                            className="absolute transition-all duration-700 ease-out"
+                            className="hidden sm:block absolute transition-all duration-700 ease-out"
                             style={{
                                 bottom: '-2%',
                                 opacity: loadedAssets['/images/backgrounds/2.webp'] ? 0.95 : 0,
@@ -319,7 +319,7 @@ function App() {
 
 
                         <div
-                            className="absolute transition-all duration-700 ease-out"
+                            className="hidden sm:block absolute transition-all duration-700 ease-out"
                             style={{
                                 bottom: '-20%',
                                 left: '-2.5%',
@@ -359,7 +359,7 @@ function App() {
                         */}
 
 
-                        <div className="relative z-20 h-full flex flex-col items-center justify-center px-8 pt-20">
+                        <div className="relative z-20 h-full flex flex-col items-center justify-start sm:justify-center px-8 pt-20">
 
                             <h1
                                 className={`pixel-font text-center mb-4 sm:mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}
@@ -449,8 +449,8 @@ function App() {
 
 
                             {isDialogueOpen && (
-                                <div className="hidden sm:block absolute bottom-[500px] right-[10px] z-50">
-                                    <div className="dialogue-bubble px-8 py-6 relative">
+                                <div className="absolute bottom-[280px] right-[10px] w-auto sm:left-auto sm:right-[10px] sm:bottom-[500px] z-50">
+                                    <div className="dialogue-bubble px-3 py-2 sm:px-8 sm:py-6 relative">
 
                                         <button
                                             onClick={() => setIsDialogueOpen(false)}
@@ -463,7 +463,7 @@ function App() {
                                         </button>
 
                                         <p className={`pixel-font mb-4 dialogue-text ${dialogueGlitch ? 'dialogue-glitch' : ''}`} style={{
-                                            fontSize: '10px',
+                                            fontSize: 'clamp(8px, 2vw, 10px)',
                                             lineHeight: '1.8',
                                             color: '#d8c6f2',
                                             textShadow: '1px 1px 0px #000000, 0 0 10px rgba(168, 85, 247, 0.3)',
@@ -534,7 +534,7 @@ function App() {
 
 
                             <div
-                                className="hidden sm:block absolute bottom-[-50px] right-[-80px] z-30"
+                                className="absolute bottom-[-20px] right-[-20px] sm:bottom-[-50px] sm:right-[-80px] z-30"
                                 onClick={() => setIsDialogueOpen(!isDialogueOpen)}
                                 onMouseMove={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();
@@ -555,7 +555,7 @@ function App() {
                                     <div
                                         className="pixel-art transition-opacity duration-700"
                                         style={{
-                                            width: 'clamp(400px, 33vw, 800px)',
+                                            width: 'clamp(300px, 50vw, 800px)',
                                             position: 'relative',
                                             opacity: loadedAssets['/images/characters/main_Chr.png'] ? 1 : 0,
                                         }}
