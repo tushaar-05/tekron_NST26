@@ -21,6 +21,7 @@ const PageContent = styled.div`
   padding: 120px 20px 100px;
   position: relative;
   z-index: 10;
+  overflow-x: hidden;
 `;
 
 const Section = styled.section`
@@ -151,7 +152,7 @@ const HeroSection = () => (
     <Section className="min-h-[60vh] flex flex-col items-center justify-center text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
             <PixelLabel color="#00fff9">INITIATING PARTNERSHIP HUB // 2026</PixelLabel>
-            <h1 className="text-6xl md:text-9xl font-bold pixel-font leading-tight mb-8"
+            <h1 className="text-4xl sm:text-6xl md:text-9xl font-bold pixel-font leading-tight mb-8"
                 style={{
                     color: '#fff',
                     textShadow: '0 0 40px rgba(168, 85, 247, 0.4)',
@@ -159,7 +160,7 @@ const HeroSection = () => (
                 BECOME OUR<br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">SPONSOR</span>
             </h1>
-            <p className="mt-8 text-xl md:text-2xl font-mono text-white/40 max-w-2xl mx-auto">
+            <p className="mt-8 text-base sm:text-xl md:text-2xl font-mono text-white/40 max-w-2xl mx-auto px-4">
                 &gt; ARCHITECT THE FUTURE OF TECHNOLOGY WITH US. INTEGRATE YOUR BRAND INTO THE TEKRON ECOSYSTEM.
             </p>
             <motion.div className="h-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent mt-12 mx-auto max-w-xl"
@@ -175,7 +176,7 @@ const WhySponsor = () => (
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="p-8 md:p-16"
+            className="p-6 md:p-16"
         >
             <div className="absolute top-0 right-0 w-64 h-64 bg-purple-500/10 blur-[100px] pointer-events-none" />
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 blur-[100px] pointer-events-none" />
@@ -187,10 +188,10 @@ const WhySponsor = () => (
                         <div className="w-10 h-[2px] bg-purple-500" />
                         <PixelLabel color="#a855f7" className="mb-0">THE VISION</PixelLabel>
                     </div>
-                    <h2 className="text-5xl md:text-7xl font-bold pixel-font text-white mb-8 leading-tight">
+                    <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold pixel-font text-white mb-8 leading-tight">
                         Crafting<br />Legacy.
                     </h2>
-                    <p className="font-mono text-white/50 leading-relaxed text-lg max-w-xl">
+                    <p className="font-mono text-white/50 leading-relaxed text-sm sm:text-lg max-w-xl">
                         TEKRON 2026 is an immersive sandbox for technical excellence.
                         With a legacy of 250+ participating colleges and a reach that defines the digital archive of tomorrow,
                         we offer a unique gateway to the most talented minds in the industry.
@@ -208,12 +209,12 @@ const WhySponsor = () => (
 
                     <div className="grid grid-cols-2 gap-6">
                         <BentoBlock className="flex flex-col justify-center items-center text-center">
-                            <div className="text-4xl font-bold pixel-font text-white mb-2">5000+</div>
-                            <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest">ATTENDEES</div>
+                            <div className="text-2xl sm:text-4xl font-bold pixel-font text-white mb-2">5000+</div>
+                            <div className="text-[8px] sm:text-[10px] font-mono text-white/30 uppercase tracking-widest">ATTENDEES</div>
                         </BentoBlock>
                         <BentoBlock className="flex flex-col justify-center items-center text-center">
-                            <div className="text-4xl font-bold pixel-font text-white mb-2">30+</div>
-                            <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest">COLLEGES</div>
+                            <div className="text-2xl sm:text-4xl font-bold pixel-font text-white mb-2">30+</div>
+                            <div className="text-[8px] sm:text-[10px] font-mono text-white/30 uppercase tracking-widest">COLLEGES</div>
                         </BentoBlock>
                     </div>
 
@@ -230,7 +231,7 @@ const WhySponsor = () => (
             </div>
 
             <div className="mt-16 pt-8 border-t border-white/5 flex flex-wrap gap-8 justify-between items-center opacity-30">
-                <div className="text-[10px] font-mono uppercase tracking-[0.4em]">SYSTEM_READY // 2026.01</div>
+                <div className="text-[8px] sm:text-[10px] font-mono uppercase tracking-[0.2em] sm:tracking-[0.4em]">SYSTEM_READY // 2026.01</div>
                 <div className="flex gap-4">
                     <div className="w-2 h-2 rounded-full bg-purple-500" />
                     <div className="w-2 h-2 rounded-full bg-purple-500/50" />
@@ -254,7 +255,7 @@ const Benefits = () => {
             <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 gap-6">
                 <div>
                     <PixelLabel color="#a855f7">STRATEGIC ADVANTAGE</PixelLabel>
-                    <h2 className="text-5xl md:text-6xl font-bold pixel-font text-white">Why Partner?</h2>
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white">Why Partner?</h2>
                 </div>
                 <div className="font-mono text-white/30 text-sm max-w-xs md:text-right">
                     Integrating your core identity into the technical archive of tomorrow.
@@ -268,7 +269,7 @@ const Benefits = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className="p-10 border-white/5 hover:bg-white/[0.03]"
+                        className="p-6 md:p-10 border-white/5 hover:bg-white/[0.03]"
                     >
                         <div className="text-4xl mb-8 opacity-80 group-hover:scale-110 transition-transform">{benefit.icon}</div>
                         <h4 className="text-lg font-bold pixel-font text-white mb-4 tracking-tighter">{benefit.title}</h4>
@@ -360,7 +361,7 @@ const TierSection = () => {
             <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                 <div>
                     <PixelLabel color="#00fff9">PARTNERSHIP_RESOURCES</PixelLabel>
-                    <h2 className="text-5xl md:text-6xl font-bold pixel-font text-white">Select Your Tier</h2>
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white">Select Your Tier</h2>
                 </div>
                 <div className="font-mono text-white/30 text-sm max-w-xs md:text-right">
                     Available loadouts for full ecosystem integration. Click any card to view detailed protocols.
@@ -386,11 +387,11 @@ const TierSection = () => {
                             </div>
                             <div className="text-right">
                                 <div className="text-[10px] font-mono text-white/30 uppercase mb-1">ALLOCATION</div>
-                                <div className="text-sm font-bold font-mono tracking-wider" style={{ color: tier.color }}>{tier.cost}</div>
+                                <div className="text-xs sm:text-sm font-bold font-mono tracking-wider" style={{ color: tier.color }}>{tier.cost}</div>
                             </div>
                         </div>
 
-                        <h3 className="text-2xl font-bold pixel-font text-white mb-8 tracking-tighter leading-none transition-transform duration-500 group-hover:translate-x-1">
+                        <h3 className="text-xl sm:text-2xl font-bold pixel-font text-white mb-8 tracking-tighter leading-none transition-transform duration-500 group-hover:translate-x-1">
                             {tier.name.split('_').join(' ')}
                         </h3>
 
@@ -439,15 +440,15 @@ const TierSection = () => {
                             }} />
 
                             {/* Modal Header */}
-                            <div className="relative p-10 md:p-14 border-b border-white/10 flex justify-between items-start bg-gradient-to-b from-white/[0.03] to-transparent">
+                            <div className="relative p-6 md:p-14 border-b border-white/10 flex justify-between items-start bg-gradient-to-b from-white/[0.03] to-transparent">
                                 <div className="flex-1">
                                     <div className="flex items-center gap-4 mb-4">
                                         <div className="w-16 h-[2px] rounded-full" style={{
                                             background: `linear-gradient(90deg, ${selectedTier.color}, transparent)`
                                         }} />
-                                        <span className="text-[9px] font-mono tracking-[0.6em] text-white/30 uppercase">TIER_SPECIFICATION</span>
+                                        <span className="text-[8px] sm:text-[9px] font-mono tracking-[0.6em] text-white/30 uppercase">TIER_SPECIFICATION</span>
                                     </div>
-                                    <h2 className="text-5xl md:text-6xl font-bold pixel-font text-white mb-3 leading-none tracking-tight">
+                                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white mb-3 leading-none tracking-tight">
                                         {selectedTier.name.split('_').join(' ')}
                                     </h2>
                                     <div className="flex items-center gap-3 mt-6">
@@ -470,8 +471,8 @@ const TierSection = () => {
                             </div>
 
                             {/* Modal Content */}
-                            <div className="flex-1 overflow-y-auto p-10 md:p-14 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
-                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-14">
+                            <div className="flex-1 overflow-y-auto p-6 md:p-14 scrollbar-thin scrollbar-thumb-white/10 scrollbar-track-transparent">
+                                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-14">
                                     <div className="lg:col-span-8">
                                         <div className="flex items-center gap-4 mb-12">
                                             <div className="w-2 h-2 rounded-full" style={{ background: selectedTier.color }} />
@@ -586,7 +587,7 @@ const VisibilityMatrix = () => {
         <Section>
             <div className="text-center mb-16">
                 <PixelLabel color="#ff00c1">VISIBILITY MATRIX</PixelLabel>
-                <h2 className="text-5xl font-bold pixel-font text-white">Branding Protocols</h2>
+                <h2 className="text-3xl sm:text-5xl font-bold pixel-font text-white">Branding Protocols</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {protocols.map((p, i) => (
@@ -596,7 +597,7 @@ const VisibilityMatrix = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.1 }}
-                        className="p-10 border-white/5 bg-white/[0.02] hover:bg-white/[0.04]"
+                        className="p-6 md:p-10 border-white/5 bg-white/[0.02] hover:bg-white/[0.04]"
                     >
                         <div className="w-12 h-1 mb-8" style={{ background: p.color }} />
                         <PixelLabel color={p.color}>{p.label}</PixelLabel>
@@ -625,13 +626,13 @@ const EventWiseSponsorship = () => {
         <Section>
             <div className="mb-12">
                 <PixelLabel color="#ec4899">TARGETED DEPLOYMENT</PixelLabel>
-                <h2 className="text-5xl font-bold pixel-font">Event Synergy</h2>
+                <h2 className="text-3xl sm:text-5xl font-bold pixel-font text-white">Event Synergy</h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {tracks.map((track, i) => (
-                    <div key={i} className="p-8 bg-black/40 border border-white/5 rounded-3xl backdrop-blur-md group hover:border-pink-500/30 transition-all">
+                    <div key={i} className="p-6 md:p-8 bg-black/40 border border-white/5 rounded-3xl backdrop-blur-md group hover:border-pink-500/30 transition-all">
                         <div className="text-5xl mb-6">{track.icon}</div>
-                        <h4 className="text-2xl font-bold pixel-font text-white mb-4">{track.name}</h4>
+                        <h4 className="text-xl sm:text-2xl font-bold pixel-font text-white mb-4">{track.name}</h4>
                         <p className="font-mono text-white/30 text-sm leading-relaxed">{track.desc}</p>
                     </div>
                 ))}
@@ -660,19 +661,19 @@ const StarPower = () => {
         <Section>
             <div className="text-center mb-16">
                 <PixelLabel color="#fbbf24">STAR_POWER_ARCHIVE</PixelLabel>
-                <h2 className="text-5xl md:text-6xl font-bold pixel-font text-white mb-4">Past Lineup</h2>
+                <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white mb-4">Past Lineup</h2>
                 <p className="font-mono text-white/30 uppercase tracking-[0.2em]">Artists & Influencers who ignited the stage.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
                 {/* Artists */}
                 <div>
-                    <h4 className="text-xl font-bold pixel-font text-white/60 mb-8 flex items-center gap-4">
+                    <h4 className="text-lg sm:text-xl font-bold pixel-font text-white/60 mb-8 flex items-center gap-4">
                         <div className="w-8 h-[2px] bg-yellow-500" /> ARTISTS_ARCHIVE
                     </h4>
                     <div className="grid grid-cols-2 gap-4">
                         {artists.map((a, i) => (
-                            <BentoBlock key={i} className="p-6 border-white/5 bg-white/[0.02]">
+                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-white/[0.02]">
                                 <div className="text-2xl mb-3">{a.icon}</div>
                                 <div className="text-xs font-bold pixel-font text-white mb-1">{a.name}</div>
                                 <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">{a.role}</div>
@@ -683,12 +684,12 @@ const StarPower = () => {
 
                 {/* Influencers */}
                 <div>
-                    <h4 className="text-xl font-bold pixel-font text-white/60 mb-8 flex items-center gap-4">
+                    <h4 className="text-lg sm:text-xl font-bold pixel-font text-white/60 mb-8 flex items-center gap-4">
                         <div className="w-8 h-[2px] bg-purple-500" /> INFLUENCER_NODE
                     </h4>
                     <div className="grid grid-cols-2 gap-4">
                         {influencers.map((inf, i) => (
-                            <BentoBlock key={i} className="p-6 border-white/5 bg-white/[0.02]">
+                            <BentoBlock key={i} className="p-4 sm:p-6 border-white/5 bg-white/[0.02]">
                                 <div className="text-2xl mb-3">{inf.icon}</div>
                                 <div className="text-xs font-bold pixel-font text-white mb-1">{inf.name}</div>
                                 <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">{inf.role}</div>
@@ -752,10 +753,10 @@ const HeritagePartners = () => {
         <Section>
             <div className="text-center mb-16">
                 <PixelLabel color="#00fff9">HERITAGE_PARTNERS</PixelLabel>
-                <h2 className="text-5xl md:text-7xl font-bold pixel-font text-white mb-4 tracking-tighter">Tekron 1.0 Protocol</h2>
+                <h2 className="text-3xl sm:text-5xl md:text-7xl font-bold pixel-font text-white mb-4 tracking-tighter">Tekron 1.0 Protocol</h2>
                 <div className="flex items-center justify-center gap-4 opacity-20">
                     <div className="w-12 h-[1px] bg-white" />
-                    <span className="text-[10px] font-mono tracking-widest uppercase">Global Archive Access</span>
+                    <span className="text-[8px] sm:text-[10px] font-mono tracking-widest uppercase">Global Archive Access</span>
                     <div className="w-12 h-[1px] bg-white" />
                 </div>
             </div>
@@ -769,10 +770,10 @@ const HeritagePartners = () => {
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: i * 0.1 }}
-                            className="p-10 flex flex-col items-center group relative hover:bg-white/[0.02] transition-all"
+                            className="p-6 md:p-10 flex flex-col items-center group relative hover:bg-white/[0.02] transition-all"
                         >
                             {/* Sector Header */}
-                            <div className="w-full flex justify-between items-center mb-12">
+                            <div className="w-full flex justify-between items-center mb-8 md:mb-12">
                                 <span className="text-[8px] font-mono opacity-20 group-hover:opacity-100 transition-opacity" style={{ color: sector.color }}>{sector.id}</span>
                                 <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: sector.color, boxShadow: `0 0 10px ${sector.color}` }} />
                             </div>
@@ -807,7 +808,7 @@ const HeritagePartners = () => {
                 </div>
 
                 {/* Footer Sync */}
-                <div className="bg-white/[0.02] p-4 border-t border-white/5 flex justify-between items-center px-10">
+                <div className="bg-white/[0.02] p-4 border-t border-white/5 flex justify-between items-center px-6 md:px-10">
                     <div className="text-[8px] font-mono text-white/20 uppercase tracking-widest">
                         // ALLIED_ECOSYSTEM_STATUS: STABLE // DATALINK_ESTABLISHED
                     </div>
@@ -837,18 +838,18 @@ const ReachStats = () => {
 
     return (
         <Section>
-            <div className="bg-white/[0.02] border border-white/5 rounded-[40px] p-12 md:p-20">
+            <div className="bg-white/[0.02] border border-white/5 rounded-[40px] p-8 md:p-20">
                 <div className="text-center mb-16">
                     <PixelLabel color="#a855f7">METRIC_VAULT</PixelLabel>
-                    <h2 className="text-5xl md:text-6xl font-bold pixel-font text-white">Impact Archive</h2>
+                    <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold pixel-font text-white">Impact Archive</h2>
                 </div>
 
-                <div className="space-y-20">
+                <div className="space-y-12 md:space-y-20">
                     {/* Tekron 1.0 Historical Stats */}
                     <div>
                         <div className="flex items-center gap-4 mb-10">
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.1.0_HISTORICAL_DATA</span>
+                            <span className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.1.0_HISTORICAL_DATA</span>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {historicalStats.map((stat, i) => (
@@ -867,7 +868,7 @@ const ReachStats = () => {
                     <div>
                         <div className="flex items-center gap-4 mb-10">
                             <div className="w-2 h-2 rounded-full bg-blue-500" />
-                            <span className="text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.2.6_PROJECTED_TARGETS</span>
+                            <span className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.2.6_PROJECTED_TARGETS</span>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                             {targetStats.map((stat, i) => (
@@ -899,19 +900,19 @@ const ContactBrochure = () => {
     return (
         <Section className="mb-0">
             <div className="text-center mb-24">
-                <h2 className="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">CONNECT.</h2>
-                <div className="flex flex-col md:flex-row justify-center gap-6 mt-12">
-                    <button className="px-12 py-6 bg-white text-black font-bold pixel-font text-sm hover:scale-105 transition-all shadow-[8px_8px_0px_#7c3aed]">
+                <h2 className="text-5xl sm:text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">CONNECT.</h2>
+                <div className="flex flex-col md:flex-row justify-center gap-6 mt-12 px-6">
+                    <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-black font-bold pixel-font text-xs sm:text-sm hover:scale-105 transition-all shadow-[8px_8px_0px_#7c3aed]">
                         📥 DOWNLOAD BROCHURE (PDF)
                     </button>
-                    <button className="px-12 py-6 bg-black/40 border-2 border-purple-500 text-white font-bold pixel-font text-sm hover:bg-purple-500/20 transition-all">
+                    <button className="px-6 py-4 sm:px-12 sm:py-6 bg-black/40 border-2 border-purple-500 text-white font-bold pixel-font text-xs sm:text-sm hover:bg-purple-500/20 transition-all">
                         INITIATE UPLINK (QUICK)
                     </button>
                 </div>
             </div>
 
             <div className="max-w-4xl mx-auto">
-                <BiometricCard className="p-12 border-purple-500/30">
+                <BiometricCard className="p-8 md:p-12 border-purple-500/30">
                     <div className="flex flex-col md:flex-row items-center gap-12">
                         <div className="w-48 h-56 relative shrink-0" style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%)' }}>
                             <img src={coordinator.image} alt={coordinator.name} className="w-full h-full object-cover" />
@@ -919,14 +920,14 @@ const ContactBrochure = () => {
                         </div>
                         <div className="flex-1 text-center md:text-left">
                             <PixelLabel color="#a855f7">{coordinator.role}</PixelLabel>
-                            <h3 className="text-4xl font-bold pixel-font text-white mb-6 tracking-tighter">{coordinator.name}</h3>
-                            <div className="space-y-4 font-mono text-lg text-white/60">
+                            <h3 className="text-2xl sm:text-4xl font-bold pixel-font text-white mb-6 tracking-tighter">{coordinator.name}</h3>
+                            <div className="space-y-4 font-mono text-sm sm:text-lg text-white/60">
                                 <a href={`tel:${coordinator.phone}`} className="block hover:text-white transition-colors">📞 {coordinator.phone}</a>
                                 <a href={`mailto:${coordinator.email}`} className="block hover:text-white transition-colors">✉️ {coordinator.email}</a>
                             </div>
                         </div>
                     </div>
-                    <div className="mt-12 pt-8 border-t border-white/5 text-center font-mono text-[10px] text-white/20 tracking-[0.5em] uppercase">
+                    <div className="mt-12 pt-8 border-t border-white/5 text-center font-mono text-[8px] sm:text-[10px] text-white/20 tracking-[0.5em] uppercase">
                         &gt; SECURE_CONNECTION_ESTABLISHED // 200 OK
                     </div>
                 </BiometricCard>
