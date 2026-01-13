@@ -1854,9 +1854,13 @@ const ContactBrochure = () => {
             <div className="text-center mb-24">
                 <h2 className="text-5xl sm:text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400">CONNECT.</h2>
                 <div className="flex flex-col md:flex-row justify-center gap-6 mt-12 px-6">
-                    <button className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-black font-bold pixel-font text-xs sm:text-sm hover:scale-105 transition-all shadow-[8px_8px_0px_#7c3aed] flex items-center gap-2">
+                    <a
+                        href="/Sponsorship Booklet.pdf"
+                        download="Sponsorship Booklet.pdf"
+                        className="px-6 py-4 sm:px-12 sm:py-6 bg-white text-black font-bold pixel-font text-xs sm:text-sm hover:scale-105 transition-all shadow-[8px_8px_0px_#7c3aed] flex items-center gap-2"
+                    >
                         <Download className="w-4 h-4" /> DOWNLOAD BROCHURE (PDF)
-                    </button>
+                    </a>
                     <button className="px-6 py-4 sm:px-12 sm:py-6 bg-black/40 border-2 border-purple-500 text-white font-bold pixel-font text-xs sm:text-sm hover:bg-purple-500/20 transition-all">
                         INITIATE UPLINK (QUICK)
                     </button>
