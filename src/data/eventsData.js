@@ -9,7 +9,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹70,000',
         registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/hakron-24-hour-hackathon-tekron-20-newton-school-of-technology-1615176',
+        unstopLink: 'https://unstop.com/o/15jb4tN?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Online_coding_challenge',
         rulebookLink: 'https://docs.google.com/document/d/1CP5PcvD6wEkggU6iDNK6TmWFJJa-Eem_Sk8JFa7tLkE/edit?usp=sharing',
         sections: [
             {
@@ -124,7 +124,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹50,000',
         registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/codewar-20-tekron-20-newton-school-of-technology-1615172',
+        unstopLink: 'https://unstop.com/p/codewars-tekron-20-newton-school-of-technology-1621629',
         rulebookLink: 'https://docs.google.com/document/d/1NwNz39OdRqmBXCRlb3dv0wWCRJec9DuP_2XpdxVy3ys/edit?usp=sharing',
         sections: [
             {
@@ -171,7 +171,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/drone-harvoc-tekron-20-newton-school-of-technology-1615308',
+        unstopLink: 'https://unstop.com/o/rqlhbDP?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
         rulebookLink: 'https://docs.google.com/document/d/1zSVXoWN5gk3xVzV3V_WudlTX3hlkQtT-4LIwgFHpzB0/edit?usp=sharing',
         sections: [
             {
@@ -232,7 +232,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/robokick-robosoccer-tekron26-newton-school-of-technology-1612193',
+        unstopLink: 'https://unstop.com/o/ZXI0pqC?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
         rulebookLink: 'https://docs.google.com/document/d/1vXBfZIkSzwLTSbPNs4655R8LjolA_SMZdSubksfBCD4/edit?usp=sharing',
         sections: [
             {
@@ -303,7 +303,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹60,000',
         registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/throttle-x-rc-car-race-competition-electric-only-tekron-20-newton-school-of-technology-1615301',
+        unstopLink: 'https://unstop.com/o/RfKS2pi?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
         rulebookLink: 'https://docs.google.com/document/d/1YKnW-fKgOSrBIRauIlnP1sb48vegS-vs6DSHG1hwnw8/edit?usp=sharing',
         sections: [
             {
@@ -395,7 +395,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹30,000',
         registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/battle-of-bands-tekron-20-newton-school-of-technology-1615135',
+        unstopLink: 'https://unstop.com/o/wgc9sBa?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
         rulebookLink: 'https://docs.google.com/document/d/1-csUq7WWPgSLIt0KgRkrHpvnmRLiTqYAUsOKFoBGmoo/edit?usp=sharing',
         sections: [
             {
@@ -539,7 +539,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹30,000',
         registrationDeadline: '2026-01-29T23:59:59',
-        unstopLink: 'https://unstop.com/p/bgmi-tournament-tekron-20-newton-school-of-technology-1615307',
+        unstopLink: 'https://unstop.com/o/haqdUvO?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
         rulebookLink: 'https://docs.google.com/document/d/1ttq1CF-ruue6WZMs9yxtn8nkyh8M4AOyWljICUi7wzI/edit?usp=sharing',
         sections: [
             {
