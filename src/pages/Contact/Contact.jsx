@@ -202,14 +202,28 @@ function Contact() {
                                     <div className="flex items-center justify-between p-3 bg-white/5 border border-white/5 hover:border-pink-500/30 hover:bg-pink-500/10 transition-all cursor-pointer group/line">
                                         <div className="flex items-center gap-3">
                                             <div className="w-1.5 h-1.5 bg-pink-500/30 group-hover/line:bg-pink-400 rounded-full transition-colors" />
-                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">NIHAL_C</span>
+                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">Harshit Jain</span>
+                                        </div>
+                                        <a href="tel:+917427887050" className="text-white font-mono tracking-wider hover:text-pink-300 transition-colors">+91 74278 87050</a>
+                                    </div>
+                                    <div className="flex items-center justify-between p-3 bg-white/5 border border-white/5 hover:border-pink-500/30 hover:bg-pink-500/10 transition-all cursor-pointer group/line">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-1.5 h-1.5 bg-pink-500/30 group-hover/line:bg-pink-400 rounded-full transition-colors" />
+                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">Vansh Agarwal</span>
+                                        </div>
+                                        <a href="tel:+919411068533" className="text-white font-mono tracking-wider hover:text-pink-300 transition-colors">+91 94110 68533</a>
+                                    </div>
+                                    <div className="flex items-center justify-between p-3 bg-white/5 border border-white/5 hover:border-pink-500/30 hover:bg-pink-500/10 transition-all cursor-pointer group/line">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-1.5 h-1.5 bg-pink-500/30 group-hover/line:bg-pink-400 rounded-full transition-colors" />
+                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">Nihal C</span>
                                         </div>
                                         <a href="tel:+916282500918" className="text-white font-mono tracking-wider hover:text-pink-300 transition-colors">+91 62825 00918</a>
                                     </div>
                                     <div className="flex items-center justify-between p-3 bg-white/5 border border-white/5 hover:border-pink-500/30 hover:bg-pink-500/10 transition-all cursor-pointer group/line">
                                         <div className="flex items-center gap-3">
                                             <div className="w-1.5 h-1.5 bg-pink-500/30 group-hover/line:bg-pink-400 rounded-full transition-colors" />
-                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">AYUSH_S</span>
+                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">Ayush Shukla</span>
                                         </div>
                                         <a href="tel:+917875393239" className="text-white font-mono tracking-wider hover:text-pink-300 transition-colors">+91 78753 93239</a>
                                     </div>
@@ -281,15 +295,32 @@ function Contact() {
                         <div className="flex flex-col gap-6">
                             <div className="bg-white/5 border border-white/10 p-8 relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 blur-2xl rounded-full" />
-                                <h3 className="text-2xl text-purple-300 uppercase tracking-widest mb-4">Target_Location</h3>
+                                <h3 className="text-2xl text-purple-300 uppercase tracking-widest mb-6">Venue_Details</h3>
+
+                                {/* University Name */}
                                 <p className="text-2xl md:text-4xl text-white mb-2 break-words">Ajeenkya DY Patil University</p>
-                                <p className="text-lg md:text-xl text-gray-400">Charholi Budruk, via Lohegaon, Pune - 412105</p>
-                                <div className="mt-6 flex gap-4 text-sm font-mono text-gray-500">
+                                <p className="text-lg md:text-xl text-gray-400 mb-6">Charholi Budruk, via Lohegaon, Pune - 412105</p>
+
+                                {/* Event Dates */}
+                                <div className="mb-6 p-4 bg-white/5 border border-purple-500/20 rounded-lg">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <span className="text-purple-400 text-sm font-mono uppercase tracking-widest">Event Dates</span>
+                                    </div>
+                                    <p className="text-xl md:text-2xl text-white font-bold">30th - 31st January 2026</p>
+                                </div>
+
+
+
+                                {/* Tags */}
+                                <div className="mt-6 flex flex-wrap gap-4 text-sm font-mono text-gray-500">
                                     <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10">
                                         <span className="w-1.5 h-1.5 bg-green-500 rounded-full" /> SECTOR_04
                                     </div>
                                     <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10">
                                         <span className="w-1.5 h-1.5 bg-yellow-500 rounded-full" /> NST_BLDG
+                                    </div>
+                                    <div className="flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10">
+                                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full" /> 2_DAY_EVENT
                                     </div>
                                 </div>
                             </div>
