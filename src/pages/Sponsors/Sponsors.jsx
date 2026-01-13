@@ -758,70 +758,83 @@ const TierSection = () => {
     const tiers = [
         {
             name: 'TITLE_SPONSOR',
-            cost: '₹10,00,000',
+            cost: '₹5,00,000 INR',
             color: '#00fff9',
-            features: ['Naming Rights', 'Keynote Spot', 'Stage Logo', 'PR Release'],
+            features: ['Naming Rights', 'Top Logo Placement', 'Stage Logo', 'PR Activity'],
             fullDetails: [
-                "Exclusive naming rights as “TEKRON 2026 – Powered by [Title Sponsor]” with top-tier logo placement across all marketing materials, website (first fold), registration pages, brochures (250+ colleges, 15,000+ participants), stage assets, banners, and all event merchandise.",
-                "Opening keynote opportunity for the sponsor representative with brand recognition during the opening ceremony, closing ceremony, and before every major competition, supported by frequent anchor shoutouts throughout the festival.",
-                "Prime-location exhibition booth with expanded space, electricity, and seating, enabling product showcases, demos, lead generation, and high-engagement activities.",
-                "Strong digital presence through 3 dedicated Instagram posts, story mentions during festival days, logo placement on every Tekron post, and branding in the official theme video, aftermovie, sponsor AV, and all certificates.",
-                "Exclusive sponsor activities including one PR endorsement event with video and reel, one dedicated brand promotion reel, and opportunities for sign-ups, trials, recruitment, and lead capture.",
-                "25 VIP passes and 10 complimentary registrations.",
-                "Full press and media visibility with recognition as the Title Sponsor in all press releases, media coverage, and external outreach."
+                'Naming rights as "TEKRON 2.0 - Powered by [Title Sponsor]".',
+                'Top logo placement in the official brochure shared across 250+ colleges and 15,000+ participants, with a clickable hyperlink redirecting to your website.',
+                'Brand presence across the official TEKRON 2.0 website (homepage + sponsor section), and visibility on all TEKRON 2.0 creatives, posts, and announcements, with stage acknowledgment during inauguration and closing ceremonies.',
+                'Three Instagram feed posts, daily story mentions throughout the festival, and one exclusive promotional reel from the official TEKRON page featuring your brand/product (if provided).',
+                'Logo featured across all TEKRON 2.0 social media posts, official theme video, aftermovie, and certificates.',
+                'YouTube brand feature on the Newton School of Technology – ADYPU official channel (11K+ subscribers).',
+                'Logo exposure on the main stage backdrop, 5-8 high-visibility standees, venue banners, and official TEKRON merchandise worn by Core Committee (CC) and Organising Committee (OC) members.',
+                'Prime stall space at the event venue for direct brand engagement.',
+                'Dedicated PR activity and brand endorsement reel during the event.',
+                '25 complimentary all-access passes with priority access to the Inauguration and Closing Ceremonies, including an opportunity for a brief on-stage brand interaction.'
             ]
         },
         {
-            name: 'CO_SPONSOR',
-            cost: '₹5,00,000',
+            name: 'CO_POWERED_BY_SPONSOR',
+            cost: '₹1,00,000 INR',
             color: '#fbbf24',
-            features: ['Co-branding', 'Secondary Logo', 'Seminar Spot', 'Web Feature'],
+            features: ['Co-branding', 'Logo Mention', 'Social Posts', 'YouTube Feature'],
             fullDetails: [
-                "Co-branding rights as “TEKRON 2026 – In Association with [Co-Sponsor]” with prominent logo placement.",
-                "Seminar or Workshop slot (30-45 mins) for direct interaction with students.",
-                "Medium-sized exhibition booth in a high-traffic zone.",
-                "2 dedicated Instagram posts and logo in the official sponsor grid.",
-                "15 VIP passes and 5 complimentary registrations.",
-                "Recognition in local press releases and digital media kits."
+                'Naming rights as "Co-Powered By" for TEKRON 2.0.',
+                'Logo mention in the official brochure shared across 250+ colleges and 15,000+ participants, with a clickable hyperlink redirecting to your website.',
+                'Brand presence across official TEKRON 2.0 website (sponsor section) with redirect link, and acknowledgment before and after major events.',
+                'Two Instagram feed posts, daily story mentions during the festival days, and one promotional reel from the official TEKRON page featuring your brand/product (if provided).',
+                'Logo appearance across select TEKRON 2.0 social media posts, official theme video, and aftermovie.',
+                'YouTube brand feature on the Newton School of Technology – ADYPU official channel (11K+ subscribers).',
+                'Logo exposure on main banner standees (3-5), banners across multiple event venues, and official TEKRON merchandise worn by Core Committee (CC) and Organising Committee (OC) members.',
+                '15 complimentary passes with invitation to the Inauguration and Closing Ceremonies, including an opportunity for a brief brand interaction.'
             ]
         },
         {
-            name: 'GOLD_SPONSOR',
-            cost: '₹3,00,000',
-            color: '#fefefe',
-            features: ['Social Blast', 'Standard Booth', 'AV Mention', 'Poster Logo'],
+            name: 'ASSOCIATE_PARTNER',
+            cost: '₹50,000 INR',
+            color: '#a855f7',
+            features: ['Partner Recognition', 'Logo Mention', 'Social Story', 'Banner Exposure'],
             fullDetails: [
-                "Official recognition as a Gold Partner across digital and physical collateral.",
-                "Standard exhibition stall for branding and engagement.",
-                "1 dedicated social media shoutout and mention in the daily festival recap.",
-                "Logo on all event posters and standees.",
-                "10 VIP passes and 3 complimentary registrations."
+                'Naming rights as "Associate Partner" for TEKRON 2.0.',
+                'Logo mention in the official brochure, shared across 250+ colleges and 15,000+ participants.',
+                'Logo appearance on the official TEKRON 2.0 website sponsor section with redirect link.',
+                'One Instagram post on the official festival page featuring your logo and product/service images (if provided).',
+                'Story mentions from the official festival page during the festival days.',
+                'Logo featured in the official aftermovie of TEKRON 2.0.',
+                'YouTube brand mention on the Newton School of Technology – ADYPU official channel.',
+                'Logo exposure on the main banner standees placed across event venues (2-3).',
+                '10 complimentary passes for our event.'
             ]
         },
         {
-            name: 'SILVER_SPONSOR',
-            cost: '₹1,00,000',
-            color: '#94a3b8',
-            features: ['Cert. Branding', 'Brochure Logo', 'Web Grid', 'Social Shoutout'],
+            name: 'CONCERT_SPONSOR',
+            cost: 'Custom Package',
+            color: '#ec4899',
+            features: ['Live Experience Partner', 'Concert Branding', 'Stage Logo', 'Social Promotion'],
             fullDetails: [
-                "Logo placement on participant certificates (5,000+ copies).",
-                "Branding on the official festival website sponsor archive.",
-                "Shared social media story announcement.",
-                "5 VIP passes.",
-                "Inclusion in the official sponsorship brochure distributed to all 250+ colleges."
+                'Recognition as "Live Experience Partner" for TEKRON 2.0.',
+                'Logo mention in the official brochure shared across 250+ colleges and 15,000+ participants, and logo appearance on the official TEKRON 2.0 website (sponsor section) with redirect link.',
+                'Brand visibility across concert-specific creatives, promotions, and announcements, including two Instagram feed posts, concert-day story mentions, and one promotional reel from the official TEKRON page.',
+                'Logo featured on the concert stage backdrop, LED screens (if applicable), and venue banners, with stage acknowledgment and brand mention by the host/anchor during the concert.',
+                'Logo inclusion in the official concert aftermovie / TEKRON aftermovie, along with a YouTube brand mention in the concert recap or highlight video on the Newton School of Technology – ADYPU official channel.',
+                '20 complimentary passes including VIP / front-zone access (as applicable), with invitation to the event.'
             ]
         },
         {
-            name: 'IN_KIND',
+            name: 'BARTER_IN_KIND_PARTNER',
             cost: 'COLLATERALS',
             color: '#22c55e',
-            features: ['Beverage/Print', 'Media Rights', 'Mention Logo', 'Web Credit'],
+            features: ['Partner Recognition', 'Logo Mention', 'Social Posts', 'Event Acknowledgment'],
             fullDetails: [
-                "Exclusive product placement or service integration (e.g., Food, Beverage, Printing).",
-                "Official 'Powered by' status for specific event categories.",
-                "Branding on event-specific collaterals.",
-                "Digital credits on our partner page and social media mentions.",
-                "Collaboration opportunities for prize distribution."
+                'Recognition as "Barter / In-Kind Partner" for TEKRON 2.0.',
+                'Logo mention in the official brochure shared across 250+ colleges and 15,000+ participants.',
+                'Logo appearance on the official TEKRON 2.0 website (sponsor section) with redirect link.',
+                'One Instagram feed post on the official festival page featuring your brand/logo.',
+                'Logo appearance on select TEKRON 2.0 social media posts and inclusion in the official aftermovie.',
+                'Logo exposure on shared banner standees or designated partner branding areas at the venue (as applicable).',
+                'Acknowledgment during relevant event sessions or announcements.',
+                'Limited complimentary passes for the event (quantity as mutually agreed).'
             ]
         }
     ];
