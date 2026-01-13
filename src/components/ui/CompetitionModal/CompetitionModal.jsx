@@ -48,36 +48,40 @@ const CloseButton = styled.button`
   position: absolute;
   top: 12px;
   right: 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   width: 36px;
   height: 36px;
   border-radius: 50%;
   color: white;
-  font-size: 18px;
+  font-size: 20px;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   
   @media (min-width: 640px) {
     top: 16px;
     right: 16px;
-    width: 38px;
-    height: 38px;
-    font-size: 19px;
+    width: 40px;
+    height: 40px;
+    font-size: 22px;
   }
   
   @media (min-width: 768px) {
     top: 20px;
     right: 20px;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
+    width: 44px;
+    height: 44px;
+    font-size: 24px;
   }
 
   &:hover {
-    background: rgba(168, 85, 247, 0.4);
-    transform: rotate(90deg);
+    background: #a855f7;
+    border-color: #a855f7;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
   }
 `;
 
@@ -489,6 +493,40 @@ const Section = styled.div`
   }
 `;
 
+const formatContent = (content) => {
+  if (!content) return null;
+
+  const lines = content.split('\n');
+
+  return lines.map((line, index) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const phoneRegex = /(\b\d{10}\b)/g;
+
+    const parts = line.split(urlRegex);
+
+    const elements = parts.map((part, partIndex) => {
+      if (part.match(urlRegex)) {
+        return <a key={partIndex} href={part} target="_blank" rel="noopener noreferrer" style={{ color: '#a855f7', textDecoration: 'underline' }}>{part}</a>;
+      }
+
+      const phoneParts = part.split(phoneRegex);
+      return phoneParts.map((subPart, subPartIndex) => {
+        if (subPart.match(phoneRegex)) {
+          return <a key={`${partIndex}-${subPartIndex}`} href={`tel:${subPart}`} style={{ color: '#a855f7', textDecoration: 'underline' }}>{subPart}</a>;
+        }
+        return subPart;
+      });
+    });
+
+    return (
+      <React.Fragment key={index}>
+        {elements}
+        {index < lines.length - 1 && <br />}
+      </React.Fragment>
+    );
+  });
+};
+
 const CompetitionModal = ({ isOpen, onClose, data }) => {
 
   return (
@@ -542,7 +580,7 @@ const CompetitionModal = ({ isOpen, onClose, data }) => {
               {data.sections && data.sections.map((section, index) => (
                 <Section key={index}>
                   <h3>{section.title}</h3>
-                  {section.content && <p>{section.content}</p>}
+                  {section.content && <p>{formatContent(section.content)}</p>}
                   {section.items && (
                     <ul>
                       {section.items.map((item, i) => (
