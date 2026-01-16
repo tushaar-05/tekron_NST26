@@ -408,7 +408,7 @@ function App() {
                         */}
 
 
-                        <div className="relative z-20 h-full flex flex-col items-center justify-start sm:justify-center px-8 pt-20">
+                        <div className="relative z-20 h-full flex flex-col items-center justify-center sm:justify-center px-8 pt-0 sm:pt-20">
 
                             <h1
                                 className={`pixel-font text-center mb-4 sm:mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}
@@ -498,7 +498,7 @@ function App() {
 
 
                             {isDialogueOpen && (
-                                <div className="absolute bottom-[280px] right-[5px] w-[90%] max-w-[500px] sm:w-auto sm:max-w-none sm:left-auto sm:right-[10px] sm:bottom-[500px] z-50">
+                                <div className="hidden sm:block absolute bottom-[280px] right-[5px] w-[90%] max-w-[500px] sm:w-auto sm:max-w-none sm:left-auto sm:right-[10px] sm:bottom-[500px] z-50">
                                     <div className="dialogue-bubble px-2 py-1 sm:px-8 sm:py-6 relative">
 
                                         <button
@@ -583,7 +583,7 @@ function App() {
 
 
                             <div
-                                className="absolute bottom-[-20px] right-[-20px] sm:bottom-[-50px] sm:right-[-80px] z-30"
+                                className="hidden sm:block absolute bottom-[-20px] right-[-20px] sm:bottom-[-50px] sm:right-[-80px] z-30"
                                 onClick={() => setIsDialogueOpen(!isDialogueOpen)}
                                 onMouseMove={(e) => {
                                     const rect = e.currentTarget.getBoundingClientRect();
