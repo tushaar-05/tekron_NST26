@@ -377,6 +377,20 @@ function About() {
         },
         {
             id: 3,
+            name: 'Vansh Agarwal',
+            role: 'Registrations Team',
+            image: '/images/committee/vansh_agarwal.jpg',
+            color: '#3b82f6', // Blue
+            stats: [
+                { name: 'TECH', value: 40 },
+                { name: 'MGMT', value: 90 },
+                { name: 'CRTV', value: 65 },
+                { name: 'COMM', value: 85 },
+                { name: 'OPS', value: 98 }
+            ]
+        },
+        {
+            id: 4,
             name: 'Nihal C',
             role: 'Sponsorship Team',
             image: '/images/committee/nihal_c.jpg',
@@ -390,7 +404,7 @@ function About() {
             ]
         },
         {
-            id: 4,
+            id: 5,
             name: 'Rithwik Kuchana',
             role: 'Marketing Team',
             image: '/images/committee/rithwik_kuchna.jpg',
@@ -404,7 +418,7 @@ function About() {
             ]
         },
         {
-            id: 5,
+            id: 6,
             name: 'Sarthak Ghoderao',
             role: 'Comms Team',
             image: '/images/committee/sarthak_ghoderao.jpg',
@@ -418,7 +432,7 @@ function About() {
             ]
         },
         {
-            id: 6,
+            id: 7,
             name: 'Ayush Shukla',
             role: 'Hospitality Team',
             image: '/images/team/ayush.jpg',
@@ -432,7 +446,7 @@ function About() {
             ]
         },
         {
-            id: 7,
+            id: 8,
             name: 'Harshit Jain',
             role: 'Sponsorship Team',
             image: '/images/committee/harshit_jain.jpg',
@@ -446,7 +460,7 @@ function About() {
             ]
         },
         {
-            id: 8,
+            id: 9,
             name: 'Aditya Chopra',
             role: 'Cultural Team',
             image: '/images/committee/aditya_chopra.jpg',
@@ -460,7 +474,7 @@ function About() {
             ]
         },
         {
-            id: 9,
+            id: 10,
             name: 'Nilesh Nand Lal',
             role: 'Marketing Team',
             image: '/images/committee/nilesh.jpg',
@@ -471,20 +485,6 @@ function About() {
                 { name: 'CRTV', value: 92 },
                 { name: 'COMM', value: 95 },
                 { name: 'OPS', value: 80 }
-            ]
-        },
-        {
-            id: 10,
-            name: 'Vansh Agarwal',
-            role: 'Operations Team',
-            image: '/images/committee/vansh_agarwal.jpg',
-            color: '#3b82f6', // Blue
-            stats: [
-                { name: 'TECH', value: 40 },
-                { name: 'MGMT', value: 90 },
-                { name: 'CRTV', value: 65 },
-                { name: 'COMM', value: 85 },
-                { name: 'OPS', value: 98 }
             ]
         },
         {

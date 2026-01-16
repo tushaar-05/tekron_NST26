@@ -58,7 +58,7 @@ function Contact() {
 
     const coordinators = [
         { role: 'Tech. Head', name: 'Ved Bhadani', phone: '+91 95467 85861', email: 'ved.bhadani@adypu.edu.in', image: '/images/team/ved.jpg', id: 'OP-01' },
-        { role: 'Hospitality Head', name: 'Vansh Agarwal', phone: '+91 94110 68533', email: 'vansh.agarwal@adypu.edu.in', image: '/images/committee/vansh_agarwal.jpg', id: 'OP-02' },
+        { role: 'Registrations Head', name: 'Vansh Agarwal', phone: '+91 94110 68533', email: 'vansh.agarwal@adypu.edu.in', image: '/images/committee/vansh_agarwal.jpg', id: 'OP-02' },
         { role: 'Sponsorship Head', name: 'Harshit Jain', phone: '+91 74278 87050', email: 'harshit.jain@adypu.edu.in', image: '/images/committee/harshit_jain.jpg', id: 'OP-03' },
         { role: 'Marketing Head', name: 'Vamshi Krishna Pendyala', phone: '+91 91215 07280', email: 'vamshikrishna.pendyala@adypu.edu.in', image: '/images/committee/Vamshi.jpg', id: 'OP-04' },
     ];
