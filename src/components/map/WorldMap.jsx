@@ -80,7 +80,7 @@ function WorldMap() {
             label: 'HOME',
             route: '/',
             desktop: { x: 50, y: 50, size: 280 },
-            mobile: { x: 50, y: 46, size: 190 }
+            mobile: { x: 50, y: 48, size: 160 }
         },
         {
             id: 'contact',
@@ -88,7 +88,7 @@ function WorldMap() {
             label: 'CONTACT',
             route: '/contact',
             desktop: { x: 50, y: 15, size: 200 },
-            mobile: { x: 45, y: 9, size: 100 }
+            mobile: { x: 50, y: 12, size: 100 }
         },
         {
             id: 'comp',
@@ -96,7 +96,7 @@ function WorldMap() {
             label: 'COMPETITIONS',
             route: '/competition',
             desktop: { x: 75, y: 25, size: 220 },
-            mobile: { x: 60, y: 25, size: 120 }
+            mobile: { x: 80, y: 26, size: 110 }
         },
         {
             id: 'gallery',
@@ -104,7 +104,7 @@ function WorldMap() {
             label: 'GALLERY',
             route: '/gallery',
             desktop: { x: 75, y: 65, size: 220 },
-            mobile: { x: 69, y: 65, size: 120 }
+            mobile: { x: 78, y: 70, size: 110 }
         },
         {
             id: 'about',
@@ -112,7 +112,7 @@ function WorldMap() {
             label: 'ABOUT',
             route: '/about',
             desktop: { x: 50, y: 85, size: 200 },
-            mobile: { x: 50, y: 80, size: 120 }
+            mobile: { x: 50, y: 88, size: 110 }
         },
         {
             id: 'sponsors',
@@ -120,7 +120,7 @@ function WorldMap() {
             label: 'SPONSORS',
             route: '/sponsors',
             desktop: { x: 25, y: 65, size: 220 },
-            mobile: { x: 17, y: 60, size: 100 }
+            mobile: { x: 22, y: 70, size: 100 }
         },
         {
             id: 'events',
@@ -128,7 +128,7 @@ function WorldMap() {
             label: 'EVENTS',
             route: '/events',
             desktop: { x: 25, y: 25, size: 220 },
-            mobile: { x: 20, y: 25, size: 110 }
+            mobile: { x: 20, y: 26, size: 110 }
         }
     ];
 
@@ -214,7 +214,8 @@ function WorldMap() {
 
     // Generate Space Debris (Refined for continuous circular motion)
     const debris = React.useMemo(() => {
-        return Array.from({ length: 60 }).map((_, i) => ({ // Reduced count from 108 to 60 for perf
+        const count = isMobile ? 20 : 60; // Reduced count for mobile
+        return Array.from({ length: count }).map((_, i) => ({
             id: i,
             x: Math.random() * 100,
             y: Math.random() * 100,
@@ -224,7 +225,7 @@ function WorldMap() {
             width: Math.random() * 100 + 50,
             height: Math.random() * 80 + 40,
         }));
-    }, []);
+    }, [isMobile]);
 
     // OPTIMIZATION: Only preload Home island and background primarily
     const initialAssets = [homeIsland, '/images/map/waterFinal.webp'];
@@ -297,28 +298,28 @@ function WorldMap() {
                 <motion.img
                     src="/images/map/cloud-1.png"
                     alt=""
-                    className="absolute top-[-20px] sm:-top-20 left-[-20px] sm:-left-20 w-[160px] sm:w-[400px] mix-blend-screen param-cloud"
+                    className="absolute top-0 sm:-top-20 left-0 sm:-left-20 w-[140px] sm:w-[400px] mix-blend-screen param-cloud opacity-80 sm:opacity-100"
                     style={{ x: cloud1X, y: cloud1Y }}
                 />
                 {/* Top Right - Cloud 2 */}
                 <motion.img
                     src="/images/map/clouds-2.png"
                     alt=""
-                    className="absolute top-[-20px] sm:-top-32 right-[-20px] sm:-right-10 w-[160px] sm:w-[500px] mix-blend-screen param-cloud"
+                    className="absolute top-0 sm:-top-32 right-0 sm:-right-10 w-[140px] sm:w-[500px] mix-blend-screen param-cloud opacity-80 sm:opacity-100"
                     style={{ x: cloud2X, y: cloud2Y }}
                 />
                 {/* Bottom Left - Cloud 3 */}
                 <motion.img
                     src="/images/map/clouds-3.png"
                     alt=""
-                    className="absolute bottom-[-20px] sm:-bottom-20 left-[-20px] sm:-left-10 w-[185px] sm:w-[450px] mix-blend-screen param-cloud"
+                    className="absolute bottom-0 sm:-bottom-20 left-0 sm:-left-10 w-[160px] sm:w-[450px] mix-blend-screen param-cloud opacity-80 sm:opacity-100"
                     style={{ x: cloud3X, y: cloud3Y }}
                 />
                 {/* Bottom Right - Cloud 4 */}
                 <motion.img
                     src="/images/map/clouds-4.png"
                     alt=""
-                    className="absolute bottom-[-20px] sm:-bottom-32 right-[-20px] sm:-right-20 w-[145px] sm:w-[550px] mix-blend-screen param-cloud"
+                    className="absolute bottom-0 sm:-bottom-32 right-0 sm:-right-20 w-[120px] sm:w-[550px] mix-blend-screen param-cloud opacity-80 sm:opacity-100"
                     style={{ x: cloud4X, y: cloud4Y }}
                 />
             </div>
@@ -351,13 +352,17 @@ function WorldMap() {
             <div className="absolute inset-0 z-10 pointer-events-none">
                 <AnimatePresence>
                     {(phase === 'stabilized' || phase === 'connected') && islands.map((island) => {
+                        const homeIsland = islands.find(i => i.id === 'home');
+                        const homeX = homeIsland ? homeIsland.x : 50;
+                        const homeY = homeIsland ? homeIsland.y : 50;
+
                         if (island.id === 'home' || !visibleIslands.includes(island.id)) return null;
 
                         return Array.from({ length: 8 }).map((_, k) => (
                             <motion.div
                                 key={`${island.id}-stream-${k}`}
                                 className="absolute bg-white rounded-full"
-                                initial={{ left: '50%', top: '50%', opacity: 0, scale: 0.5 }}
+                                initial={{ left: `${homeX}%`, top: `${homeY}%`, opacity: 0, scale: 0.5 }}
                                 animate={{
                                     left: `${island.x}%`,
                                     top: `${island.y}%`,
