@@ -99,7 +99,7 @@ function Contact() {
                     {/* Hero Header */}
                     <motion.div variants={itemVariants} className="text-center space-y-2 relative">
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-32 bg-purple-500/5 blur-[100px] pointer-events-none" />
-                        <h1 className="text-5xl md:text-7xl lg:text-9xl font-black tracking-tighter glitch-text-pixel text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" data-text="CONTACT_US">
+                        <h1 className="text-4xl md:text-7xl lg:text-9xl font-black tracking-tighter glitch-text-pixel text-white drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]" data-text="CONTACT_US">
                             CONTACT_US
                         </h1>
                         <div className="flex items-center justify-center gap-4 text-cyan-400/80 text-xl tracking-[0.5em] uppercase">
@@ -152,7 +152,7 @@ function Contact() {
 
                         <div className="grid grid-cols-1 md:grid-cols-2">
                             {/* Email Sector */}
-                            <div className="p-8 border-b md:border-b-0 md:border-r border-white/10 relative group">
+                            <div className="p-4 md:p-8 border-b md:border-b-0 md:border-r border-white/10 relative group">
                                 <div className="absolute top-0 left-0 w-full h-full bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                 <div className="flex items-start justify-between mb-8">
@@ -183,7 +183,7 @@ function Contact() {
                             </div>
 
                             {/* Helpline Sector */}
-                            <div className="p-8 relative group">
+                            <div className="p-4 md:p-8 relative group">
                                 <div className="absolute top-0 right-0 w-full h-full bg-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
                                 <div className="flex items-start justify-between mb-8">
@@ -238,7 +238,7 @@ function Contact() {
                             <span className="text-white/30 text-lg mb-1">directory_v2.4</span>
                         </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
                             {coordinators.map((member, index) => (
                                 <motion.div
                                     key={index}
@@ -287,7 +287,7 @@ function Contact() {
 
                         {/* Venue / Map Terminal */}
                         <div className="flex flex-col gap-6">
-                            <div className="bg-white/5 border border-white/10 p-8 relative overflow-hidden group">
+                            <div className="bg-white/5 border border-white/10 p-5 md:p-8 relative overflow-hidden group">
                                 <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 blur-2xl rounded-full" />
                                 <h3 className="text-2xl text-purple-300 uppercase tracking-widest mb-6">Venue_Details</h3>
 
@@ -352,7 +352,7 @@ function Contact() {
                             <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-purple-400 z-20" />
                             <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-purple-400 z-20" />
 
-                            <div className="h-full bg-black/40 border border-white/10 p-8 md:p-12 relative overflow-hidden">
+                            <div className="h-full bg-black/40 border border-white/10 p-5 md:p-8 lg:p-12 relative overflow-hidden">
                                 {/* Terminal Header */}
                                 <div className="flex items-center justify-between mb-8 border-b border-white/10 pb-4">
                                     <div className="flex gap-2">
