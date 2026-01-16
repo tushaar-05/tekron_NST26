@@ -170,7 +170,20 @@ const AnimatedCounter = ({ target }) => {
         };
         requestAnimationFrame(animate);
     }, [target]);
-    return <span>{count.toLocaleString()}</span>;
+
+    const formatShorthand = (num) => {
+        if (num >= 1000000) {
+            const val = num / 1000000;
+            return (val % 1 === 0 ? val.toFixed(0) : val.toFixed(1)) + 'M';
+        }
+        if (num >= 1000) {
+            const val = num / 1000;
+            return (val % 1 === 0 ? val.toFixed(0) : val.toFixed(1)) + 'k';
+        }
+        return num.toLocaleString();
+    };
+
+    return <span>{formatShorthand(count)}</span>;
 };
 
 // --- 🎯 1. Hero Section ---
@@ -1816,14 +1829,14 @@ const ReachStats = () => {
                             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
                             <span className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.1.0_HISTORICAL_DATA</span>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                             {historicalStats.map((stat, i) => (
-                                <BentoBlock key={i} className="p-8 border-white/5 bg-black/40">
-                                    <div className="text-3xl mb-4">{stat.icon}</div>
-                                    <div className="text-3xl font-bold pixel-font mb-2" style={{ color: stat.color }}>
+                                <BentoBlock key={i} className="p-4 md:p-8 border-white/5 bg-black/40">
+                                    <div className="text-2xl sm:text-3xl mb-3">{React.cloneElement(stat.icon, { className: 'w-6 h-6 sm:w-8 h-8' })}</div>
+                                    <div className="text-xl sm:text-3xl font-bold pixel-font mb-1 truncate" style={{ color: stat.color }}>
                                         <AnimatedCounter target={stat.value} />{stat.suffix}
                                     </div>
-                                    <div className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">{stat.label}</div>
+                                    <div className="text-[7px] sm:text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">{stat.label}</div>
                                 </BentoBlock>
                             ))}
                         </div>
@@ -1835,14 +1848,14 @@ const ReachStats = () => {
                             <div className="w-2 h-2 rounded-full bg-blue-500" />
                             <span className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.2.6_PROJECTED_TARGETS</span>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                             {targetStats.map((stat, i) => (
-                                <BentoBlock key={i} className="p-8 border-white/5 bg-black/40">
-                                    <div className="text-3xl mb-4">{stat.icon}</div>
-                                    <div className="text-3xl font-bold pixel-font mb-2" style={{ color: stat.color }}>
+                                <BentoBlock key={i} className="p-4 md:p-8 border-white/5 bg-black/40">
+                                    <div className="text-2xl sm:text-3xl mb-3">{React.cloneElement(stat.icon, { className: 'w-6 h-6 sm:w-8 h-8' })}</div>
+                                    <div className="text-xl sm:text-3xl font-bold pixel-font mb-1 truncate" style={{ color: stat.color }}>
                                         <AnimatedCounter target={stat.value} />{stat.suffix}
                                     </div>
-                                    <div className="text-[9px] font-mono text-white/30 uppercase tracking-[0.3em]">{stat.label}</div>
+                                    <div className="text-[7px] sm:text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">{stat.label}</div>
                                 </BentoBlock>
                             ))}
                         </div>
