@@ -96,7 +96,7 @@ function WorldMap() {
             label: 'COMPETITIONS',
             route: '/competition',
             desktop: { x: 75, y: 25, size: 220 },
-            mobile: { x: 80, y: 26, size: 110 }
+            mobile: { x: 72, y: 26, size: 110 }
         },
         {
             id: 'gallery',
@@ -104,7 +104,7 @@ function WorldMap() {
             label: 'GALLERY',
             route: '/gallery',
             desktop: { x: 75, y: 65, size: 220 },
-            mobile: { x: 78, y: 70, size: 110 }
+            mobile: { x: 72, y: 70, size: 110 }
         },
         {
             id: 'about',
@@ -120,7 +120,7 @@ function WorldMap() {
             label: 'SPONSORS',
             route: '/sponsors',
             desktop: { x: 25, y: 65, size: 220 },
-            mobile: { x: 22, y: 70, size: 100 }
+            mobile: { x: 28, y: 70, size: 100 }
         },
         {
             id: 'events',
@@ -128,7 +128,7 @@ function WorldMap() {
             label: 'EVENTS',
             route: '/events',
             desktop: { x: 25, y: 25, size: 220 },
-            mobile: { x: 20, y: 26, size: 110 }
+            mobile: { x: 28, y: 26, size: 110 }
         }
     ];
 
@@ -492,12 +492,12 @@ function WorldMap() {
                                         initial={{ opacity: 0, y: 10, rotateX: 90 }}
                                         animate={{ opacity: 1, y: 0, rotateX: 0 }}
                                         transition={{ delay: 0.5, type: 'spring' }}
-                                        className="absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap"
+                                        className="absolute -bottom-8 sm:-bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap"
                                         style={{ transformStyle: 'preserve-3d', transform: 'translateZ(20px)' }}
                                     >
-                                        <div className="flex flex-col items-center gap-1">
-                                            <div className="w-1 h-8 bg-gradient-to-b from-white/50 to-transparent" />
-                                            <span className="text-lg font-bold text-white tracking-[0.2em] bg-black/40 px-3 py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg" style={{ fontFamily: "'VT323', monospace" }}>
+                                        <div className="flex flex-col items-center gap-0.5 sm:gap-1">
+                                            <div className="w-1 h-4 sm:h-8 bg-gradient-to-b from-white/50 to-transparent" />
+                                            <span className="text-sm sm:text-lg font-bold text-white tracking-[0.2em] bg-black/40 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full backdrop-blur-md border border-white/10 shadow-lg" style={{ fontFamily: "'VT323', monospace" }}>
                                                 {island.label}
                                             </span>
                                         </div>
