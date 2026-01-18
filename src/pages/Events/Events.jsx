@@ -159,9 +159,8 @@ export default function Events() {
   // Events data
   const events = [
     { id: 1, title: 'Robotics Workshop', category: 'Workshop', image: '/images/events/robotics.png' },
-    { id: 2, title: 'Cyber Security Workshop', category: 'Workshop', image: '/images/events/cybersecurity.png' },
-    { id: 3, title: 'Among Us - Real Life', category: 'Event', image: '/images/events/amongus.png' },
-    { id: 4, title: 'Speed Dating', category: 'Event', image: '/images/events/speeddating.png' },
+    { id: 3, title: 'Sector of Scilence', category: 'Event', image: '/images/events/amongus.png' },
+    { id: 4, title: 'Dil Jale', category: 'Event', image: '/images/events/speeddating.png' },
     { id: 5, title: 'Live Concert DJ Night', category: 'Event', image: '/images/events/djnight.png' },
   ];
 
