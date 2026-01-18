@@ -332,12 +332,13 @@ function Contact() {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ duration: 1 }}
-                                    src="https://maps.google.com/maps?width=100%25&height=600&hl=en&q=Ajeenkya%20DY%20Patil%20University,%20Charholi%20Budruk,%20Pune&t=&z=15&ie=UTF8&iwloc=B&output=embed"
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3854.7980601043187!2d73.90934667520087!3d18.621257666090994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2c71e08905091%3A0x51ca0d931361c1bc!2sAjeenkya%20DY%20Patil%20University!5e1!3m2!1sen!2sin!4v1768762920677!5m2!1sen!2sin"
                                     width="100%"
                                     height="100%"
                                     style={{ border: 0 }}
                                     allowFullScreen=""
                                     loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
                                     title="Map"
                                     className="w-full h-full grayscale-0 invert-0 contrast-100 opacity-100"
                                 />
