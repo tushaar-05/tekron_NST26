@@ -77,7 +77,7 @@ function App() {
 
     const dialogues = [
         {
-            text: "Welcome to TEKRON 2026! Join us for cutting-edge tech talks, AI innovations."
+            text: "Welcome to TEKRON 2.0! Join us for cutting-edge tech talks, AI innovations."
         },
         {
             text: "Network with industry leaders, attend hands-on workshops, and explore the future of technology. Register now to secure your spot!"
@@ -427,7 +427,9 @@ function App() {
                                 <span className="pixel-tech-glow">TEKRON</span>
                                 <span className="text-purple-500 text-[40px] sm:text-[60px]" style={{
                                     textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.4)',
-                                }}>2026</span>
+                                    letterSpacing: '0.02em',
+                                    marginTop: '-0.1em'
+                                }}>2.0</span>
                             </h1>
 
 
@@ -474,12 +476,12 @@ function App() {
                                     className="pixel-font text-center leading-relaxed px-4 sm:px-0"
                                     style={{
                                         fontSize: 'clamp(7.5px, 0.9vw, 14px)',
-                                        color: '#e9e5eeff',
+                                        color: '#f5f1ff',
                                         lineHeight: '1.8',
-                                        textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 15px rgba(200, 182, 226, 0.3)',
+                                        textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7), 0 0 20px rgba(168, 85, 247, 0.4)',
                                     }}
                                 >
-                                    Step into the future at TEKRON 2026 Explore AI, cybersecurity, and more—through hands-on workshops, bold ideas, and epic networking. Don’t just watch the future. Be part of it.
+                                    Tekron is a premier tech fest that celebrates innovation, creativity, and problem-solving. It brings together tech enthusiasts, developers, designers, and innovators to compete, collaborate, and explore cutting-edge technologies. Through exciting events, workshops, and challenges, Tekron aims to ignite curiosity, encourage learning, and inspire the next generation of technologists.
                                 </p>
                             </div>
 

@@ -108,11 +108,11 @@ function Loading({ onLoadingComplete }) {
                     style={{
                         fontSize: 'clamp(20px, 4vw, 40px)',
                         color: '#a855f7',
-                        letterSpacing: '0.2em',
+                        letterSpacing: '0.05em',
                         textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 20px rgba(168, 85, 247, 0.5)',
                     }}
                 >
-                    2026
+                    2.0
                 </div>
 
 
@@ -214,7 +214,7 @@ function Loading({ onLoadingComplete }) {
                     opacity: 0.6,
                 }}
             >
-                v2.0.26
+                v2.0
             </div>
 
             <div

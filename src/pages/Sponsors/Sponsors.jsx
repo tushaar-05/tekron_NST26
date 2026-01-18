@@ -190,7 +190,7 @@ const AnimatedCounter = ({ target }) => {
 const HeroSection = () => (
     <Section className="min-h-[60vh] flex flex-col items-center justify-center text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-            <PixelLabel color="#00fff9">INITIATING PARTNERSHIP HUB // 2026</PixelLabel>
+            <PixelLabel color="#00fff9">INITIATING PARTNERSHIP HUB // 2.0</PixelLabel>
             <h1 className="text-4xl sm:text-5xl md:text-8xl font-bold pixel-font leading-tight mb-8"
                 style={{
                     color: '#fff',
@@ -320,7 +320,7 @@ const WhySponsor = () => {
                                 </div>
 
                                 <p className="font-mono text-white/70 leading-relaxed text-sm sm:text-base mb-6">
-                                    TEKRON 2026 is an <span className="text-purple-400 font-bold">immersive sandbox</span> for technical excellence.
+                                    TEKRON 2.0 is an <span className="text-purple-400 font-bold">immersive sandbox</span> for technical excellence.
                                 </p>
 
                                 <p className="font-mono text-white/50 leading-relaxed text-xs sm:text-sm">
@@ -1809,7 +1809,7 @@ const ReachStats = () => {
         { label: '1.0_FOOTFALL', value: 5000, suffix: '+', icon: <Footprints className="w-8 h-8 text-yellow-500" />, color: '#fbbf24' }
     ];
     const targetStats = [
-        { label: '2026_EXPECTED_FOOTFALL', value: 10000, suffix: '+', icon: <Users className="w-8 h-8 text-purple-500" />, color: '#a855f7' },
+        { label: '2.0_EXPECTED_FOOTFALL', value: 10000, suffix: '+', icon: <Users className="w-8 h-8 text-purple-500" />, color: '#a855f7' },
         { label: 'COLLEGES_NODES', value: 50, suffix: '+', icon: <Building2 className="w-8 h-8 text-cyan-500" />, color: '#00fff9' },
         { label: 'TOTAL_IMPRESSIONS', value: 1000000, suffix: '+', icon: <TrendingUp className="w-8 h-8 text-pink-500" />, color: '#ec4899' }
     ];
@@ -1842,11 +1842,11 @@ const ReachStats = () => {
                         </div>
                     </div>
 
-                    {/* Tekron 2026 Projected Stats */}
+                    {/* Tekron 2.0 Projected Stats */}
                     <div>
                         <div className="flex items-center gap-4 mb-10">
                             <div className="w-2 h-2 rounded-full bg-blue-500" />
-                            <span className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.2.6_PROJECTED_TARGETS</span>
+                            <span className="text-[8px] sm:text-[10px] font-mono text-white/40 uppercase tracking-[0.4em]">v.2.0_PROJECTED_TARGETS</span>
                         </div>
                         <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                             {targetStats.map((stat, i) => (

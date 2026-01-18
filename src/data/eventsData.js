@@ -4,7 +4,7 @@ export const competitions = [
         title: 'Hackron',
         category: 'Competition',
         image: '/images/events/hackron.png',
-        description: 'Agentic AI Hackathon 2026 is a 24-hour offline hackathon where students build real AI agents capable of thinking, planning, using tools, and completing tasks autonomously. Join the future of AI — Agentic Systems — through hands-on learning and competitive building.',
+        description: 'Agentic AI Hackathon 2.0 is a 24-hour offline hackathon where students build real AI agents capable of thinking, planning, using tools, and completing tasks autonomously. Join the future of AI — Agentic Systems — through hands-on learning and competitive building.',
         teamSize: '3-5 Members',
         date: '30th - Jan - 2026',
         prizePool: '₹70,000',
