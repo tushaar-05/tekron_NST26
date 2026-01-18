@@ -544,7 +544,7 @@ function About() {
 
     const stats = {
         events: 20,
-        participants: 1500,
+        participants: 5000,
         projects: 25,
         hours: 10000
     };
@@ -628,7 +628,7 @@ function About() {
                         <div className="text-center group cursor-default">
                             <div className="text-[10px] sm:text-xs text-purple-400 mb-1 pixel-font tracking-widest group-hover:text-yellow-400 transition-colors">BOUNTY</div>
                             <div className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-yellow-400 pixel-font" style={{ textShadow: '0 0 15px rgba(250, 204, 21, 0.5)' }}>
-                                ₹8L
+                                ₹4L
                                 <span className="text-purple-500">+</span>
                             </div>
                         </div>
@@ -702,9 +702,9 @@ function About() {
                                     <div className="w-1 h-1 bg-cyan-400 rounded-full animate-pulse"></div>
                                     <p className="text-cyan-300/60 font-mono text-xs tracking-wider">INITIALIZING...</p>
                                 </div>
-                                <p className="text-cyan-50/90 text-base md:text-lg leading-relaxed font-light">
-                                    To render a future where technology isn't just a tool, but a <span className="text-cyan-300 font-semibold">playground</span>.
-                                    We envision a sandbox where students <span className="text-cyan-400 font-bold bg-cyan-400/10 px-2 py-0.5 rounded">compile, debug, and deploy</span> ideas to change the world.
+                                <p className="text-cyan-50/90 text-xs md:text-sm leading-relaxed font-light">
+                                    To create a future where technology is not just <span className="text-cyan-300 font-semibold">learned</span>, but <span className="text-cyan-300 font-semibold">experienced</span>.
+                                    Tekron envisions a <span className="text-cyan-400 font-bold bg-cyan-400/10 px-2 py-0.5 rounded">playground of innovation</span> where curiosity fuels creation, students experiment fearlessly, and ideas evolve into real-world solutions that shape tomorrow.
                                 </p>
 
                                 {/* Progress Bar Effect */}
@@ -787,9 +787,9 @@ function About() {
                                     <div className="w-1 h-1 bg-pink-400 rounded-full animate-pulse"></div>
                                     <p className="text-pink-300/60 font-mono text-xs tracking-wider">EXECUTING...</p>
                                 </div>
-                                <p className="text-pink-50/90 text-base md:text-lg leading-relaxed font-light">
-                                    To equip the next generation with the ultimate <span className="text-pink-300 font-semibold">inventory</span>: <span className="text-pink-400 font-bold bg-pink-400/10 px-2 py-0.5 rounded">Skills, Network, and Opportunity</span>.
-                                    Fostering a guild of collaborators ready to patch the bugs of tomorrow.
+                                <p className="text-pink-50/90 text-xs md:text-sm leading-relaxed font-light">
+                                    To empower the next generation of innovators by providing the <span className="text-pink-300 font-semibold">skills, network, and opportunities</span> needed to thrive in a tech-driven world.
+                                    Through competitions, workshops, and collaborative challenges, Tekron aims to build a <span className="text-pink-400 font-bold bg-pink-400/10 px-2 py-0.5 rounded">community</span> that codes boldly, thinks critically, and debugs the problems of the future—together.
                                 </p>
 
                                 {/* Progress Bar Effect */}

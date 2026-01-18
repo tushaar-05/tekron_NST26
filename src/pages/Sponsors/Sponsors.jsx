@@ -319,13 +319,17 @@ const WhySponsor = () => {
                                     <span className="text-[10px] font-mono text-purple-400 uppercase tracking-[0.3em]">SYSTEM_ACTIVE</span>
                                 </div>
 
-                                <p className="font-mono text-white/70 leading-relaxed text-sm sm:text-base mb-6">
-                                    TEKRON 2.0 is an <span className="text-purple-400 font-bold">immersive sandbox</span> for technical excellence.
+                                <p className="font-mono text-white/70 leading-relaxed text-xs sm:text-sm mb-6">
+                                    Tekron is not just an event—it is a continuously evolving tech ecosystem.
+                                    Built on innovation, collaboration, and scale, Tekron has established itself as a platform where ideas meet execution and talent meets opportunity.
                                 </p>
 
-                                <p className="font-mono text-white/50 leading-relaxed text-xs sm:text-sm">
-                                    With a legacy of <span className="text-cyan-400 font-bold">250+ participating colleges</span> and a reach that defines the digital archive of tomorrow,
-                                    we offer a unique gateway to the most talented minds in the industry.
+                                <p className="font-mono text-white/50 leading-relaxed text-[10px] sm:text-xs mb-6">
+                                    With strong year-on-year growth, multi-college participation, and large-scale digital outreach, Tekron has created a legacy that extends far beyond event days. Every edition strengthens its impact—connecting brands with a highly engaged, future-ready audience of engineers, developers, creators, and innovators.
+                                </p>
+
+                                <p className="font-mono text-cyan-400/80 leading-relaxed text-[10px] sm:text-xs">
+                                    Tekron 2.0 represents the next milestone in this journey—bigger reach, deeper engagement, and smarter brand integration.
                                 </p>
 
                                 {/* Data Stream Effect */}
@@ -440,40 +444,39 @@ const WhySponsor = () => {
 const Benefits = () => {
     const items = [
         {
-            title: 'BRAND VISIBILITY',
-            desc: 'Dominant placement on banners, stages, and the main ecosystem backdrop with guaranteed prime positioning.',
-            icon: <BarChart3 className="w-10 h-10" />,
+            title: 'High-Impact Visibility',
+            desc: 'Strategic branding across on-ground venues, digital platforms, merchandise, and media ensures maximum recall before, during, and after the fest.',
+            icon: <Sparkles className="w-10 h-10" />,
             color: '#a855f7',
-            metric: '95%',
-            metricLabel: 'EXPOSURE',
             gradient: 'from-purple-500/20 via-purple-600/10 to-transparent'
         },
         {
-            title: 'SOCIAL PROMOTION',
-            desc: 'Strategic multi-channel social media blasts and partner feature stories across all platforms.',
-            icon: <Smartphone className="w-10 h-10" />,
+            title: 'Targeted Tech Audience',
+            desc: 'Direct access to thousands of students from top colleges—developers, innovators, and early adopters who actively engage with technology-driven brands.',
+            icon: <Target className="w-10 h-10" />,
             color: '#3b82f6',
-            metric: '700K+',
-            metricLabel: 'REACH',
             gradient: 'from-blue-500/20 via-blue-600/10 to-transparent'
         },
         {
-            title: 'TALENT PIPELINE',
-            desc: 'Direct recruitment access and lead generation through technical challenges and competitions.',
-            icon: <Target className="w-10 h-10" />,
+            title: 'Multi-Channel Integration',
+            desc: 'From physical presence and branded assets to social media amplification and web visibility, Tekron delivers seamless cross-platform exposure.',
+            icon: <Globe className="w-10 h-10" />,
+            color: '#00fff9',
+            gradient: 'from-cyan-500/20 via-cyan-600/10 to-transparent'
+        },
+        {
+            title: 'Association with Innovation',
+            desc: 'Align your brand with cutting-edge competitions, hackathons, workshops, and live tech experiences that reflect progress, creativity, and problem-solving.',
+            icon: <Rocket className="w-10 h-10" />,
             color: '#ec4899',
-            metric: '10K+',
-            metricLabel: 'STUDENTS',
             gradient: 'from-pink-500/20 via-pink-600/10 to-transparent'
         },
         {
-            title: 'DIGITAL REACH',
-            desc: 'Logo integration across the official website, posters, certificates, and all digital assets.',
-            icon: <Globe className="w-10 h-10" />,
-            color: '#00fff9',
-            metric: '1M+',
-            metricLabel: 'IMPRESSIONS',
-            gradient: 'from-cyan-500/20 via-cyan-600/10 to-transparent'
+            title: 'Long-Term Brand Equity',
+            desc: 'Tekron isn’t a one-time campaign—it’s a growing legacy. Sponsors become part of a story that continues to scale with every edition.',
+            icon: <TrendingUp className="w-10 h-10" />,
+            color: '#fbbf24',
+            gradient: 'from-yellow-500/20 via-yellow-600/10 to-transparent'
         }
     ];
 
@@ -537,23 +540,20 @@ const Benefits = () => {
                             <PixelLabel color="#a855f7">STRATEGIC_ADVANTAGE</PixelLabel>
                         </div>
                         <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold pixel-font text-white mb-6 leading-none tracking-tighter">
-                            Why Partner?
+                            WHY PARTNER WITH TEKRON
                         </h2>
                         <div className="flex items-center gap-3">
                             <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" style={{
                                 boxShadow: '0 0 15px #a855f7'
                             }} />
                             <span className="text-[10px] font-mono text-white/30 uppercase tracking-[0.3em]">
-                                INTEGRATION_PROTOCOL_ACTIVE
+                                ALIGNMENT_PROTOCOL_ACTIVE
                             </span>
                         </div>
                     </div>
                     <div className="lg:max-w-md">
                         <p className="font-mono text-white/40 text-sm leading-relaxed">
-                            Integrating your core identity into the technical archive of tomorrow.
-                            <span className="block mt-2 text-white/60">
-                                Join the ecosystem that connects <span className="text-purple-400 font-bold">10,000+ students</span> with industry leaders.
-                            </span>
+                            Partnering with Tekron means aligning your brand with India’s new-age tech culture and the next generation of decision-makers.
                         </p>
                     </div>
                 </div>
@@ -645,21 +645,6 @@ const Benefits = () => {
                                         />
                                     </div>
 
-                                    {/* Metric Display */}
-                                    <div className="text-right">
-                                        <div
-                                            className="text-2xl lg:text-3xl font-bold pixel-font mb-1 transition-all duration-500"
-                                            style={{
-                                                color: benefit.color,
-                                                textShadow: `0 0 20px ${benefit.color}40`
-                                            }}
-                                        >
-                                            {benefit.metric}
-                                        </div>
-                                        <div className="text-[9px] font-mono text-white/30 uppercase tracking-[0.2em]">
-                                            {benefit.metricLabel}
-                                        </div>
-                                    </div>
                                 </div>
 
                                 {/* Title */}
@@ -1935,9 +1920,8 @@ const Sponsors = () => {
                 <Benefits />
                 <TierSection />
                 <VisibilityMatrix />
-
-                <StarPower />
                 <HeritagePartners />
+                <StarPower />
                 <ReachStats />
                 <ContactBrochure />
                 <Footer />
