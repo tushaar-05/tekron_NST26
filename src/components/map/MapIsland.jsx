@@ -43,13 +43,18 @@ const MapIsland = ({
                 alt={alt}
                 onLoad={handleLoad}
                 onError={() => setError(true)}
+                loading={isHome ? "eager" : "lazy"} // Prioritize home island
+                decoding="async" // Decode images asynchronously
+                fetchpriority={isHome ? "high" : "low"} // Browser hint for priority
                 className={`pixel-art drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] ${isHome ? 'brightness-125' : ''}`}
                 style={{
                     width: size,
                     display: 'block',
                     opacity: isLoaded ? 1 : 0,
-                    transition: 'opacity 0.5s ease-out',
-                    willChange: 'transform' // Optimize for GPU
+                    transition: 'opacity 0.3s ease-out',
+                    willChange: 'transform, opacity',
+                    imageRendering: 'crisp-edges', // Better for pixel art
+                    transform: 'translateZ(0)', // Force GPU acceleration
                 }}
             />
         </div>

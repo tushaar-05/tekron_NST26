@@ -4,14 +4,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import MapIsland from './MapIsland';
 import WorldLoading from './WorldLoading';
 
-// Import optimized island images
-const homeIsland = '/images/map/islands/home_pixel.png';
-const aboutIsland = '/images/map/islands/about_pixel.webp';
-const compIsland = '/images/map/islands/comp_pixel.png';
-const contactIsland = '/images/map/islands/contact_pixel.png';
-const eventsIsland = '/images/map/islands/events_pixel.png';
-const galleryIsland = '/images/map/islands/gallery_pixel.png';
-const sponsorsIsland = '/images/map/islands/sponsors_pixel.png';
+// Import optimized island images - Using WebP where available for better performance
+const homeIsland = '/images/map/islands/New/home_pixel.webp';
+const aboutIsland = '/images/map/islands/New/about_pixel.webp';
+const compIsland = '/images/map/islands/New/comp_pixel.webp';
+const contactIsland = '/images/map/islands/New/contact_pixel.webp';
+const eventsIsland = '/images/map/islands/New/events_pixel.webp';
+const galleryIsland = '/images/map/islands/New/gallery_pixel.webp';
+const sponsorsIsland = '/images/map/islands/New/sponsors_pixel.webp';
 
 function WorldMap() {
     const navigate = useNavigate();
