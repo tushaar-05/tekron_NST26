@@ -516,6 +516,34 @@ function About() {
                 { name: 'OPS', value: 75 }
             ]
         },
+        {
+            id: 13,
+            name: 'Premansh',
+            role: 'Operations Team',
+            image: '/images/committee/premansh.jpg',
+            color: '#ef4444', // Red (matching his suit)
+            stats: [
+                { name: 'TECH', value: 45 },
+                { name: 'MGMT', value: 85 },
+                { name: 'CRTV', value: 60 },
+                { name: 'COMM', value: 90 },
+                { name: 'OPS', value: 95 }
+            ]
+        },
+        {
+            id: 14,
+            name: 'Yashpreet',
+            role: 'Operations Team',
+            image: '/images/committee/yashpreet.jpg',
+            color: '#3b82f6', // Blue
+            stats: [
+                { name: 'TECH', value: 40 },
+                { name: 'MGMT', value: 80 },
+                { name: 'CRTV', value: 70 },
+                { name: 'COMM', value: 85 },
+                { name: 'OPS', value: 92 }
+            ]
+        },
 
     ];
 
