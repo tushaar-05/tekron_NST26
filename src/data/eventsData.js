@@ -381,7 +381,7 @@ export const competitions = [
             },
             {
                 title: 'Contact & Community',
-                content: 'Vansh Agarwal – 7037599455 / 9411068533\nJoin Community: https://chat.whatsapp.com/JRxPLfQ4LKZByX8lHE1TGE'
+                content: 'Vansh Agarwal – 7037599455\nJoin Community: https://chat.whatsapp.com/JRxPLfQ4LKZByX8lHE1TGE'
             }
         ]
     },

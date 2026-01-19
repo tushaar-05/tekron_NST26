@@ -378,7 +378,7 @@ function About() {
         {
             id: 3,
             name: 'Vansh Agarwal',
-            role: 'Registrations Team',
+            role: 'Registration and Competitions Head',
             image: '/images/committee/vansh_agarwal.jpg',
             color: '#3b82f6', // Blue
             stats: [
