@@ -7,7 +7,7 @@ export const competitions = [
         description: 'Agentic AI Hackathon 2.0 is a 24-hour offline hackathon where students build real AI agents capable of thinking, planning, using tools, and completing tasks autonomously. Join the future of AI — Agentic Systems — through hands-on learning and competitive building.',
         teamSize: '3-5 Members',
         date: '30th - Jan - 2026',
-        prizePool: '₹70,000',
+        prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/o/15jb4tN?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Online_coding_challenge',
         rulebookLink: 'https://docs.google.com/document/d/1CP5PcvD6wEkggU6iDNK6TmWFJJa-Eem_Sk8JFa7tLkE/edit?usp=sharing',

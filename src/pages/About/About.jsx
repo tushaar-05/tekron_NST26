@@ -521,6 +521,7 @@ function About() {
             name: 'Premansh',
             role: 'Operations Team',
             image: '/images/committee/premansh.jpg',
+            objectPosition: 'top',
             color: '#ef4444', // Red (matching his suit)
             stats: [
                 { name: 'TECH', value: 45 },
