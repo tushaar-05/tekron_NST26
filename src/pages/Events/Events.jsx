@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
 import Footer from '../../components/layout/Footer';
+import CompetitionModal from '../../components/ui/CompetitionModal/CompetitionModal';
+import { events } from '../../data/eventsData';
 
 // EventCard Component
-const EventCard = ({ title, category, image }) => {
+const EventCard = ({ title, category, image, onClick }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const particles = Array.from({ length: 8 }, (_, i) => ({
@@ -23,7 +25,8 @@ const EventCard = ({ title, category, image }) => {
 
   return (
     <div
-      className="relative overflow-hidden rounded-3xl transition-all duration-500 ease-out"
+      onClick={onClick}
+      className="relative overflow-hidden rounded-3xl transition-all duration-500 ease-out cursor-pointer"
       style={{
         background: 'linear-gradient(135deg, rgba(30, 20, 56, 0.8), rgba(45, 27, 78, 0.6))',
         backdropFilter: 'blur(20px)',
@@ -155,16 +158,13 @@ const EventCard = ({ title, category, image }) => {
 // Events Page Component
 export default function Events() {
   const navigate = useNavigate();
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Events data
-  const events = [
-    { id: 1, title: 'Robotics Workshop', category: 'Workshop', image: '/images/events/robotics.png' },
-    { id: 3, title: 'Sector of Scilence', category: 'Event', image: '/images/events/amongus.png' },
-    { id: 4, title: 'Dil Jale', category: 'Event', image: '/images/events/speeddating.png' },
-    { id: 5, title: 'Live Concert DJ Night', category: 'Event', image: '/images/events/djnight.png' },
-  ];
-
-
+  const handleEventClick = (event) => {
+    setSelectedEvent(event);
+    setIsModalOpen(true);
+  };
 
   return (
     <UnifiedBackground>
@@ -194,8 +194,6 @@ export default function Events() {
             </p>
           </header>
 
-
-
           {/* Events Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
             {events.map((event) => (
@@ -204,9 +202,16 @@ export default function Events() {
                 title={event.title}
                 category={event.category}
                 image={event.image}
+                onClick={() => handleEventClick(event)}
               />
             ))}
           </div>
+
+          <CompetitionModal
+            isOpen={isModalOpen}
+            onClose={() => setIsModalOpen(false)}
+            data={selectedEvent}
+          />
         </div>
       </div>
       <Footer />

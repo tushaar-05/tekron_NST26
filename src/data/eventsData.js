@@ -578,12 +578,182 @@ export const competitions = [
 ];
 
 export const events = [
-    { id: 1, title: 'TedX', category: 'Event' },
-    { id: 2, title: 'Moto Expo', category: 'Event' },
-    { id: 3, title: 'Drone Show', category: 'Event' },
-    { id: 4, title: 'Fun Activities', category: 'Event' },
-    { id: 5, title: 'AR&VR , Metabat', category: 'Event' },
-    { id: 6, title: 'Game Dev', category: 'Workshop' },
-    { id: 7, title: 'Robotics', category: 'Workshop' },
-    { id: 8, title: 'Photography', category: 'Workshop' },
+    {
+        id: 1,
+        title: 'Robotics Workshop',
+        category: 'Workshop',
+        image: '/images/events/robotics.png',
+        description: 'Hands-on robotics workshop where you will learn to build and program your own robots.',
+        date: 'Day 2',
+        sections: [
+            {
+                title: 'Overview',
+                items: ['Introduction to Robotics', 'Hands-on Building', 'Programming Basics']
+            }
+        ]
+    },
+    {
+        id: 2,
+        title: 'Sector of Silence',
+        category: 'Event',
+        image: '/images/events/amongus.png',
+        description: 'Among Us: The Live Experience is a high-intensity, real-world adaptation of the globally popular social deduction game. Set inside a physically transformed arena, participants step into a compromised space station where trust is fragile, silence is mandatory, and survival depends on observation and strategy.',
+        teamSize: 'Individual',
+        date: 'Offline',
+        sections: [
+            {
+                title: 'Event Details',
+                items: [
+                    'Event Name: Among Us: The Live Experience',
+                    'Event Mode: Offline',
+                    'Gameplay Type: Social Deduction & Survival',
+                    'Roles: Crewmates & Imposter (secretly assigned)',
+                    'Supervision: Task Room Guards & Meeting Moderator',
+                    'Equipment Provided: Color-coded bibs, masks, Skull Stamp, special gear',
+                    'Theme: Sector 7 – The Silent Outpost'
+                ]
+            },
+            {
+                title: 'Theme: Sector 7 – The Silent Outpost',
+                content: 'The year is 2025. A remote deep-space research facility has lost contact with Earth. Oxygen systems are failing, lights flicker, and sabotage is suspected from within.\n\nThe arena is transformed into a cold, industrial space station where:\n• Shadows hide danger\n• Silence amplifies fear\n• Every teammate could be the enemy\n\nYou are no longer a participant — you are a survivor.'
+            },
+            {
+                title: 'What to Expect',
+                items: [
+                    'Fully immersive live-action gameplay inspired by Among Us',
+                    'Real-world physical tasks (card swipes, repairs, fuel sorting, etc.)',
+                    'Industrial sci-fi themed arena with blackout zones and emergency lighting',
+                    'Absolute silence gameplay for heightened tension',
+                    'Live moderation and professional control team',
+                    'Two intense gameplay modes with escalating difficulty'
+                ]
+            },
+            {
+                title: 'Gameplay Modes',
+                items: [
+                    'Classic Mode – The Deduction Phase: Silent movement across zones, observation-based gameplay, emergency meetings and trials.',
+                    'Hide & Seek Mode – The Survival Phase: No meetings/voting, Imposter becomes Hunter, crewmates hide against the clock.'
+                ]
+            },
+            {
+                title: 'Winning Conditions',
+                items: [
+                    'Crewmates Win If: All assigned tasks are completed OR the Imposter is successfully voted out.',
+                    'Imposter Wins If: Crewmates are eliminated until numbers are equal OR the Imposter outlasts the clock in Hide & Seek mode.'
+                ]
+            },
+            {
+                title: 'Core Rules & Code of Conduct',
+                items: [
+                    'Total Silence: No talking, gestures, or digital communication during gameplay',
+                    'Meetings Only: Speaking allowed only during official meetings',
+                    'Uniformity: Masks and color-coded bibs must be worn at all times',
+                    'Fair Play: Roles are assigned via sealed envelopes — peeking or revealing roles leads to instant disqualification',
+                    'Eliminations: Performed using the official Skull Stamp',
+                    'Eliminated Players: Must move silently to the Observer Zone'
+                ]
+            },
+            {
+                title: 'Experience Assurance',
+                items: [
+                    'Professionally moderated sessions',
+                    'Controlled pacing and fair gameplay',
+                    'Immersive sound design and alarm systems',
+                    'Safety-first supervision throughout the event'
+                ]
+            },
+            {
+                title: 'Final Call',
+                content: 'Are you sharp enough to detect a lie in silence?\nOr bold enough to eliminate in plain sight?\n\nTrust no one. Observe everything. Survive the Outpost.'
+            }
+        ]
+    },
+    {
+        id: 3,
+        title: 'Dil Jale',
+        category: 'Event',
+        image: '/images/events/speeddating.png',
+        description: 'Andha Pyaar & Speed Dating is a two-phase interactive social experience that explores chemistry beyond appearances. Designed to be fun, safe, and emotionally engaging, the event combines light-hearted speed dating with a blindfold-based connection challenge.',
+        date: 'Offline',
+        sections: [
+            {
+                title: 'Event Overview',
+                items: [
+                    'Mode: Offline',
+                    'Category: Social Experiment & Interactive Experience',
+                    'Theme: Love Beyond Looks'
+                ]
+            },
+            {
+                title: 'About the Event',
+                content: 'The experience asks one powerful question: Can attraction exist without sight?\nParticipants rely purely on voice, conversation, and personality—making every interaction genuine, unexpected, and memorable.'
+            },
+            {
+                title: 'What to Expect',
+                items: [
+                    'A fun, open-entry Speed Dating walkthrough',
+                    'A curated blindfold-based connection challenge',
+                    'Guided conversations with playful prompts',
+                    'A dramatic flag-based decision moment',
+                    'Romantic yet playful ambiance',
+                    'High crowd engagement & social-media-worthy moments'
+                ]
+            },
+            {
+                title: 'Event Format - Phase 1: Speed Dating',
+                items: [
+                    'Open Entry | Warm-Up Phase',
+                    'Prior registration required',
+                    'Short 2–3 minute conversations per round',
+                    'Ice-breaker prompts provided by moderators',
+                    'Designed to engage participants and build excitement'
+                ]
+            },
+            {
+                title: 'Event Format - Phase 2: Andha Pyaar',
+                items: [
+                    'Invite-Only | Curated Experience',
+                    'Participants per Round: 3 Boys, 2 Girls',
+                    'Setup: All participants blindfolded, seated facing each other',
+                    'Objective: Boys attempt to impress using only voice, conversation, and personality',
+                    'Interaction Time: 20–25 minutes of guided conversation'
+                ]
+            },
+            {
+                title: 'The Flag Decision (Climax Moment)',
+                content: 'At the end of each interaction, every boy–girl pair chooses secretly:\n• Pink Flag: "I felt a connection"\n• Black Flag: "No connection"'
+            },
+            {
+                title: 'Outcomes',
+                items: [
+                    'Pink + Pink (Match 🎉): Sponsored date / concert ticket',
+                    'Pink + Black (No Match): Fun & light-hearted outcome (Hamper/Flowers)',
+                    'No awkwardness. Everyone leaves smiling.'
+                ]
+            },
+            {
+                title: 'Rules & Safety Guidelines',
+                items: [
+                    'Blindfolds must be worn at all times during Andha Pyaar',
+                    'No physical contact allowed',
+                    'Respectful language mandatory',
+                    'Moderators may intervene if required',
+                    'Participants pre-selected for balance & comfort'
+                ]
+            },
+            {
+                title: 'Final Note',
+                content: 'Andha Pyaar & Speed Dating is not just an event — it’s a story people will talk about long after Tekron ends.\nCome for the fun. Stay for the connection. 💖'
+            }
+        ]
+    },
+    {
+        id: 4,
+        title: 'Live Concert DJ Night',
+        category: 'Event',
+        image: '/images/events/djnight.png',
+        description: 'End the fest with a bang at our Live Concert and DJ Night! Featuring top artists and non-stop music.',
+        date: 'Day 2 Evening'
+    },
+
 ];
