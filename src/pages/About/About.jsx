@@ -147,8 +147,11 @@ const CoreMemberCard = ({ member, index }) => {
                         <img
                             src={member.image}
                             alt={member.name}
-                            className="w-full h-full object-cover scale-110 transition-transform duration-700"
-                            style={{ objectPosition: member.objectPosition || 'center' }}
+                            className="w-full h-full object-cover transition-transform duration-700"
+                            style={{
+                                objectPosition: member.objectPosition || 'center',
+                                transform: `scale(${member.scale || 1.1})`
+                            }}
                         />
                     </div>
 
@@ -373,7 +376,8 @@ function About() {
                 { name: 'CRTV', value: 75 },
                 { name: 'COMM', value: 70 },
                 { name: 'OPS', value: 65 }
-            ]
+            ],
+            scale: 1.5
         },
         {
             id: 3,
