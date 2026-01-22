@@ -419,10 +419,8 @@ function Contact() {
                         </div>
                     </motion.div>
 
-                    {/* Social Footer */}
-                    <Footer />
-
                 </motion.div>
+                <Footer />
             </div>
 
             <style jsx>{`

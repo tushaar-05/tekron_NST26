@@ -111,8 +111,9 @@ const Competition = () => {
             </div>
           )}
 
-          <Footer />
         </div>
+
+        <Footer />
 
         <CompetitionModal
           isOpen={isModalOpen}
