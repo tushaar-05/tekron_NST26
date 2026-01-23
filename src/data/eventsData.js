@@ -654,6 +654,7 @@ export const events = [
         description: 'Among Us: The Live Experience is a high-intensity, real-world adaptation of the globally popular social deduction game. Set inside a physically transformed arena, participants step into a compromised space station where trust is fragile, silence is mandatory, and survival depends on observation and strategy.',
         teamSize: 'Individual',
         date: 'Offline',
+        unstopLink: 'https://forms.gle/1Cs6Vcu9AEaYp9BFA',
         sections: [
             {
                 title: 'Event Details',
