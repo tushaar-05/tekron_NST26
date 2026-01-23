@@ -592,13 +592,15 @@ const CompetitionModal = ({ isOpen, onClose, data }) => {
               ))}
 
               <ButtonGroup>
-                <RegisterButton
-                  href={data.unstopLink || '#'}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {data.unstopLink ? 'Register' : 'Allocating Slots Soon'}
-                </RegisterButton>
+                {!data.hideRegister && (
+                  <RegisterButton
+                    href={data.unstopLink || '#'}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {data.unstopLink ? 'Register' : 'Allocating Slots Soon'}
+                  </RegisterButton>
+                )}
 
                 {data.rulebookLink && (
                   <RulebookButton

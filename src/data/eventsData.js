@@ -812,11 +812,12 @@ export const events = [
     },
     {
         id: 5,
-        title: 'Panel Discussion',
+        title: 'Tech Panel Discussion',
         category: 'Speaker Session',
+        hideRegister: true,
         image: '/images/events/panel_discussion.png',
         description: 'Join us for an insightful panel discussion with industry experts sharing their journey in AI, entrepreneurship, and leadership.',
-        date: 'Day 1',
+        date: '30/01/2026',
         sections: [
             {
                 title: 'Speaker: Dharmik Bapodara',
