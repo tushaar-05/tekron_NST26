@@ -575,6 +575,60 @@ export const competitions = [
             }
         ]
     },
+    {
+        id: 11,
+        title: 'Last Goal Standing',
+        category: 'Competition',
+        image: '/images/events/fifa.png',
+        description: 'Last Goal Standing is a competitive FIFA 1v1 college tournament designed to test individual skill, quick decision-making, and fair play. The event follows a simple single knock-out format.',
+        teamSize: '1 Player',
+        date: '30th - Jan - 2026',
+        prizePool: '₹4,000',
+        registrationDeadline: '2026-01-29T23:59:59',
+        unstopLink: 'https://unstop.com/o/DPJfVCo?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
+        rulebookLink: '',
+        sections: [
+            {
+                title: 'Tournament Format',
+                items: [
+                    'Single knock-out 1v1 tournament',
+                    'Each team consists of one (1) player',
+                    'Each match consists of one FIFA game',
+                    'Winner advances to the next round'
+                ]
+            },
+            {
+                title: 'Game Settings',
+                items: [
+                    'Game: EA Sports FIFA',
+                    'Match Duration: 12 minutes (6-minute halves)',
+                    'Game Speed: Normal',
+                    'Difficulty Level: Legendary',
+                    'Teams: All teams available in the original game are allowed'
+                ]
+            },
+            {
+                title: 'Rules & Code of Conduct',
+                items: [
+                    'No coaching or external assistance is allowed during matches',
+                    'Controllers will be provided; players may use their own controllers if preferred',
+                    'Players must be familiar with controller settings before the match begins',
+                    'If a match ends in a draw, the winner will be decided by a penalty shootout'
+                ]
+            },
+            {
+                title: 'Prize Pool',
+                items: [
+                    'Total Prize Pool: ₹4,000',
+                    'Prize distribution will be announced by the organizers'
+                ]
+            },
+            {
+                title: 'Administration',
+                content: 'Participation in this tournament implies full acceptance of all rules stated above. All decisions made by the Game Administrators are final and binding.\nStay calm. Play smart. Score the last goal.'
+            }
+        ]
+    },
 ];
 
 export const events = [
@@ -754,6 +808,24 @@ export const events = [
         image: '/images/events/djnight.png',
         description: 'End the fest with a bang at our Live Concert and DJ Night! Featuring top artists and non-stop music.',
         date: 'Day 2 Evening'
+    },
+    {
+        id: 5,
+        title: 'Panel Discussion',
+        category: 'Speaker Session',
+        image: '/images/events/panel_discussion.png',
+        description: 'Join us for an insightful panel discussion with industry experts sharing their journey in AI, entrepreneurship, and leadership.',
+        date: 'Day 1',
+        sections: [
+            {
+                title: 'Speaker: Dharmik Bapodara',
+                content: 'Co-Founder – Youth Energy | Ex-Team Captain – AXLR8R Formula Racing\n\nDharmik Bapodara is a dynamic entrepreneur and leader with hands-on experience in building youth-driven communities and high-performance engineering teams. As the former Team Captain of AXLR8R Formula Racing, he has led teams under pressure, blending innovation with execution. Currently, as Co-Founder of Youth Energy, he focuses on empowering young minds through leadership, teamwork, and real-world exposure.\n\nLinkedIn: https://www.linkedin.com/in/dharmikbapodara/'
+            },
+            {
+                title: 'Speaker: Samyak Jain',
+                content: 'Co-Founder – ZEKO AI | CEO – MyWays.ai\n\nSamyak Jain is an AI entrepreneur driving innovation at the intersection of technology and real-world problem solving. As Co-Founder of ZEKO AI and CEO of MyWays.ai, he works on building intelligent platforms that simplify decision-making and enhance user experiences. His journey reflects deep expertise in AI, startups, and scalable product development.\n\nLinkedIn: https://www.linkedin.com/in/jain-samyak/'
+            }
+        ]
     },
 
 ];
