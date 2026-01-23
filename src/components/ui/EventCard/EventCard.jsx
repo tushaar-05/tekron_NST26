@@ -52,31 +52,17 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
       {/* Animated Gradient Border Overlay */}
       <div className={`absolute inset-0 bg-gradient-to-r from-transparent via-purple-500/10 to-transparent translate-x-[-100%] transition-transform duration-1000 group-hover:translate-x-[100%] z-0 pointer-events-none`} />
 
-      {/* Hero Image Section */}
-      <div className="relative h-48 w-full overflow-hidden bg-slate-900 border-b border-white/5">
-        {/* Dynamic Scanline */}
-        <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-purple-500/20 to-transparent z-10 translate-y-[-100%] ${isHovered ? 'animate-scan-fast' : ''}`} />
-
-        {/* Countdown Timer */}
-        {/* Countdown Timer Removed */}
-
-        {/* Corner Accents */}
-        <div className="absolute top-2 left-2 w-3 h-3 border-l border-t border-purple-500/50 z-20" />
-        <div className="absolute top-2 right-2 w-3 h-3 border-r border-t border-purple-500/50 z-20" />
-        <div className="absolute bottom-2 left-2 w-3 h-3 border-l border-b border-purple-500/50 z-20" />
-        <div className="absolute bottom-2 right-2 w-3 h-3 border-r border-b border-purple-500/50 z-20" />
+      {/* Hero Image Section - Redesigned for better poster visibility */}
+      <div className="relative h-96 w-full overflow-hidden border-b border-purple-500/20 bg-transparent">
 
         {image ? (
           <>
-            <div
-              className={`absolute inset-0 bg-slate-800 animate-pulse transition-opacity duration-500 ${imageLoaded ? 'opacity-0' : 'opacity-100'} z-0`}
-            />
             <img
               src={image}
               alt={title}
               loading={priority ? "eager" : "lazy"}
               onLoad={() => setImageLoaded(true)}
-              className={`w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:contrast-125 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+              className={`w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
             />
           </>
         ) : (
@@ -85,9 +71,9 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
           </div>
         )}
 
-        {/* Category Tag */}
-        <div className="absolute top-3 right-3 z-20">
-          <span className="px-2 py-1 bg-black/60 border border-white/10 backdrop-blur-sm text-[10px] uppercase tracking-widest text-purple-300 font-mono rounded">
+        {/* Category Tag - Repositioned */}
+        <div className="absolute top-4 left-4 z-20">
+          <span className="px-3 py-1.5 bg-purple-600/80 backdrop-blur-md border border-purple-400/50 text-xs uppercase tracking-widest text-white font-bold rounded shadow-lg shadow-purple-500/20">
             {category}
           </span>
         </div>
@@ -107,16 +93,18 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
 
         {/* Footer Meta */}
         <div className="flex items-center justify-between pt-4 border-t border-white/5">
-          <div className="flex flex-col">
-            <span className="text-xs text-purple-200 uppercase tracking-wider font-mono font-bold mb-1">Prize Pool</span>
-            <span className="text-2xl md:text-3xl text-yellow-400 font-bold font-['VT323'] drop-shadow-[0_0_10px_rgba(250,204,21,0.4)]">
-              {prizePool || 'TBA'}
-            </span>
-          </div>
+          {prizePool && (
+            <div className="flex flex-col">
+              <span className="text-xs text-purple-200 uppercase tracking-wider font-mono font-bold mb-1">Prize Pool</span>
+              <span className="text-2xl md:text-3xl text-yellow-400 font-bold font-['VT323'] drop-shadow-[0_0_10px_rgba(250,204,21,0.4)]">
+                {prizePool}
+              </span>
+            </div>
+          )}
 
 
 
-          {unstopLink ? (
+          {unstopLink && (
             <a
               href={unstopLink}
               target="_blank"
@@ -127,10 +115,6 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
               <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">Register</span>
               <svg className="w-4 h-4 text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </a>
-          ) : (
-            <div className="px-4 py-2 opacity-50 cursor-not-allowed border border-white/10 rounded">
-              <span className="text-xs font-bold uppercase tracking-wider text-gray-500">Closed</span>
-            </div>
           )}
         </div>
 
