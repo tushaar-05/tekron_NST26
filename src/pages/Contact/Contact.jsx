@@ -57,10 +57,11 @@ function Contact() {
     };
 
     const coordinators = [
-        { role: 'Tech. Head', name: 'Ved Bhadani', phone: '+91 95467 85861', email: 'ved.bhadani@adypu.edu.in', image: '/images/team/ved.jpg', id: 'OP-01' },
+        { role: 'Tech. Head', name: 'Ved Bhadani', phone: '+91 95467 85861', email: 'ved.bhadani@adypu.edu.in', image: '/images/committee/ved_bhadani.jpg', id: 'OP-01', scale: 1.5 },
         { role: 'Registration and Competitions Head', name: 'Vansh Agarwal', phone: '+91 70375 99455', email: 'vansh.agarwal@adypu.edu.in', image: '/images/committee/vansh_agarwal.jpg', id: 'OP-02' },
         { role: 'Sponsorship Head', name: 'Harshit Jain', phone: '+91 74278 87050', email: 'harshit.jain@adypu.edu.in', image: '/images/committee/harshit_jain.jpg', id: 'OP-03' },
         { role: 'Marketing Head', name: 'Vamshi Krishna Pendyala', phone: '+91 91215 07280', email: 'vamshikrishna.pendyala@adypu.edu.in', image: '/images/committee/Vamshi.jpg', id: 'OP-04' },
+        { role: 'Hospitality Head', name: 'Ayush Shukla', phone: '+91 78753 93239', email: 'ayush.shukla@adypu.edu.in', image: '/images/team/ayush.jpg', id: 'OP-05', scale: 1.25 },
     ];
 
     const containerVariants = {
@@ -216,9 +217,9 @@ function Contact() {
                                     <div className="flex items-center justify-between p-3 bg-white/5 border border-white/5 hover:border-pink-500/30 hover:bg-pink-500/10 transition-all cursor-pointer group/line">
                                         <div className="flex items-center gap-3">
                                             <div className="w-1.5 h-1.5 bg-pink-500/30 group-hover/line:bg-pink-400 rounded-full transition-colors" />
-                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">Nihal C</span>
+                                            <span className="text-white/60 group-hover/line:text-white font-mono text-sm transition-colors">Ayush Shukla</span>
                                         </div>
-                                        <a href="tel:+916282500918" className="text-white font-mono tracking-wider hover:text-pink-300 transition-colors">+91 62825 00918</a>
+                                        <a href="tel:+917875393239" className="text-white font-mono tracking-wider hover:text-pink-300 transition-colors">+91 78753 93239</a>
                                     </div>
 
                                 </div>
@@ -251,12 +252,12 @@ function Contact() {
                                     </div>
 
                                     <div className="aspect-square w-full bg-slate-900 relative overflow-hidden transition-all duration-500">
-                                        <div className="absolute inset-0 bg-[linear-gradient(transparent_2px,rgba(0,0,0,0.5)_3px)] bg-[size:100%_4px] pointer-events-none z-10 opacity-30" />
                                         {member.image ? (
                                             <img
                                                 src={member.image}
                                                 alt={member.name}
-                                                className="w-full h-full object-cover"
+                                                className="w-full h-full object-cover transition-transform duration-700"
+                                                style={{ transform: `scale(${member.scale || 1})` }}
                                                 loading="lazy"
                                             />
                                         ) : (

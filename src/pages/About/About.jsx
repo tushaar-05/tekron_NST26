@@ -353,7 +353,7 @@ function About() {
         {
             id: 1,
             name: 'Vamshi Pendyala',
-            role: 'Marketing Team',
+            role: 'Marketing Head',
             image: '/images/committee/Vamshi.jpg',
             color: '#fbbf24',
             stats: [
@@ -367,7 +367,7 @@ function About() {
         {
             id: 2,
             name: 'Ved Bhadani',
-            role: 'Tech Team',
+            role: 'Tech Head',
             image: '/images/committee/ved_bhadani.jpg',
             color: '#22d3ee', // Cyan
             stats: [
@@ -452,7 +452,7 @@ function About() {
         {
             id: 8,
             name: 'Harshit Jain',
-            role: 'Sponsorship Team',
+            role: 'Sponsorship Head',
             image: '/images/committee/harshit_jain.jpg',
             color: '#f97316', // Orange
             stats: [
@@ -466,7 +466,7 @@ function About() {
         {
             id: 9,
             name: 'Aditya Chopra',
-            role: 'Cultural Team',
+            role: 'Cultural Head',
             image: '/images/committee/aditya_chopra.jpg',
             color: '#6366f1', // Indigo
             stats: [
