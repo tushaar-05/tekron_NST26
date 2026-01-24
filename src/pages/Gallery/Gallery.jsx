@@ -26,7 +26,7 @@ const noticeFade = keyframes`
 const PageContainer = styled.div`
   min-height: 100vh;
   width: 100%;
-  background: #000;
+  background: transparent;
   position: relative;
   overflow: hidden;
 `;
@@ -126,20 +126,21 @@ const gridMove = keyframes`
 const HoloGridBackground = styled.div`
   position: fixed;
   inset: 0;
-  background-color: #05020a;
+  background-color: transparent;
   background-image: 
-    linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.08) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: ${gridMove} 4s linear infinite;
   perspective: 1000px;
-  z-index: 0;
+  z-index: 6;
+  pointer-events: none;
   
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 0%, #000 90%);
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 90%);
   }
 `;
 
@@ -616,10 +617,10 @@ const Gallery = () => {
                 >
                   <video
                     src="/images/gallery/aftermovie.mp4"
+                    autoPlay
                     muted
                     loop
-                    onMouseOver={e => e.target.play()}
-                    onMouseOut={e => e.target.pause()}
+                    playsInline
                   />
                   <div className="meta-overlay">
                     <span className="meta-title">AFTERMOVIE_TEKRON.RAW</span>
