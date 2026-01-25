@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
 import Footer from '../../components/layout/Footer';
+import { competitions, events } from '../../data/eventsData';
 
 
 
@@ -554,6 +555,7 @@ function About() {
 
     const selectedMember = coreCommittee.find(m => m.id === selectedId) || coreCommittee[0];
 
+    /*
     const organizingCommittee = [
         {
             id: 1,
@@ -574,6 +576,7 @@ function About() {
             image: `https://api.dicebear.com/7.x/avataaars/svg?seed=Org${i + 1}`, // Placeholder for others
         }))
     ];
+    */
 
     const stats = {
         events: 20,
@@ -581,6 +584,28 @@ function About() {
         projects: 25,
         hours: 10000
     };
+
+    const artists = [
+        { name: 'Anuj Rehan', role: 'Singer', image: '/images/artists/anuj_rehan.jpg', color: '#3b82f6' },
+        { name: 'Shreya Baruah', role: 'Singer', image: '/images/artists/shreya_baruah.jpg', color: '#ec4899' },
+        { name: 'DJ RawQueen', role: 'DJ', image: '/images/artists/dj_rawqueen.jpg', color: '#a855f7' }
+    ];
+
+    const influencers = [
+        { name: 'Rohit Nagar', role: 'Content Creator', image: '/images/influencers/rohit_nagar.jpg', color: '#3b82f6' },
+        { name: 'Iqlipse Nova', role: 'Singer / Content Creator', image: '/images/influencers/iqlipse_nova.jpg', color: '#10b981' },
+        { name: 'Eknoor Singh', role: 'Content Creator', image: '/images/influencers/eknoor_singh.jpg', color: '#f59e0b' }
+    ];
+
+    const sponsors = [
+        { name: 'Blinkit', image: '/images/brands/blinkit.png' },
+        { name: 'Unstop', image: '/images/brands/unstop.png' },
+        { name: 'Pizza Hut', image: '/images/brands/pizza_hut.png' },
+        { name: 'AIESEC', image: '/images/brands/aiesec.png' },
+        { name: 'Club Charholi', image: '/images/brands/club_charholi.png' },
+        { name: 'Hitchki', image: '/images/brands/hitchki_v1.png' },
+        { name: 'JINY', image: '/images/brands/jiny_entertainments.png' }
+    ];
 
     return (
         <UnifiedBackground>
@@ -905,8 +930,242 @@ function About() {
                 </AnimatePresence>
             </section>
 
+            {/* TEKRON 2.0 MAIN HEADER SECTION */}
+            <section className="px-4 pt-32 pb-10 max-w-7xl mx-auto relative z-10 overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-96 bg-purple-600/5 blur-[150px] pointer-events-none" />
 
-            {/* SECTION 5: ORGANIZING COMMITTEE - 30 Members */}
+                <div className="flex flex-col items-center">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="flex items-center gap-4 mb-6"
+                    >
+                        <div className="h-[2px] w-12 bg-purple-500/50" />
+                        <span className="text-purple-400 pixel-font text-[10px] sm:text-xs tracking-[0.4em]">VERSION_2.0_DATA_STREAM</span>
+                        <div className="h-[2px] w-12 bg-purple-500/50" />
+                    </motion.div>
+
+                    <motion.h2
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-center pixel-font text-white leading-none"
+                        style={{ textShadow: '0 0 60px rgba(168,85,247,0.4)' }}
+                    >
+                        TEKRON <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400" style={{ filter: 'drop-shadow(0 0 15px rgba(168,85,247,0.5))' }}>2.0</span>
+                    </motion.h2>
+
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                        className="mt-8 flex flex-wrap justify-center gap-4 text-purple-200/40 font-mono text-[10px] sm:text-xs tracking-[0.2em]"
+                    >
+                        <span>ARTISTS</span>
+                        <span className="text-purple-500">◈</span>
+                        <span>INFLUENCERS</span>
+                        <span className="text-purple-500">◈</span>
+                        <span>PARTNERS</span>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: '100%' }}
+                        className="h-[1px] max-w-md bg-gradient-to-r from-transparent via-purple-500/30 to-transparent mt-10"
+                    />
+                </div>
+            </section>
+
+            {/* SECTION 4.0: COMPETITIONS & EVENTS MARQUEE */}
+            <section className="py-20 relative z-10 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 mb-12">
+                    <div className="flex items-center gap-6">
+                        <div className="h-[1px] flex-1 bg-white/10" />
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold pixel-font text-white/80 tracking-widest whitespace-nowrap">
+                            [ FEATURED_COMPETITIONS_&_EVENTS ]
+                        </h2>
+                        <div className="h-[1px] w-20 bg-white/10" />
+                    </div>
+                </div>
+
+                {/* Infinite Scroll Container with constrained width and edge masking */}
+                <div className="max-w-7xl mx-auto relative group">
+                    {/* Perspective gradient masks for edges */}
+                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#020202] to-transparent z-20 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#020202] to-transparent z-20 pointer-events-none" />
+
+                    <div className="overflow-hidden">
+                        <motion.div
+                            key="marquee-v2026-final-fixed"
+                            animate={{ x: ["0%", "-50%"] }}
+                            transition={{
+                                duration: 27,
+
+                                repeat: Infinity,
+                                ease: "linear",
+                                repeatType: "loop"
+                            }}
+                            className="flex whitespace-nowrap py-4 w-fit"
+                        >
+                            {(() => {
+                                const allData = [...competitions, ...events];
+                                const targetTitles = [
+                                    'CodeWars', 'Hackron', 'Throttle X', 'Robo Kick', 'Drone Havoc',
+                                    'BGMI', 'Dil Jale', 'Sector of Silence', 'Battle of Bands', 'Last Goal Standing'
+                                ];
+
+                                const activeItems = targetTitles.map(title =>
+                                    allData.find(item => item.title.toLowerCase().trim() === title.toLowerCase().trim())
+                                ).filter(Boolean);
+
+                                // Render the set twice for a seamless loop
+                                return [...activeItems, ...activeItems].map((item, idx) => (
+                                    <div
+                                        key={`marquee-render-${idx}`}
+                                        className="flex flex-col items-center gap-6 flex-shrink-0 mr-12 group/poster"
+                                    >
+                                        <div className="relative w-64 sm:w-80 h-[400px] sm:h-[480px] rounded-2xl overflow-hidden border border-white/5 transition-all duration-500 hover:border-purple-500/40 hover:shadow-[0_0_50px_rgba(168,85,247,0.2)]">
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/poster:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </div>
+                                        <h3 className="text-white font-bold text-[10px] sm:text-xs pixel-font opacity-30 group-hover/poster:opacity-100 transition-opacity uppercase tracking-[0.3em]">
+                                            {item.title}
+                                        </h3>
+                                    </div>
+                                ));
+                            })()}
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 4.1: ARTIST LINEUP */}
+            <section className="px-4 py-20 max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-16">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 pixel-font"
+                        style={{ color: '#fff', textShadow: '0 0 20px rgba(168,85,247,0.4)' }}
+                    >
+                        [ HEADLINER_ARTISTS ]
+                    </motion.h2>
+                    <p className="text-purple-300 pixel-font text-[10px] sm:text-xs tracking-widest">&gt; SOUND_AND_VISION_SYSTEM_INITIALIZED.</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    {artists.map((artist, idx) => (
+                        <motion.div
+                            key={idx}
+                            whileHover={{ y: -10 }}
+                            className="relative group bg-black/40 border border-white/5 p-4 overflow-hidden"
+                            style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }}
+                        >
+                            <div className="aspect-[3/4] relative overflow-hidden mb-4">
+                                <img src={artist.image} alt={artist.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                                <div className="absolute bottom-4 left-4">
+                                    <span className="text-[8px] pixel-font px-2 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white">LIVE_PFRM</span>
+                                </div>
+                            </div>
+                            <h3 className="text-xl font-bold text-white pixel-font mb-1">{artist.name}</h3>
+                            <p className="text-xs text-white/40 font-mono tracking-widest uppercase" style={{ color: artist.color }}>{artist.role}</p>
+                            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 transition-all group-hover:w-12 group-hover:h-12" style={{ borderColor: artist.color }} />
+                        </motion.div>
+                    ))}
+                </div>
+            </section>
+
+            {/* SECTION 4.2: INFLUENCER HUB */}
+            <section className="px-4 py-24 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent relative z-10">
+                <div className="max-w-7xl mx-auto">
+                    <div className="flex flex-col items-center mb-16">
+                        <motion.h2
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            className="text-3xl sm:text-4xl md:text-5xl font-bold pixel-font text-white mb-4"
+                        >
+                            [ FEATURED_INFLUENCERS ]
+                        </motion.h2>
+                        <div className="flex items-center gap-4">
+                            <div className="h-[2px] w-12 bg-cyan-500/30" />
+                            <span className="text-purple-300 font-mono text-[10px] tracking-widest uppercase">THE_ELITE_COMM_NETWORK</span>
+                            <div className="h-[2px] w-12 bg-cyan-500/30" />
+                        </div>
+                    </div>
+
+                    <div className="flex flex-wrap justify-center gap-10 md:gap-14">
+                        {influencers.map((person, idx) => (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.15, type: "spring", stiffness: 100 }}
+                                className="group relative w-[310px] h-[430px]"
+                            >
+                                {/* Glowing Border Layer */}
+                                <div className="absolute -inset-0.5 bg-gradient-to-b from-cyan-500/50 to-purple-600/50 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-500" />
+
+                                {/* Main Card Body */}
+                                <div className="relative h-full w-full bg-black/60 backdrop-blur-xl border border-white/10 rounded-2xl p-4 overflow-hidden flex flex-col">
+                                    {/* Profile Image Container */}
+                                    <div className="relative h-[330px] w-full rounded-xl overflow-hidden mb-5">
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
+                                        <img src={person.image} alt={person.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-125" />
+                                    </div>
+
+                                    {/* Info readout */}
+                                    <div className="pb-4 flex flex-col items-center justify-center text-center">
+                                        <h3 className="text-white font-bold text-lg pixel-font group-hover:text-cyan-400 transition-colors uppercase leading-none mb-3">{person.name}</h3>
+                                        <div className="h-[1px] w-12 bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent mb-2" />
+                                        <p className="text-[10px] font-mono text-purple-300/60 uppercase tracking-[0.2em]">{person.role}</p>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 4.3: OUR PARTNERS (SPONSORS) */}
+            <section className="px-4 py-24 max-w-7xl mx-auto relative z-10 overflow-hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-64 bg-purple-600/5 blur-[120px] -z-10" />
+
+                <div className="flex items-center gap-6 mb-16">
+                    <h2 className="text-2xl sm:text-4xl font-bold pixel-font text-white whitespace-nowrap">
+                        [ OUR_PARTNERS ]
+                    </h2>
+                    <div className="h-[1px] flex-1 bg-white/10" />
+                </div>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+                    {sponsors.map((brand, idx) => (
+                        <motion.div
+                            key={idx}
+                            whileHover={{ scale: 1.05 }}
+                            className="h-24 sm:h-32 bg-white/5 backdrop-blur-md rounded-2xl border border-white/5 p-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 hover:border-purple-500/30 group"
+                        >
+                            <img
+                                src={brand.image}
+                                alt={brand.name}
+                                className="max-w-[80%] max-h-[60%] object-contain transition-transform duration-500 group-hover:scale-110"
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+            </section>
+
+
+            {/* 
+            // SECTION 5: ORGANIZING COMMITTEE - 30 Members
             <section className="px-4 py-16 max-w-7xl mx-auto relative z-10">
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
@@ -950,6 +1209,7 @@ function About() {
                     ))}
                 </div>
             </section>
+            */}
 
 
 
