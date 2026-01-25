@@ -26,7 +26,7 @@ const noticeFade = keyframes`
 const PageContainer = styled.div`
   min-height: 100vh;
   width: 100%;
-  background: #000;
+  background: transparent;
   position: relative;
   overflow: hidden;
 `;
@@ -126,20 +126,21 @@ const gridMove = keyframes`
 const HoloGridBackground = styled.div`
   position: fixed;
   inset: 0;
-  background-color: #05020a;
+  background-color: transparent;
   background-image: 
-    linear-gradient(rgba(168, 85, 247, 0.1) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 85, 247, 0.1) 1px, transparent 1px);
+    linear-gradient(rgba(168, 85, 247, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 85, 247, 0.08) 1px, transparent 1px);
   background-size: 40px 40px;
   animation: ${gridMove} 4s linear infinite;
   perspective: 1000px;
-  z-index: 0;
+  z-index: 6;
+  pointer-events: none;
   
   &::after {
     content: '';
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at center, transparent 0%, #000 90%);
+    background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.3) 90%);
   }
 `;
 
@@ -181,6 +182,94 @@ opacity: 0;
 // --- Quantum Data Card (Crazy Mode) ---
 
 // --- Shard Grid Components (Promoted to Main Display) ---
+
+const FeaturedVideoContainer = styled(motion.div)`
+  max-width: 1400px;
+  margin: 0 auto 60px;
+  padding: 0 40px;
+  position: relative;
+`;
+
+const FeaturedVideo = styled(motion.div)`
+  position: relative;
+  width: 100%;
+  height: 600px;
+  border: 2px solid rgba(168, 85, 247, 0.3);
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(20, 10, 30, 0.5);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.2);
+  
+  @media (max-width: 768px) {
+    height: 400px;
+  }
+  
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    filter: grayscale(0.5) contrast(1.2);
+    transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 0 1px rgba(168, 85, 247, 0);
+    transition: all 0.3s ease;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .meta-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.9);
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 3;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+    color: #a855f7;
+  }
+
+  .meta-title {
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+  }
+
+  .meta-size {
+    font-size: 0.8rem;
+    opacity: 0.7;
+  }
+
+  &:hover {
+    z-index: 10;
+    border-color: #a855f7;
+    
+    video {
+      opacity: 1;
+      filter: grayscale(0) contrast(1.1);
+      transform: scale(1.02);
+    }
+
+    &::before {
+      box-shadow: inset 0 0 40px rgba(168, 85, 247, 0.4);
+    }
+
+    .meta-overlay {
+      transform: translateY(0);
+    }
+  }
+`;
 
 const ShardGrid = styled.div`
   display: grid;
@@ -515,6 +604,30 @@ const Gallery = () => {
                 <h1>SECURED ARCHIVES</h1>
                 <p>SELECT A DATA FRAGMENT TO DECRYPT</p>
               </PageHeader>
+
+              {/* Featured Aftermovie Video */}
+              <FeaturedVideoContainer
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                <FeaturedVideo
+                  whileHover={{ scale: 1.01 }}
+                  onClick={() => setSelectedImage({ type: 'video', src: '/images/gallery/aftermovie.mp4' })}
+                >
+                  <video
+                    src="/images/gallery/aftermovie.mp4"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                  <div className="meta-overlay">
+                    <span className="meta-title">AFTERMOVIE_TEKRON.RAW</span>
+                    <span className="meta-size">21.8MB</span>
+                  </div>
+                </FeaturedVideo>
+              </FeaturedVideoContainer>
 
               <div className="w-full">
                 <ShardGrid>
