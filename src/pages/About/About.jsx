@@ -598,13 +598,31 @@ function About() {
     ];
 
     const sponsors = [
-        { name: 'Blinkit', image: '/images/brands/blinkit.png' },
-        { name: 'Unstop', image: '/images/brands/unstop.png' },
-        { name: 'Pizza Hut', image: '/images/brands/pizza_hut.png' },
-        { name: 'AIESEC', image: '/images/brands/aiesec.png' },
-        { name: 'Club Charholi', image: '/images/brands/club_charholi.png' },
-        { name: 'Hitchki', image: '/images/brands/hitchki_v1.png' },
-        { name: 'JINY', image: '/images/brands/jiny_entertainments.png' }
+        { name: 'Pizza Hut', image: '/images/brands/pizza_hut.png', color: '#ff0000' },
+        { name: 'Monster Energy', image: '/images/brands/monster_energy.png', color: '#00ff00' },
+        { name: 'Interview Buddy', image: '/images/brands/interview_buddy.png', color: '#7c3aed' },
+        { name: 'Wet n Joy', image: '/images/brands/wet_n_joy.png', color: '#00ffff' },
+        { name: 'Ajex eSports', image: '/images/brands/ajex_esports.png', color: '#a855f7' },
+        { name: 'AFDC', image: '/images/brands/afdc.jpg', color: '#d8c6f2' }
+    ];
+
+    const techPanelists = [
+        {
+            name: 'Dharmik Bapodara',
+            role: 'Co-Founder – Youth Energy',
+            description: 'Ex-Team Captain – AXLR8R Formula Racing. Leader in youth-driven communities and high-performance engineering teams.',
+            image: '/images/panelists/dharmik_bapodara.jpg',
+            color: '#22d3ee',
+            linkedin: 'https://www.linkedin.com/in/dharmikbapodara/'
+        },
+        {
+            name: 'Samyak Jain',
+            role: 'Co-Founder – ZEKO AI | CEO – MyWays.ai',
+            description: 'AI entrepreneur driving innovation at the intersection of technology and real-world problem solving.',
+            image: '/images/panelists/samyak_jain.jpg',
+            color: '#a855f7',
+            linkedin: 'https://www.linkedin.com/in/jain-samyak/'
+        }
     ];
 
     return (
@@ -1044,6 +1062,94 @@ function About() {
                 </div>
             </section>
 
+            {/* SECTION 4.0.5: TECH PANELISTS */}
+            <section className="px-4 py-20 max-w-7xl mx-auto relative z-10">
+                <div className="flex items-center gap-6 mb-16 px-4">
+                    <div className="h-[2px] w-12 bg-cyan-500/50" />
+                    <h2 className="text-2xl sm:text-4xl font-bold pixel-font text-white whitespace-nowrap">
+                        [ TECH_PANELISTS ]
+                    </h2>
+                    <div className="h-[2px] flex-1 bg-gradient-to-r from-cyan-500/50 to-transparent" />
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    {techPanelists.map((panelist, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: idx * 0.2 }}
+                            className="group relative"
+                        >
+                            {/* Outer Glow */}
+                            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-600/20 rounded-[2rem] blur-xl opacity-0 group-hover:opacity-100 transition duration-700" />
+
+                            <div className="relative bg-black/40 backdrop-blur-2xl border border-white/10 rounded-[2rem] p-6 sm:p-8 flex flex-col sm:flex-row items-center sm:items-start gap-8 overflow-hidden h-full">
+                                {/* PHOTO ON LEFT */}
+                                <div className="relative shrink-0 group/img">
+                                    <div className="w-32 h-32 sm:w-44 sm:h-44 rounded-2xl overflow-hidden border border-white/10 group-hover/img:border-cyan-500/50 transition-all duration-500 shadow-2xl">
+                                        <img
+                                            src={panelist.image}
+                                            alt={panelist.name}
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover/img:scale-110"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-60 group-hover/img:opacity-20 transition-opacity" />
+                                    </div>
+
+                                    {/* Corner Decals */}
+                                    <div className="absolute -top-1 -left-1 w-3 h-3 border-t border-l border-cyan-400 group-hover/img:w-6 group-hover/img:h-6 transition-all duration-500" />
+                                    <div className="absolute -bottom-1 -right-1 w-3 h-3 border-b border-r border-purple-400 group-hover/img:w-6 group-hover/img:h-6 transition-all duration-500" />
+                                </div>
+
+                                {/* DETAILS ON RIGHT */}
+                                <div className="flex flex-col flex-1 text-center sm:text-left h-full">
+                                    <div className="mb-4">
+                                        <div className="flex items-center justify-center sm:justify-start gap-2 mb-2">
+                                            <span className="text-[9px] font-mono text-cyan-400 bg-cyan-400/10 px-2 py-0.5 rounded border border-cyan-400/20 tracking-widest uppercase">
+                                                GUEST_OPERATIVE
+                                            </span>
+                                        </div>
+                                        <h3 className="text-xl sm:text-2xl font-bold text-white pixel-font mb-1 group-hover:text-cyan-400 transition-colors uppercase leading-none">
+                                            {panelist.name}
+                                        </h3>
+                                        <p className="text-[10px] sm:text-xs font-mono text-purple-300 font-bold uppercase tracking-tight">
+                                            {panelist.role}
+                                        </p>
+                                    </div>
+
+                                    <p className="text-xs sm:text-[13px] text-white/50 leading-relaxed font-mono mb-6 italic">
+                                        "{panelist.description}"
+                                    </p>
+
+                                    {/* LINKEDIN BUTTON */}
+                                    <div className="mt-auto pt-4 border-t border-white/5 w-full flex justify-center sm:justify-start">
+                                        <motion.a
+                                            href={panelist.linkedin}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            whileHover={{ x: 5, scale: 1.02 }}
+                                            whileTap={{ scale: 0.98 }}
+                                            className="px-5 py-2.5 rounded-lg bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/40 text-cyan-400 transition-all duration-300 flex items-center gap-3 group/btn"
+                                        >
+                                            <span className="text-[10px] font-bold pixel-font tracking-tighter uppercase whitespace-nowrap">
+                                                [ LINKEDIN_PROTOCOL ]
+                                            </span>
+                                            <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse group-hover/btn:shadow-[0_0_10px_#22d3ee]" />
+                                        </motion.a>
+                                    </div>
+                                </div>
+
+                                {/* Index Watermark */}
+                                <div className="absolute top-0 right-0 p-4 opacity-[0.03] pointer-events-none group-hover:opacity-[0.08] transition-opacity">
+                                    <span className="text-8xl font-bold pixel-font">0{idx + 1}</span>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
+            </section>
+
             {/* SECTION 4.1: ARTIST LINEUP */}
             <section className="px-4 py-20 max-w-7xl mx-auto relative z-10">
                 <div className="text-center mb-16">
@@ -1146,20 +1252,84 @@ function About() {
                     <div className="h-[1px] flex-1 bg-white/10" />
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
-                    {sponsors.map((brand, idx) => (
-                        <motion.div
-                            key={idx}
-                            whileHover={{ scale: 1.05 }}
-                            className="h-24 sm:h-32 bg-white/5 backdrop-blur-md rounded-2xl border border-white/5 p-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-500 hover:border-purple-500/30 group"
-                        >
-                            <img
-                                src={brand.image}
-                                alt={brand.name}
-                                className="max-w-[80%] max-h-[60%] object-contain transition-transform duration-500 group-hover:scale-110"
-                            />
-                        </motion.div>
-                    ))}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                    {sponsors.map((brand, idx) => {
+                        const [isHovered, setIsHovered] = useState(false);
+                        const brandColor = brand.color || '#a855f7';
+
+                        return (
+                            <motion.div
+                                key={idx}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: idx * 0.1 }}
+                                className="h-48 sm:h-60 relative group"
+                                onMouseEnter={() => setIsHovered(true)}
+                                onMouseLeave={() => setIsHovered(false)}
+                            >
+                                {/* Holographic Background Layer */}
+                                <div
+                                    className="absolute inset-0 rounded-3xl transition-all duration-500 overflow-hidden"
+                                    style={{
+                                        background: 'linear-gradient(135deg, rgba(30, 20, 56, 0.8), rgba(45, 27, 78, 0.6))',
+                                        backdropFilter: 'blur(20px)',
+                                        boxShadow: isHovered
+                                            ? `0 20px 40px ${brandColor}4d, 0 0 60px ${brandColor}33`
+                                            : '0 4px 6px rgba(0, 0, 0, 0.1)'
+                                    }}
+                                >
+                                    {/* Holographic Border */}
+                                    <div
+                                        className="absolute inset-0 rounded-3xl transition-opacity duration-400"
+                                        style={{
+                                            padding: '2px',
+                                            background: `linear-gradient(135deg, ${brandColor}, #7c3aed, #6366f1)`,
+                                            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                                            WebkitMaskComposite: 'xor',
+                                            maskComposite: 'exclude',
+                                            opacity: isHovered ? 1 : 0
+                                        }}
+                                    />
+
+                                    {/* Radial Glow */}
+                                    <div
+                                        className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] transition-opacity duration-400 pointer-events-none"
+                                        style={{
+                                            background: `radial-gradient(circle, ${brandColor}1a 0%, transparent 70%)`,
+                                            opacity: isHovered ? 1 : 0
+                                        }}
+                                    />
+
+                                    {/* Content Container */}
+                                    <div className="relative w-full h-full flex items-center justify-center p-8 overflow-hidden">
+                                        {/* Grid Pattern Background */}
+                                        <div
+                                            className="absolute inset-0 opacity-20"
+                                            style={{
+                                                backgroundImage: `
+                                                    repeating-linear-gradient(0deg, ${brandColor}1a 0px, transparent 1px, transparent 2px, ${brandColor}1a 3px),
+                                                    repeating-linear-gradient(90deg, ${brandColor}1a 0px, transparent 1px, transparent 2px, ${brandColor}1a 3px)
+                                                `
+                                            }}
+                                        />
+
+                                        <div className="relative z-10 w-full h-full flex items-center justify-center">
+                                            <img
+                                                src={brand.image}
+                                                alt={brand.name}
+                                                className="max-w-full max-h-full object-contain transition-all duration-500"
+                                                style={{
+                                                    filter: isHovered ? `drop-shadow(0 0 20px ${brandColor}80)` : 'none',
+                                                    transform: isHovered ? 'scale(1.1)' : 'scale(1)'
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </section>
 
