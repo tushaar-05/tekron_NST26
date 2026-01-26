@@ -9,6 +9,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
+        isRegistrationClosed: true,
         unstopLink: 'https://unstop.com/o/15jb4tN?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Online_coding_challenge',
         rulebookLink: 'https://docs.google.com/document/d/1CP5PcvD6wEkggU6iDNK6TmWFJJa-Eem_Sk8JFa7tLkE/edit?usp=sharing',
         sections: [
@@ -124,6 +125,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹50,000',
         registrationDeadline: '2026-01-29T23:59:59',
+        isRegistrationClosed: true,
         unstopLink: 'https://unstop.com/p/codewars-tekron-20-newton-school-of-technology-1621629',
         rulebookLink: 'https://docs.google.com/document/d/1NwNz39OdRqmBXCRlb3dv0wWCRJec9DuP_2XpdxVy3ys/edit?usp=sharing',
         sections: [
@@ -539,6 +541,7 @@ export const competitions = [
         date: '30th - Jan - 2026',
         prizePool: '₹30,000',
         registrationDeadline: '2026-01-29T23:59:59',
+        isRegistrationClosed: true,
         unstopLink: 'https://unstop.com/o/haqdUvO?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
         rulebookLink: 'https://docs.google.com/document/d/1ttq1CF-ruue6WZMs9yxtn8nkyh8M4AOyWljICUi7wzI/edit?usp=sharing',
         sections: [
@@ -730,6 +733,7 @@ export const events = [
         image: '/images/events/speeddating.png',
         description: 'Andha Pyaar & Speed Dating is a two-phase interactive social experience that explores chemistry beyond appearances. Designed to be fun, safe, and emotionally engaging, the event combines light-hearted speed dating with a blindfold-based connection challenge.',
         date: '30/01/2026',
+        hideRegister: true,
         sections: [
             {
                 title: 'Event Overview',

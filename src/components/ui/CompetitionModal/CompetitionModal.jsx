@@ -734,11 +734,19 @@ const CompetitionModal = ({ isOpen, onClose, data }) => {
               <ButtonGroup>
                 {!data.hideRegister && (
                   <RegisterButton
-                    href={data.unstopLink || '#'}
-                    target="_blank"
+                    href={data.isRegistrationClosed ? '#' : (data.unstopLink || '#')}
+                    target={data.isRegistrationClosed ? '_self' : '_blank'}
                     rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (data.isRegistrationClosed) e.preventDefault();
+                    }}
+                    style={{
+                      opacity: data.isRegistrationClosed ? 0.5 : 1,
+                      cursor: data.isRegistrationClosed ? 'not-allowed' : 'pointer',
+                      background: data.isRegistrationClosed ? 'gray' : undefined
+                    }}
                   >
-                    {data.unstopLink ? 'Register' : 'Allocating Slots Soon'}
+                    {data.isRegistrationClosed ? 'Registration Closed' : (data.unstopLink ? 'Register' : 'Allocating Slots Soon')}
                   </RegisterButton>
                 )}
 

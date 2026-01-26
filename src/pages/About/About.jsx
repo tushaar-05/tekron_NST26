@@ -139,8 +139,6 @@ const CoreMemberCard = ({ member, index }) => {
 
                 {/* Scanning Portrait */}
                 <div className="relative mx-auto mb-6 w-40 h-40">
-                    <div className="absolute inset-x-[-10px] inset-y-[-10px] border border-dashed border-white/5 group-hover:border-white/20 rounded-full animate-spin-slow transition-colors" />
-
                     <div
                         className="relative w-full h-full transition-all duration-700 overflow-hidden"
                         style={{ clipPath: 'polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%)' }}
@@ -155,10 +153,6 @@ const CoreMemberCard = ({ member, index }) => {
                             }}
                         />
                     </div>
-
-                    {/* Biometric Corners */}
-                    <div className="absolute -top-2 -left-2 w-4 h-4 border-t border-l border-white/20" />
-                    <div className="absolute -bottom-2 -right-2 w-4 h-4 border-b border-r border-white/20" />
                 </div>
 
                 {/* Operative Data */}
@@ -215,14 +209,6 @@ const HolographicDisplay = ({ member, color, onClose }) => {
 
                 {/* Left Column: Portrait */}
                 <div className="relative z-10 shrink-0">
-                    {/* Rotating Rings */}
-                    <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                        className="absolute inset-x-[-25%] inset-y-[-25%] border-2 border-dashed rounded-full pointer-events-none opacity-20"
-                        style={{ borderColor: color }}
-                    />
-
                     <div className="relative w-64 h-80 md:w-80 md:h-96 overflow-hidden"
                         style={{ clipPath: 'polygon(15% 0, 100% 0, 100% 85%, 85% 100%, 0 100%, 0 15%)' }}>
                         <motion.img
@@ -234,8 +220,6 @@ const HolographicDisplay = ({ member, color, onClose }) => {
                             style={{ objectPosition: member.objectPosition || 'center' }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-                        {/* Scanlines Overlay */}
-                        <div className="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.2)_50%)] bg-[length:100%_4px] pointer-events-none opacity-20" />
                     </div>
                 </div>
 
@@ -896,58 +880,6 @@ function About() {
 
 
 
-            {/* SECTION 4: CORE COMMITTEE - Grid + Holographic Modal */}
-            <section className="px-4 py-16 max-w-7xl mx-auto relative z-10">
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 pixel-font"
-                        style={{
-                            color: '#d8c6f2',
-                            textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(216, 198, 242, 0.4)',
-                            imageRendering: 'pixelated'
-                        }}
-                    >
-                        [ CORE COMMITTEE ]
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="text-purple-300 pixel-font text-[10px] sm:text-xs md:text-sm"
-                    >
-                        &gt; THE_ARCHITECTS_OF_THE_REALM.
-                    </motion.p>
-                </div>
-
-                {/* Grid View */}
-                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 justify-center">
-                    {coreCommittee.map((member, index) => (
-                        <CoreMemberCard
-                            key={member.id}
-                            member={member}
-                            index={index}
-                            onClick={() => {
-                                setSelectedId(member.id);
-                                setIsModalOpen(true);
-                            }}
-                        />
-                    ))}
-                </div>
-
-                {/* Detailed Modal View */}
-                <AnimatePresence>
-                    {isModalOpen && selectedMember && (
-                        <HolographicDisplay
-                            member={selectedMember}
-                            color={selectedMember.color}
-                            onClose={() => setIsModalOpen(false)}
-                        />
-                    )}
-                </AnimatePresence>
-            </section>
 
             {/* TEKRON 2.0 MAIN HEADER SECTION */}
             <section className="px-4 pt-32 pb-10 max-w-7xl mx-auto relative z-10 overflow-hidden">
@@ -996,74 +928,41 @@ function About() {
                 </div>
             </section>
 
-            {/* SECTION 4.0: COMPETITIONS & EVENTS MARQUEE */}
-            <section className="py-20 relative z-10 overflow-hidden">
-                <div className="max-w-7xl mx-auto px-4 mb-12">
-                    <div className="flex items-center gap-6">
-                        <div className="h-[1px] flex-1 bg-white/10" />
-                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold pixel-font text-white/80 tracking-widest whitespace-nowrap">
-                            [ FEATURED_COMPETITIONS_&_EVENTS ]
-                        </h2>
-                        <div className="h-[1px] w-20 bg-white/10" />
-                    </div>
+            {/* SECTION 4.1: ARTIST LINEUP */}
+            <section className="px-4 py-20 max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-16">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 pixel-font"
+                        style={{ color: '#fff', textShadow: '0 0 20px rgba(168,85,247,0.4)' }}
+                    >
+                        [ HEADLINER_ARTISTS ]
+                    </motion.h2>
+                    <p className="text-purple-300 pixel-font text-[10px] sm:text-xs tracking-widest">&gt; SOUND_AND_VISION_SYSTEM_INITIALIZED.</p>
                 </div>
 
-                {/* Infinite Scroll Container with constrained width and edge masking */}
-                <div className="max-w-7xl mx-auto relative group">
-                    {/* Perspective gradient masks for edges */}
-                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#020202] to-transparent z-20 pointer-events-none" />
-                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#020202] to-transparent z-20 pointer-events-none" />
-
-                    <div className="overflow-hidden">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    {artists.map((artist, idx) => (
                         <motion.div
-                            key="marquee-v2026-final-fixed"
-                            animate={{ x: ["0%", "-50%"] }}
-                            transition={{
-                                duration: 27,
-
-                                repeat: Infinity,
-                                ease: "linear",
-                                repeatType: "loop"
-                            }}
-                            className="flex whitespace-nowrap py-4 w-fit"
+                            key={idx}
+                            whileHover={{ y: -10 }}
+                            className="relative group bg-black/40 border border-white/5 p-4 overflow-hidden"
+                            style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }}
                         >
-                            {(() => {
-                                const allData = [...competitions, ...events];
-                                const targetTitles = [
-                                    'CodeWars', 'Hackron', 'Throttle X', 'Robo Kick', 'Drone Havoc',
-                                    'BGMI', 'Dil Jale', 'Sector of Silence', 'Battle of Bands', 'Last Goal Standing'
-                                ];
-
-                                const activeItems = targetTitles.map(title =>
-                                    allData.find(item => item.title.toLowerCase().trim() === title.toLowerCase().trim())
-                                ).filter(Boolean);
-
-                                // Render the set twice for a seamless loop
-                                return [...activeItems, ...activeItems].map((item, idx) => (
-                                    <button
-                                        key={`marquee-render-${idx}`}
-                                        onClick={() => {
-                                            const route = item.category === 'Competition' ? '/competition' : '/events';
-                                            navigate(route, { state: { autoOpenId: item.id } });
-                                        }}
-                                        className="flex flex-col items-center gap-6 flex-shrink-0 mr-12 group/poster cursor-pointer outline-none focus:outline-none"
-                                    >
-                                        <div className="relative w-64 sm:w-80 h-[400px] sm:h-[480px] rounded-2xl overflow-hidden border border-white/5 transition-all duration-500 hover:border-purple-500/40 hover:shadow-[0_0_50px_rgba(168,85,247,0.2)]">
-                                            <img
-                                                src={item.image}
-                                                alt={item.title}
-                                                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/poster:scale-105"
-                                            />
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                                        </div>
-                                        <h3 className="text-white font-bold text-[10px] sm:text-xs pixel-font opacity-30 group-hover/poster:opacity-100 transition-opacity uppercase tracking-[0.3em]">
-                                            {item.title}
-                                        </h3>
-                                    </button>
-                                ));
-                            })()}
+                            <div className="aspect-[3/4] relative overflow-hidden mb-4">
+                                <img src={artist.image} alt={artist.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                                <div className="absolute bottom-4 left-4">
+                                    <span className="text-[8px] pixel-font px-2 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white">LIVE_PFRM</span>
+                                </div>
+                            </div>
+                            <h3 className="text-xl font-bold text-white pixel-font mb-1">{artist.name}</h3>
+                            <p className="text-xs text-white/40 font-mono tracking-widest uppercase" style={{ color: artist.color }}>{artist.role}</p>
+                            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 transition-all group-hover:w-12 group-hover:h-12" style={{ borderColor: artist.color }} />
                         </motion.div>
-                    </div>
+                    ))}
                 </div>
             </section>
 
@@ -1155,44 +1054,6 @@ function About() {
                 </div>
             </section>
 
-            {/* SECTION 4.1: ARTIST LINEUP */}
-            <section className="px-4 py-20 max-w-7xl mx-auto relative z-10">
-                <div className="text-center mb-16">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 pixel-font"
-                        style={{ color: '#fff', textShadow: '0 0 20px rgba(168,85,247,0.4)' }}
-                    >
-                        [ HEADLINER_ARTISTS ]
-                    </motion.h2>
-                    <p className="text-purple-300 pixel-font text-[10px] sm:text-xs tracking-widest">&gt; SOUND_AND_VISION_SYSTEM_INITIALIZED.</p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    {artists.map((artist, idx) => (
-                        <motion.div
-                            key={idx}
-                            whileHover={{ y: -10 }}
-                            className="relative group bg-black/40 border border-white/5 p-4 overflow-hidden"
-                            style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }}
-                        >
-                            <div className="aspect-[3/4] relative overflow-hidden mb-4">
-                                <img src={artist.image} alt={artist.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
-                                <div className="absolute bottom-4 left-4">
-                                    <span className="text-[8px] pixel-font px-2 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white">LIVE_PFRM</span>
-                                </div>
-                            </div>
-                            <h3 className="text-xl font-bold text-white pixel-font mb-1">{artist.name}</h3>
-                            <p className="text-xs text-white/40 font-mono tracking-widest uppercase" style={{ color: artist.color }}>{artist.role}</p>
-                            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 transition-all group-hover:w-12 group-hover:h-12" style={{ borderColor: artist.color }} />
-                        </motion.div>
-                    ))}
-                </div>
-            </section>
-
             {/* SECTION 4.2: INFLUENCER HUB */}
             <section className="px-4 py-24 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent relative z-10">
                 <div className="max-w-7xl mx-auto">
@@ -1242,6 +1103,77 @@ function About() {
                                 </div>
                             </motion.div>
                         ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* SECTION 4.0: COMPETITIONS & EVENTS MARQUEE */}
+            <section className="py-20 relative z-10 overflow-hidden">
+                <div className="max-w-7xl mx-auto px-4 mb-12">
+                    <div className="flex items-center gap-6">
+                        <div className="h-[1px] flex-1 bg-white/10" />
+                        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold pixel-font text-white/80 tracking-widest whitespace-nowrap">
+                            [ FEATURED_COMPETITIONS_&_EVENTS ]
+                        </h2>
+                        <div className="h-[1px] w-20 bg-white/10" />
+                    </div>
+                </div>
+
+                {/* Infinite Scroll Container with constrained width and edge masking */}
+                <div className="max-w-7xl mx-auto relative group">
+                    {/* Perspective gradient masks for edges */}
+                    <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#020202] to-transparent z-20 pointer-events-none" />
+                    <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#020202] to-transparent z-20 pointer-events-none" />
+
+                    <div className="overflow-hidden">
+                        <motion.div
+                            key="marquee-v2026-final-fixed"
+                            animate={{ x: ["0%", "-50%"] }}
+                            transition={{
+                                duration: 27,
+
+                                repeat: Infinity,
+                                ease: "linear",
+                                repeatType: "loop"
+                            }}
+                            className="flex whitespace-nowrap py-4 w-fit"
+                        >
+                            {(() => {
+                                const allData = [...competitions, ...events];
+                                const targetTitles = [
+                                    'CodeWars', 'Hackron', 'Throttle X', 'Robo Kick', 'Drone Havoc',
+                                    'BGMI', 'Dil Jale', 'Sector of Silence', 'Battle of Bands', 'Last Goal Standing'
+                                ];
+
+                                const activeItems = targetTitles.map(title =>
+                                    allData.find(item => item.title.toLowerCase().trim() === title.toLowerCase().trim())
+                                ).filter(Boolean);
+
+                                // Render the set twice for a seamless loop
+                                return [...activeItems, ...activeItems].map((item, idx) => (
+                                    <button
+                                        key={`marquee-render-${idx}`}
+                                        onClick={() => {
+                                            const route = item.category === 'Competition' ? '/competition' : '/events';
+                                            navigate(route, { state: { autoOpenId: item.id } });
+                                        }}
+                                        className="flex flex-col items-center gap-6 flex-shrink-0 mr-12 group/poster cursor-pointer outline-none focus:outline-none"
+                                    >
+                                        <div className="relative w-64 sm:w-80 h-[400px] sm:h-[480px] rounded-2xl overflow-hidden border border-white/5 transition-all duration-500 hover:border-purple-500/40 hover:shadow-[0_0_50px_rgba(168,85,247,0.2)]">
+                                            <img
+                                                src={item.image}
+                                                alt={item.title}
+                                                className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/poster:scale-105"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        </div>
+                                        <h3 className="text-white font-bold text-[10px] sm:text-xs pixel-font opacity-30 group-hover/poster:opacity-100 transition-opacity uppercase tracking-[0.3em]">
+                                            {item.title}
+                                        </h3>
+                                    </button>
+                                ));
+                            })()}
+                        </motion.div>
                     </div>
                 </div>
             </section>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const EventCard = ({ title, category, image, description, prizePool, unstopLink, registrationDeadline, onClick, priority = false }) => {
+const EventCard = ({ title, category, image, description, prizePool, unstopLink, registrationDeadline, isRegistrationClosed = false, onClick, priority = false }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -36,8 +36,7 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
     return () => clearInterval(interval);
   }, [registrationDeadline]);
 
-
-
+  const showClosedStatus = isRegistrationClosed || isExpired;
 
   return (
     <motion.div
@@ -102,39 +101,49 @@ const EventCard = ({ title, category, image, description, prizePool, unstopLink,
             </div>
           )}
 
-
-
           {unstopLink && (
             <a
-              href={unstopLink}
-              target="_blank"
+              href={showClosedStatus ? "#" : unstopLink}
+              target={showClosedStatus ? "_self" : "_blank"}
               rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-2 px-3 py-2.5 sm:px-4 sm:py-2.5 md:px-6 md:py-2.5 bg-purple-600 hover:bg-purple-500 border border-purple-400 hover:border-purple-300 rounded shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)] transition-all group/btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                if (showClosedStatus) e.preventDefault();
+              }}
+              className={`flex items-center gap-2 px-3 py-2.5 sm:px-4 sm:py-2.5 md:px-6 md:py-2.5 rounded transition-all group/btn ${showClosedStatus
+                ? 'bg-gray-700/50 border-gray-600 text-gray-400 cursor-not-allowed'
+                : 'bg-purple-600 hover:bg-purple-500 border border-purple-400 hover:border-purple-300 shadow-[0_0_15px_rgba(147,51,234,0.3)] hover:shadow-[0_0_25px_rgba(168,85,247,0.5)]'
+                }`}
             >
-              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">Register</span>
-              <svg className="w-4 h-4 text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              <span className="text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
+                Register
+              </span>
+              {!showClosedStatus && (
+                <svg className="w-4 h-4 text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              )}
             </a>
           )}
         </div>
 
-        {registrationDeadline && !isExpired && (
+        {registrationDeadline && (
           <div className="mt-4 pt-3 border-t border-white/5 w-full">
             <div className="flex items-center justify-between">
-              <span className="text-[10px] text-purple-300 font-mono uppercase tracking-wider">Registration Ends In</span>
+              <span className="text-[10px] text-purple-300 font-mono uppercase tracking-wider">
+                Registration Ends In
+              </span>
               <div className="flex gap-2 items-center bg-black/40 px-3 py-1.5 rounded border border-purple-500/20 shadow-inner">
                 <div className="flex flex-col items-center min-w-[28px]">
-                  <span className="text-base font-bold text-white leading-none font-['VT323']">{timeLeft.days}</span>
+                  <span className="text-base font-bold text-white leading-none font-['VT323']">{showClosedStatus ? 0 : timeLeft.days}</span>
                   <span className="text-[9px] text-purple-400 leading-none mt-0.5">DAYS</span>
                 </div>
                 <span className="text-purple-500 text-xs mb-2">:</span>
                 <div className="flex flex-col items-center min-w-[28px]">
-                  <span className="text-base font-bold text-white leading-none font-['VT323']">{String(timeLeft.hours).padStart(2, '0')}</span>
+                  <span className="text-base font-bold text-white leading-none font-['VT323']">{showClosedStatus ? '00' : String(timeLeft.hours).padStart(2, '0')}</span>
                   <span className="text-[9px] text-purple-400 leading-none mt-0.5">HRS</span>
                 </div>
                 <span className="text-purple-500 text-xs mb-2">:</span>
                 <div className="flex flex-col items-center min-w-[28px]">
-                  <span className="text-base font-bold text-white leading-none font-['VT323']">{String(timeLeft.minutes).padStart(2, '0')}</span>
+                  <span className="text-base font-bold text-white leading-none font-['VT323']">{showClosedStatus ? '00' : String(timeLeft.minutes).padStart(2, '0')}</span>
                   <span className="text-[9px] text-purple-400 leading-none mt-0.5">MINS</span>
                 </div>
               </div>
