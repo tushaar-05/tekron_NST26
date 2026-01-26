@@ -369,6 +369,124 @@ const ButtonGroup = styled.div`
 `;
 
 
+const ArtistLineup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 16px;
+`;
+
+const ArtistCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background: rgba(168, 85, 247, 0.05);
+  border: 1px solid rgba(168, 85, 247, 0.1);
+  border-radius: 20px;
+  padding: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: rgba(168, 85, 247, 0.1);
+    border-color: rgba(168, 85, 247, 0.3);
+    transform: translateX(10px);
+  }
+
+  @media (min-width: 640px) {
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 24px;
+  }
+`;
+
+const ArtistPhoto = styled.div`
+  width: 120px;
+  height: 120px;
+  flex-shrink: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  position: relative;
+  background: #000;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  @media (min-width: 640px) {
+    width: 160px;
+    height: 160px;
+  }
+`;
+
+const ArtistText = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  
+  .label {
+    font-size: 0.75rem;
+    color: #a855f7;
+    font-family: 'VT323', monospace;
+    letter-spacing: 2px;
+    margin-bottom: 2px;
+    display: block;
+    opacity: 0.8;
+  }
+
+  h4 {
+    font-size: 1.75rem;
+    color: white;
+    margin: 0 0 6px;
+    font-family: 'VT323', monospace;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  .meta {
+    font-size: 0.95rem;
+    color: #cbd5e1;
+    font-family: 'VT323', monospace;
+    margin-bottom: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 6px;
+    }
+  }
+
+  p {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin: 0;
+    font-family: 'VT323', monospace;
+  }
+`;
+
 const Section = styled.div`
   margin-top: 24px;
   background: rgba(255, 255, 255, 0.02);
@@ -581,6 +699,28 @@ const CompetitionModal = ({ isOpen, onClose, data }) => {
                 <Section key={index}>
                   <h3>{section.title}</h3>
                   {section.content && <p>{formatContent(section.content)}</p>}
+
+                  {section.artists && (
+                    <ArtistLineup>
+                      {section.artists.map((artist, i) => (
+                        <ArtistCard key={i}>
+                          <ArtistPhoto>
+                            <img src={artist.image} alt={artist.name} />
+                          </ArtistPhoto>
+                          <ArtistText>
+                            <span className="label">{artist.label}</span>
+                            <h4>{artist.name}</h4>
+                            <div className="meta">
+                              <span>🎵 {artist.genre}</span>
+                              <span>⏰ {artist.time}</span>
+                            </div>
+                            <p>{artist.about}</p>
+                          </ArtistText>
+                        </ArtistCard>
+                      ))}
+                    </ArtistLineup>
+                  )}
+
                   {section.items && (
                     <ul>
                       {section.items.map((item, i) => (

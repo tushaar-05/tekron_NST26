@@ -588,7 +588,7 @@ function About() {
     const artists = [
         { name: 'Anuj Rehan', role: 'Singer', image: '/images/artists/anuj_rehan.jpg', color: '#3b82f6' },
         { name: 'Shreya Baruah', role: 'Singer', image: '/images/artists/shreya_baruah.jpg', color: '#ec4899' },
-        { name: 'DJ RawQueen', role: 'DJ', image: '/images/artists/dj_rawqueen.jpg', color: '#a855f7' }
+        { name: 'DJ Vishvek', role: 'DJ', image: '/images/artists/dj_vishvek.jpg', color: '#a855f7' }
     ];
 
     const influencers = [
@@ -603,7 +603,8 @@ function About() {
         { name: 'Interview Buddy', image: '/images/brands/interview_buddy.png', color: '#7c3aed' },
         { name: 'Wet n Joy', image: '/images/brands/wet_n_joy.png', color: '#00ffff' },
         { name: 'Ajex eSports', image: '/images/brands/ajex_esports.png', color: '#a855f7' },
-        { name: 'AFDC', image: '/images/brands/afdc.jpg', color: '#d8c6f2' }
+        { name: 'AFDC', image: '/images/brands/afdc.jpg', color: '#d8c6f2' },
+        { name: 'Jiny Entertainments', image: '/images/brands/jiny_entertainments_v2.png', color: '#10b981' }
     ];
 
     const techPanelists = [
@@ -1039,9 +1040,13 @@ function About() {
 
                                 // Render the set twice for a seamless loop
                                 return [...activeItems, ...activeItems].map((item, idx) => (
-                                    <div
+                                    <button
                                         key={`marquee-render-${idx}`}
-                                        className="flex flex-col items-center gap-6 flex-shrink-0 mr-12 group/poster"
+                                        onClick={() => {
+                                            const route = item.category === 'Competition' ? '/competition' : '/events';
+                                            navigate(route, { state: { autoOpenId: item.id } });
+                                        }}
+                                        className="flex flex-col items-center gap-6 flex-shrink-0 mr-12 group/poster cursor-pointer outline-none focus:outline-none"
                                     >
                                         <div className="relative w-64 sm:w-80 h-[400px] sm:h-[480px] rounded-2xl overflow-hidden border border-white/5 transition-all duration-500 hover:border-purple-500/40 hover:shadow-[0_0_50px_rgba(168,85,247,0.2)]">
                                             <img
@@ -1054,7 +1059,7 @@ function About() {
                                         <h3 className="text-white font-bold text-[10px] sm:text-xs pixel-font opacity-30 group-hover/poster:opacity-100 transition-opacity uppercase tracking-[0.3em]">
                                             {item.title}
                                         </h3>
-                                    </div>
+                                    </button>
                                 ));
                             })()}
                         </motion.div>
@@ -1331,6 +1336,59 @@ function About() {
                         );
                     })}
                 </div>
+            </section>
+
+            {/* SECTION 4: CORE COMMITTEE - Grid + Holographic Modal */}
+            <section className="px-4 py-16 max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-16">
+                    <motion.h2
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 pixel-font"
+                        style={{
+                            color: '#d8c6f2',
+                            textShadow: '4px 4px 0px rgba(0, 0, 0, 0.6), 0 0 30px rgba(216, 198, 242, 0.4)',
+                            imageRendering: 'pixelated'
+                        }}
+                    >
+                        [ CORE COMMITTEE ]
+                    </motion.h2>
+                    <motion.p
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        className="text-purple-300 pixel-font text-[10px] sm:text-xs md:text-sm"
+                    >
+                        &gt; THE_ARCHITECTS_OF_THE_REALM.
+                    </motion.p>
+                </div>
+
+                {/* Grid View */}
+                <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-8 justify-center">
+                    {coreCommittee.map((member, index) => (
+                        <CoreMemberCard
+                            key={member.id}
+                            member={member}
+                            index={index}
+                            onClick={() => {
+                                setSelectedId(member.id);
+                                setIsModalOpen(true);
+                            }}
+                        />
+                    ))}
+                </div>
+
+                {/* Detailed Modal View */}
+                <AnimatePresence>
+                    {isModalOpen && selectedMember && (
+                        <HolographicDisplay
+                            member={selectedMember}
+                            color={selectedMember.color}
+                            onClose={() => setIsModalOpen(false)}
+                        />
+                    )}
+                </AnimatePresence>
             </section>
 
 

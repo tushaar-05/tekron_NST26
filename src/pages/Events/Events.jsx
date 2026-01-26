@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
 import Footer from '../../components/layout/Footer';
@@ -12,8 +12,21 @@ import EventCard from '../../components/ui/EventCard/EventCard';
 // Events Page Component
 export default function Events() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Handle auto-opening of modal from marquee deep-links
+  React.useEffect(() => {
+    if (location.state?.autoOpenId) {
+      const eventId = location.state.autoOpenId;
+      const targetEvent = events.find(e => e.id === eventId);
+      if (targetEvent) {
+        setSelectedEvent(targetEvent);
+        setIsModalOpen(true);
+      }
+    }
+  }, [location.state]);
 
   const handleEventClick = (event) => {
     setSelectedEvent(event);

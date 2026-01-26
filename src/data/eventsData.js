@@ -729,7 +729,7 @@ export const events = [
         category: 'Event',
         image: '/images/events/speeddating.png',
         description: 'Andha Pyaar & Speed Dating is a two-phase interactive social experience that explores chemistry beyond appearances. Designed to be fun, safe, and emotionally engaging, the event combines light-hearted speed dating with a blindfold-based connection challenge.',
-        date: 'Offline',
+        date: '30/01/2026',
         sections: [
             {
                 title: 'Event Overview',
@@ -804,11 +804,60 @@ export const events = [
     },
     {
         id: 4,
-        title: 'Live Concert DJ Night',
+        title: 'Live Concert & DJ Night',
         category: 'Event',
-        image: '/images/events/djnight.png',
-        description: 'End the fest with a bang at our Live Concert and DJ Night! Featuring top artists and non-stop music.',
-        date: 'Day 2 Evening'
+        hideRegister: true,
+        image: '/images/events/djnight_v2.png',
+        description: 'End the fest with a bang at our Live Concert and DJ Night! Experience an unforgettable evening featuring soulsful melodies, versatile vocals, and high-energy EDM mixes.',
+        date: 'Day 2 Evening',
+        sections: [
+            {
+                title: '🎶 Headlining Artists',
+                artists: [
+                    {
+                        label: 'LINEUP 1',
+                        name: 'Anuj Rehan',
+                        genre: 'Pop / Indie / Fusion',
+                        time: '5:00 PM – 6:30 PM',
+                        about: 'Anuj delivers soulful melodies and energetic performances that blend contemporary pop with indie vibes. Known for his engaging stage presence and heartfelt lyrics, Anuj sets the tone for an unforgettable evening.',
+                        image: '/images/artists/anuj_rehan.jpg'
+                    },
+                    {
+                        label: 'LINEUP 2',
+                        name: 'Shreya Baruah',
+                        genre: 'Bollywood / R&B / Acoustic',
+                        time: '6:30 PM – 7:30 PM',
+                        about: 'Shreya Baruah captivates audiences with her versatile vocals and dynamic range — from Bollywood favorites to smooth R&B tunes. Her performances mix emotion, rhythm, and crowd interaction for a truly immersive experience.',
+                        image: '/images/artists/shreya_baruah.jpg'
+                    },
+                    {
+                        label: 'LINEUP 3',
+                        name: 'DJ Vishvek',
+                        genre: 'EDM / House / Trap',
+                        time: '7:30 PM – 9:00 PM',
+                        about: 'Get ready to dance! DJ Vishvek brings high-energy beats and electrifying mixes that keep the party going all night long. His sets fuse EDM, House, and Trap, creating a high-octane finale to the night.',
+                        image: '/images/artists/dj_vishvek.jpg'
+                    }
+                ]
+            },
+            {
+                title: '🗓 Event Schedule',
+                items: [
+                    '05:00 PM – 06:30 PM: Anuj Rehan',
+                    '06:30 PM – 07:30 PM: Shreya Baruah',
+                    '07:30 PM – 09:00 PM: DJ Vishvek'
+                ]
+            },
+            {
+                title: '📣 Why You Should Attend',
+                items: [
+                    '🌟 A mix of live vocals, fusion tunes, and DJ beats',
+                    '🎤 Talented performers bringing diverse styles',
+                    '💃 Dance-ready after-party with DJ Vishvek',
+                    '🎉 Perfect night out with music lovers'
+                ]
+            }
+        ]
     },
     {
         id: 5,

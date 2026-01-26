@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import { competitions } from '../../data/eventsData';
 import EventCard from '../../components/ui/EventCard/EventCard';
@@ -12,6 +12,7 @@ import Footer from '../../components/layout/Footer';
 
 const Competition = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [selectedComp, setSelectedComp] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -26,6 +27,20 @@ const Competition = () => {
       return () => clearTimeout(timer);
     }
   }, [visibleCount]);
+
+  // Handle auto-opening of modal from marquee deep-links
+  useEffect(() => {
+    if (location.state?.autoOpenId) {
+      const compId = location.state.autoOpenId;
+      const targetComp = competitions.find(c => c.id === compId);
+      if (targetComp) {
+        setSelectedComp(targetComp);
+        setIsModalOpen(true);
+        // Clear state to prevent re-opening on manual refresh but keep for back navigation if needed
+        // For now, simpler is better: window.history.replaceState({}, document.title)
+      }
+    }
+  }, [location.state, competitions]);
 
   const handleCardClick = (comp) => {
     setSelectedComp(comp);
