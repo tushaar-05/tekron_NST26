@@ -1330,9 +1330,9 @@ const VisibilityMatrix = () => {
 // --- 👤 Shared Data & Components ---
 const artistsData = [
     { name: 'SHREYA JAIN', role: 'Singer / Performer', image: '/images/artists/shreya_jain.jpg', color: '#fbbf24', gridArea: 'artist1' },
-    { name: 'DJ SUITUP', role: 'Electronic Artist', image: '/images/artists/dj_suitup.jpg', color: '#00fff9', gridArea: 'artist2' },
+    { name: 'DJ SUITUP', role: 'DJ', image: '/images/artists/dj_suitup.jpg', color: '#06b6d4', gridArea: 'artist2' },
     { name: 'KULLU BAAZI', role: 'Standup Comedy', image: '/images/artists/kullu_baazi.jpg', color: '#a855f7', gridArea: 'artist3' },
-    { name: 'DJ NAAIRO', role: 'Music Producer', image: '/images/artists/dj_naairo.jpg', color: '#ec4899', gridArea: 'artist4' }
+    { name: 'DJ NAAIRO', role: 'DJ', image: '/images/artists/dj_naairo.jpg', color: '#ec4899', gridArea: 'artist4' },
 ];
 
 const influencersData = [
@@ -1471,7 +1471,7 @@ const PersonCard = ({ person, index, type }) => (
 );
 
 
-// --- ✨ 7a. Past Artists - Redesigned Bento Grid ---
+// --- ✨ 7a. Past Artists - Redesigned to Match About Page ---
 const PastArtists = () => {
     return (
         <Section className="pb-8">
@@ -1506,50 +1506,28 @@ const PastArtists = () => {
                 </p>
             </motion.div>
 
-            {/* Asymmetric Bento Grid for Artists */}
-            <div
-                className="grid gap-6"
-                style={{
-                    gridTemplateColumns: 'repeat(6, 1fr)',
-                    gridTemplateRows: 'repeat(4, 200px)',
-                    gridTemplateAreas: `
-                        "artist1 artist1 artist1 artist2 artist2 artist2"
-                        "artist1 artist1 artist1 artist2 artist2 artist2"
-                        "artist3 artist3 artist3 artist4 artist4 artist4"
-                        "artist3 artist3 artist3 artist4 artist4 artist4"
-                    `
-                }}
-            >
-                {artistsData.map((artist, i) => (
-                    <PersonCard key={i} person={artist} index={i} type="artist" />
+            {/* Grid Layout matching About Page - 4 in a line */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                {artistsData.map((artist, idx) => (
+                    <motion.div
+                        key={idx}
+                        whileHover={{ y: -10 }}
+                        className="relative group bg-black/40 border border-white/5 p-4 overflow-hidden"
+                        style={{ clipPath: 'polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px)' }}
+                    >
+                        <div className="aspect-[3/4] relative overflow-hidden mb-4">
+                            <img src={artist.image} alt={artist.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
+                            <div className="absolute bottom-4 left-4">
+                                <span className="text-[8px] pixel-font px-2 py-1 bg-white/10 backdrop-blur-md border border-white/20 text-white">LIVE_PFRM</span>
+                            </div>
+                        </div>
+                        <h3 className="text-xl font-bold text-white pixel-font mb-1">{artist.name}</h3>
+                        <p className="text-xs text-white/40 font-mono tracking-widest uppercase" style={{ color: artist.color }}>{artist.role}</p>
+                        <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 transition-all group-hover:w-12 group-hover:h-12" style={{ borderColor: artist.color }} />
+                    </motion.div>
                 ))}
             </div>
-
-            {/* Mobile/Tablet Responsive Grid */}
-            <style jsx>{`
-                @media (max-width: 1024px) {
-                    .grid[style*="gridTemplateAreas"] {
-                        grid-template-columns: repeat(4, 1fr) !important;
-                        grid-template-rows: repeat(4, 180px) !important;
-                        grid-template-areas: 
-                            "artist1 artist1 artist2 artist2"
-                            "artist1 artist1 artist2 artist2"
-                            "artist3 artist3 artist4 artist4"
-                            "artist3 artist3 artist4 artist4" !important;
-                    }
-                }
-                @media (max-width: 640px) {
-                    .grid[style*="gridTemplateAreas"] {
-                        grid-template-columns: 1fr !important;
-                        grid-template-rows: repeat(4, 280px) !important;
-                        grid-template-areas: 
-                            "artist1"
-                            "artist2"
-                            "artist3"
-                            "artist4" !important;
-                    }
-                }
-            `}</style>
         </Section>
     );
 };
