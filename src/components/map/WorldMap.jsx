@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from
 import { useNavigate, useLocation } from 'react-router-dom';
 import MapIsland from './MapIsland';
 import WorldLoading from './WorldLoading';
+import MapHighlights from './MapHighlights';
 
 // Import optimized island images - Using WebP where available for better performance
 const homeIsland = '/images/map/islands/New/home_pixel.webp';
@@ -228,7 +229,7 @@ function WorldMap() {
             id: i,
             x: Math.random() * 100,
             y: Math.random() * 100,
-            size: Math.random() * 3 + 1,
+            size: (Math.random() * 3 + 1) * 1.2, // Increased by 20%
             speed: Math.random() * 35 + 22,
             opacity: Math.random() * 0.5 + 0.4,
             width: Math.random() * 100 + 50,
@@ -385,8 +386,8 @@ function WorldMap() {
                                     ease: "linear"
                                 }}
                                 style={{
-                                    width: '3px',
-                                    height: '3px',
+                                    width: '3.6px', // Increased by 20% from 3px
+                                    height: '3.6px',
                                     boxShadow: 'none'
                                 }}
                             />
@@ -519,7 +520,7 @@ function WorldMap() {
             </motion.div>
 
             {/* Narrative HUD */}
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 md:left-auto md:translate-x-0 md:bottom-12 md:right-12 z-50 pointer-events-none w-max max-w-[90vw]">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none w-max max-w-[90vw]">
                 <motion.div
                     key={narrative} // Re-animate on text change
                     initial={{ opacity: 0, y: 10 }}
@@ -532,6 +533,26 @@ function WorldMap() {
                     </span>
                 </motion.div>
             </div>
+
+            {/* Scroll Indicator (Only if not exploring) */}
+            {phase === 'connected' && (
+                <motion.div
+                    className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-40 hidden sm:flex flex-col items-center gap-2 pointer-events-none opacity-50"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 0.5, y: [0, 10, 0] }}
+                    transition={{ opacity: { delay: 2, duration: 1 }, y: { duration: 2, repeat: Infinity } }}
+                >
+                    {/* Optional: Keeping a subtle indicator or removing it if it conflicts with overlay */}
+                </motion.div>
+            )}
+
+
+            {/* NEW: Map HUD Overlay (Highlights) */}
+            {phase === 'connected' && (
+                <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden">
+                    <MapHighlights />
+                </div>
+            )}
 
             <style>{`
                 .typewriter {

@@ -206,25 +206,21 @@ function App() {
                         background: '#1a0b2e',
                         imageRendering: 'pixelated',
                     }}
+                    className="h-screen overflow-hidden"
                 >
+                    {/* HERO SECTION - Formerly the fixed page */}
                     <div
-                        className="relative w-screen h-screen overflow-hidden tech-event-bg"
+                        className="relative w-full h-full overflow-hidden tech-event-bg"
                         style={{
                             background: 'linear-gradient(180deg, #1a0b2e 0%, #2d1b4e 30%, #1e1438 70%, #0f0a1e 100%)',
                         }}
                     >
-
                         <div className="tech-grid-pixel absolute inset-0 z-0 opacity-15" />
-
-
                         <div className="scan-line-pixel absolute inset-0 z-2 pointer-events-none" />
-
-
                         {glitchActive && <div className="glitch-overlay-pixel absolute inset-0 z-3 pointer-events-none" />}
 
-
                         <div
-                            className="absolute inset-0 z-0 transition-opacity duration-1000"
+                            className="absolute inset-0 z-0 transition-opacity duration-700"
                             style={{
                                 backgroundImage: 'url(/images/backgrounds/bg_img.jpg)',
                                 backgroundSize: 'cover',
@@ -233,7 +229,6 @@ function App() {
                                 opacity: loadedAssets['/images/backgrounds/bg_img.jpg'] ? 0.3 : 0,
                             }}
                         />
-
 
                         {/* Mobile clouds at top - visible only on mobile */}
                         <div
@@ -386,26 +381,6 @@ function App() {
                                 loading="eager"
                             />
                         </div>
-
-
-                        {/* Commented out EXPLORE/NAVIGATE button as per request
-                        <button
-                            className="notch-nav-button absolute top-0 left-1/2 transform -translate-x-1/2 z-40 pixel-art"
-                            onClick={handleNavigateToMap}
-                            style={{
-                                transform: 'translateX(-50%) scale(1.3)',
-                                transformOrigin: 'top center',
-                                minWidth: '270px',
-                                width: 'auto',
-                                padding: '0 30px',
-                            }}
-                        >
-                            <div className="notch-nav-content w-full">
-                                <span className="notch-text-default pixel-font text-white text-[22px] md:text-[24px] whitespace-nowrap">EXPLORE</span>
-                                <span className="notch-text-expanded pixel-font text-white text-[22px] md:text-[24px] whitespace-nowrap">NAVIGATE</span>
-                            </div>
-                        </button>
-                        */}
 
 
                         <div className="relative z-20 h-full flex flex-col items-center justify-center sm:justify-center px-8 pt-0 sm:pt-20">

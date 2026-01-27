@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import UnifiedBackground from '../../components/layout/UnifiedBackground';
 import MiniNavbar from '../../components/layout/MiniNavbar';
@@ -285,6 +285,7 @@ const HolographicDisplay = ({ member, color, onClose }) => {
 
 function About() {
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [showCursor, setShowCursor] = useState(true);
     const [glitchActive, setGlitchActive] = useState(false);
@@ -298,6 +299,19 @@ function About() {
         }, 530);
         return () => clearInterval(cursorTimer);
     }, []);
+
+    // Scroll to section on load if hash is present
+    useEffect(() => {
+        if (location.hash) {
+            const id = location.hash.replace('#', '');
+            const element = document.getElementById(id);
+            if (element) {
+                setTimeout(() => {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+    }, [location]);
 
     const artifactsData = [
         {
@@ -929,7 +943,7 @@ function About() {
             </section>
 
             {/* SECTION 4.1: ARTIST LINEUP */}
-            <section className="px-4 py-20 max-w-7xl mx-auto relative z-10">
+            <section id="artists" className="px-4 py-20 max-w-7xl mx-auto relative z-10">
                 <div className="text-center mb-16">
                     <motion.h2
                         initial={{ opacity: 0, y: 30 }}
@@ -967,7 +981,7 @@ function About() {
             </section>
 
             {/* SECTION 4.0.5: TECH PANELISTS */}
-            <section className="px-4 py-20 max-w-7xl mx-auto relative z-10">
+            <section id="tech-panel" className="px-4 py-20 max-w-7xl mx-auto relative z-10">
                 <div className="flex items-center gap-6 mb-16 px-4">
                     <div className="h-[2px] w-12 bg-cyan-500/50" />
                     <h2 className="text-2xl sm:text-4xl font-bold pixel-font text-white whitespace-nowrap">
@@ -1055,7 +1069,7 @@ function About() {
             </section>
 
             {/* SECTION 4.2: INFLUENCER HUB */}
-            <section className="px-4 py-24 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent relative z-10">
+            <section id="influencers" className="px-4 py-24 bg-gradient-to-b from-transparent via-purple-500/5 to-transparent relative z-10">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col items-center mb-16">
                         <motion.h2
@@ -1179,7 +1193,7 @@ function About() {
             </section>
 
             {/* SECTION 4.3: OUR PARTNERS (SPONSORS) */}
-            <section className="px-4 py-24 max-w-7xl mx-auto relative z-10 overflow-hidden">
+            <section id="partners" className="px-4 py-24 max-w-7xl mx-auto relative z-10 overflow-hidden">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-64 bg-purple-600/5 blur-[120px] -z-10" />
 
                 <div className="flex items-center gap-6 mb-16">
