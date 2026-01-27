@@ -409,6 +409,16 @@ function App() {
 
 
                         <div className="relative z-20 h-full flex flex-col items-center justify-center sm:justify-center px-8 pt-0 sm:pt-20">
+                            {/* Partner Logos */}
+                            <motion.div
+                                initial={{ opacity: 0, y: -20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="flex flex-wrap justify-center items-center gap-6 md:gap-12 mb-8 md:mb-12 bg-white/5 py-3 md:py-4 px-6 md:px-10 rounded-2xl border border-white/5 backdrop-blur-sm shadow-xl"
+                            >
+                                <img src="/images/logos/newton_logo.png" alt="Newton School of Technology" className="h-6 md:h-10 brightness-125 hover:scale-105 transition-transform" />
+                                <span className="pixel-font text-purple-400 text-lg md:text-2xl mx-2 opacity-60">X</span>
+                                <img src="/images/logos/adypu_logo.png" alt="ADYPU" className="h-6 md:h-10 brightness-125 hover:scale-105 transition-transform" />
+                            </motion.div>
 
                             <h1
                                 className={`pixel-font text-center mb-4 sm:mb-6 ${glitchActive ? 'glitch-text-pixel' : ''}`}

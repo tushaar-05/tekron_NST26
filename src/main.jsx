@@ -15,6 +15,7 @@ import Competition from './pages/Competition/Competition';
 import Events from './pages/Events/Events';
 import Contact from './pages/Contact/Contact';
 import Sponsors from './pages/Sponsors/Sponsors';
+import Hospitality from './pages/Hospitality/Hospitality';
 import ComingSoon from './components/ui/ComingSoon/ComingSoon';
 
 // A wrapper component to handle route changes
@@ -32,6 +33,7 @@ function AppWrapper() {
             <Route path="/events" element={<Events />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/sponsors" element={<Sponsors />} />
+            <Route path="/hospitality" element={<Hospitality />} />
 
             {/* Redirects */}
             <Route path="/home" element={<Navigate to="/" replace />} />

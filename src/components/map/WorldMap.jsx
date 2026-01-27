@@ -9,9 +9,10 @@ const homeIsland = '/images/map/islands/New/home_pixel.webp';
 const aboutIsland = '/images/map/islands/New/about_pixel.webp';
 const compIsland = '/images/map/islands/New/comp_pixel.webp';
 const contactIsland = '/images/map/islands/New/contact_pixel.webp';
-const eventsIsland = '/images/map/islands/New/events_pixel.webp';
 const galleryIsland = '/images/map/islands/New/gallery_pixel.webp';
 const sponsorsIsland = '/images/map/islands/New/sponsors_pixel.webp';
+const eventsIsland = '/images/map/islands/New/events_pixel.webp';
+const hospitalityIsland = '/images/map/islands/New/hospitality_pixel.webp';
 
 function WorldMap() {
     const navigate = useNavigate();
@@ -83,52 +84,60 @@ function WorldMap() {
             mobile: { x: 50, y: 48, size: 160 }
         },
         {
-            id: 'contact',
-            image: contactIsland,
-            label: 'CONTACT',
-            route: '/contact',
-            desktop: { x: 50, y: 15, size: 200 },
-            mobile: { x: 50, y: 12, size: 100 }
+            id: 'hospitality',
+            image: hospitalityIsland,
+            label: 'HOSPITALITY',
+            route: '/hospitality',
+            desktop: { x: 50, y: 15, size: 190 },
+            mobile: { x: 50, y: 12, size: 90 }
         },
         {
             id: 'comp',
             image: compIsland,
             label: 'COMPETITIONS',
             route: '/competition',
-            desktop: { x: 75, y: 25, size: 220 },
-            mobile: { x: 72, y: 26, size: 110 }
+            desktop: { x: 78, y: 28, size: 210 },
+            mobile: { x: 78, y: 30, size: 100 }
         },
         {
             id: 'gallery',
             image: galleryIsland,
             label: 'GALLERY',
             route: '/gallery',
-            desktop: { x: 75, y: 65, size: 220 },
-            mobile: { x: 72, y: 70, size: 110 }
+            desktop: { x: 84, y: 58, size: 210 },
+            mobile: { x: 82, y: 60, size: 100 }
         },
         {
             id: 'about',
             image: aboutIsland,
             label: 'ABOUT',
             route: '/about',
-            desktop: { x: 50, y: 85, size: 200 },
-            mobile: { x: 50, y: 88, size: 110 }
+            desktop: { x: 65, y: 82, size: 190 },
+            mobile: { x: 65, y: 84, size: 100 }
         },
         {
             id: 'sponsors',
             image: sponsorsIsland,
             label: 'SPONSORS',
             route: '/sponsors',
-            desktop: { x: 25, y: 65, size: 220 },
-            mobile: { x: 28, y: 70, size: 100 }
+            desktop: { x: 35, y: 82, size: 210 },
+            mobile: { x: 35, y: 84, size: 100 }
         },
         {
             id: 'events',
             image: eventsIsland,
             label: 'EVENTS',
             route: '/events',
-            desktop: { x: 25, y: 25, size: 220 },
-            mobile: { x: 28, y: 26, size: 110 }
+            desktop: { x: 16, y: 58, size: 210 },
+            mobile: { x: 18, y: 60, size: 100 }
+        },
+        {
+            id: 'contact',
+            image: contactIsland,
+            label: 'CONTACT',
+            route: '/contact',
+            desktop: { x: 23, y: 28, size: 210 },
+            mobile: { x: 22, y: 30, size: 100 }
         }
     ];
 
