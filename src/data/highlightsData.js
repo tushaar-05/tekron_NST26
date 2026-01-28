@@ -7,7 +7,8 @@ export const artists = [
 export const influencers = [
     { name: 'Rohit Nagar', role: 'Content Creator', image: '/images/influencers/rohit_nagar.jpg', color: '#3b82f6' },
     { name: 'Iqlipse Nova', role: 'Singer / Content Creator', image: '/images/influencers/iqlipse_nova.jpg', color: '#10b981' },
-    { name: 'Eknoor Singh', role: 'Content Creator', image: '/images/influencers/eknoor_singh.jpg', color: '#f59e0b' }
+    { name: 'Eknoor Singh', role: 'Content Creator', image: '/images/influencers/eknoor_singh.jpg', color: '#f59e0b' },
+    { name: 'Bhagyashree Limaye', role: 'Content Creator/Actor', image: '/images/influencers/bhagyashree_limaye.jpg', color: '#a855f7', collaboration: 'Under25', collaborationLogo: '/images/brands/under25.png' }
 ];
 
 export const sponsors = [

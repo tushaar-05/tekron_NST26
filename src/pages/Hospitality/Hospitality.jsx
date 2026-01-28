@@ -191,7 +191,7 @@ const Hospitality = () => {
                                             </p>
                                             {item.status && (
                                                 <div className="mt-3 pl-2">
-                                                    <span className="text-[12px] px-2 py-1 border rounded-md uppercase tracking-widest text-white/80 font-bold bg-black/30 font-['VT323']" style={{ borderColor: `${section.color}44`, color: section.color }}>
+                                                    <span className="text-base px-3 py-1.5 border rounded-md uppercase tracking-widest text-white/80 font-bold bg-black/30 font-['VT323']" style={{ borderColor: `${section.color}44`, color: section.color }}>
                                                         {item.status}
                                                     </span>
                                                 </div>
