@@ -6,7 +6,7 @@ export const competitions = [
         image: '/images/events/hackron.png',
         description: 'Agentic AI Hackathon 2.0 is a 24-hour offline hackathon where students build real AI agents capable of thinking, planning, using tools, and completing tasks autonomously. Join the future of AI — Agentic Systems — through hands-on learning and competitive building.',
         teamSize: '3-5 Members',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
         isRegistrationClosed: true,
@@ -66,7 +66,7 @@ export const competitions = [
     //     image: '/images/events/cybox.png',
     //     description: 'CYBOX is an offline Capture The Flag (CTF) cybersecurity competition. The event focuses on real-world offensive security and penetration testing scenarios in a professional red-team environment.',
     //     teamSize: '3 Members',
-    //     date: '30th - Jan - 2026',
+    //     date: '31st Jan - 1st Feb',
     //     prizePool: '₹75,000',
     //     registrationDeadline: '2026-01-29T23:59:59',
     //     unstopLink: 'https://unstop.com/p/cybox-newton-school-of-technology-1615144',
@@ -122,7 +122,7 @@ export const competitions = [
         image: '/images/events/codewars.png',
         description: 'CodeWars is a flagship competitive programming contest designed to challenge students’ problem-solving skills, algorithmic thinking, and coding efficiency in a high-pressure environment. The contest follows an ICPC-style individual format.',
         teamSize: 'Individual',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹50,000',
         registrationDeadline: '2026-01-29T23:59:59',
         isRegistrationClosed: true,
@@ -144,7 +144,7 @@ export const competitions = [
                     'Date: 31 January 2026',
                     'Venue: Newton School of Technology - ADYPU',
                     'Duration: 3 Hours (Fully proctored)',
-                    'Prize Pool: ₹70,000 (1st: 30k, 2nd: 20k, 3rd: 10k)',
+                    'Prize Pool: ₹40,000 (1st: ₹18k, 2nd: ₹13k, 3rd: ₹9k)',
                     'Goodies for Ranks 4th–10th'
                 ]
             },
@@ -170,7 +170,7 @@ export const competitions = [
         image: '/images/events/dronehavoc.png',
         description: 'Drone Havoc is an adrenaline-filled drone racing and obstacle navigation competition featuring timed trials, knockout rounds, and finals in a specially designed arena with aerial obstacles and checkpoints.',
         teamSize: 'Max 4 Members',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/o/rqlhbDP?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
@@ -214,8 +214,8 @@ export const competitions = [
             {
                 title: 'Prize Pool',
                 items: [
-                    '1st Prize: ₹60,000',
-                    '2nd Prize: ₹40,000'
+                    '1st Prize: ₹45,000',
+                    '2nd Prize: ₹30,000'
                 ]
             },
             {
@@ -231,7 +231,7 @@ export const competitions = [
         image: '/images/events/robokick.png',
         description: 'Design and control robots to play soccer. Strategy and engineering come together in this robotic sports showdown where teams compete to score goals in an arena.',
         teamSize: 'Up to 5 Members',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹75,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/o/ZXI0pqC?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
@@ -278,15 +278,15 @@ export const competitions = [
                 title: 'Important Dates',
                 items: [
                     'Registration & Video: 15 Jan 2026',
-                    'Event Day: 30 Jan 2026 (9:30 AM IST)'
+                    'Event Day: 31st Jan 2026 (9:30 AM IST)'
                 ]
             },
             {
                 title: 'Prize Pool',
                 items: [
-                    '1st Prize: ₹55,000',
-                    '2nd Prize: ₹40,000',
-                    '3rd Prize: ₹25,000'
+                    '1st Prize: ₹40,000',
+                    '2nd Prize: ₹25,000',
+                    '3rd Prize: ₹10,000'
                 ]
             },
             {
@@ -302,7 +302,7 @@ export const competitions = [
         image: '/images/events/throttlex.png',
         description: 'Welcome to RC Car Race (electric only), a thrilling enthusiast competition to check the control of players on their joysticks.\n\nTime: 4–7 hours\nVenue: Oval Ground\nEach team will get to show their full potential in the arena while competing with other competitors.',
         teamSize: 'Teams (Unspecified Size)',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹60,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/o/RfKS2pi?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
@@ -375,9 +375,9 @@ export const competitions = [
             {
                 title: 'Prize Pool Breakdown',
                 items: [
-                    'Total Pool: ₹80,000',
-                    '1st Prize: ₹45,000',
-                    '2nd Prize: ₹25,000',
+                    'Total Pool: ₹60,000',
+                    '1st Prize: ₹30,000',
+                    '2nd Prize: ₹20,000',
                     '3rd Prize: ₹10,000'
                 ]
             },
@@ -389,12 +389,12 @@ export const competitions = [
     },
     {
         id: 7,
-        title: 'Battle of Bands',
+        title: 'Sargam (Battle of Bands)',
         category: 'Competition',
         image: '/images/events/battleofbands.png',
         description: 'A high-energy live music competition designed to showcase the best emerging college bands. Emphasizing originality, musicianship, synchronization, and stage presence.',
         teamSize: '3-7 Members',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹30,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/o/wgc9sBa?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
@@ -412,7 +412,7 @@ export const competitions = [
             {
                 title: 'Round 2: Live Stage Finals',
                 items: [
-                    'Date: 30 January 2026',
+                    'Date: 31st Jan 2026',
                     'Time: Max 15 mins (including setup & soundcheck)',
                     'Live performing members must match the video submission',
                     'No auto-tune, backing tracks, or pre-recorded audio allowed'
@@ -430,8 +430,8 @@ export const competitions = [
             {
                 title: 'Prize Pool',
                 items: [
-                    'Winner: ₹25,000 + Trophy',
-                    'First Runner-up: ₹15,000',
+                    'Winner: ₹20,000 + Trophy',
+                    'First Runner-up: ₹10,000',
                     'Certificates for all participating bands'
                 ]
             },
@@ -538,7 +538,7 @@ export const competitions = [
         image: '/images/events/bgmi.png',
         description: 'The BGMI Tournament at TEKRON 2.0 is a high-stakes competitive esports event featuring a structured qualification pathway from Online Qualifiers to the Grand Finals.',
         teamSize: '4 Members',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹30,000',
         registrationDeadline: '2026-01-29T23:59:59',
         isRegistrationClosed: true,
@@ -551,7 +551,7 @@ export const competitions = [
                     'Stage 1: Online Qualifiers (18 Jan)',
                     'Stage 2: Semifinals (24 Teams, 3 Groups of 8)',
                     'Stage 3: Qualification for Finals (Top 16 cumulative)',
-                    'Stage 4: Grand Finals (30-31 Jan, 10 AM - 6 PM)'
+                    'Stage 4: Grand Finals (31 Jan, 10 AM - 6 PM)'
                 ]
             },
             {
@@ -565,11 +565,9 @@ export const competitions = [
             {
                 title: 'Prize Pool',
                 items: [
-                    '1st Place: ₹40,000',
-                    '2nd Place: ₹20,000',
-                    '3rd Place: ₹10,000',
-                    '4th Place: ₹5,000',
-                    '5th-16th Place: ₹2,083 each'
+                    '1st Place: ₹15,000',
+                    '2nd Place: ₹10,000',
+                    '3rd Place: ₹5,000'
                 ]
             },
             {
@@ -580,12 +578,12 @@ export const competitions = [
     },
     {
         id: 11,
-        title: 'Last Goal Standing',
+        title: 'Last Goal Standing (FC24)',
         category: 'Competition',
         image: '/images/events/fifa.png',
         description: 'Last Goal Standing is a competitive FIFA 1v1 college tournament designed to test individual skill, quick decision-making, and fair play. The event follows a simple single knock-out format.',
         teamSize: '1 Player',
-        date: '30th - Jan - 2026',
+        date: '31st Jan',
         prizePool: '₹4,000',
         registrationDeadline: '2026-01-29T23:59:59',
         unstopLink: 'https://unstop.com/o/DPJfVCo?lb=EFfhJSmw&utm_medium=Share&utm_source=tekrofes68721&utm_campaign=Competitions',
@@ -641,7 +639,7 @@ export const events = [
         category: 'Workshop',
         image: '/images/events/robotics.png',
         description: 'Hands-on robotics workshop where you will learn to build and program your own robots.',
-        date: 'Day 2',
+        date: '31st Jan',
         sections: [
             {
                 title: 'Overview',
@@ -656,7 +654,7 @@ export const events = [
         image: '/images/events/amongus.png',
         description: 'Among Us: The Live Experience is a high-intensity, real-world adaptation of the globally popular social deduction game. Set inside a physically transformed arena, participants step into a compromised space station where trust is fragile, silence is mandatory, and survival depends on observation and strategy.',
         teamSize: 'Individual',
-        date: 'Offline',
+        date: '31st Jan',
         unstopLink: 'https://forms.gle/1Cs6Vcu9AEaYp9BFA',
         sections: [
             {
@@ -732,7 +730,7 @@ export const events = [
         category: 'Event',
         image: '/images/events/speeddating.png',
         description: 'Andha Pyaar & Speed Dating is a two-phase interactive social experience that explores chemistry beyond appearances. Designed to be fun, safe, and emotionally engaging, the event combines light-hearted speed dating with a blindfold-based connection challenge.',
-        date: '30/01/2026',
+        date: '31st Jan',
         hideRegister: true,
         sections: [
             {
@@ -813,7 +811,7 @@ export const events = [
         hideRegister: true,
         image: '/images/events/djnight_v2.png',
         description: 'End the fest with a bang at our Live Concert and DJ Night! Experience an unforgettable evening featuring soulsful melodies, versatile vocals, and high-energy EDM mixes.',
-        date: 'Day 2 Evening',
+        date: '31st Jan Evening',
         sections: [
             {
                 title: '🎶 Headlining Artists',
@@ -870,7 +868,7 @@ export const events = [
         hideRegister: true,
         image: '/images/events/panel_discussion.png',
         description: 'Join us for an insightful panel discussion with industry experts sharing their journey in AI, entrepreneurship, and leadership.',
-        date: '30/01/2026',
+        date: '31st Jan',
         sections: [
             {
                 title: 'Speaker: Dharmik Bapodara',
