@@ -152,7 +152,7 @@ function App() {
     }, [dialogueIndex, assetsLoaded]);
 
     useEffect(() => {
-        const targetDate = new Date('2026-01-30T00:00:00').getTime();
+        const targetDate = new Date('2026-01-31T00:00:00').getTime();
 
         const updateCountdown = () => {
             const now = new Date().getTime();
