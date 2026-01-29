@@ -1107,7 +1107,12 @@ function About() {
                                     {/* Profile Image Container */}
                                     <div className="relative h-[330px] w-full rounded-xl overflow-hidden mb-5">
                                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10" />
-                                        <img src={person.image} alt={person.name} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-125" />
+                                        <img
+                                            src={person.image}
+                                            alt={person.name}
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-125"
+                                            style={person.name === 'Eknoor Singh' ? { objectPosition: 'center 20%' } : {}}
+                                        />
 
                                         {/* Collaboration Logo */}
                                         {person.collaboration && person.collaborationLogo && (
