@@ -177,6 +177,83 @@ const CoreMemberCard = ({ member, index }) => {
     );
 };
 
+const PartnerLogo = ({ brand, idx }) => {
+    const [isHovered, setIsHovered] = useState(false);
+    const brandColor = brand.color || '#a855f7';
+
+    return (
+        <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            className="h-48 sm:h-60 relative group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+        >
+            {/* Holographic Background Layer */}
+            <div
+                className="absolute inset-0 rounded-3xl transition-all duration-500 overflow-hidden"
+                style={{
+                    background: 'linear-gradient(135deg, rgba(30, 20, 56, 0.8), rgba(45, 27, 78, 0.6))',
+                    backdropFilter: 'blur(20px)',
+                    boxShadow: isHovered
+                        ? `0 20px 40px ${brandColor}4d, 0 0 60px ${brandColor}33`
+                        : '0 4px 6px rgba(0, 0, 0, 0.1)'
+                }}
+            >
+                {/* Holographic Border */}
+                <div
+                    className="absolute inset-0 rounded-3xl transition-opacity duration-400"
+                    style={{
+                        padding: '2px',
+                        background: `linear-gradient(135deg, ${brandColor}, #7c3aed, #6366f1)`,
+                        WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                        WebkitMaskComposite: 'xor',
+                        maskComposite: 'exclude',
+                        opacity: isHovered ? 1 : 0
+                    }}
+                />
+
+                {/* Radial Glow */}
+                <div
+                    className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] transition-opacity duration-400 pointer-events-none"
+                    style={{
+                        background: `radial-gradient(circle, ${brandColor}1a 0%, transparent 70%)`,
+                        opacity: isHovered ? 1 : 0
+                    }}
+                />
+
+                {/* Content Container */}
+                <div className="relative w-full h-full flex items-center justify-center p-8 overflow-hidden">
+                    {/* Grid Pattern Background */}
+                    <div
+                        className="absolute inset-0 opacity-20"
+                        style={{
+                            backgroundImage: `
+                                repeating-linear-gradient(0deg, ${brandColor}1a 0px, transparent 1px, transparent 2px, ${brandColor}1a 3px),
+                                repeating-linear-gradient(90deg, ${brandColor}1a 0px, transparent 1px, transparent 2px, ${brandColor}1a 3px)
+                            `
+                        }}
+                    />
+
+                    <div className="relative z-10 w-full h-full flex items-center justify-center">
+                        <img
+                            src={brand.image}
+                            alt={brand.name}
+                            className="max-w-full max-h-full object-contain transition-all duration-500"
+                            style={{
+                                filter: isHovered ? `drop-shadow(0 0 20px ${brandColor}80)` : 'none',
+                                transform: isHovered ? 'scale(1.1)' : 'scale(1)'
+                            }}
+                        />
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+    );
+};
+
 const HolographicDisplay = ({ member, color, onClose }) => {
     return (
         <motion.div
@@ -549,7 +626,20 @@ function About() {
                 { name: 'OPS', value: 92 }
             ]
         },
-
+        {
+            id: 15,
+            name: 'Raman Thakur',
+            role: 'Competitions Team',
+            image: '/images/committee/raman_thakur.jpg',
+            color: '#22d3ee', // Cyan
+            stats: [
+                { name: 'TECH', value: 35 },
+                { name: 'MGMT', value: 80 },
+                { name: 'CRTV', value: 65 },
+                { name: 'COMM', value: 85 },
+                { name: 'OPS', value: 90 }
+            ]
+        },
     ];
 
     const selectedMember = coreCommittee.find(m => m.id === selectedId) || coreCommittee[0];
@@ -1218,83 +1308,9 @@ function About() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-                    {sponsors.map((brand, idx) => {
-                        const [isHovered, setIsHovered] = useState(false);
-                        const brandColor = brand.color || '#a855f7';
-
-                        return (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: idx * 0.1 }}
-                                className="h-48 sm:h-60 relative group"
-                                onMouseEnter={() => setIsHovered(true)}
-                                onMouseLeave={() => setIsHovered(false)}
-                            >
-                                {/* Holographic Background Layer */}
-                                <div
-                                    className="absolute inset-0 rounded-3xl transition-all duration-500 overflow-hidden"
-                                    style={{
-                                        background: 'linear-gradient(135deg, rgba(30, 20, 56, 0.8), rgba(45, 27, 78, 0.6))',
-                                        backdropFilter: 'blur(20px)',
-                                        boxShadow: isHovered
-                                            ? `0 20px 40px ${brandColor}4d, 0 0 60px ${brandColor}33`
-                                            : '0 4px 6px rgba(0, 0, 0, 0.1)'
-                                    }}
-                                >
-                                    {/* Holographic Border */}
-                                    <div
-                                        className="absolute inset-0 rounded-3xl transition-opacity duration-400"
-                                        style={{
-                                            padding: '2px',
-                                            background: `linear-gradient(135deg, ${brandColor}, #7c3aed, #6366f1)`,
-                                            WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-                                            WebkitMaskComposite: 'xor',
-                                            maskComposite: 'exclude',
-                                            opacity: isHovered ? 1 : 0
-                                        }}
-                                    />
-
-                                    {/* Radial Glow */}
-                                    <div
-                                        className="absolute -top-1/2 -left-1/2 w-[200%] h-[200%] transition-opacity duration-400 pointer-events-none"
-                                        style={{
-                                            background: `radial-gradient(circle, ${brandColor}1a 0%, transparent 70%)`,
-                                            opacity: isHovered ? 1 : 0
-                                        }}
-                                    />
-
-                                    {/* Content Container */}
-                                    <div className="relative w-full h-full flex items-center justify-center p-8 overflow-hidden">
-                                        {/* Grid Pattern Background */}
-                                        <div
-                                            className="absolute inset-0 opacity-20"
-                                            style={{
-                                                backgroundImage: `
-                                                    repeating-linear-gradient(0deg, ${brandColor}1a 0px, transparent 1px, transparent 2px, ${brandColor}1a 3px),
-                                                    repeating-linear-gradient(90deg, ${brandColor}1a 0px, transparent 1px, transparent 2px, ${brandColor}1a 3px)
-                                                `
-                                            }}
-                                        />
-
-                                        <div className="relative z-10 w-full h-full flex items-center justify-center">
-                                            <img
-                                                src={brand.image}
-                                                alt={brand.name}
-                                                className="max-w-full max-h-full object-contain transition-all duration-500"
-                                                style={{
-                                                    filter: isHovered ? `drop-shadow(0 0 20px ${brandColor}80)` : 'none',
-                                                    transform: isHovered ? 'scale(1.1)' : 'scale(1)'
-                                                }}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </motion.div>
-                        );
-                    })}
+                    {sponsors.map((brand, idx) => (
+                        <PartnerLogo key={idx} brand={brand} idx={idx} />
+                    ))}
                 </div>
             </section>
 
