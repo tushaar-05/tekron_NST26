@@ -11,8 +11,17 @@ import {
     ExternalLink,
     Phone,
     Mail,
-    Download
+    Download,
+    Utensils
 } from 'lucide-react';
+
+const foodCourtStalls = [
+    { name: 'BOM Cafe', logo: '/images/foodcourt/bom_cafe.png' },
+    { name: 'Taco Bell', logo: '/images/foodcourt/taco_bell.png' },
+    { name: 'House of Ice Cream', logo: '/images/foodcourt/house_of_icecream.png' },
+    { name: 'Maanshh Chowrangi', logo: '/images/foodcourt/maanshh_chowrangi.jpg' },
+    { name: 'AaniyouU', logo: '/images/foodcourt/aaniyou_u.jpg' }
+];
 
 const Hospitality = () => {
     const [glitchActive, setGlitchActive] = useState(false);
@@ -204,6 +213,43 @@ const Hospitality = () => {
                     ))}
                 </div>
 
+                {/* Tekron Food Court Marquee Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="mb-32 relative overflow-hidden"
+                >
+                    <div className="flex items-center gap-6 mb-12">
+                        <h2 className="text-2xl sm:text-4xl font-bold pixel-font text-white whitespace-nowrap">
+                            [ TEKRON_FOOD_COURT ]
+                        </h2>
+                        <div className="h-[1px] flex-1 bg-white/10" />
+                    </div>
+
+                    <div className="relative group">
+                        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#0a0a0c] to-transparent z-10" />
+                        <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-[#0a0a0c] to-transparent z-10" />
+
+                        <div className="marquee-container flex gap-8 py-8 items-center overflow-hidden">
+                            <div className="marquee-content flex gap-8 items-center animate-marquee">
+                                {[...foodCourtStalls, ...foodCourtStalls].map((stall, idx) => (
+                                    <div
+                                        key={idx}
+                                        className="min-w-[250px] h-40 bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-center justify-center group/stall hover:border-cyan-500/50 transition-all duration-500"
+                                    >
+                                        <img
+                                            src={stall.logo}
+                                            alt={stall.name}
+                                            className="max-w-full max-h-full object-contain transition-all duration-500 transform group-hover/stall:scale-110"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </motion.div>
+
                 {/* Refined Contact Section - Matching Reference */}
                 <div className="relative py-20 pb-40">
                     <div className="max-w-7xl mx-auto px-4">
@@ -316,7 +362,6 @@ const Hospitality = () => {
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </motion.div>
                     </div>
@@ -371,6 +416,21 @@ const Hospitality = () => {
                     100% {
                         clip: rect(78px, 9999px, 7px, 0);
                     }
+                }
+
+                .animate-marquee {
+                    display: flex;
+                    width: max-content;
+                    animation: marquee 30s linear infinite;
+                }
+
+                @keyframes marquee {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-50%); }
+                }
+
+                .marquee-container:hover .animate-marquee {
+                    animation-play-state: paused;
                 }
             `}</style>
         </UnifiedBackground>

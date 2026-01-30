@@ -18,7 +18,8 @@ export const sponsors = [
     { name: 'Wet n Joy', image: '/images/brands/wet_n_joy.png', color: '#00ffff' },
     { name: 'Ajex eSports', image: '/images/brands/ajex_esports.png', color: '#a855f7' },
     { name: 'AFDC', image: '/images/brands/afdc.jpg', color: '#d8c6f2' },
-    { name: 'Jiny Entertainments', image: '/images/brands/jiny_entertainments_v2.png', color: '#10b981' }
+    { name: 'Jiny Entertainments', image: '/images/brands/jiny_entertainments_v2.png', color: '#10b981' },
+    { name: 'GeeksforGeeks', image: '/images/brands/gfg.png', color: '#2f8d46' }
 ];
 
 export const techPanelists = [
