@@ -684,7 +684,8 @@ function About() {
         { name: 'Rohit Nagar', role: 'Content Creator', image: '/images/influencers/rohit_nagar.jpg', color: '#3b82f6' },
         { name: 'Iqlipse Nova', role: 'Singer / Content Creator', image: '/images/influencers/iqlipse_nova.jpg', color: '#10b981' },
         { name: 'Eknoor Singh', role: 'Content Creator', image: '/images/influencers/eknoor_singh.jpg', color: '#f59e0b' },
-        { name: 'Bhagyashree Limaye', role: 'Content Creator/Actor', image: '/images/influencers/bhagyashree_limaye.jpg', color: '#a855f7', collaboration: 'Under25', collaborationLogo: '/images/brands/under25.png' }
+        { name: 'Bhagyashree Limaye', role: 'Content Creator/Actor', image: '/images/influencers/bhagyashree_limaye.jpg', color: '#a855f7', collaboration: 'Under25', collaborationLogo: '/images/brands/under25.png' },
+        { name: 'Arjun Pandey', role: 'Content Creator', image: '/images/influencers/arjun_pandey.jpg', color: '#f97316', collaboration: 'Under25', collaborationLogo: '/images/brands/under25.png' }
     ];
 
     const sponsors = [
@@ -694,7 +695,8 @@ function About() {
         { name: 'Wet n Joy', image: '/images/brands/wet_n_joy.png', color: '#00ffff' },
         { name: 'Ajex eSports', image: '/images/brands/ajex_esports.png', color: '#a855f7' },
         { name: 'AFDC', image: '/images/brands/afdc.jpg', color: '#d8c6f2' },
-        { name: 'Jiny Entertainments', image: '/images/brands/jiny_entertainments_v2.png', color: '#10b981' }
+        { name: 'Jiny Entertainments', image: '/images/brands/jiny_entertainments_v2.png', color: '#10b981' },
+        { name: 'The Paradise India', image: '/images/brands/the_paradise_india.png', color: '#ffffff' }
     ];
 
     const techPanelists = [
