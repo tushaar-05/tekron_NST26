@@ -1935,6 +1935,105 @@ const ReachStats = () => {
     );
 };
 
+// --- 🤝 5. Tekron 2.0 Sponsors (New Section) ---
+const TekronSponsors = () => {
+    const partners = [
+        { name: 'Pizza Hut', image: '/images/brands/pizza_hut.png', color: '#ff0000', category: 'PARTNER' },
+        { name: 'Monster Energy', image: '/images/brands/monster_energy.png', color: '#00ff00', category: 'PARTNER' },
+        { name: 'Interview Buddy', image: '/images/brands/interview_buddy.png', color: '#7c3aed', category: 'PARTNER' },
+        { name: 'Wet n Joy', image: '/images/brands/wet_n_joy.png', color: '#00ffff', category: 'PARTNER' },
+        { name: 'Ajex eSports', image: '/images/brands/ajex_esports.png', color: '#a855f7', category: 'PARTNER' },
+        { name: 'AFDC', image: '/images/brands/afdc.jpg', color: '#d8c6f2', category: 'PARTNER' },
+        { name: 'Jiny Entertainments', image: '/images/brands/jiny_entertainments_v2.png', color: '#10b981', category: 'PARTNER' },
+        { name: 'The Paradise India', image: '/images/brands/the_paradise_india.png', color: '#ffffff', category: 'PARTNER' },
+        { name: 'Prera', image: '/images/brands/prera.png', color: '#ffd700', category: 'ASSOCIATE' }
+    ];
+
+    const foodCourtStalls = [
+        { name: 'BOM Cafe', logo: '/images/foodcourt/bom_cafe.png', color: '#ec4899' },
+        { name: 'Taco Bell', logo: '/images/foodcourt/taco_bell.png', color: '#8b5cf6' },
+        { name: 'House of Ice Cream', logo: '/images/foodcourt/house_of_icecream.png', color: '#f43f5e' },
+        { name: 'Maanshh Chowrangi', logo: '/images/foodcourt/maanshh_chowrangi.jpg', color: '#f59e0b' },
+        { name: 'AaniyouU', logo: '/images/foodcourt/aaniyou_u.jpg', color: '#14b8a6' }
+    ];
+
+    const prera = { name: 'Prera', logo: '/images/brands/prera.png', color: '#ffd700', category: 'ASSOCIATE' };
+
+    return (
+        <Section className="relative z-10">
+            <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="max-w-7xl mx-auto px-4 mb-16 text-center"
+            >
+                <div className="flex items-center justify-center gap-4 mb-8">
+                    <div className="h-[2px] w-12 bg-gradient-to-r from-transparent to-cyan-500" />
+                    <PixelLabel color="#00fff9">TEKRON_ALLIANCE_NETWORK</PixelLabel>
+                    <div className="h-[2px] w-12 bg-gradient-to-l from-transparent to-cyan-500" />
+                </div>
+                <h2 className="text-4xl sm:text-6xl font-bold pixel-font text-white mb-4">
+                    TEKRON 2.0 <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-cyan-400">SPONSORS</span>
+                </h2>
+            </motion.div>
+
+            {/* Our Partners */}
+            <div className="mb-20 max-w-7xl mx-auto px-4">
+                <h3 className="text-2xl font-bold font-mono text-white/60 mb-8 pl-4 border-l-4 border-purple-500 uppercase">
+                    Our Partners
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {partners.map((partner, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                        >
+                            <PartnerCard
+                                name={partner.name}
+                                logo={partner.image}
+                                category={partner.category}
+                                color={partner.color}
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Tekron Food Court */}
+            <div className="mb-20 max-w-7xl mx-auto px-4">
+                <h3 className="text-2xl font-bold font-mono text-white/60 mb-8 pl-4 border-l-4 border-pink-500 uppercase">
+                    Tekron Food Court
+                </h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    {foodCourtStalls.map((stall, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                        >
+                            <PartnerCard
+                                name={stall.name}
+                                logo={stall.logo}
+                                category="FOOD COURT"
+                                color={stall.color}
+                            />
+                        </motion.div>
+                    ))}
+                </div>
+            </div>
+
+
+            {/* Connector Lines */}
+            <div className="absolute left-[3px] top-[10%] bottom-[10%] w-[1px] bg-gradient-to-b from-transparent via-white/10 to-transparent hidden xl:block" />
+        </Section>
+    );
+}
+
 // --- 📩 9. Contact & Brochure ---
 const ContactBrochure = () => {
     const coordinator = {
@@ -2075,6 +2174,7 @@ const Sponsors = () => {
                 <WhySponsor />
                 <Benefits />
                 <TierSection />
+                <TekronSponsors />
                 <VisibilityMatrix />
                 <HeritageHeader />
                 <ReachStats />
